@@ -1,9 +1,11 @@
-public class R {
-  /**
-   * This class represents a rectangle.  It defines all the operations mandated by
-   * the Shape interface
-   */
+/**
+ * This class represents a rectangle.  It defines all the operations mandated by
+ * the Shape interface
+ */
 
+public class R extends AbstractShape {
+  private double width;
+  private double height;
   /**
    * Constructs a rectangle object with the given location of its lower-left
    * corner and dimensions
@@ -13,7 +15,7 @@ public class R {
    * @param width  width of this rectangle
    * @param height height of this rectangle
    */
-  public Rectangle(double x, double y, double width, double height) {
+  public R(double x, double y, double width, double height) {
     super(new Point2D(x, y));
     this.width = width;
     this.height = height;
@@ -30,9 +32,9 @@ public class R {
   }
 
   @Override
-  public Shape resize(double factor) {
+  public IShape resize(double factor) {
     double sqrtFactor = Math.sqrt(factor);
-    return new Rectangle(
+    return new R(
             this.reference.getX(),
             this.reference.getY(), sqrtFactor *
             this.width,

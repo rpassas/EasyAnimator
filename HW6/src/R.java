@@ -7,8 +7,6 @@ public class R extends AbstractShape {
   private double width;
   private double height;
 
-
-
   /**
    * Constructs a rectangle object with the given location of its lower-left
    * corner and dimensions
@@ -22,42 +20,33 @@ public class R extends AbstractShape {
     super(new Point2D(x, y));
     this.width = width;
     this.height = height;
+    super.setR(0);
+    super.setG(0);
+    super.setB(0);
+    super.setOpacity(0);
   }
 
   /**
-   * Method to set a new width of the rectangle.
-   * @param width the value of the new width.
+   * Constructs a rectangle object with the given location of its lower-left
+   * corner and dimensions
+   *
+   * @param x      x coordinate of the lower-left corner of this rectangle
+   * @param y      y coordinate of the lower-left corner of this rectangle
+   * @param width  width of this rectangle
+   * @param height height of this rectangle
+   * @param r the r color value.
+   * @param g the g color value.
+   * @param b the b color value.
+   * @param opacity the opacity value
    */
-  public void setWidth(double width) {
+  public R(double x, double y, double width, double height, int r, int g, int b, int opacity) {
+    super(new Point2D(x, y));
     this.width = width;
-  }
-
-  /**
-   * Method to set a new height of the rectangle.
-   * @param height the value of the new height.
-   */
-  public void setHeight(double height) {
     this.height = height;
-  }
-
-  @Override
-  public double area() {
-    return this.width * this.height;
-  }
-
-  @Override
-  public double perimeter() {
-    return 2 * (this.width + this.height);
-  }
-
-  @Override
-  public BasicShape resize(double factor) {
-    double sqrtFactor = Math.sqrt(factor);
-    return new R(
-            this.reference.getX(),
-            this.reference.getY(), sqrtFactor *
-            this.width,
-            sqrtFactor * this.height);
+    super.setR(r);
+    super.setG(g);
+    super.setB(b);
+    super.setOpacity(opacity);
   }
 
   public String toString() {

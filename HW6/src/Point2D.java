@@ -44,4 +44,22 @@ public class Point2D {
   public double getY() {
     return y;
   }
+
+  /**
+   * Method to set the X value of the origin point to a new value.
+   *
+   * @param x is the new value of x.
+   */
+  public void setX(double x) {
+    this.x = x;
+  }
+
+  /**
+   * Method to set the Y value of the origin point to a new value.
+   *
+   * @param y is the new value ofy.
+   */
+  public void setY(double y) {
+    this.y = y;
+  }
 }

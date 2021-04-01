@@ -5,7 +5,8 @@ IShape dictates protocol for shapes, abstract shape is common behaviors to shape
 
 
 
-scratch work:
+###scratch work:
+
 for move:
 1. create initial shape
 2. create list of shapes at different positions mapped based on time

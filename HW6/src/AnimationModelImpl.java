@@ -50,28 +50,33 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public void remove(AnimationModel shape) {
+  public void remove(AbstractShape shape) {
 
   }
 
   // TODO these will rely on get shapes at tick
   @Override
-  public void move(AnimationModel shape, int x, int y, int t1, int t2) {
+  public void translate(AbstractShape shape, int x, int y, int t1, int t2) {
 
   }
 
   @Override
-  public void flash(AnimationModel shape, int t1, int t2) {
+  public void rotate(AbstractShape shape, double angle, int t1, int t2) {
 
   }
 
   @Override
-  public void shader(AnimationModel shape, int r, int g, int b, int t1, int t2) {
+  public void flash(AbstractShape shape, int t1, int t2) {
 
   }
 
   @Override
-  public AnimationModel resize(AnimationModel shape, int h, int w, int t1, int t2) {
+  public void shader(AbstractShape shape, int r, int g, int b, int t1, int t2) {
+
+  }
+
+  @Override
+  public AnimationModel resize(AbstractShape shape, int h, int w, int t1, int t2) {
     return null;
   }
 

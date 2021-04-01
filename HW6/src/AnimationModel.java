@@ -16,8 +16,7 @@ public interface AnimationModel {
    * Given a shape, will remove that shape.
    * @param shape the target shape to be removed
    */
-  void remove(AnimationModel shape);
-
+  void remove(AbstractShape shape);
 
   /**
    * Moves a shape over a time interval by creating copies, deleting the previous shape,
@@ -28,7 +27,17 @@ public interface AnimationModel {
    * @param t1 integer indicating start time
    * @param t2 integer indicating end time
    */
-  void move(AnimationModel shape, int x, int y, int t1, int t2);
+  void translate(AbstractShape shape, int x, int y, int t1, int t2);
+
+  /**
+   * Moves a shape over a time interval by creating copies, deleting the previous shape,
+   * and mapping time ticks to coordinates as they shape "moves."
+   * @param shape shape to be moved
+   * @param angle angle to be rotated in degrees
+   * @param t1 integer indicating start time
+   * @param t2 integer indicating end time
+   */
+  void rotate(AbstractShape shape, double angle, int t1, int t2);
 
   /**
    * Takes a shape, changes opacity according to time, then removes the shape. Acts as
@@ -37,7 +46,7 @@ public interface AnimationModel {
    * @param t1 integer indicating start time
    * @param t2 integer indicating end time
    */
-  void flash(AnimationModel shape, int t1, int t2);
+  void flash(AbstractShape shape, int t1, int t2);
 
   /**
    * Takes a shape, changes color according to time, then removes the shape.
@@ -48,7 +57,7 @@ public interface AnimationModel {
    * @param t1 integer indicating start time
    * @param t2 integer indicating end time
    */
-  void shader(AnimationModel shape, int r, int g, int b, int t1, int t2);
+  void shader(AbstractShape shape, int r, int g, int b, int t1, int t2);
 
   /**
    * Takes a shape and resizes it over time.
@@ -58,7 +67,7 @@ public interface AnimationModel {
    * @param t1 start time
    * @param t2 end time
    */
-  AnimationModel resize(AnimationModel shape, int h, int w, int t1, int t2);
+  AnimationModel resize(AbstractShape shape, int h, int w, int t1, int t2);
 
   /**
    * Takes in a time interval and returns the shapes at that point.

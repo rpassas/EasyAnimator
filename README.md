@@ -7,6 +7,9 @@ IShape dictates protocol for shapes, abstract shape is common behaviors to shape
 
 ### Overview
 
+<img width="413" alt="Screen Shot 2021-04-01 at 1 27 45 PM" src="https://user-images.githubusercontent.com/35311744/113331575-2248cc00-92ee-11eb-8de2-a006d7f5905c.png">
+
+
 Helper methods sitting inside wrappers for the controller (e.g. move, fade, shade, resize) will then populate the list as needed by mapping values to the attributes of shapes based on ranges and time ticks. To make it work the wrapper (wrappers are written for the controller) will need a list of one shape, a function to map values (taken as params e.g. rgb) given time stamps, and a way to get an item in a list at tick. The controller will add and remove "relevant" shapes per the generated list IShape. The view displays the provided shapes.
 
 ### Model:

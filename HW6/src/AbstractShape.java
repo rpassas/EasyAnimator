@@ -1,23 +1,23 @@
-public class AbstractShape implements BasicShape{
+public abstract class AbstractShape implements BasicShape{
   protected Point2D reference;
-  private double height;
-  private double width;
+  private int height;
+  private int width;
   private int r;
   private int g;
   private int b;
-  private int opacity;
+  private int a;
 
   public AbstractShape(Point2D reference) {
     this.reference = reference;
   }
 
   @Override
-  public double getHeight() {
+  public int getHeight() {
     return height;
   }
 
   @Override
-  public double getWidth() {
+  public int getWidth() {
     return width;
   }
 
@@ -38,16 +38,16 @@ public class AbstractShape implements BasicShape{
 
   @Override
   public int getOpacity() {
-    return opacity;
+    return a;
   }
 
   @Override
-  public void setHeight(double height) {
+  public void setHeight(int height) {
     this.height = height;
   }
 
   @Override
-  public void setWidth(double width) {
+  public void setWidth(int width) {
     this.width = width;
   }
 
@@ -68,6 +68,6 @@ public class AbstractShape implements BasicShape{
 
   @Override
   public void setOpacity(int opacity) {
-    this.opacity = opacity;
+    this.a = opacity;
   }
 }

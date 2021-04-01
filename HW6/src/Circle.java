@@ -1,10 +1,9 @@
 /**
  * A class representing a. oval.
  */
-public class C extends AbstractShape{
-  private double radius;
-  private double width;
-  private double height;
+public class Circle extends AbstractShape{
+  private int width;
+  private int height;
 
   /**
    * Construct a circle object using the given center and radius
@@ -12,9 +11,10 @@ public class C extends AbstractShape{
    * @param y y coordinate of the center of this circle
    * @param radius the radius of this circle
    */
-  public C(double x, double y, double radius) {
+  public Circle(int x, int y, int radius) {
     super(new Point2D(x,y));
-    this.radius = radius;
+    this.width = radius;
+    this.height = radius;
   }
 
   /**
@@ -28,9 +28,9 @@ public class C extends AbstractShape{
    * @param r the r color value.
    * @param g the g color value.
    * @param b the b color value.
-   * @param opacity the opacity value
+   * @param a the opacity value
    */
-  public C(double x, double y, double width, double height, double r, double g, double b, double opacity) {
+  public Circle(int x, int y, int width, int height, int r, int g, int b, int a) {
     super(new Point2D(x,y));
     this.width = width;
     this.height = height;
@@ -47,15 +47,39 @@ public class C extends AbstractShape{
    * @param width the full width of the oval.
    * @param height the full height of the oval.
    */
-  public C(double x, double y, double width, double height) {
+  public Circle(int x, int y, int width, int height) {
     super(new Point2D(x,y));
     this.width = width;
     this.height = height;
   }
 
+  /**
+   * Constructs a rectangle object with the given location of its lower-left
+   * corner and dimensions
+   *
+   * @param x      x coordinate of the lower-left corner of this rectangle
+   * @param y      y coordinate of the lower-left corner of this rectangle
+   * @param radius the radius of the circle
+   * @param r the r color value.
+   * @param g the g color value.
+   * @param b the b color value.
+   * @param a the opacity value
+   */
+  public Circle(int x, int y, int radius, int r, int g, int b, int a) {
+    super(new Point2D(x,y));
+    this.width = radius;
+    this.height = radius;
+    super.setR(0);
+    super.setG(0);
+    super.setB(0);
+    super.setOpacity(0);
+  }
+
+
+
   public String toString() {
-    return String.format("Circle: center (%.3f,%.3f) radius %.3f",
-            this.reference.getX(),this.reference.getY(),this.radius);
+    return String.format("Circle: center (%d, %d) x-dimension: %d, y-dimension",
+            this.reference.getX(),this.reference.getY(),this.width, this.height);
   }
 }
 

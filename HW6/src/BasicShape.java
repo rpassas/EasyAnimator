@@ -8,13 +8,13 @@ public interface BasicShape {
    * Method to get the height of the current shape.
    * @return the height of the current shape.
    */
-   double getHeight();
+   int getHeight();
 
   /**
    * Method to get the width of the current shape.
    * @return the width of the current shape.
    */
-   double getWidth();
+   int getWidth();
 
   /**
    * Method to get the R value of RGB of the current shape.
@@ -44,13 +44,13 @@ public interface BasicShape {
    * Method to set the height of the current shape.
    * @param height the height that it will be set to.
    */
-   void setHeight(double height);
+   void setHeight(int height);
 
   /**
    * Method to set the width of the current shape.
    * @param width the width that it will be set to.
    */
-   void setWidth(double width);
+   void setWidth(int width);
 
   /**
    * Method to set the R value of the current shape.

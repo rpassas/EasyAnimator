@@ -7,7 +7,8 @@ IShape dictates protocol for shapes, abstract shape is common behaviors to shape
 
 ### Overview
 
-<img width="516" alt="Screen Shot 2021-04-01 at 1 29 07 PM" src="https://user-images.githubusercontent.com/35311744/113331691-3ee50400-92ee-11eb-884a-0a54cf63c9a0.png">
+<img width="464" alt="Screen Shot 2021-04-01 at 4 29 43 PM" src="https://user-images.githubusercontent.com/35311744/113350464-80ce7400-9307-11eb-94c9-0c11e152545c.png">
+
 
 R and C are concrete shapes extending the AbstractShape class that implements the BasicShape interface for shapes. Each shape has a Point2D reference, and each IShape is a list of shapes that has a base shape that it operates on.
 

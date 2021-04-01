@@ -32,7 +32,7 @@ for size change:
 
 ---
 
-each functionality has:
+### each functionality has:
 1. create shape
 2. list of shapes with attribute mapped to time
 3. iterator removing and adding the list at a given time stamp

@@ -6,7 +6,11 @@ IShape dictates protocol for shapes, abstract shape is common behaviors to shape
 
 
 
-### scratch work:
+## scratch work:
+
+
+### Controller:
+- can take color name e.g. "blue" and convert to rgb for the model to work on
 
 some basic functionalities: 
 

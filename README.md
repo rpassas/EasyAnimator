@@ -5,20 +5,37 @@
 IShape dictates protocol for shapes, abstract shape is common behaviors to shapes, which is implemented by R (rectangle) and C (ellipse) classes. Shapes each have a point2D, dictating position of shapes.
 
 
+### Overview
 
-## scratch work:
+Helper methods sitting inside wrappers for the controller (e.g. move, fade, shade, resize) will then populate the list as needed by mapping values to the attributes of shapes based on ranges and time ticks. To make it work the wrapper (wrappers are written for the controller) will need a list of one shape, a function to map values (taken as params e.g. rgb) given time stamps, and a way to get an item in a list at tick. The controller will add and remove "relevant" shapes per the generated list IShape. The view displays the provided shapes.
 
 ### Model:
-AbstractShape: IShape[] that can then have methods called on it to populate the list
+- takes a command from the controller to generate a list of shapes
 
-by default a shape has: position(x1, y1), size(w, h), a default or given color
+IShape: IShape[] that can then have methods called on it to populate the list for animation. An instantiated IShape is a list of 1 concrete shape.
 
-An instantiated shape is a list of 1 shape concrete shape. This
+BasicShape: by default a shape has: position(x1, y1), size(w, h), a default or given color. This can concretely be a rectangle or circle (ellipse).
+
+Colors operate with rgba schemes, with the default "a" being 1, and rgb each being 0, unless specified otherwise.
 
 
 ### Controller:
+- takes a list of shapes and passes "relevant" shapes to view (for removal or deletion)
 - can take color name e.g. "blue" and convert to rgb for the model to work on
-- 
+
+
+### View
+- takes a shape from the controller and displays/removes it accordingly 
+
+
+
+
+
+
+
+
+
+### scratch work:
 
 some basic functionalities: 
 

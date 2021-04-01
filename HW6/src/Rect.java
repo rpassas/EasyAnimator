@@ -3,9 +3,9 @@
  * the Shape interface
  */
 
-public class R extends AbstractShape {
-  private double width;
-  private double height;
+public class Rect extends AbstractShape {
+  private int width;
+  private int height;
 
   /**
    * Constructs a rectangle object with the given location of its lower-left
@@ -16,14 +16,14 @@ public class R extends AbstractShape {
    * @param width  width of this rectangle
    * @param height height of this rectangle
    */
-  public R(double x, double y, double width, double height) {
+  public Rect(int x, int y, int width, int height) {
     super(new Point2D(x, y));
     this.width = width;
     this.height = height;
     super.setR(0);
     super.setG(0);
     super.setB(0);
-    super.setOpacity(0);
+    super.setOpacity(1);
   }
 
   /**
@@ -37,21 +37,21 @@ public class R extends AbstractShape {
    * @param r the r color value.
    * @param g the g color value.
    * @param b the b color value.
-   * @param opacity the opacity value
+   * @param a the opacity value
    */
-  public R(double x, double y, double width, double height, int r, int g, int b, int opacity) {
+  public Rect(int x, int y, int width, int height, int r, int g, int b, int a) {
     super(new Point2D(x, y));
     this.width = width;
     this.height = height;
     super.setR(r);
     super.setG(g);
     super.setB(b);
-    super.setOpacity(opacity);
+    super.setOpacity(a);
   }
 
   public String toString() {
-    return String.format("Rectangle: LL corner (%.3f,%.3f) width %.3f height " +
-                    "%.3f",
+    return String.format("Rectangle: LL corner (%d, %d) width %d height " +
+                    "%d",
             this.reference.getX(), this.reference.getY(), this.width, this
                     .height);
   }

@@ -3,7 +3,7 @@
  * should support.
  */
 
-public interface IShape {
+public interface AnimationModel {
 
   //TODO we may need a create and a draw function, with one creating an object the other
   // drawing it for the viewer (maybe thats for the controller to do?)
@@ -21,7 +21,7 @@ public interface IShape {
    * Given a shape, will remove that shape.
    * @param shape the target shape to be removed
    */
-  void remove(IShape shape);
+  void remove(AnimationModel shape);
 
 
   /**
@@ -33,7 +33,7 @@ public interface IShape {
    * @param t1 integer indicating start time
    * @param t2 integer indicating end time
    */
-  void move(IShape shape, int x, int y, int t1, int t2);
+  void move(AnimationModel shape, int x, int y, int t1, int t2);
 
   /**
    * Takes a shape, changes opacity according to time, then removes the shape. Acts as
@@ -42,7 +42,7 @@ public interface IShape {
    * @param t1 integer indicating start time
    * @param t2 integer indicating end time
    */
-  void flash(IShape shape, int t1, int t2);
+  void flash(AnimationModel shape, int t1, int t2);
 
   //TODO this method needs a version where you put a color enum instead
   /**
@@ -54,7 +54,7 @@ public interface IShape {
    * @param t1 integer indicating start time
    * @param t2 integer indicating end time
    */
-  void shader(IShape shape, int r, int g, int b, int t1, int t2);
+  void shader(AnimationModel shape, int r, int g, int b, int t1, int t2);
 
   /**
    * Takes a shape and resizes it over time.
@@ -64,7 +64,7 @@ public interface IShape {
    * @param t1 start time
    * @param t2 end time
    */
-  IShape resize(IShape shape, int h, int w, int t1, int t2);
+  AnimationModel resize(AnimationModel shape, int h, int w, int t1, int t2);
 
   /**
    * Takes in a time interval and returns the shapes at that point.
@@ -72,5 +72,5 @@ public interface IShape {
    * @param tick the time interval to get the shapes at.
    * @return the shapes that are created at that time interval.
    */
-  IShape getShapesAtTick(int tick);
+  AnimationModel getShapesAtTick(int tick);
 }

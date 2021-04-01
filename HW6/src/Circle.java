@@ -15,6 +15,10 @@ public class Circle extends AbstractShape{
     super(new Point2D(x,y));
     this.width = radius;
     this.height = radius;
+    super.setR(0);
+    super.setG(0);
+    super.setB(0);
+    super.setOpacity(1);
   }
 
   /**
@@ -34,10 +38,10 @@ public class Circle extends AbstractShape{
     super(new Point2D(x,y));
     this.width = width;
     this.height = height;
-    super.setR(0);
-    super.setG(0);
-    super.setB(0);
-    super.setOpacity(0);
+    super.setR(r);
+    super.setG(g);
+    super.setB(b);
+    super.setOpacity(a);
   }
 
   /**
@@ -51,6 +55,10 @@ public class Circle extends AbstractShape{
     super(new Point2D(x,y));
     this.width = width;
     this.height = height;
+    super.setR(0);
+    super.setG(0);
+    super.setB(0);
+    super.setOpacity(1);
   }
 
   /**
@@ -69,16 +77,16 @@ public class Circle extends AbstractShape{
     super(new Point2D(x,y));
     this.width = radius;
     this.height = radius;
-    super.setR(0);
-    super.setG(0);
-    super.setB(0);
-    super.setOpacity(0);
+    super.setR(r);
+    super.setG(g);
+    super.setB(b);
+    super.setOpacity(a);
   }
 
 
 
   public String toString() {
-    return String.format("Circle: center (%d, %d) x-dimension: %d, y-dimension",
+    return String.format("Circle-> center: (%d, %d) x-dimension: %d, y-dimension: %d",
             this.reference.getX(),this.reference.getY(),this.width, this.height);
   }
 }

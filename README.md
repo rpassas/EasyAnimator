@@ -8,9 +8,17 @@ IShape dictates protocol for shapes, abstract shape is common behaviors to shape
 
 ## scratch work:
 
+### Model:
+AbstractShape: IShape[] that can then have methods called on it to populate the list
+
+by default a shape has: position(x1, y1), size(w, h), a default or given color
+
+An instantiated shape is a list of 1 shape concrete shape. This
+
 
 ### Controller:
 - can take color name e.g. "blue" and convert to rgb for the model to work on
+- 
 
 some basic functionalities: 
 

@@ -5,27 +5,42 @@ import java.util.LinkedList;
  */
 public class AnimationModelImpl implements AnimationModel {
   private LinkedList<AbstractShape> listOfShapes;
-  //TODO private AbstractShape shape;
 
-  //TODO add param of shape
   public AnimationModelImpl() {
-    //TODO instead of add shape we can just have the constructor take
-    // an existing shape (we have a create method for shapes)
     this.listOfShapes = new LinkedList<AbstractShape>();
   }
 
+  //TODO if we overload addshape do we also override?
 
   @Override
-  public void addShape(AvailableShapes shape, int x, int y, int width, int height) {
-    if (shape == AvailableShapes.OVAL) {
-      listOfShapes.add(new Circle(x, y, width, height));
+  public void addShape(AbstractShape shape) {
+    if (shape.getType() == AvailableShapes.OVAL) {
+      listOfShapes.add(shape);
     }
-    if (shape == AvailableShapes.RECTANGLE) {
-      listOfShapes.add(new Rect(x, y, width, height));
+    if (shape.getType() == AvailableShapes.RECTANGLE) {
+      listOfShapes.add(shape);
+    } else {
+      throw new IllegalArgumentException("added shape must be one of the accepted types");
     }
   }
 
-  public void addShape(AvailableShapes shape, int x, int y, int w, int h, int r, int g, int b, int opacity) {
+  public void addShape(AvailableShapes shape, int x, int y, int w, int h) {
+    if (w < 0 || h < 0) {
+      throw new IllegalArgumentException("dimensions must be positive.");
+    }
+    if (shape == AvailableShapes.OVAL) {
+      listOfShapes.add(new Circle(x, y, w, h));
+    }
+    if (shape == AvailableShapes.RECTANGLE) {
+      listOfShapes.add(new Rect(x, y, w, h));
+    }
+  }
+
+  public void addShape(AvailableShapes shape, int x, int y, int w, int h,
+                       int r, int g, int b, int opacity) {
+    if (w < 0 || h < 0) {
+      throw new IllegalArgumentException("dimensions must be positive.");
+    }
     if (shape == AvailableShapes.OVAL) {
       listOfShapes.add(new Circle(x, y, w, h, r, g, b, opacity));
     }
@@ -39,6 +54,7 @@ public class AnimationModelImpl implements AnimationModel {
 
   }
 
+  // TODO these will rely on get shapes at tick
   @Override
   public void move(AnimationModel shape, int x, int y, int t1, int t2) {
 
@@ -58,6 +74,8 @@ public class AnimationModelImpl implements AnimationModel {
   public AnimationModel resize(AnimationModel shape, int h, int w, int t1, int t2) {
     return null;
   }
+
+  //TODO does not have to be implemented until next time for controller
 
   @Override
   public AnimationModel getShapesAtTick(int tick) {

@@ -35,10 +35,16 @@ public interface BasicShape {
    int getB();
 
   /**
-   * Method to get the opacity value of RGB of the current shape.
+   * Method to get the opacity value of RGBA of the current shape.
    * @return the opacity value of the current shape.
    */
    int getOpacity();
+
+  /**
+   * Method to get the enum type of shape.
+   * @return the opacity value of the current shape.
+   */
+  AvailableShapes getType();
 
   /**
    * Method to set the height of the current shape.

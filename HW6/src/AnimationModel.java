@@ -5,17 +5,12 @@
 
 public interface AnimationModel {
 
-  //TODO we may need a create and a draw function, with one creating an object the other
-  // drawing it for the viewer (maybe thats for the controller to do?)
-  //TODO may need a version with colors - not sure how to handle colors yet
   /**
-   * Creates a shape given coordinates and dimensions.
-   * @param x the x coordinate of the shape's position
-   * @param y the y coordinate of the shape's position
-   * @param w the width of the shape
-   * @param h the height of the shape
+   * Adds a shape to to the model
+   * @param shape the shape to be added to the model (list of shapes).
+   * @throws IllegalArgumentException if the given shape does not have proper type.
    */
-  void addShape(AvailableShapes shape, int x, int y, int w, int h);
+  void addShape(AbstractShape shape);
 
   /**
    * Given a shape, will remove that shape.
@@ -44,7 +39,6 @@ public interface AnimationModel {
    */
   void flash(AnimationModel shape, int t1, int t2);
 
-  //TODO this method needs a version where you put a color enum instead
   /**
    * Takes a shape, changes color according to time, then removes the shape.
    * @param r red value 0 - 255

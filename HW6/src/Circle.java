@@ -4,6 +4,7 @@
 public class Circle extends AbstractShape{
   private int width;
   private int height;
+  private AvailableShapes type;
 
   /**
    * Construct a circle object using the given center and radius
@@ -13,12 +14,16 @@ public class Circle extends AbstractShape{
    */
   public Circle(int x, int y, int radius) {
     super(new Point2D(x,y));
+    if (radius < 0) {
+      throw new IllegalArgumentException("dimensions must be positive.");
+    }
     this.width = radius;
     this.height = radius;
     super.setR(0);
     super.setG(0);
     super.setB(0);
     super.setOpacity(1);
+    this.type = AvailableShapes.OVAL;
   }
 
   /**
@@ -36,12 +41,16 @@ public class Circle extends AbstractShape{
    */
   public Circle(int x, int y, int width, int height, int r, int g, int b, int a) {
     super(new Point2D(x,y));
+    if (width < 0 || height < 0) {
+      throw new IllegalArgumentException("dimensions must be positive.");
+    }
     this.width = width;
     this.height = height;
     super.setR(r);
     super.setG(g);
     super.setB(b);
     super.setOpacity(a);
+    this.type = AvailableShapes.OVAL;
   }
 
   /**
@@ -53,12 +62,16 @@ public class Circle extends AbstractShape{
    */
   public Circle(int x, int y, int width, int height) {
     super(new Point2D(x,y));
+    if (width < 0 || height < 0) {
+      throw new IllegalArgumentException("dimensions must be positive.");
+    }
     this.width = width;
     this.height = height;
     super.setR(0);
     super.setG(0);
     super.setB(0);
     super.setOpacity(1);
+    this.type = AvailableShapes.OVAL;
   }
 
   /**
@@ -75,15 +88,22 @@ public class Circle extends AbstractShape{
    */
   public Circle(int x, int y, int radius, int r, int g, int b, int a) {
     super(new Point2D(x,y));
+    if (radius < 0) {
+      throw new IllegalArgumentException("dimensions must be positive.");
+    }
     this.width = radius;
     this.height = radius;
     super.setR(r);
     super.setG(g);
     super.setB(b);
     super.setOpacity(a);
+    this.type = AvailableShapes.OVAL;
   }
 
-
+  @Override
+  public AvailableShapes getType() {
+    return this.type;
+  }
 
   public String toString() {
     return String.format("Circle-> center: (%d, %d) x-dimension: %d, y-dimension: %d",

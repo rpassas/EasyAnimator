@@ -6,6 +6,7 @@
 public class Rect extends AbstractShape {
   private int width;
   private int height;
+  private AvailableShapes type;
 
   /**
    * Constructs a rectangle object with the given location of its lower-left
@@ -18,12 +19,16 @@ public class Rect extends AbstractShape {
    */
   public Rect(int x, int y, int width, int height) {
     super(new Point2D(x, y));
+    if (width < 0 || height < 0) {
+      throw new IllegalArgumentException("dimensions must be positive.");
+    }
     this.width = width;
     this.height = height;
     super.setR(0);
     super.setG(0);
     super.setB(0);
     super.setOpacity(1);
+    this.type = AvailableShapes.RECTANGLE;
   }
 
   /**
@@ -41,12 +46,21 @@ public class Rect extends AbstractShape {
    */
   public Rect(int x, int y, int width, int height, int r, int g, int b, int a) {
     super(new Point2D(x, y));
+    if (width < 0 || height < 0) {
+      throw new IllegalArgumentException("dimensions must be positive.");
+    }
     this.width = width;
     this.height = height;
     super.setR(r);
     super.setG(g);
     super.setB(b);
     super.setOpacity(a);
+    this.type = AvailableShapes.RECTANGLE;
+  }
+
+  @Override
+  public AvailableShapes getType() {
+    return this.type;
   }
 
   public String toString() {

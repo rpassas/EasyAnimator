@@ -9,6 +9,7 @@ IShape dictates protocol for shapes, abstract shape is common behaviors to shape
 
 <img width="516" alt="Screen Shot 2021-04-01 at 1 29 07 PM" src="https://user-images.githubusercontent.com/35311744/113331691-3ee50400-92ee-11eb-884a-0a54cf63c9a0.png">
 
+R and C are concrete shapes extending the AbstractShape class that implements the 
 
 Helper methods sitting inside wrappers for the controller (e.g. move, fade, shade, resize) will then populate the list as needed by mapping values to the attributes of shapes based on ranges and time ticks. To make it work the wrapper (wrappers are written for the controller) will need a list of one shape, a function to map values (taken as params e.g. rgb) given time stamps, and a way to get an item in a list at tick. The controller will add and remove "relevant" shapes per the generated list IShape. The view displays the provided shapes.
 

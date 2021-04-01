@@ -6,6 +6,9 @@
 public class R extends AbstractShape {
   private double width;
   private double height;
+
+
+
   /**
    * Constructs a rectangle object with the given location of its lower-left
    * corner and dimensions
@@ -21,6 +24,22 @@ public class R extends AbstractShape {
     this.height = height;
   }
 
+  /**
+   * Method to set a new width of the rectangle.
+   * @param width the value of the new width.
+   */
+  public void setWidth(double width) {
+    this.width = width;
+  }
+
+  /**
+   * Method to set a new height of the rectangle.
+   * @param height the value of the new height.
+   */
+  public void setHeight(double height) {
+    this.height = height;
+  }
+
   @Override
   public double area() {
     return this.width * this.height;
@@ -32,7 +51,7 @@ public class R extends AbstractShape {
   }
 
   @Override
-  public IShape resize(double factor) {
+  public BasicShape resize(double factor) {
     double sqrtFactor = Math.sqrt(factor);
     return new R(
             this.reference.getX(),

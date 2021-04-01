@@ -1,4 +1,4 @@
-public class AbstractShape implements IShape {
+public class AbstractShape implements BasicShape{
   protected Point2D reference;
 
   public AbstractShape(Point2D reference) {
@@ -10,7 +10,7 @@ public class AbstractShape implements IShape {
     return reference.distToOrigin();
   }
 
-  @Override
+ @Override
   public double area() {
     return 0;
   }
@@ -21,7 +21,7 @@ public class AbstractShape implements IShape {
   }
 
   @Override
-  public IShape resize(double factor) {
+  public BasicShape resize(double factor) {
     return null;
   }
 }

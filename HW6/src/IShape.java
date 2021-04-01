@@ -70,6 +70,14 @@ public interface IShape {
   IShape resize(IShape shape, int h, int w, int t1, int t2);
 
   /**
+   * Takes in a time interval and returns the shapes at that point.
+   *
+   * @param tick the time interval to get the shapes at.
+   * @return the shapes that are created at that time interval.
+   */
+  IShape getShapesAtTick(int tick);
+
+  /**
    * Returns the distance of this shape from the origin. The distance is
    * measured from whatever reference position a shape is (e.g. a center for
    * a circle)

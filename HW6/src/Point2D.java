@@ -3,8 +3,8 @@
  * coordinates as (x,y).
  */
 public class Point2D {
-  private double x;
-  private double y;
+  private int x;
+  private int y;
 
   /**
    * Construct a 2d point with the given coordinates
@@ -12,7 +12,10 @@ public class Point2D {
    * @param x the x-coordinate of this point
    * @param y the y-coordinate of this point
    */
-  public Point2D(double x, double y) {
+  public Point2D(int x, int y) {
+    if (x < 0 || y < 0) {
+      throw new IllegalArgumentException("X and Y must be positive.");
+    }
     this.x = x;
     this.y = y;
   }
@@ -32,7 +35,7 @@ public class Point2D {
    *
    * @return x-coordinate of this point
    */
-  public double getX() {
+  public int getX() {
     return x;
   }
 
@@ -41,7 +44,7 @@ public class Point2D {
    *
    * @return y-coordinate of this point
    */
-  public double getY() {
+  public int getY() {
     return y;
   }
 
@@ -50,7 +53,7 @@ public class Point2D {
    *
    * @param x is the new value of x.
    */
-  public void setX(double x) {
+  public void setX(int x) {
     this.x = x;
   }
 
@@ -59,7 +62,7 @@ public class Point2D {
    *
    * @param y is the new value ofy.
    */
-  public void setY(double y) {
+  public void setY(int y) {
     this.y = y;
   }
 }

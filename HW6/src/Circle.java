@@ -15,10 +15,10 @@ public class Circle extends AbstractShape{
   public Circle(int x, int y, int radius) {
     super(new Point2D(x,y));
     if (radius < 0) {
-      throw new IllegalArgumentException("dimensions must be positive.");
+      throw new IllegalArgumentException("Radius must be positive.");
     }
-    this.width = radius;
-    this.height = radius;
+    super.setWidth(radius);
+    super.setHeight(radius);
     super.setR(0);
     super.setG(0);
     super.setB(0);
@@ -27,8 +27,7 @@ public class Circle extends AbstractShape{
   }
 
   /**
-   * Constructs a rectangle object with the given location of its lower-left
-   * corner and dimensions
+   * Constructs a Circle object with the given center and dimensions
    *
    * @param x      x coordinate of the lower-left corner of this rectangle
    * @param y      y coordinate of the lower-left corner of this rectangle
@@ -44,8 +43,17 @@ public class Circle extends AbstractShape{
     if (width < 0 || height < 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
     }
-    this.width = width;
-    this.height = height;
+    if (r < 0 || g < 0 || b < 0) {
+      throw new IllegalArgumentException("Color values must be positive");
+    }
+    if (r > 255 || g > 255 || b > 255) {
+      throw new IllegalArgumentException("Color values must be below 255");
+    }
+    if (a < 0 || a > 100) {
+      throw new IllegalArgumentException("Opacity must be between 0 and 100");
+    }
+    super.setWidth(width);
+    super.setHeight(height);
     super.setR(r);
     super.setG(g);
     super.setB(b);
@@ -65,8 +73,8 @@ public class Circle extends AbstractShape{
     if (width < 0 || height < 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
     }
-    this.width = width;
-    this.height = height;
+    super.setWidth(width);
+    super.setHeight(height);
     super.setR(0);
     super.setG(0);
     super.setB(0);
@@ -75,8 +83,7 @@ public class Circle extends AbstractShape{
   }
 
   /**
-   * Constructs a rectangle object with the given location of its lower-left
-   * corner and dimensions
+   * Constructs a Circle object with the given center and dimensions
    *
    * @param x      x coordinate of the lower-left corner of this rectangle
    * @param y      y coordinate of the lower-left corner of this rectangle
@@ -91,8 +98,17 @@ public class Circle extends AbstractShape{
     if (radius < 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
     }
-    this.width = radius;
-    this.height = radius;
+    if (r < 0 || g < 0 || b < 0) {
+      throw new IllegalArgumentException("Color values must be positive");
+    }
+    if (r > 255 || g > 255 || b > 255) {
+      throw new IllegalArgumentException("Color values must be below 255");
+    }
+    if (a < 0 || a > 100) {
+      throw new IllegalArgumentException("Opacity must be between 0 and 100");
+    }
+    super.setWidth(radius);
+    super.setHeight(radius);
     super.setR(r);
     super.setG(g);
     super.setB(b);
@@ -106,8 +122,8 @@ public class Circle extends AbstractShape{
   }
 
   public String toString() {
-    return String.format("Circle-> center: (%d, %d) x-dimension: %d, y-dimension: %d",
-            this.reference.getX(),this.reference.getY(),this.width, this.height);
+    return "Circle-> center: (" + this.reference.getX() + ", " + this.reference.getY()
+            + ") x-dimension: " + this.getWidth() + ", y-dimension: " + this.getHeight();
   }
 }
 

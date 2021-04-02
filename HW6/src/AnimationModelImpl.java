@@ -39,7 +39,7 @@ public class AnimationModelImpl implements AnimationModel {
 
   public void addShape(AvailableShapes shape, int x, int y, int w, int h,
                        int r, int g, int b, int opacity) {
-    if (x < 0 || y > 0) { // likely will need a max value based on board size
+    if (x < 0 || y > 0) {
       throw new IllegalArgumentException("Invalid X and Y coordinate");
     }
     if (w < 0 || h < 0) {
@@ -68,7 +68,7 @@ public class AnimationModelImpl implements AnimationModel {
   // TODO these will rely on get shapes at tick
   @Override
   public void translate(AbstractShape shape, int x, int y, int t1, int t2) {
-    if (x < 0 || y > 0) { // likely will need a max value based on board size
+    if (x < 0 || y > 0) {
       throw new IllegalArgumentException("Invalid X and Y coordinate");
     }
     if (t1 < 0 || t2 < 0) {
@@ -113,14 +113,15 @@ public class AnimationModelImpl implements AnimationModel {
     if (t1 < 0 || t2 < 0) {
       throw new IllegalArgumentException("Time value must be positive");
     }
+
     return null;
   }
 
   //TODO does not have to be implemented until next time for controller
 
   @Override
-  public AnimationModel getShapesAtTick(int tick) {
-    if (tick < 0) {
+  public AnimationModel getShapesAtTick(int CurrentTick) {
+    if (CurrentTick < 0) {
       throw new IllegalArgumentException("Time value must be positive");
     }
     return null;

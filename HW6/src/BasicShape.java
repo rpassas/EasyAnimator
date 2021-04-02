@@ -81,5 +81,17 @@ public interface BasicShape {
    * @param opacity the opacity value that it will be set to.
    */
    void setOpacity(int opacity);
+
+  /**
+   * Method to return the time value of the current shape.
+   * @return the time value of the current shape.
+   */
+  int getTick();
+
+  /**
+   * Method to set the tick value of the current shape.
+   * @param tick the tick value to set it to.
+   */
+  void setTick(int tick);
 }
 

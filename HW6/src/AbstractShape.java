@@ -6,6 +6,7 @@ public abstract class AbstractShape implements BasicShape{
   private int g;
   private int b;
   private int a;
+  private int tick;
 
   public AbstractShape(Point2D reference) {
     this.reference = reference;
@@ -69,5 +70,13 @@ public abstract class AbstractShape implements BasicShape{
   @Override
   public void setOpacity(int opacity) {
     this.a = opacity;
+  }
+
+  public int getTick() {
+    return tick;
+  }
+
+  public void setTick(int tick) {
+    this.tick = tick;
   }
 }

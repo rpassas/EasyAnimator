@@ -22,8 +22,8 @@ public class Rect extends AbstractShape {
     if (width < 0 || height < 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
     }
-    this.width = width;
-    this.height = height;
+    super.setWidth(width);
+    super.setHeight(height);
     super.setR(0);
     super.setG(0);
     super.setB(0);
@@ -49,8 +49,17 @@ public class Rect extends AbstractShape {
     if (width < 0 || height < 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
     }
-    this.width = width;
-    this.height = height;
+    if (r < 0 || g < 0 || b < 0) {
+      throw new IllegalArgumentException("Color values must be positive");
+    }
+    if (r > 255 || g > 255 || b > 255) {
+      throw new IllegalArgumentException("Color values must be below 255");
+    }
+    if (a < 0 || a > 100) {
+      throw new IllegalArgumentException("Opacity must be between 0 and 100");
+    }
+    super.setWidth(width);
+    super.setHeight(height);
     super.setR(r);
     super.setG(g);
     super.setB(b);
@@ -64,10 +73,8 @@ public class Rect extends AbstractShape {
   }
 
   public String toString() {
-    return String.format("Rectangle: LL corner (%d, %d) width %d height " +
-                    "%d",
-            this.reference.getX(), this.reference.getY(), this.width, this
-                    .height);
+    return "Rectangle-> center: (" + this.reference.getX() + ", " + this.reference.getY()
+            + ") x-dimension: " + this.getWidth() + ", y-dimension: " + this.getHeight();
   }
 }
 

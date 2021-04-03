@@ -6,6 +6,8 @@ public class AbstractChange implements Change{
   private int updatedG;
   private int updatedB;
   private int updatedA;
+  private int startTime;
+  private int endTime;
 
   public int getUpdatedHeight() {
     return updatedHeight;
@@ -61,5 +63,21 @@ public class AbstractChange implements Change{
 
   public void setReference(Point2D reference) {
     this.reference = reference;
+  }
+
+  public int getStartTime() {
+    return startTime;
+  }
+
+  public void setStartTime(int startTime) {
+    this.startTime = startTime;
+  }
+
+  public int getEndTime() {
+    return endTime;
+  }
+
+  public void setEndTime(int endTime) {
+    this.endTime = endTime;
   }
 }

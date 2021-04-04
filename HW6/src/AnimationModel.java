@@ -28,9 +28,9 @@ public interface AnimationModel {
 
   /**
    * Given a shape, will remove that shape.
-   * @param shapeIdentifier index of the target shape to be removed
+   * @param shape shape to be removed
    */
-  void remove(int shapeIdentifier);
+  void remove(AbstractShape shape);
 
   /**
    * Moves a shape over a time interval by creating copies, deleting the previous shape,

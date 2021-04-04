@@ -6,7 +6,6 @@ import java.util.LinkedList;
 public class AnimationModelImpl implements AnimationModel {
   private LinkedList<AbstractShape> listOfShapes;
   private LinkedList<AbstractChange> listOfChanges;
-  //TODO I feel like we don't need either of these:
   private LinkedList<Integer> listOfIndexes;
   int shapeIndex;
 
@@ -87,9 +86,16 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
+  public void remove(AbstractShape shape) {
+    listOfShapes.remove(shape);
+    listOfIndexes.remove(listOfShapes.indexOf(shape));
+    shapeIndex--;
+  }
+
   public void remove(int shapeIdentifier) {
     listOfShapes.remove(shapeIdentifier);
     listOfIndexes.remove(shapeIdentifier);
+    shapeIndex--;
   }
 
   // TODO include checks for contradicting changes e.g. shape can't move left and right at once

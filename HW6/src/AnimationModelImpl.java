@@ -86,13 +86,13 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public void remove(AbstractShape shape) {
+  public void removeShape(AbstractShape shape) {
     listOfShapes.remove(shape);
     listOfIndexes.remove(listOfShapes.indexOf(shape));
     shapeIndex--;
   }
 
-  public void remove(int shapeIdentifier) {
+  public void removeShape(int shapeIdentifier) {
     listOfShapes.remove(shapeIdentifier);
     listOfIndexes.remove(shapeIdentifier);
     shapeIndex--;

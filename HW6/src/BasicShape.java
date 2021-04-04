@@ -5,6 +5,12 @@
 public interface BasicShape {
 
   /**
+   * Gets the coordinates for the shape.
+   * @return the coordinates for the shape
+   */
+  Point2D getLocation();
+
+  /**
    * Method to get the height of the current shape.
    * @return the height of the current shape.
    */

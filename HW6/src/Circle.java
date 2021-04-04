@@ -2,8 +2,6 @@
  * A class representing a. oval.
  */
 public class Circle extends AbstractShape{
-  private int width;
-  private int height;
   private AvailableShapes type;
 
   /**

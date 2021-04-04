@@ -1,4 +1,4 @@
-public class AbstractChange implements Change{
+public abstract class AbstractChange implements Change{
   protected Point2D reference;
   private int updatedHeight;
   private int updatedWidth;
@@ -8,6 +8,7 @@ public class AbstractChange implements Change{
   private int updatedA;
   private int startTime;
   private int endTime;
+  private int shapeID;
 
   public int getUpdatedHeight() {
     return updatedHeight;
@@ -80,4 +81,14 @@ public class AbstractChange implements Change{
   public void setEndTime(int endTime) {
     this.endTime = endTime;
   }
+
+  public int getShapeID() {
+    return shapeID;
+  }
+
+  public void setShapeID(int shapeID) {
+    this.shapeID = shapeID;
+  }
 }
+
+

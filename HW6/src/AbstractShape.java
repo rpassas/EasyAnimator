@@ -13,6 +13,11 @@ public abstract class AbstractShape implements BasicShape{
   }
 
   @Override
+  public Point2D getLocation() {
+    return this.reference;
+  }
+
+  @Override
   public int getHeight() {
     return height;
   }

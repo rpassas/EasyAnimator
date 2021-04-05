@@ -33,27 +33,34 @@ public interface AnimationModel {
    * @param shape shape to be removed
    */
   void removeShape(AbstractShape shape);
-  //TODO documentation should reflect error throws
+
   /**
    * Moves a shape over a time interval by creating copies, deleting the previous shape,
    * and mapping time ticks to coordinates as they shape "moves."
    * @param shape shape to be moved
-   * @param x integer indicating starting x coordinate
-   * @param y integer indicating starting y coordinate
+   * @param startX integer indicating starting x coordinate
+   * @param startY integer indicating starting y coordinate
+   * @param endX integer indicating ending x coordinate
+   * @param endY integer indicating ending y coordinate
    * @param t1 integer indicating start time
    * @param t2 integer indicating end time
    * @throws IllegalArgumentException for negative time
    * @throws IllegalArgumentException for conflicting changes
    * @throws IllegalArgumentException for reverse time
    */
-  void addMove(AbstractShape shape, int x, int y, int t1, int t2);
+  void addMove(AbstractShape shape, int startX, int startY, int endX, int endY, int t1, int t2);
 
   /**
    * Takes a shape, changes color according to time, then removes the shape.
    * @param shape shape to be recolored
-   * @param r red value 0 - 255
-   * @param g green value 0 - 255
-   * @param b blue value 0 - 255
+   * @param startR start red value 0 - 255
+   * @param startG start reen value 0 - 255
+   * @param startB start blue value 0 - 255
+   * @param startA start opacity value 0 - 100
+   * @param endR end red value 0 - 255
+   * @param endG end green value 0 - 255
+   * @param endB end blue value 0 - 255
+   * @param endA end opacity value 0 - 100
    * @param t1 integer indicating start time
    * @param t2 integer indicating end time
    * @throws IllegalArgumentException for negative time
@@ -62,13 +69,17 @@ public interface AnimationModel {
    * @throws IllegalArgumentException for negative colors
    * @throws IllegalArgumentException for out of bounds colors
    */
-  void addRecolor(AbstractShape shape, int r, int g, int b, int a, int t1, int t2);
+  void addRecolor(AbstractShape shape,
+                  int startR, int startG, int startB, int startA,
+                  int endR, int endG, int endB, int endA, int t1, int t2);
 
   /**
    * Takes a shape and resizes it over time.
    * @param shape to be resized
-   * @param h new height
-   * @param w new width
+   * @param startH starting height
+   * @param startW starting width
+   * @param endH new height
+   * @param endW new width
    * @param t1 start time
    * @param t2 end time
    * @throws IllegalArgumentException for negative time
@@ -76,7 +87,8 @@ public interface AnimationModel {
    * @throws IllegalArgumentException for reverse time
    * @throws IllegalArgumentException for non-positive dimensions
    */
-  void addResize(AbstractShape shape, int h, int w, int t1, int t2);
+  void addResize(AbstractShape shape,
+                 int startW, int startH, int endW, int endH, int t1, int t2);
 
   /**
    * Takes in a time interval and returns the shapes at that point.

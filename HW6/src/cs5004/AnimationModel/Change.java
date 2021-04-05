@@ -2,6 +2,91 @@ package cs5004.AnimationModel;
 
 public interface Change {
 
+
+  /**
+   * Method to get the startHeight value of the current shape.
+   * @return the startHeight value of the current shape.
+   */
+  int getStartHeight();
+
+  /**
+   * Method to set the startHeight value of the current shape.
+   * @param startHeight the startHeight value that it will be set to.
+   */
+  void setStartHeight(int startHeight);
+
+  /**
+   * Method to get the startWidth value of the current shape.
+   * @return the startWidth value of the current shape.
+   */
+  int getStartWidth();
+
+  /**
+   * Method to set the startWidth value of the current shape.
+   * @param startWidth the startWidth value that it will be set to.
+   */
+  void setStartWidth(int startWidth);
+
+  /**
+   * Method to get the startR value of RGB of the current shape.
+   * @return the startR value of the current shape.
+   */
+  int getStartR();
+
+  /**
+   * Method to set the startR value of the current shape.
+   * @param startR the startR value that it will be set to.
+   */
+  void setStartR(int startR);
+
+  /**
+   * Method to get the starting G value of RGB of the current shape.
+   * @return the starting g value of the current shape.
+   */
+  int getStartG();
+
+  /**
+   * Method to set the starting G value of the current shape.
+   * @param startG the startG value that it will be set to.
+   */
+  void setStartG(int startG);
+
+  /**
+   * Method to get the startB value of RGB of the current shape.
+   * @return the startB of the current shape.
+   */
+  int getStartB();
+
+  /**
+   * Method to set the starting B value of the current shape.
+   * @param startB the startB value that it will be set to.
+   */
+  void setStartB(int startB);
+
+  /**
+   * Method to get the startA value of the current shape.
+   * @return the startA of the current shape.
+   */
+  int getStartA();
+
+  /**
+   * Method to set the startA value of the current shape.
+   * @param startA the startA value that it will be set to.
+   */
+  void setStartA(int startA);
+
+  /**
+   * Method to get the startReference value of the current shape.
+   * @return the startReference of the current shape.
+   */
+  Point2D getStartReference();
+
+  /**
+   * Method to set the startReference value of the current shape.
+   * @param startReference the starting reference value that it will be set to.
+   */
+  void setStartReference(Point2D startReference);
+
   /**
    * Method to get the updatedHeight value of the current shape.
    * @return the updatedHeight value of the current shape.

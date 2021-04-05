@@ -202,7 +202,8 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public void addMove(AbstractShape shape, int x, int y, int t1, int t2) {
+  public void addMove(AbstractShape shape,
+                      int startX, int startY, int endX, int endY, int t1, int t2) {
     if (t1 < 0 || t2 < 0) {
       throw new IllegalArgumentException("Time value must be positive");
     }
@@ -215,18 +216,22 @@ public class AnimationModelImpl implements AnimationModel {
     if (!listOfShapes.contains(shape)) {
       this.addShape(shape);
     }
-    listOfChanges.add(new Move(shape, listOfShapes.indexOf(shape), shape.getLabel(), x, y, t1, t2));
+    listOfChanges.add(new Move(shape, listOfShapes.indexOf(shape), shape.getLabel(),
+        startX, startY, endX, endY, t1, t2));
   }
 
   @Override
-  public void addRecolor(AbstractShape shape, int r, int g, int b, int a, int t1, int t2) {
+  public void addRecolor(AbstractShape shape,
+                         int startR, int startG, int startB, int startA,
+                         int endR, int endG, int endB, int endA, int t1, int t2) {
     if (t1 < 0 || t2 < 0) {
       throw new IllegalArgumentException("Time value must be positive");
     }
-    if (r < 0 || g < 0 || b < 0) {
+    if (endR < 0 || endG < 0 || endB < 0 || startR < 0 || startG < 0 || startB < 0) {
       throw new IllegalArgumentException("Color values must be positive");
     }
-    if (r > 255 || g > 255 || b > 255) {
+    if (endR > 255 || endG > 255  || endB > 255
+        || startR > 255  || startG > 255  || startB > 255 ) {
       throw new IllegalArgumentException("Color values must be below 255");
     }
     if (timeOverlap(shape, AvailableChanges.RECOLOR, t1, t2)) {
@@ -235,19 +240,20 @@ public class AnimationModelImpl implements AnimationModel {
     if (t1 > t2) {
       throw new IllegalArgumentException("Start time > end time");
     }
-    if (a < 0 || a > 100) {
+    if (startA < 0 || startA > 100 || endA < 0 || endA > 100) {
       throw new IllegalArgumentException("Opacity must be between 0 and 100");
     }
     if (!listOfShapes.contains(shape)) {
       this.addShape(shape);
     }
     listOfChanges.add(new Recolor(shape, listOfShapes.indexOf(shape), shape.getLabel(),
-        r, g, b, a, t1, t2));
+        startR, startG, startB, startA, endR, endG, endB, endA, t1, t2));
   }
 
   @Override
-  public void addResize(AbstractShape shape, int w, int h, int t1, int t2) {
-    if (w <= 0 || h <= 0) {
+  public void addResize(AbstractShape shape,
+                        int startW, int startH, int endW, int endH, int t1, int t2) {
+    if (startW <= 0 || startH <= 0 || endW <= 0 || endH <= 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
     }
     if (t1 < 0 || t2 < 0) {
@@ -263,7 +269,7 @@ public class AnimationModelImpl implements AnimationModel {
       this.addShape(shape);
     }
     listOfChanges.add(new Resize(shape, listOfShapes.indexOf(shape), shape.getLabel(),
-        w, h, t1, t2));
+        startW, startH, endW, endH, t1, t2));
   }
 
   //TODO does not have to be implemented until next time for controller

@@ -89,6 +89,18 @@ public interface BasicShape {
    void setOpacity(int opacity);
 
   /**
+   * Method to set the label of the current shape.
+   * @param label the unique label that it will be set to.
+   */
+  void setLabel(String label);
+
+  /**
+   * Method to get the label of the current shape.
+   * @return label the unique label that it will be set to.
+   */
+  String getLabel();
+
+  /**
    * Method to return the time value of the current shape.
    * @return the time value of the current shape.
    */

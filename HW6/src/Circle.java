@@ -9,8 +9,9 @@ public class Circle extends AbstractShape{
    * @param x x coordinate of the center of this circle
    * @param y y coordinate of the center of this circle
    * @param radius the radius of this circle
+   * @param label String label for the shape
    */
-  public Circle(int x, int y, int radius) {
+  public Circle(String label, int x, int y, int radius) {
     super(new Point2D(x,y));
     if (radius < 0) {
       throw new IllegalArgumentException("Radius must be positive.");
@@ -21,6 +22,7 @@ public class Circle extends AbstractShape{
     super.setG(0);
     super.setB(0);
     super.setOpacity(1);
+    super.setLabel(label);
     this.type = AvailableShapes.OVAL;
   }
 
@@ -35,8 +37,9 @@ public class Circle extends AbstractShape{
    * @param g the g color value.
    * @param b the b color value.
    * @param a the opacity value
+   * @param label String label for the shape
    */
-  public Circle(int x, int y, int width, int height, int r, int g, int b, int a) {
+  public Circle(String label, int x, int y, int width, int height, int r, int g, int b, int a) {
     super(new Point2D(x,y));
     if (width < 0 || height < 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
@@ -56,6 +59,7 @@ public class Circle extends AbstractShape{
     super.setG(g);
     super.setB(b);
     super.setOpacity(a);
+    super.setLabel(label);
     this.type = AvailableShapes.OVAL;
   }
 
@@ -65,8 +69,9 @@ public class Circle extends AbstractShape{
    * @param y the y coordinate of the center of the oval.
    * @param width the full width of the oval.
    * @param height the full height of the oval.
+   * @param label String label for the shape
    */
-  public Circle(int x, int y, int width, int height) {
+  public Circle(String label, int x, int y, int width, int height) {
     super(new Point2D(x,y));
     if (width < 0 || height < 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
@@ -77,6 +82,7 @@ public class Circle extends AbstractShape{
     super.setG(0);
     super.setB(0);
     super.setOpacity(1);
+    super.setLabel(label);
     this.type = AvailableShapes.OVAL;
   }
 
@@ -90,8 +96,9 @@ public class Circle extends AbstractShape{
    * @param g the g color value.
    * @param b the b color value.
    * @param a the opacity value
+   * @param label String label for the shape
    */
-  public Circle(int x, int y, int radius, int r, int g, int b, int a) {
+  public Circle(String label, int x, int y, int radius, int r, int g, int b, int a) {
     super(new Point2D(x,y));
     if (radius < 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
@@ -111,6 +118,7 @@ public class Circle extends AbstractShape{
     super.setG(g);
     super.setB(b);
     super.setOpacity(a);
+    super.setLabel(label);
     this.type = AvailableShapes.OVAL;
   }
 

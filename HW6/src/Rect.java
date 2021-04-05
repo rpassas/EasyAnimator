@@ -16,8 +16,9 @@ public class Rect extends AbstractShape {
    * @param y      y coordinate of the lower-left corner of this rectangle
    * @param width  width of this rectangle
    * @param height height of this rectangle
+   * @param label String label for the shape
    */
-  public Rect(int x, int y, int width, int height) {
+  public Rect(String label, int x, int y, int width, int height) {
     super(new Point2D(x, y));
     if (width < 0 || height < 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
@@ -28,6 +29,7 @@ public class Rect extends AbstractShape {
     super.setG(0);
     super.setB(0);
     super.setOpacity(1);
+    super.setLabel(label);
     this.type = AvailableShapes.RECTANGLE;
   }
 
@@ -43,8 +45,9 @@ public class Rect extends AbstractShape {
    * @param g the g color value.
    * @param b the b color value.
    * @param a the opacity value
+   * @param label String label for the shape
    */
-  public Rect(int x, int y, int width, int height, int r, int g, int b, int a) {
+  public Rect(String label, int x, int y, int width, int height, int r, int g, int b, int a) {
     super(new Point2D(x, y));
     if (width < 0 || height < 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
@@ -64,6 +67,7 @@ public class Rect extends AbstractShape {
     super.setG(g);
     super.setB(b);
     super.setOpacity(a);
+    super.setLabel(label);
     this.type = AvailableShapes.RECTANGLE;
   }
 

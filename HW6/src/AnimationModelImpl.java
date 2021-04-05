@@ -40,16 +40,21 @@ public class AnimationModelImpl implements AnimationModel {
     }
   }
 
-  public void addShape(AvailableShapes shape, int x, int y, int w, int h) {
+  public void addShape(AvailableShapes shape, String label, int x, int y, int w, int h) {
     if (w < 0 || h < 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
     }
+    for (AbstractShape aShape : this.listOfShapes) {
+      if (aShape.getLabel().equals(label)) {
+        throw new IllegalArgumentException("labels must be unique to shapes.");
+      }
+    }
     if (shape == AvailableShapes.OVAL) {
-      listOfShapes.add(new Circle(x, y, w, h));
+      listOfShapes.add(new Circle(label, x, y, w, h));
       listOfIndexes.add(shapeIndex);
       shapeIndex++;
     } else if (shape == AvailableShapes.RECTANGLE) {
-      listOfShapes.add(new Rect(x, y, w, h));
+      listOfShapes.add(new Rect(label, x, y, w, h));
       listOfIndexes.add(shapeIndex);
       shapeIndex++;
     } else {
@@ -57,7 +62,7 @@ public class AnimationModelImpl implements AnimationModel {
     }
   }
 
-  public void addShape(AvailableShapes shape, int x, int y, int w, int h,
+  public void addShape(AvailableShapes shape, String label, int x, int y, int w, int h,
                        int r, int g, int b, int opacity) {
     if (x < 0 || y < 0) {
       throw new IllegalArgumentException("Invalid X and Y coordinate");
@@ -72,12 +77,17 @@ public class AnimationModelImpl implements AnimationModel {
       throw new IllegalArgumentException("Color values must be below 255 for " +
               "rgb and 100 for opacity");
     }
+    for (AbstractShape aShape : this.listOfShapes) {
+      if (aShape.getLabel().equals(label)) {
+        throw new IllegalArgumentException("labels must be unique to shapes.");
+      }
+    }
     if (shape == AvailableShapes.OVAL) {
-      listOfShapes.add(new Circle(x, y, w, h, r, g, b, opacity));
+      listOfShapes.add(new Circle(label, x, y, w, h, r, g, b, opacity));
       listOfIndexes.add(shapeIndex);
       shapeIndex++;
     } else if (shape == AvailableShapes.RECTANGLE) {
-      listOfShapes.add(new Rect(x, y, w, h, r, g, b, opacity));
+      listOfShapes.add(new Rect(label, x, y, w, h, r, g, b, opacity));
       listOfIndexes.add(shapeIndex);
       shapeIndex++;
     } else {
@@ -103,8 +113,19 @@ public class AnimationModelImpl implements AnimationModel {
       listOfIndexes.remove(listOfIndexes.indexOf(shapeIdentifier));
       //shapeIndex--;
     } else {
-     throw new IllegalArgumentException("That identifier is empty");
+     throw new IllegalArgumentException("That identifier is empty.");
     }
+  }
+
+  public void removeShape(String label) {
+    for (AbstractShape aShape : this.listOfShapes) {
+      if (aShape.getLabel().equals(label)) {
+        listOfShapes.remove(aShape);
+        listOfIndexes.remove(listOfShapes.indexOf(aShape));
+        return;
+      }
+    }
+      throw new IllegalArgumentException("Give label does not exist.");
   }
 
   private boolean timeOverlap(AbstractShape shape, int t1, int t2) {

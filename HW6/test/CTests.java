@@ -14,34 +14,37 @@ public class CTests {
 
   @Before
   public void setup() {
-    circle1 = new Circle(1, 2, 3);
-    circle2 = new Circle(1, 2, 3, 4, 5, 6, 7, 8);
-    circle3 = new Circle(1, 2, 3, 4);
-    circle4 = new Circle(1, 2, 3, 4, 5, 6, 7);
+    circle1 = new Circle("c1", 1, 2, 3);
+    circle2 = new Circle("c2", 1, 2, 3, 4, 5, 6, 7, 8);
+    circle3 = new Circle("c3", 1, 2, 3, 4);
+    circle4 = new Circle("c4", 1, 2, 3, 4, 5, 6, 7);
   }
 
   @Test
   public void testConstructor() {
     //Testing the constructor with a radius no RGB or width and height
-    Circle circleConstructorRadius = new Circle(5, 3, 2);
+    Circle circleConstructorRadius = new Circle("circle1", 5, 3, 2);
     assertEquals("Circle-> center: (5, 3) x-dimension: 2, y-dimension: 2",
             circleConstructorRadius.toString());
     // Testing the constructor with a width and a height and no radius or rgb
-    Circle circleConstructorWH1 = new Circle(2, 4, 5, 6);
+    Circle circleConstructorWH1 = new Circle("circle2", 2, 4, 5, 6);
     assertEquals("Circle-> center: (2, 4) x-dimension: 5, y-dimension: 6",
             circleConstructorWH1.toString());
-    Circle circleConstructorWH2 = new Circle(15, 1, 15, 167);
+    Circle circleConstructorWH2 = new Circle("circle3", 15, 1, 15, 167);
     assertEquals("Circle-> center: (15, 1) x-dimension: 15, y-dimension: 167",
             circleConstructorWH2.toString());
     //Testing constructor with width and height and rgb, no radius
-    Circle circleConstructorRGB1 = new Circle(5, 3, 2, 2, 2, 2, 2, 20);
+    Circle circleConstructorRGB1 = new Circle("circle4",
+        5, 3, 2, 2, 2, 2, 2, 20);
     assertEquals("Circle-> center: (5, 3) x-dimension: 2, y-dimension: 2",
             circleConstructorRGB1.toString());
-    Circle circleConstructorRGB2 = new Circle(1, 1, 1, 1, 1, 1, 1, 1);
+    Circle circleConstructorRGB2 = new Circle("circle5",
+        1, 1, 1, 1, 1, 1, 1, 1);
     assertEquals("Circle-> center: (1, 1) x-dimension: 1, y-dimension: 1",
             circleConstructorRGB2.toString());
     //Testing constructor with radius and rgb no width and height
-    Circle circleConstructorRGBRadius = new Circle(1, 2, 3, 4, 5, 6, 7);
+    Circle circleConstructorRGBRadius = new Circle("circle6",
+        1, 2, 3, 4, 5, 6, 7);
     assertEquals("Circle-> center: (1, 2) x-dimension: 3, y-dimension: 3",
             circleConstructorRGBRadius.toString());
   }
@@ -50,7 +53,7 @@ public class CTests {
   public void testInvalidConstructor1() {
     // Testing negative radius for constructor 1
     try {
-      new Circle(5, 5, -5);
+      new Circle("circle1", 5, 5, -5);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Radius must be positive.", iae.getMessage());
@@ -58,7 +61,7 @@ public class CTests {
     }
     // Testing negative X for constructor 1
     try {
-      new Circle(-5, 5, 5);
+      new Circle("circle2", -5, 5, 5);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -66,7 +69,7 @@ public class CTests {
     }
     // Testing negative Y for constructor 1
     try {
-      new Circle(1, -5, 5);
+      new Circle("circle3", 1, -5, 5);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -74,7 +77,7 @@ public class CTests {
     }
     // Testing negative X/Y for constructor 1
     try {
-      new Circle(-5, -5, 5);
+      new Circle("circle4", -5, -5, 5);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -86,7 +89,7 @@ public class CTests {
   public void testInvalidConstructor2() {
     // Testing negative X for constructor 2
     try {
-      new Circle(-5, 5, 2, 3, 2, 4, 5, 6);
+      new Circle("circle1", -5, 5, 2, 3, 2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -94,7 +97,7 @@ public class CTests {
     }
     // Testing negative Y for constructor 2
     try {
-      new Circle(5, -5, 2, 3, 2, 4, 5, 6);
+      new Circle("circle2", 5, -5, 2, 3, 2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -102,7 +105,7 @@ public class CTests {
     }
     // Testing negative X/Y for constructor 2
     try {
-      new Circle(-5, -5, 2, 3, 2, 4, 5, 6);
+      new Circle("circle3", -5, -5, 2, 3, 2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -110,7 +113,7 @@ public class CTests {
     }
     // Testing negative Width for constructor 2
     try {
-      new Circle(5, 5, -2, 3, 2, 4, 5, 6);
+      new Circle("circle4", 5, 5, -2, 3, 2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -118,7 +121,7 @@ public class CTests {
     }
     // Testing negative Height for constructor 2
     try {
-      new Circle(5, 5, 2, -3, 2, 4, 5, 6);
+      new Circle("circle5", 5, 5, 2, -3, 2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -126,7 +129,7 @@ public class CTests {
     }
     // Testing negative r for constructor 2
     try {
-      new Circle(5, 5, 2, 3, -2, 4, 5, 6);
+      new Circle("circle6", 5, 5, 2, 3, -2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be positive", iae.getMessage());
@@ -134,7 +137,7 @@ public class CTests {
     }
     // Testing r too high for constructor 2
     try {
-      new Circle(5, 5, 2, 3, 2000, 4, 5, 6);
+      new Circle("circle7", 5, 5, 2, 3, 2000, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be below 255", iae.getMessage());
@@ -142,7 +145,7 @@ public class CTests {
     }
     // Testing negative g for constructor 2
     try {
-      new Circle(5, 5, 2, 3, 2, -4, 5, 6);
+      new Circle("circle8", 5, 5, 2, 3, 2, -4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be positive", iae.getMessage());
@@ -150,7 +153,7 @@ public class CTests {
     }
     // Testing g too high for constructor 2
     try {
-      new Circle(5, 5, 2, 3, 2, 400, 5, 6);
+      new Circle("circle9", 5, 5, 2, 3, 2, 400, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be below 255", iae.getMessage());
@@ -158,7 +161,7 @@ public class CTests {
     }
     // Testing negative b for constructor 2
     try {
-      new Circle(5, 5, 2, 3, 2, 4, -5, 6);
+      new Circle("circle10", 5, 5, 2, 3, 2, 4, -5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be positive", iae.getMessage());
@@ -166,7 +169,7 @@ public class CTests {
     }
     // Testing b too high for constructor 2
     try {
-      new Circle(5, 5, 2, 3, 2, 4, 578, 6);
+      new Circle("circle11", 5, 5, 2, 3, 2, 4, 578, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be below 255", iae.getMessage());
@@ -174,7 +177,7 @@ public class CTests {
     }
     // Testing negative a for constructor 2
     try {
-      new Circle(5, 5, 2, 3, 2, 4, 5, -6);
+      new Circle("circle12", 5, 5, 2, 3, 2, 4, 5, -6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Opacity must be between 0 and 100", iae.getMessage());
@@ -182,7 +185,7 @@ public class CTests {
     }
     // Testing a too high for constructor 2
     try {
-      new Circle(5, 5, 2, 3, 2, 4, 5, 600);
+      new Circle("circle13", 5, 5, 2, 3, 2, 4, 5, 600);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Opacity must be between 0 and 100", iae.getMessage());
@@ -194,7 +197,7 @@ public class CTests {
   public void testInvalidConstructor3() {
     // Testing negative X for constructor 3
     try {
-      new Circle(-11, 12, 13, 14);
+      new Circle("circle1", -11, 12, 13, 14);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -202,7 +205,7 @@ public class CTests {
     }
     // Testing negative Y for constructor 3
     try {
-      new Circle(11, -12, 13, 14);
+      new Circle("circle2", 11, -12, 13, 14);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -210,7 +213,7 @@ public class CTests {
     }
     // Testing negative X/Y for constructor 3
     try {
-      new Circle(-11, -12, 13, 14);
+      new Circle("circle3", -11, -12, 13, 14);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -218,7 +221,7 @@ public class CTests {
     }
     // Testing negative Width for constructor 3
     try {
-      new Circle(11, 12, -13, 14);
+      new Circle("circle4",11, 12, -13, 14);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -226,7 +229,7 @@ public class CTests {
     }
     // Testing negative Height for constructor 3
     try {
-      new Circle(11, 12, 13, -14);
+      new Circle("circle5", 11, 12, 13, -14);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -238,7 +241,7 @@ public class CTests {
   public void testInvalidConstructor4() {
     // Testing negative X for constructor 4
     try {
-      new Circle(-20, 30, 40, 50, 60, 70, 80);
+      new Circle("circle1", -20, 30, 40, 50, 60, 70, 80);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -246,7 +249,7 @@ public class CTests {
     }
     // Testing negative Y for constructor 4
     try {
-      new Circle(20, -30, 40, 50, 60, 70, 80);
+      new Circle("circle2", 20, -30, 40, 50, 60, 70, 80);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -254,7 +257,7 @@ public class CTests {
     }
     // Testing negative X/Y for constructor 4
     try {
-      new Circle(-20, -30, 40, 50, 60, 70, 80);
+      new Circle("circle3", -20, -30, 40, 50, 60, 70, 80);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -262,7 +265,7 @@ public class CTests {
     }
     // Testing negative radius for constructor 4
     try {
-      new Circle(20, 30, -40, 50, 60, 70, 80);
+      new Circle("circle4", 20, 30, -40, 50, 60, 70, 80);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -270,7 +273,7 @@ public class CTests {
     }
     // Testing negative r for constructor 4
     try {
-      new Circle(20, 30, 40, -50, 60, 70, 80);
+      new Circle("circle5", 20, 30, 40, -50, 60, 70, 80);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be positive", iae.getMessage());
@@ -278,7 +281,7 @@ public class CTests {
     }
     // Testing r too high for constructor 4
     try {
-      new Circle(20, 30, 40, 500, 60, 70, 80);
+      new Circle("circle6", 20, 30, 40, 500, 60, 70, 80);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be below 255", iae.getMessage());
@@ -286,7 +289,7 @@ public class CTests {
     }
     // Testing negative g for constructor 4
     try {
-      new Circle(20, 30, 40, 50, -60, 70, 80);
+      new Circle("circle7", 20, 30, 40, 50, -60, 70, 80);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be positive", iae.getMessage());
@@ -294,7 +297,7 @@ public class CTests {
     }
     // Testing g too high for constructor 4
     try {
-      new Circle(20, 30, 40, 50, 690, 70, 80);
+      new Circle("circle8", 20, 30, 40, 50, 690, 70, 80);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be below 255", iae.getMessage());
@@ -302,7 +305,7 @@ public class CTests {
     }
     // Testing negative b for constructor 4
     try {
-      new Circle(20, 30, 40, 50, 60, -1, 80);
+      new Circle("circle9", 20, 30, 40, 50, 60, -1, 80);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be positive", iae.getMessage());
@@ -310,7 +313,7 @@ public class CTests {
     }
     // Testing b too high for constructor 4
     try {
-      new Circle(20, 30, 40, 50, 60, 708, 80);
+      new Circle("circle10", 20, 30, 40, 50, 60, 708, 80);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be below 255", iae.getMessage());
@@ -318,7 +321,7 @@ public class CTests {
     }
     // Testing negative a for constructor 4
     try {
-      new Circle(20, 30, 40, 50, 60, 70, -80);
+      new Circle("circle11", 20, 30, 40, 50, 60, 70, -80);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Opacity must be between 0 and 100", iae.getMessage());
@@ -326,7 +329,7 @@ public class CTests {
     }
     // Testing a too high for constructor 4
     try {
-      new Circle(20, 30, 40, 50, 60, 70, 101);
+      new Circle("circle12", 20, 30, 40, 50, 60, 70, 101);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Opacity must be between 0 and 100", iae.getMessage());

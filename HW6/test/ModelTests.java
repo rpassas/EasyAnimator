@@ -20,16 +20,16 @@ public class ModelTests {
   public void setup() {
     model1 = new AnimationModelImpl();
     model2 = new AnimationModelImpl();
-    rectangle1 = new Rect(3, 6, 2, 3, 10, 20, 30, 50);
-    rectangle2 = new Rect(5, 6, 7, 8);
-    circle1 = new Circle(1, 2, 3, 4);
-    circle2 = new Circle(15, 26, 45, 0, 64, 254, 100);
+    rectangle1 = new Rect("R1", 3, 6, 2, 3, 10, 20, 30, 50);
+    rectangle2 = new Rect("R2", 5, 6, 7, 8);
+    circle1 = new Circle("C1", 1, 2, 3, 4);
+    circle2 = new Circle("C2", 15, 26, 45, 0, 64, 254, 100);
   }
 
   @Test
   public void testAnimationModelImplConstructor() {
     AnimationModelImpl modelConstructor = new AnimationModelImpl();
-    modelConstructor.addShape(AvailableShapes.RECTANGLE, 5, 1, 2, 5);
+    modelConstructor.addShape(AvailableShapes.RECTANGLE, "Rect1", 5, 1, 2, 5);
     assertEquals("[Rectangle-> center: (5, 1) x-dimension: 2, y-dimension: 5]", modelConstructor.getShapes().toString());
   }
 
@@ -38,27 +38,30 @@ public class ModelTests {
     // adding a circle and rect via a premade shape
     LinkedList<AbstractShape> testList = new LinkedList<AbstractShape>();
     assertEquals(testList, model1.getShapes());
-    Circle circleConstructorRadius = new Circle(5, 3, 2);
+    Circle circleConstructorRadius = new Circle("Circ",5, 3, 2);
     testList.add(circleConstructorRadius);
     model1.addShape(circleConstructorRadius);
     assertEquals(testList, model1.getShapes());
-    Rect rectangle1 = new Rect(3, 6, 4, 7);
+    Rect rectangle1 = new Rect("Rect", 3, 6, 4, 7);
     testList.add(circleConstructorRadius);
     model1.addShape(circleConstructorRadius);
     assertEquals(testList, model1.getShapes());
 
     // adding via a change
-    Rect rectangle2 = new Rect(3, 6, 2, 3, 10, 20, 30, 50);
+    Rect rectangle2 = new Rect("Rect2", 3, 6, 2, 3,
+        10, 20, 30, 50);
     model1.addMove(rectangle2, 5, 5, 0, 4);
     testList.add(rectangle2);
     assertEquals(testList, model1.getShapes());
 
     // testing a model via shape constructor
-    model2.addShape(AvailableShapes.RECTANGLE, 2, 2, 2, 2);
-    model2.addShape(AvailableShapes.RECTANGLE, 3, 3, 3, 3);
-    model2.addShape(AvailableShapes.OVAL, 4, 4, 4, 4);
-    model2.addShape(AvailableShapes.OVAL, 5, 5, 5, 5, 5, 5, 5, 100);
-    model2.addShape(AvailableShapes.RECTANGLE, 6, 6, 6, 6, 6, 6, 6, 6);
+    model2.addShape(AvailableShapes.RECTANGLE, "aRect", 2, 2, 2, 2);
+    model2.addShape(AvailableShapes.RECTANGLE, "anotherRect", 3, 3, 3, 3);
+    model2.addShape(AvailableShapes.OVAL, "aCircle", 4, 4, 4, 4);
+    model2.addShape(AvailableShapes.OVAL, "anotherCircle",
+        5, 5, 5, 5, 5, 5, 5, 100);
+    model2.addShape(AvailableShapes.RECTANGLE, "Circle3",
+        6, 6, 6, 6, 6, 6, 6, 6);
     assertEquals("[Rectangle-> center: (2, 2) x-dimension: 2, y-dimension: 2," +
                     " Rectangle-> center: (3, 3) x-dimension: 3, y-dimension: 3, " +
                     "Circle-> center: (4, 4) x-dimension: 4, y-dimension: 4, " +
@@ -70,11 +73,13 @@ public class ModelTests {
   @Test
   public void testRemoveShapes() {
     //Removing by shape index
-    model2.addShape(AvailableShapes.RECTANGLE, 2, 2, 2, 2);
-    model2.addShape(AvailableShapes.RECTANGLE, 3, 3, 3, 3);
-    model2.addShape(AvailableShapes.OVAL, 4, 4, 4, 4);
-    model2.addShape(AvailableShapes.OVAL, 5, 5, 5, 5, 5, 5, 5, 100);
-    model2.addShape(AvailableShapes.RECTANGLE, 6, 6, 6, 6, 6, 6, 6, 6);
+    model2.addShape(AvailableShapes.RECTANGLE, "Rect1", 2, 2, 2, 2);
+    model2.addShape(AvailableShapes.RECTANGLE, "Rect2",3, 3, 3, 3);
+    model2.addShape(AvailableShapes.OVAL, "Circle1",4, 4, 4, 4);
+    model2.addShape(AvailableShapes.OVAL,"Circle2",
+        5, 5, 5, 5, 5, 5, 5, 100);
+    model2.addShape(AvailableShapes.RECTANGLE,"Circle3",
+        6, 6, 6, 6, 6, 6, 6, 6);
     model2.removeShape(0);
     assertEquals("[Rectangle-> center: (3, 3) x-dimension: 3, y-dimension: 3, " +
                     "Circle-> center: (4, 4) x-dimension: 4, y-dimension: 4, " +
@@ -114,10 +119,11 @@ public class ModelTests {
   @Test
   public void testAddMove() {
     //TODO how would we add a shape like this and then get it to move with parallel lists?
-    model1.addShape(AvailableShapes.RECTANGLE, 1, 2, 3, 7);
-    model1.addShape(AvailableShapes.RECTANGLE, 11, 3, 2, 3);
-    model1.addShape(AvailableShapes.OVAL, 41, 44, 1, 4);
-    model1.addShape(AvailableShapes.OVAL, 5, 25, 5, 55, 53, 35, 5, 100);
+    model1.addShape(AvailableShapes.RECTANGLE, "Rect1", 1, 2, 3, 7);
+    model1.addShape(AvailableShapes.RECTANGLE, "Rect2", 11, 3, 2, 3);
+    model1.addShape(AvailableShapes.OVAL, "Circle1", 41, 44, 1, 4);
+    model1.addShape(AvailableShapes.OVAL, "Circle2",
+        5, 25, 5, 55, 53, 35, 5, 100);
 
     model2.addShape(rectangle1);
     model2.addShape(circle2);
@@ -136,7 +142,8 @@ public class ModelTests {
   public void testAddColor() {
     model1.addShape(rectangle1);
     LinkedList<Change> testList = new LinkedList<Change>();
-    Recolor color1 = new Recolor(rectangle1, 0, 100, 115, 130, 0, 25);
+    Recolor color1 = new Recolor(rectangle1,
+        0, 100, 115, 130, 0, 25);
     testList.add(color1);
     model1.addRecolor(rectangle1, 100, 115, 130, 0, 25);
     assertEquals(testList.get(0).getShapeID(), model1.getChanges().get(0).getShapeID());

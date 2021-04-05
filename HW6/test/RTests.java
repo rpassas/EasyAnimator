@@ -12,18 +12,19 @@ public class RTests {
 
   @Before
   public void setup() {
-    rectangle1 = new Rect(3, 6, 4, 7);
-    rectangle2 = new Rect(3, 6, 2, 3, 10, 20, 30, 50);
+    rectangle1 = new Rect("R1", 3, 6, 4, 7);
+    rectangle2 = new Rect("R2", 3, 6, 2, 3, 10, 20, 30, 50);
   }
 
   @Test
   public void testConstructor() {
     //Testing the constructor 1 with X/Y width and Height
-    Rect rectConstructorWH = new Rect(1, 1, 2, 9);
+    Rect rectConstructorWH = new Rect("rect1",1, 1, 2, 9);
     assertEquals("Rectangle-> center: (1, 1) x-dimension: 2, y-dimension: 9",
             rectConstructorWH.toString());
     //Testing the constructor 2 with X/Y, width, height, RGB, and opacity
-    Rect rectConstructorRGB = new Rect(10, 20, 30, 40, 15, 15, 15, 100);
+    Rect rectConstructorRGB = new Rect("rect2",
+        10, 20, 30, 40, 15, 15, 15, 100);
     assertEquals("Rectangle-> center: (10, 20) x-dimension: 30, y-dimension: 40",
             rectConstructorRGB.toString());
   }
@@ -32,7 +33,7 @@ public class RTests {
   public void testInvalidConstructor1() {
     // Testing negative X for constructor 1
     try {
-      new Rect(-5, 5, 2, 3, 2, 4, 5, 6);
+      new Rect("rect1", -5, 5, 2, 3, 2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -40,7 +41,7 @@ public class RTests {
     }
     // Testing negative Y for constructor 1
     try {
-      new Rect(5, -5, 2, 3, 2, 4, 5, 6);
+      new Rect("rect2", 5, -5, 2, 3, 2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -48,7 +49,7 @@ public class RTests {
     }
     // Testing negative X/Y for constructor 1
     try {
-      new Rect(-5, -5, 2, 3, 2, 4, 5, 6);
+      new Rect("rect3", -5, -5, 2, 3, 2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -56,7 +57,7 @@ public class RTests {
     }
     // Testing negative Width for constructor 1
     try {
-      new Rect(5, 5, -2, 3, 2, 4, 5, 6);
+      new Rect("rect4", 5, 5, -2, 3, 2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -64,7 +65,7 @@ public class RTests {
     }
     // Testing negative Height for constructor 1
     try {
-      new Rect(5, 5, 2, -3, 2, 4, 5, 6);
+      new Rect("rect5", 5, 5, 2, -3, 2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -76,7 +77,7 @@ public class RTests {
   public void testInvalidConstructor2() {
     // Testing negative X for constructor 2
     try {
-      new Rect(-5, 5, 2, 3, 2, 4, 5, 6);
+      new Rect("rect1", -5, 5, 2, 3, 2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -84,7 +85,7 @@ public class RTests {
     }
     // Testing negative Y for constructor 2
     try {
-      new Rect(5, -5, 2, 3, 2, 4, 5, 6);
+      new Rect("rect2", 5, -5, 2, 3, 2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -92,7 +93,7 @@ public class RTests {
     }
     // Testing negative X/Y for constructor 2
     try {
-      new Rect(-5, -5, 2, 3, 2, 4, 5, 6);
+      new Rect("rect3", -5, -5, 2, 3, 2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("X and Y must be positive.", iae.getMessage());
@@ -100,7 +101,7 @@ public class RTests {
     }
     // Testing negative Width for constructor 2
     try {
-      new Rect(5, 5, -2, 3, 2, 4, 5, 6);
+      new Rect("rect4", 5, 5, -2, 3, 2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -108,7 +109,7 @@ public class RTests {
     }
     // Testing negative Height for constructor 2
     try {
-      new Rect(5, 5, 2, -3, 2, 4, 5, 6);
+      new Rect("rect5", 5, 5, 2, -3, 2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -116,7 +117,7 @@ public class RTests {
     }
     // Testing negative r for constructor 2
     try {
-      new Rect(5, 5, 2, 3, -2, 4, 5, 6);
+      new Rect("rect6", 5, 5, 2, 3, -2, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be positive", iae.getMessage());
@@ -124,7 +125,7 @@ public class RTests {
     }
     // Testing r too high for constructor 2
     try {
-      new Rect(5, 5, 2, 3, 2000, 4, 5, 6);
+      new Rect("rect7", 5, 5, 2, 3, 2000, 4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be below 255", iae.getMessage());
@@ -132,7 +133,7 @@ public class RTests {
     }
     // Testing negative g for constructor 2
     try {
-      new Rect(5, 5, 2, 3, 2, -4, 5, 6);
+      new Rect("rect8", 5, 5, 2, 3, 2, -4, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be positive", iae.getMessage());
@@ -140,7 +141,7 @@ public class RTests {
     }
     // Testing g too high for constructor 2
     try {
-      new Rect(5, 5, 2, 3, 2, 400, 5, 6);
+      new Rect("rect9", 5, 5, 2, 3, 2, 400, 5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be below 255", iae.getMessage());
@@ -148,7 +149,7 @@ public class RTests {
     }
     // Testing negative b for constructor 2
     try {
-      new Rect(5, 5, 2, 3, 2, 4, -5, 6);
+      new Rect("rect10", 5, 5, 2, 3, 2, 4, -5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be positive", iae.getMessage());
@@ -156,7 +157,7 @@ public class RTests {
     }
     // Testing b too high for constructor 2
     try {
-      new Rect(5, 5, 2, 3, 2, 4, 578, 6);
+      new Rect("rect11", 5, 5, 2, 3, 2, 4, 578, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be below 255", iae.getMessage());
@@ -164,7 +165,7 @@ public class RTests {
     }
     // Testing negative a for constructor 2
     try {
-      new Rect(5, 5, 2, 3, 2, 4, 5, -6);
+      new Rect("rect12", 5, 5, 2, 3, 2, 4, 5, -6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Opacity must be between 0 and 100", iae.getMessage());
@@ -172,7 +173,7 @@ public class RTests {
     }
     // Testing a too high for constructor 2
     try {
-      new Rect(5, 5, 2, 3, 2, 4, 5, 600);
+      new Rect("rect13", 5, 5, 2, 3, 2, 4, 5, 600);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Opacity must be between 0 and 100", iae.getMessage());

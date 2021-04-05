@@ -113,5 +113,11 @@ public interface BasicShape {
    * @param tick the tick value to set it to.
    */
   void setTick(int tick);
+
+  /**
+   * Generates a string describing the shape.
+   * @return string giving details of the shape
+   */
+  String toString();
 }
 

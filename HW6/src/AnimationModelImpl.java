@@ -59,7 +59,7 @@ public class AnimationModelImpl implements AnimationModel {
 
   public void addShape(AvailableShapes shape, int x, int y, int w, int h,
                        int r, int g, int b, int opacity) {
-    if (x < 0 || y > 0) {
+    if (x < 0 || y < 0) {
       throw new IllegalArgumentException("Invalid X and Y coordinate");
     }
     if (w < 0 || h < 0) {
@@ -87,28 +87,44 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public void removeShape(AbstractShape shape) {
-    listOfShapes.remove(shape);
-    listOfIndexes.remove(listOfShapes.indexOf(shape));
-    shapeIndex--;
+    if(listOfShapes.contains(shape)) {
+      listOfIndexes.remove(listOfShapes.indexOf(shape));
+      listOfShapes.remove(shape);
+    } else {
+      throw new IllegalArgumentException("That shape is not in the list");
+    }
+    // We shouldn't decrement the shape index here, its a number that we don't want repeats of
+    //shapeIndex--;
   }
 
   public void removeShape(int shapeIdentifier) {
-    listOfShapes.remove(shapeIdentifier);
-    listOfIndexes.remove(shapeIdentifier);
-    shapeIndex--;
+    if (listOfIndexes.contains(shapeIdentifier)) {
+      listOfShapes.remove(listOfIndexes.indexOf(shapeIdentifier));
+      listOfIndexes.remove(listOfIndexes.indexOf(shapeIdentifier));
+      //shapeIndex--;
+    } else {
+     throw new IllegalArgumentException("That identifier is empty");
+    }
   }
 
   // TODO include checks for contradicting changes e.g. shape can't move left and right at once
   @Override
   public void addMove(AbstractShape shape, int x, int y, int t1, int t2) {
-    //TODO why is this bad?
-    /*
-    if (x < 0 || y > 0) {
+    if (x < 0 || y < 0) {
       throw new IllegalArgumentException("Invalid X and Y coordinate");
     }
-    */
     if (t1 < 0 || t2 < 0) {
       throw new IllegalArgumentException("Time value must be positive");
+    }
+    for (Change c : this.listOfChanges) {
+      //only one change can be made at a time
+      if (c.getShapeID() == listOfIndexes.get(listOfShapes.indexOf(shape))
+              && c.getStartTime() < t1 && c.getEndTime() > t1 //overlapping time at the front
+              || c.getStartTime() < t2 && c.getEndTime() > t2 // Overlapping time at the end
+              || c.getStartTime() < t1 && c.getEndTime() > t2 // old change inside new change's time
+              || c.getStartTime() > t1 && c.getEndTime() < t2) { //new change inside old change time
+        throw new IllegalArgumentException("Only one change can be made at a time");
+      }
     }
     if (listOfShapes.indexOf(shape) == -1) {
       this.addShape(shape);

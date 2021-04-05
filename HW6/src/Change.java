@@ -106,4 +106,8 @@ public interface Change {
    * @param endTime the endTime value that it will be set to.
    */
   public void setEndTime(int endTime);
+
+  public int getShapeID();
+
+  public void setShapeID(int shapeID);
 }

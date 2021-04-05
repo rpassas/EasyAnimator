@@ -106,4 +106,16 @@ public interface Change {
    * @param endTime the endTime value that it will be set to.
    */
   void setEndTime(int endTime);
+
+  /**
+   * Get the shape's ID for a change.
+   * @return int indicating shape ID
+   */
+  int getShapeID();
+
+  /**
+   * Set the shape's ID for a change.
+   * @param shapeID is an int indicating a new ID.
+   */
+  void setShapeID(int shapeID);
 }

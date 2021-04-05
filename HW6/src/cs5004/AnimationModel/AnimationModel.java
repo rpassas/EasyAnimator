@@ -54,7 +54,7 @@ public interface AnimationModel {
    * Takes a shape, changes color according to time, then removes the shape.
    * @param shape shape to be recolored
    * @param startR start red value 0 - 255
-   * @param startG start reen value 0 - 255
+   * @param startG start green value 0 - 255
    * @param startB start blue value 0 - 255
    * @param startA start opacity value 0 - 100
    * @param endR end red value 0 - 255

@@ -59,7 +59,7 @@ public class ModelTests {
     // adding via a change
     Rect rectangle2 = new Rect("Rect2", 3, 6, 2, 3,
         10, 20, 30, 50);
-    model1.addMove(rectangle2, 5, 5, 0, 4);
+    model1.addMove(rectangle2, 5, 5, 3, 4,  0, 4);
     testList.add(rectangle2);
     assertEquals(testList, model1.getShapes());
 
@@ -174,21 +174,22 @@ public class ModelTests {
 
     model2.addShape(rectangle1);
     model2.addShape(circle2);
-    model2.addMove(rectangle1, 15, 15, 5, 10);
-    model2.addMove(rectangle1, 2, 2, 10, 20);
-    assertEquals("[Shape R1 updates its position to" +
-            " x-dimension: 15, y-dimension: 15 from t= 5 to t= 10\n" +
-            ", Shape R1 updates its position to" +
-            " x-dimension: 2, y-dimension: 2 from t= 10 to t= 20\n" +
+    model2.addMove(rectangle1, 15, 15, 5, 10,  2, 11);
+    model2.addMove(rectangle1, 2, 2, 10, 20, 12, 17);
+    assertEquals("[Shape R1 updates its position from x-dimension: 5," +
+            " y-dimension: 10 to x-dimension: 5, y-dimension: 10 from t= 2 to t= 11\n" +
+            ", Shape R1 updates its position from x-dimension: 10, y-dimension: 20 to" +
+            " x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n" +
             "]",
             model2.getChanges().toString());
-    model2.addMove(circle2,1, 1, 0, 25);
-    assertEquals("[Shape R1 updates its position to" +
-            " x-dimension: 15, y-dimension: 15 from t= 5 to t= 10\n" +
-            ", Shape R1 updates its position to" +
-            " x-dimension: 2, y-dimension: 2 from t= 10 to t= 20\n" +
-            ", Shape C2 updates its position to" +
-            " x-dimension: 1, y-dimension: 1 from t= 0 to t= 25\n" +
+    model2.addMove(circle2,1, 1, 0, 25, 18, 20);
+    assertEquals("[Shape R1 updates its position from x-dimension: 5, y-dimension:" +
+            " 10 to x-dimension: 5, y-dimension: 10 from t= 2 to t= 11\n" +
+            ", Shape R1 updates its position from x-dimension: 10," +
+            " y-dimension: 20 to x-dimension: " +
+            "10, y-dimension: 20 from t= 12 to t= 17\n" +
+            ", Shape C2 updates its position from x-dimension: 0, y-dimension: 25 to x-dimension:" +
+            " 0, y-dimension: 25 from t= 18 to t= 20\n" +
             "]",
             model2.getChanges().toString());
   }
@@ -198,7 +199,7 @@ public class ModelTests {
     // Testing negative t1
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addMove(circle1, 15, 15, -5, 5);
+      testIllegal.addMove(circle1, 15, 15, -5, 5, -10, 20);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Time value must be positive", iae.getMessage());
@@ -207,7 +208,7 @@ public class ModelTests {
     // Testing negative t2
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addMove(circle1, 15, 15, 25, -5);
+      testIllegal.addMove(circle1, 15, 15, 25, -5, 10, -20);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Time value must be positive", iae.getMessage());
@@ -216,8 +217,8 @@ public class ModelTests {
     // Testing conflicting time at front
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addMove(circle1, 15, 15, 15, 25);
-      testIllegal.addMove(circle1, 15, 15, 1, 16);
+      testIllegal.addMove(circle1, 15, 15, 5, 20, 15, 25);
+      testIllegal.addMove(circle1, 15, 15,19, 20, 1, 16);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Only one move change can be made at a time", iae.getMessage());
@@ -226,8 +227,8 @@ public class ModelTests {
     // Testing conflicting time at the back
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addMove(circle1, 15, 15, 15, 25);
-      testIllegal.addMove(circle1, 15, 15, 24, 45);
+      testIllegal.addMove(circle1, 15, 15,5, 20, 15, 25);
+      testIllegal.addMove(circle1, 15, 15,5, 20, 24, 45);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Only one move change can be made at a time", iae.getMessage());
@@ -236,8 +237,8 @@ public class ModelTests {
     // Testing conflicting time, move 2 is within move 1
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addMove(circle1, 15, 15, 15, 25);
-      testIllegal.addMove(circle1, 15, 15, 19, 21);
+      testIllegal.addMove(circle1, 15, 15,5, 20, 15, 25);
+      testIllegal.addMove(circle1, 15, 15,5, 20, 19, 21);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Only one move change can be made at a time", iae.getMessage());
@@ -246,8 +247,8 @@ public class ModelTests {
     // Testing conflicting time, move 1 is within move 2
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addMove(circle1, 15, 15, 15, 25);
-      testIllegal.addMove(circle1, 15, 15, 0, 40);
+      testIllegal.addMove(circle1, 15, 15,5, 20, 15, 25);
+      testIllegal.addMove(circle1, 15, 15,5, 20, 0, 40);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Only one move change can be made at a time", iae.getMessage());
@@ -256,7 +257,7 @@ public class ModelTests {
     // Testing start time after end time
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addMove(circle1, 15, 15, 15, 5);
+      testIllegal.addMove(circle1, 15, 15,5, 20, 15, 5);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Start time > end time", iae.getMessage());
@@ -269,9 +270,12 @@ public class ModelTests {
     model1.addShape(rectangle1);
     LinkedList<Change> testList = new LinkedList<>();
     Recolor color1 = new Recolor(rectangle1,
-        0, rectangle1.getLabel(),100, 115, 130, 0, 5, 10);
+        0, rectangle1.getLabel(),
+        100, 115, 130, 100,
+        100, 115, 130, 100, 0, 5);
     testList.add(color1);
-    model1.addRecolor(rectangle1, 100, 115, 130, 0, 5, 10);
+    model1.addRecolor(rectangle1, 100, 115, 130, 100,
+        100, 115, 130, 100, 0, 5);
     assertEquals(testList.get(0).getShapeID(), model1.getChanges().get(0).getShapeID());
     assertEquals(testList.get(0).getUpdatedR(), model1.getChanges().get(0).getUpdatedR());
     assertEquals(testList.get(0).getUpdatedG(), model1.getChanges().get(0).getUpdatedG());
@@ -283,9 +287,11 @@ public class ModelTests {
     model2.addShape(circle1);
     LinkedList<Change> testList2 = new LinkedList<>();
     Recolor color2 = new Recolor(circle1,
-            0, circle1.getLabel(),100, 115, 130, 0, 5, 10);
+            0, circle1.getLabel(),100, 115, 130, 0,
+        100, 115, 10, 0,5, 10);
     testList2.add(color2);
-    model2.addRecolor(circle1, 100, 115, 130, 0, 5, 10);
+    model2.addRecolor(circle1, 100, 115, 130, 0,
+        100, 115, 10, 0,5, 10);
     assertEquals(testList2.get(0).getShapeID(), model2.getChanges().get(0).getShapeID());
     assertEquals(testList2.get(0).getUpdatedR(), model2.getChanges().get(0).getUpdatedR());
     assertEquals(testList2.get(0).getUpdatedG(), model2.getChanges().get(0).getUpdatedG());
@@ -300,7 +306,8 @@ public class ModelTests {
     // Testing negative R
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addRecolor(circle1, -15, 25, 30, 100, 5, 6);
+      testIllegal.addRecolor(circle1, -15, 25, 30, 100,
+          100, 115, 130, 0,5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be positive", iae.getMessage());
@@ -309,7 +316,8 @@ public class ModelTests {
     // Testing negative G
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addRecolor(circle1, 15, -25, 30, 100, 5, 6);
+      testIllegal.addRecolor(circle1, 15, -25, 30, 100,
+          100, 115, 130, 0,5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be positive", iae.getMessage());
@@ -318,7 +326,8 @@ public class ModelTests {
     // Testing negative B
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addRecolor(circle1, 15, 25, -30, 100, 5, 6);
+      testIllegal.addRecolor(circle1, 15, 25, -30, 100,
+          100, 115, 130, 0,5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be positive", iae.getMessage());
@@ -327,7 +336,8 @@ public class ModelTests {
     // Testing negative A
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addRecolor(circle1, 15, 25, 30, -100, 5, 6);
+      testIllegal.addRecolor(circle1, 15, 25, 30, -100,
+          100, 115, 130, 0,5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Opacity must be between 0 and 100", iae.getMessage());
@@ -337,7 +347,8 @@ public class ModelTests {
     // Testing too High R
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addRecolor(circle1, 315, 25, 30, 100, 5, 6);
+      testIllegal.addRecolor(circle1, 315, 25, 30, 100,
+          100, 115, 130, 0,5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be below 255", iae.getMessage());
@@ -346,7 +357,8 @@ public class ModelTests {
     // Testing too High G
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addRecolor(circle1, 15, 325, 30, 100, 5, 6);
+      testIllegal.addRecolor(circle1, 15, 325, 30, 100,
+          100, 115, 130, 0,5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be below 255", iae.getMessage());
@@ -355,7 +367,8 @@ public class ModelTests {
     // Testing too high B
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addRecolor(circle1, 15, 25, 256, 100, 5, 6);
+      testIllegal.addRecolor(circle1, 15, 25, 256, 100,
+          100, 115, 130, 0,5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Color values must be below 255", iae.getMessage());
@@ -364,7 +377,8 @@ public class ModelTests {
     // Testing too high A
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addRecolor(circle1, 15, 25, 30, 101, 5, 6);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 101,
+          100, 115, 130, 0,5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Opacity must be between 0 and 100", iae.getMessage());
@@ -374,7 +388,8 @@ public class ModelTests {
     // Testing negative t1
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addRecolor(circle1, 15, 25, 30, 100, -5, 6);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100,
+          100, 115, 130, 0,-5, 6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Time value must be positive", iae.getMessage());
@@ -383,7 +398,8 @@ public class ModelTests {
     // Testing negative t2
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 5, -6);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100,
+          100, 115, 130, 0,5, -6);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Time value must be positive", iae.getMessage());
@@ -392,8 +408,10 @@ public class ModelTests {
     // Testing conflicting time at front
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 15, 25);
-      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 1, 16);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100,
+          100, 115, 130, 0,15, 25);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100,
+          100, 115, 130, 0,1, 16);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Only one recolor change can be made at a time", iae.getMessage());
@@ -402,8 +420,10 @@ public class ModelTests {
     // Testing conflicting time at the back
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 15, 25);
-      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 24, 45);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100,
+          100, 115, 130, 0,15, 25);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100,
+          100, 115, 130, 0,24, 45);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Only one recolor change can be made at a time", iae.getMessage());
@@ -412,8 +432,10 @@ public class ModelTests {
     // Testing conflicting time, move 2 is within move 1
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 15, 25);
-      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 19, 21);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100,
+          100, 115, 130, 0,15, 25);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100,
+          100, 115, 130, 0,19, 21);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Only one recolor change can be made at a time", iae.getMessage());
@@ -422,8 +444,10 @@ public class ModelTests {
     // Testing conflicting time, move 1 is within move 2
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 15, 25);
-      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 0, 40);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100,
+          100, 115, 130, 0,15, 25);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100,
+          100, 115, 130, 0,0, 40);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Only one recolor change can be made at a time", iae.getMessage());
@@ -432,7 +456,8 @@ public class ModelTests {
     // Testing start time after end time
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 6, 5);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100,
+          100, 115, 130, 0,6, 5);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Start time > end time", iae.getMessage());
@@ -445,16 +470,18 @@ public class ModelTests {
     model1.addShape(rectangle2);
     assertEquals("[Rectangle R2 -> center: (5, 6), x-dimension: 7, y-dimension: 8]",
             model1.getShapes().toString());
-    model1.addResize(rectangle2, 1, 3, 0 , 15);
-    assertEquals("[Shape R2 updates its dimensions to" +
-            " width: 1 height: 3 from t= 0 to t= 15\n" +
+    model1.addResize(rectangle2, 1, 3,
+        5, 3,0 , 15);
+    assertEquals("[Shape R2 updates its dimensions from width: 0 height: 1 to width:" +
+            " 5 height: 3 from t= 0 to t= 15\n" +
             "]",
             model1.getChanges().toString());
-    model1.addResize(rectangle2, 5, 5, 15, 50);
-    assertEquals("[Shape R2 updates its dimensions to" +
-            " width: 1 height: 3 from t= 0 to t= 15\n" +
-            ", Shape R2 updates its dimensions to" +
-            " width: 5 height: 5 from t= 15 to t= 50\n" +
+    model1.addResize(rectangle2, 5, 5,
+        1, 3,15, 50);
+    assertEquals("[Shape R2 updates its dimensions from width: 0 height:" +
+            " 1 to width: 5 height: 3 from t= 0 to t= 15\n" +
+            ", Shape R2 updates its dimensions from width: 0 height: 5 to width:" +
+            " 1 height: 3 from t= 15 to t= 50\n" +
             "]",
             model1.getChanges().toString());
 
@@ -465,24 +492,24 @@ public class ModelTests {
             "cs5004.AnimationModel.Circle C2 -> center: (15, 26), x-dimension: 45, y-dimension: 45, " +
             "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4]",
             model2.getShapes().toString());
-    model2.addResize(rectangle1, 1, 1, 1, 2);
-    model2.addResize(circle1, 1, 1, 1, 2);
-    model2.addResize(circle2, 1, 1, 1, 2);
-    assertEquals("[Shape R1 updates its dimensions to" +
-            " width: 1 height: 1 from t= 1 to t= 2\n" +
-            ", Shape C1 updates its dimensions to width: 1 height: 1 from t= 1 to t= 2\n" +
-            ", Shape C2 updates its dimensions to width: 1 height: 1 from t= 1 to t= 2\n" +
+    model2.addResize(rectangle1, 1, 1,7, 3, 1, 2);
+    model2.addResize(circle1, 1, 1,3, 8, 1, 2);
+    model2.addResize(circle2, 1, 1, 4, 1,1, 2);
+    assertEquals("[Shape R1 updates its dimensions from width: 0 height: 1 to width:" +
+            " 7 height: 3 from t= 1 to t= 2\n" +
+            ", Shape C1 updates its dimensions from width: 0 height: 1 to width: 3 height: " +
+            "8 from t= 1 to t= 2\n" +
+            ", Shape C2 updates its dimensions from width: 0 height: 1 to width: 4 height: " +
+            "1 from t= 1 to t= 2\n" +
             "]",
             model2.getChanges().toString());
   }
 
   @Test
   public void testIllegalAddResize() {
-    // TODO added x & y must be positive, that should line up with our other logic
-    // Testing negative/0 width
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addResize(circle1, -15, 15, 5, 5);
+      testIllegal.addResize(circle1, -15, 15, 1, 3, 5, 5);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -491,7 +518,7 @@ public class ModelTests {
     // Testing negative/0 height
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addResize(circle1, 15, 0, 5, 5);
+      testIllegal.addResize(circle1, 15, 0,1, 3, 5, 5);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -500,7 +527,7 @@ public class ModelTests {
     // Testing negative t1
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addResize(circle1, 15, 15, -5, 5);
+      testIllegal.addResize(circle1, 15, 15,1, 3, -5, 5);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Time value must be positive", iae.getMessage());
@@ -509,7 +536,7 @@ public class ModelTests {
     // Testing negative t2
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addResize(circle1, 15, 15, 25, -5);
+      testIllegal.addResize(circle1, 15, 15,1, 3, 25, -5);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Time value must be positive", iae.getMessage());
@@ -518,8 +545,8 @@ public class ModelTests {
     // Testing conflicting time at front
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addResize(circle1, 15, 15, 15, 25);
-      testIllegal.addResize(circle1, 15, 15, 1, 16);
+      testIllegal.addResize(circle1, 15, 15,1, 3, 15, 25);
+      testIllegal.addResize(circle1, 15, 15,1, 3, 1, 16);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Only one resize change can be made at a time", iae.getMessage());
@@ -528,8 +555,8 @@ public class ModelTests {
     // Testing conflicting time at the back
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addResize(circle1, 15, 15, 15, 25);
-      testIllegal.addResize(circle1, 15, 15, 24, 45);
+      testIllegal.addResize(circle1, 15, 15,1, 3, 15, 25);
+      testIllegal.addResize(circle1, 15, 15,1, 3, 24, 45);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Only one resize change can be made at a time", iae.getMessage());
@@ -538,8 +565,8 @@ public class ModelTests {
     // Testing conflicting time, move 2 is within move 1
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addResize(circle1, 15, 15, 15, 25);
-      testIllegal.addResize(circle1, 15, 15, 19, 21);
+      testIllegal.addResize(circle1, 15, 15,1, 3, 15, 25);
+      testIllegal.addResize(circle1, 15, 15, 1, 3,19, 21);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Only one resize change can be made at a time", iae.getMessage());
@@ -548,8 +575,8 @@ public class ModelTests {
     // Testing conflicting time, move 1 is within move 2
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addResize(circle1, 15, 15, 15, 25);
-      testIllegal.addResize(circle1, 15, 15, 0, 40);
+      testIllegal.addResize(circle1, 15, 15,1, 3, 15, 25);
+      testIllegal.addResize(circle1, 15, 15, 1, 3,0, 40);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Only one resize change can be made at a time", iae.getMessage());
@@ -558,7 +585,7 @@ public class ModelTests {
     // Testing start time after end time
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addResize(circle1, 15, 15, 15, 5);
+      testIllegal.addResize(circle1, 15, 15, 1, 3,15, 5);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("Start time > end time", iae.getMessage());
@@ -575,24 +602,33 @@ public class ModelTests {
         Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3
         cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4
         """, model1.toString());
-    model1.addMove(rectangle1, 2, 3, 2,3);
-    model1.addMove(circle1, 2, 3, 2,3);
-    model1.addRecolor(rectangle1, 2, 3, 250,3, 5, 7);
-    model1.addRecolor(circle1, 17, 111, 2,3, 5, 8);
+    model1.addMove(rectangle1, 2, 3, 1, 3,2,3);
+    model1.addMove(circle1, 2, 3, 1, 3,2,3);
+    model1.addRecolor(rectangle1, 2, 3, 250,3,
+        2, 3, 250,3,5, 7);
+    model1.addRecolor(circle1, 17, 111, 2,3,
+        2, 3, 250,3,5, 8);
     assertEquals("Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3\n" +
         "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4\n" +
-        "Shape R1 updates its position to x-dimension: 2, y-dimension: 3 from t= 2 to t= 3\n" +
-        "Shape C1 updates its position to x-dimension: 2, y-dimension: 3 from t= 2 to t= 3\n" +
-        "Shape R1 updates its color to (2, 3, 250) from t= 5 to t= 7\n" +
-        "Shape C1 updates its color to (17, 111, 2) from t= 5 to t= 8\n", model1.toString());
-    model1.addResize(circle1, 15, 15, 0, 100);
+        "Shape R1 updates its position from x-dimension: 1, y-dimension: 3 to x-dimension: 1, " +
+        "y-dimension: 3 from t= 2 to t= 3\n" +
+        "Shape C1 updates its position from x-dimension: 1, y-dimension: 3 to x-dimension: 1, " +
+        "y-dimension: 3 from t= 2 to t= 3\n" +
+        "Shape R1 updates its color from (2, 3, 250, 3) to (2, 3, 250, 3) from t= 5 to t= 7\n" +
+        "Shape C1 updates its color from (17, 111, 2, 3) to (2, 3, 250, 3) from t= 5 to t= 8\n",
+        model1.toString());
+    model1.addResize(circle1, 15, 15, 1, 3,0, 100);
     assertEquals("Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3\n" +
             "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4\n" +
-            "Shape R1 updates its position to x-dimension: 2, y-dimension: 3 from t= 2 to t= 3\n" +
-            "Shape C1 updates its position to x-dimension: 2, y-dimension: 3 from t= 2 to t= 3\n" +
-            "Shape R1 updates its color to (2, 3, 250) from t= 5 to t= 7\n" +
-            "Shape C1 updates its color to (17, 111, 2) from t= 5 to t= 8\n" +
-            "Shape C1 updates its dimensions to width: 15 height: 15 from t= 0 to t= 100\n",
+            "Shape R1 updates its position from x-dimension: 1, y-dimension:" +
+            " 3 to x-dimension: 1, y-dimension: 3 from t= 2 to t= 3\n" +
+            "Shape C1 updates its position from x-dimension: 1, y-dimension: 3 to x-dimension:" +
+            " 1, y-dimension: 3 from t= 2 to t= 3\n" +
+            "Shape R1 updates its color from (2, 3, 250, 3) to (2, 3, 250, 3) from t= 5 to t= 7\n" +
+            "Shape C1 updates its color from (17, 111, 2, 3) to (2, 3, 250, 3) from" +
+            " t= 5 to t= 8\n" +
+            "Shape C1 updates its dimensions from width: 0 height: 15 to width: 1 height:" +
+            " 3 from t= 0 to t= 100\n",
             model1.toString());
   }
 

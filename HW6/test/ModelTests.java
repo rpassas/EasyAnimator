@@ -11,11 +11,19 @@ import static org.junit.Assert.fail;
 public class ModelTests {
   private AnimationModelImpl model1;
   private AnimationModelImpl model2;
+  private Rect rectangle1;
+  private Rect rectangle2;
+  private Circle circle1;
+  private Circle circle2;
 
   @Before
   public void setup() {
     model1 = new AnimationModelImpl();
     model2 = new AnimationModelImpl();
+    rectangle1 = new Rect(3, 6, 2, 3, 10, 20, 30, 50);
+    rectangle2 = new Rect(5, 6, 7, 8);
+    circle1 = new Circle(1, 2, 3, 4);
+    circle2 = new Circle(15, 26, 45, 0, 64, 254, 100);
   }
 
   @Test
@@ -41,7 +49,7 @@ public class ModelTests {
 
     // adding via a change
     Rect rectangle2 = new Rect(3, 6, 2, 3, 10, 20, 30, 50);
-    model1.addMove(rectangle2, 5,5,0,4);
+    model1.addMove(rectangle2, 5, 5, 0, 4);
     testList.add(rectangle2);
     assertEquals(testList, model1.getShapes());
 
@@ -52,20 +60,19 @@ public class ModelTests {
     model2.addShape(AvailableShapes.OVAL, 5, 5, 5, 5, 5, 5, 5, 100);
     model2.addShape(AvailableShapes.RECTANGLE, 6, 6, 6, 6, 6, 6, 6, 6);
     assertEquals("[Rectangle-> center: (2, 2) x-dimension: 2, y-dimension: 2," +
-            " Rectangle-> center: (3, 3) x-dimension: 3, y-dimension: 3, " +
-            "Circle-> center: (4, 4) x-dimension: 4, y-dimension: 4, " +
-            "Circle-> center: (5, 5) x-dimension: 5, y-dimension: 5, " +
-            "Rectangle-> center: (6, 6) x-dimension: 6, y-dimension: 6]",
+                    " Rectangle-> center: (3, 3) x-dimension: 3, y-dimension: 3, " +
+                    "Circle-> center: (4, 4) x-dimension: 4, y-dimension: 4, " +
+                    "Circle-> center: (5, 5) x-dimension: 5, y-dimension: 5, " +
+                    "Rectangle-> center: (6, 6) x-dimension: 6, y-dimension: 6]",
             model2.getShapes().toString());
   }
 
   @Test
-  public void testRemoveShapes () {
+  public void testRemoveShapes() {
     //Removing by shapde index
     model2.addShape(AvailableShapes.RECTANGLE, 2, 2, 2, 2);
     model2.addShape(AvailableShapes.RECTANGLE, 3, 3, 3, 3);
     model2.addShape(AvailableShapes.OVAL, 4, 4, 4, 4);
-
     model2.addShape(AvailableShapes.OVAL, 5, 5, 5, 5, 5, 5, 5, 100);
     model2.addShape(AvailableShapes.RECTANGLE, 6, 6, 6, 6, 6, 6, 6, 6);
     model2.removeShape(0);
@@ -83,10 +90,6 @@ public class ModelTests {
     assertEquals("[]", model2.getShapes().toString());
 
     // Removing by shape object
-    Rect rectangle1 = new Rect(3, 6, 2, 3, 10, 20, 30, 50);
-    Circle circle1 = new Circle(1, 2, 3, 4);
-    Rect rectangle2 = new Rect(5, 6, 7, 8);
-    Circle circle2 = new Circle(15, 26, 45, 0, 64, 254, 100);
     model1.addShape(rectangle1);
     model1.addShape(circle1);
     model1.addShape(rectangle2);
@@ -106,5 +109,32 @@ public class ModelTests {
     model1.removeShape(circle1);
     model1.removeShape(circle2);
     assertEquals("[]", model1.getShapes().toString());
+  }
+
+  @Test
+  public void testAddMove() {
+    //TODO how would we add a shape like this and then get it to move with parallel lists?
+    model1.addShape(AvailableShapes.RECTANGLE, 1, 2, 3, 7);
+    model1.addShape(AvailableShapes.RECTANGLE, 11, 3, 2, 3);
+    model1.addShape(AvailableShapes.OVAL, 41, 44, 1, 4);
+    model1.addShape(AvailableShapes.OVAL, 5, 25, 5, 55, 53, 35, 5, 100);
+
+    model2.addShape(rectangle1);
+    model2.addShape(circle2);
+    model2.addMove(rectangle1, 15, 15, 5, 10);
+    model2.addMove(rectangle1, 2, 2, 10, 20);
+    assertEquals("[Rectangle-> center: (2, 2) x-dimension: 2, y-dimension: 3, " +
+                    "Circle-> center: (15, 26) x-dimension: 45, y-dimension: 45]",
+            model2.getShapes().toString());
+    model2.addMove(circle2,1, 1, 0, 25);
+    assertEquals("[Rectangle-> center: (2, 2) x-dimension: 2, y-dimension: 3, " +
+                    "Circle-> center: (1, 1) x-dimension: 45, y-dimension: 45]",
+            model2.getShapes().toString());
+  }
+
+  @Test
+  public void testAddResize() {
+    model1.addShape(rectangle2);
+
   }
 }

@@ -9,6 +9,7 @@ public class Move extends AbstractChange {
     super.setEndTime(endTime);
     super.setShapeID(shapeID);
     super.setShapeLabel(shapeLabel);
+    super.setType(AvailableChanges.MOVE);
   }
 
   @Override

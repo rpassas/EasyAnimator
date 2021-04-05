@@ -132,6 +132,18 @@ public interface Change {
   void setShapeLabel(String shapeLabel);
 
   /**
+   * Set the type of change.
+   * @param type is an enum indicating the type of change
+   */
+  void setType(AvailableChanges type);
+
+  /**
+   * Get the type of change.
+   * @return the change's type
+   */
+  AvailableChanges getType();
+
+  /**
    * Generates a string describing the change.
    * @return string giving details of the change
    */

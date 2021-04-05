@@ -40,6 +40,9 @@ public interface AnimationModel {
    * @param y integer indicating starting y coordinate
    * @param t1 integer indicating start time
    * @param t2 integer indicating end time
+   * @throws IllegalArgumentException for negative time
+   * @throws IllegalArgumentException for conflicting changes
+   * @throws IllegalArgumentException for reverse time
    */
   void addMove(AbstractShape shape, int x, int y, int t1, int t2);
 
@@ -51,6 +54,11 @@ public interface AnimationModel {
    * @param b blue value 0 - 255
    * @param t1 integer indicating start time
    * @param t2 integer indicating end time
+   * @throws IllegalArgumentException for negative time
+   * @throws IllegalArgumentException for conflicting changes
+   * @throws IllegalArgumentException for reverse time
+   * @throws IllegalArgumentException for negative colors
+   * @throws IllegalArgumentException for out of bounds colors
    */
   void addRecolor(AbstractShape shape, int r, int g, int b, int t1, int t2);
 
@@ -61,6 +69,10 @@ public interface AnimationModel {
    * @param w new width
    * @param t1 start time
    * @param t2 end time
+   * @throws IllegalArgumentException for negative time
+   * @throws IllegalArgumentException for conflicting changes
+   * @throws IllegalArgumentException for reverse time
+   * @throws IllegalArgumentException for non-positive dimensions
    */
   void addResize(AbstractShape shape, int h, int w, int t1, int t2);
 

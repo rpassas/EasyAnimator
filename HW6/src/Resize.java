@@ -8,6 +8,7 @@ public class Resize extends AbstractChange {
     super.setEndTime(endTime);
     super.setShapeID(shapeID);
     super.setShapeLabel(shapeLabel);
+    super.setType(AvailableChanges.RESIZE);
   }
 
   @Override

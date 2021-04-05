@@ -10,9 +10,9 @@ public class AnimationModelImpl implements AnimationModel {
   int shapeIndex;
 
   public AnimationModelImpl() {
-    this.listOfShapes = new LinkedList<AbstractShape>();
+    this.listOfShapes = new LinkedList<>();
     this.listOfIndexes = new LinkedList<>();
-    this.listOfChanges = new LinkedList<AbstractChange>();
+    this.listOfChanges = new LinkedList<>();
   }
 
   @Override
@@ -27,6 +27,12 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public void addShape(AbstractShape shape) {
+    // make sure labels are unique
+    for (AbstractShape aShape : this.listOfShapes) {
+      if (aShape.getLabel().equals(shape.getLabel())) {
+        shape.setLabel(shape.getLabel() + "+");
+      }
+    }
     if (shape.getType().equals(AvailableShapes.OVAL)) {
       listOfShapes.add(shape);
       listOfIndexes.add(shapeIndex);
@@ -40,13 +46,26 @@ public class AnimationModelImpl implements AnimationModel {
     }
   }
 
+  /**
+   * Overload of addShape that adds a shape to the model using parameters needed to construct
+   * a shape.
+   * @param shape enum shape type
+   * @param label a label for the shape
+   * @param x x position of the shape
+   * @param y y position of the shape
+   * @param w width of the shape
+   * @param h height of the shape
+   * @throws IllegalArgumentException if dimensions are not positive
+   * @throws IllegalArgumentException for non-unique label
+   * @throws IllegalArgumentException if shape is not a circle or rectangle type
+   */
   public void addShape(AvailableShapes shape, String label, int x, int y, int w, int h) {
     if (w < 0 || h < 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
     }
     for (AbstractShape aShape : this.listOfShapes) {
       if (aShape.getLabel().equals(label)) {
-        throw new IllegalArgumentException("labels must be unique to shapes.");
+        throw new IllegalArgumentException("Labels must be unique to shapes");
       }
     }
     if (shape == AvailableShapes.OVAL) {
@@ -62,12 +81,28 @@ public class AnimationModelImpl implements AnimationModel {
     }
   }
 
+  /**
+   * Overload of addShape that adds a shape to the model using parameters needed to construct
+   * a shape.
+   * @param shape enum shape type
+   * @param label a label for the shape
+   * @param x x position of the shape
+   * @param y y position of the shape
+   * @param w width of the shape
+   * @param h height of the shape
+   * @param r red fill value
+   * @param g green fill value
+   * @param b blue fill value
+   * @param opacity fill opacity value
+   * @throws IllegalArgumentException for non-positive dimensions
+   * @throws IllegalArgumentException for negative color values
+   * @throws IllegalArgumentException for color values outside of normal range
+   * @throws IllegalArgumentException for non-unique label
+   * @throws IllegalArgumentException for invalid shape type
+   */
   public void addShape(AvailableShapes shape, String label, int x, int y, int w, int h,
                        int r, int g, int b, int opacity) {
-    if (x < 0 || y < 0) {
-      throw new IllegalArgumentException("Invalid X and Y coordinate");
-    }
-    if (w < 0 || h < 0) {
+    if (w <= 0 || h <= 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
     }
     if (r < 0 || g < 0 || b < 0 || opacity < 0) {
@@ -79,7 +114,7 @@ public class AnimationModelImpl implements AnimationModel {
     }
     for (AbstractShape aShape : this.listOfShapes) {
       if (aShape.getLabel().equals(label)) {
-        throw new IllegalArgumentException("labels must be unique to shapes.");
+        throw new IllegalArgumentException("Labels must be unique to shapes");
       }
     }
     if (shape == AvailableShapes.OVAL) {
@@ -107,6 +142,11 @@ public class AnimationModelImpl implements AnimationModel {
     //shapeIndex--;
   }
 
+  /**
+   * Overload method for removeShape that takes the indentifier for a shape rather than the shape
+   * itself to find and remove it from the model.
+   * @param shapeIdentifier index of the shape in the list of shapes
+   */
   public void removeShape(int shapeIdentifier) {
     if (listOfIndexes.contains(shapeIdentifier)) {
       listOfShapes.remove(listOfIndexes.indexOf(shapeIdentifier));
@@ -117,6 +157,11 @@ public class AnimationModelImpl implements AnimationModel {
     }
   }
 
+  /**
+   * Overload of removeShape method that uses the unique label of a shape rather than the shape
+   * itself to find and remove it from the model.
+   * @param label unique string label for a shape
+   */
   public void removeShape(String label) {
     for (AbstractShape aShape : this.listOfShapes) {
       if (aShape.getLabel().equals(label)) {
@@ -125,40 +170,45 @@ public class AnimationModelImpl implements AnimationModel {
         return;
       }
     }
-      throw new IllegalArgumentException("Give label does not exist.");
+      throw new IllegalArgumentException("Given label does not exist.");
   }
 
-  private boolean timeOverlap(AbstractShape shape, int t1, int t2) {
+  /**
+   * Helper method to check that time stamps do not overlap on conflicting
+   * changes on the same shape.
+   * @param shape shape being checked
+   * @param type of change being checked for
+   * @param t1 start time for change
+   * @param t2 end time for change
+   * @return boolean indicating overlap in conflicting changes
+   */
+  private boolean timeOverlap(AbstractShape shape, AvailableChanges type, int t1, int t2) {
     for (Change c : this.listOfChanges) {
-      //only one change can be made at a time
-      if (c.getShapeID() == listOfIndexes.get(listOfShapes.indexOf(shape)) //overlapping time at the front
-              && c.getStartTime() < t1 && c.getEndTime() > t1
-              // Overlapping time at the end
-              || c.getShapeID() == listOfIndexes.get(listOfShapes.indexOf(shape))
-              && c.getStartTime() < t2 && c.getEndTime() > t2
-              // old change inside new change's time
-              || c.getShapeID() == listOfIndexes.get(listOfShapes.indexOf(shape))
-              && c.getStartTime() < t1 && c.getEndTime() > t2
-              //new change inside old change time
-              || c.getShapeID() == listOfIndexes.get(listOfShapes.indexOf(shape))
-              && c.getStartTime() > t1 && c.getEndTime() < t2) {
+      //two changes of the same type cannot occur at once
+      if (type == c.getType()
+          // same shape?
+          && c.getShapeID() == listOfIndexes.get(listOfShapes.indexOf(shape))
+          //overlapping time at the front of existing change
+          && ((c.getStartTime() <= t1 && c.getEndTime() > t1)
+          // Overlapping time at the end of existing change
+          || (c.getStartTime() < t2 && c.getEndTime() >= t2)
+          //new change inside old change time
+          || (c.getStartTime() <= t1 && c.getEndTime() >= t2)
+          // old change inside new change's time
+          || (c.getStartTime() >= t1 && c.getEndTime() <= t2))) {
         return true;
       }
     }
     return false;
   }
 
-  // TODO include checks for contradicting changes e.g. shape can't move left and right at once
   @Override
   public void addMove(AbstractShape shape, int x, int y, int t1, int t2) {
-    if (x < 0 || y < 0) {
-      throw new IllegalArgumentException("Invalid X and Y coordinate");
-    }
     if (t1 < 0 || t2 < 0) {
       throw new IllegalArgumentException("Time value must be positive");
     }
-    if (timeOverlap(shape, t1, t2)) {
-      throw new IllegalArgumentException("Only one change can be made at a time");
+    if (timeOverlap(shape, AvailableChanges.MOVE, t1, t2)) {
+      throw new IllegalArgumentException("Only one move change can be made at a time");
     }
     if (t1 > t2) {
       throw new IllegalArgumentException("Start time > end time");
@@ -180,8 +230,8 @@ public class AnimationModelImpl implements AnimationModel {
     if (r > 255 || g > 255 || b > 255) {
       throw new IllegalArgumentException("Color values must be below 255");
     }
-    if (timeOverlap(shape, t1, t2)) {
-      throw new IllegalArgumentException("Only one change can be made at a time");
+    if (timeOverlap(shape, AvailableChanges.RECOLOR, t1, t2)) {
+      throw new IllegalArgumentException("Only one recolor change can be made at a time");
     }
     if (t1 > t2) {
       throw new IllegalArgumentException("Start time > end time");
@@ -201,8 +251,8 @@ public class AnimationModelImpl implements AnimationModel {
     if (t1 < 0 || t2 < 0) {
       throw new IllegalArgumentException("Time value must be positive");
     }
-    if (timeOverlap(shape, t1, t2)) {
-      throw new IllegalArgumentException("Only one change can be made at a time");
+    if (timeOverlap(shape, AvailableChanges.RESIZE, t1, t2)) {
+      throw new IllegalArgumentException("Only one resize change can be made at a time");
     }
     if (t1 > t2) {
       throw new IllegalArgumentException("Start time > end time");

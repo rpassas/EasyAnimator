@@ -9,6 +9,7 @@ public class Recolor extends AbstractChange {
     super.setEndTime(endTime);
     super.setShapeID(shapeID);
     super.setShapeLabel(shapeLabel);
+    super.setType(AvailableChanges.RECOLOR);
   }
 
   @Override

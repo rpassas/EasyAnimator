@@ -10,6 +10,7 @@ public abstract class AbstractChange implements Change{
   private int endTime;
   private int shapeID;
   private String shapeLabel;
+  private AvailableChanges type;
 
   @Override
   public int getUpdatedHeight() {
@@ -115,6 +116,14 @@ public abstract class AbstractChange implements Change{
   public void setShapeLabel(String shapeLabel) {
     this.shapeLabel = shapeLabel;
   }
+
+  @Override
+  public void setType(AvailableChanges type) {
+    this.type = type;
+  }
+
+  @Override
+  public AvailableChanges getType() {return this.type;}
 
   @Override
   public String getShapeLabel() {

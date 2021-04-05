@@ -20,12 +20,12 @@ public class RTests {
   public void testConstructor() {
     //Testing the constructor 1 with X/Y width and Height
     Rect rectConstructorWH = new Rect("rect1",1, 1, 2, 9);
-    assertEquals("Rectangle-> center: (1, 1) x-dimension: 2, y-dimension: 9",
+    assertEquals("Rectangle rect1 -> center: (1, 1), x-dimension: 2, y-dimension: 9",
             rectConstructorWH.toString());
     //Testing the constructor 2 with X/Y, width, height, RGB, and opacity
     Rect rectConstructorRGB = new Rect("rect2",
         10, 20, 30, 40, 15, 15, 15, 100);
-    assertEquals("Rectangle-> center: (10, 20) x-dimension: 30, y-dimension: 40",
+    assertEquals("Rectangle rect2 -> center: (10, 20), x-dimension: 30, y-dimension: 40",
             rectConstructorRGB.toString());
   }
 

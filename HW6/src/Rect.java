@@ -77,8 +77,9 @@ public class Rect extends AbstractShape {
   }
 
   public String toString() {
-    return "Rectangle-> center: (" + this.reference.getX() + ", " + this.reference.getY()
-            + ") x-dimension: " + this.getWidth() + ", y-dimension: " + this.getHeight();
+    return "Rectangle " + this.getLabel() + " -> center: ("
+        + this.reference.getX() + ", " + this.reference.getY()
+        + "), x-dimension: " + this.getWidth() + ", y-dimension: " + this.getHeight();
   }
 }
 

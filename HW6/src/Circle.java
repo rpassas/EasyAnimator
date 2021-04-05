@@ -128,8 +128,9 @@ public class Circle extends AbstractShape{
   }
 
   public String toString() {
-    return "Circle-> center: (" + this.reference.getX() + ", " + this.reference.getY()
-            + ") x-dimension: " + this.getWidth() + ", y-dimension: " + this.getHeight();
+    return "Circle " + this.getLabel() + " -> center: ("
+        + this.reference.getX() + ", " + this.reference.getY()
+        + "), x-dimension: " + this.getWidth() + ", y-dimension: " + this.getHeight();
   }
 }
 

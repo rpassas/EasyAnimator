@@ -24,28 +24,28 @@ public class CTests {
   public void testConstructor() {
     //Testing the constructor with a radius no RGB or width and height
     Circle circleConstructorRadius = new Circle("circle1", 5, 3, 2);
-    assertEquals("Circle-> center: (5, 3) x-dimension: 2, y-dimension: 2",
+    assertEquals("Circle circle1 -> center: (5, 3), x-dimension: 2, y-dimension: 2",
             circleConstructorRadius.toString());
     // Testing the constructor with a width and a height and no radius or rgb
     Circle circleConstructorWH1 = new Circle("circle2", 2, 4, 5, 6);
-    assertEquals("Circle-> center: (2, 4) x-dimension: 5, y-dimension: 6",
+    assertEquals("Circle circle2 -> center: (2, 4), x-dimension: 5, y-dimension: 6",
             circleConstructorWH1.toString());
     Circle circleConstructorWH2 = new Circle("circle3", 15, 1, 15, 167);
-    assertEquals("Circle-> center: (15, 1) x-dimension: 15, y-dimension: 167",
+    assertEquals("Circle circle3 -> center: (15, 1), x-dimension: 15, y-dimension: 167",
             circleConstructorWH2.toString());
     //Testing constructor with width and height and rgb, no radius
     Circle circleConstructorRGB1 = new Circle("circle4",
         5, 3, 2, 2, 2, 2, 2, 20);
-    assertEquals("Circle-> center: (5, 3) x-dimension: 2, y-dimension: 2",
+    assertEquals("Circle circle4 -> center: (5, 3), x-dimension: 2, y-dimension: 2",
             circleConstructorRGB1.toString());
     Circle circleConstructorRGB2 = new Circle("circle5",
         1, 1, 1, 1, 1, 1, 1, 1);
-    assertEquals("Circle-> center: (1, 1) x-dimension: 1, y-dimension: 1",
+    assertEquals("Circle circle5 -> center: (1, 1), x-dimension: 1, y-dimension: 1",
             circleConstructorRGB2.toString());
     //Testing constructor with radius and rgb no width and height
     Circle circleConstructorRGBRadius = new Circle("circle6",
         1, 2, 3, 4, 5, 6, 7);
-    assertEquals("Circle-> center: (1, 2) x-dimension: 3, y-dimension: 3",
+    assertEquals("Circle circle6 -> center: (1, 2), x-dimension: 3, y-dimension: 3",
             circleConstructorRGBRadius.toString());
   }
 

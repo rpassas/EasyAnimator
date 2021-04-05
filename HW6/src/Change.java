@@ -118,4 +118,22 @@ public interface Change {
    * @param shapeID is an int indicating a new ID.
    */
   void setShapeID(int shapeID);
+
+  /**
+   * Get the shape's label for a change.
+   * @return int indicating shape label
+   */
+  String getShapeLabel();
+
+  /**
+   * Set the shape's label for a change.
+   * @param shapeLabel is an int indicating a new label.
+   */
+  void setShapeLabel(String shapeLabel);
+
+  /**
+   * Generates a string describing the change.
+   * @return string giving details of the change
+   */
+  String toString();
 }

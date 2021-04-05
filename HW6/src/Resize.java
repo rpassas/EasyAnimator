@@ -1,10 +1,19 @@
 public class Resize extends AbstractChange {
 
-  public Resize(BasicShape shape, int shapeID, int width, int height, int startTime, int endTime) {
+  public Resize(BasicShape shape, int shapeID, String shapeLabel,
+                int width, int height, int startTime, int endTime) {
     shape.setWidth(width);
     shape.setHeight(height);
     super.setStartTime(startTime);
     super.setEndTime(endTime);
     super.setShapeID(shapeID);
+    super.setShapeLabel(shapeLabel);
+  }
+
+  @Override
+  public String toString() {
+    return "Shape " + super.getShapeLabel() + " updates its dimensions to width: "
+        + super.getUpdatedWidth() + " height: " + super.getUpdatedHeight()
+        + " from t= " + super.getStartTime() + " to t= " + super.getEndTime() + "\n";
   }
 }

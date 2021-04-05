@@ -113,5 +113,11 @@ public interface BasicShape {
    * @param tick the tick value to set it to.
    */
   void setTick(int tick);
+
+  /**
+   * Method to clone the shape.
+   * @return a deep copy of the shape.
+   */
+  BasicShape cloneShape();
 }
 

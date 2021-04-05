@@ -31,22 +31,22 @@ public class Recolor extends AbstractChange {
 
   @Override
   public int getStartHeight() {
-    throw new IllegalStateException("Move does not have a height value");
+    throw new IllegalStateException("Recolor does not have a height value");
   }
 
   @Override
   public void setStartHeight(int startHeight) {
-    throw new IllegalStateException("Move cannot set height values");
+    throw new IllegalStateException("Recolor cannot set height values");
   }
 
   @Override
   public int getStartWidth() {
-    throw new IllegalStateException("Move cannot get width values");
+    throw new IllegalStateException("Recolor cannot get width values");
   }
 
   @Override
   public void setStartWidth(int startWidth) {
-    throw new IllegalStateException("Move cannot set width values");
+    throw new IllegalStateException("Recolor cannot set width values");
   }
 
   @Override
@@ -91,32 +91,32 @@ public class Recolor extends AbstractChange {
 
   @Override
   public Point2D getStartReference() {
-    throw new IllegalStateException("Move cannot get position values");
+    throw new IllegalStateException("Recolor cannot get position values");
   }
 
   @Override
   public void setStartReference(Point2D startReference) {
-    throw new IllegalStateException("Move cannot set position values");
+    throw new IllegalStateException("Recolor cannot set position values");
   }
 
   @Override
   public int getUpdatedHeight() {
-    throw new IllegalStateException("Move cannot get height value");
+    throw new IllegalStateException("Recolor cannot get height value");
   }
 
   @Override
   public void setUpdatedHeight(int updatedHeight) {
-    throw new IllegalStateException("Move cannot set height value");
+    throw new IllegalStateException("Recolor cannot set height value");
   }
 
   @Override
   public int getUpdatedWidth() {
-    throw new IllegalStateException("Move cannot get width value");
+    throw new IllegalStateException("Recolor cannot get width value");
   }
 
   @Override
   public void setUpdatedWidth(int updatedWidth) {
-    throw new IllegalStateException("Move cannot set width value");
+    throw new IllegalStateException("Recolor cannot set width value");
   }
 
   @Override
@@ -161,12 +161,12 @@ public class Recolor extends AbstractChange {
 
   @Override
   public Point2D getReference() {
-    throw new IllegalStateException("Move cannot get position values");
+    throw new IllegalStateException("Recolor cannot get position values");
   }
 
   @Override
   public void setReference(Point2D reference) {
-    throw new IllegalStateException("Move cannot set position values");
+    throw new IllegalStateException("Recolor cannot set position values");
   }
 
 

@@ -37,57 +37,57 @@ public class Resize extends AbstractChange {
 
   @Override
   public void setStartWidth(int startWidth) {
-    this.startHeight = startWidth;
+    this.startWidth = startWidth;
   }
 
   @Override
   public int getStartR() {
-    throw new IllegalStateException("Move cannot get color values");
+    throw new IllegalStateException("Resize cannot get color values");
   }
 
   @Override
   public void setStartR(int startR) {
-    throw new IllegalStateException("Move cannot set color values");
+    throw new IllegalStateException("Resize cannot set color values");
   }
 
   @Override
   public int getStartG() {
-    throw new IllegalStateException("Move cannot set color values");
+    throw new IllegalStateException("Resize cannot set color values");
   }
 
   @Override
   public void setStartG(int startG) {
-    throw new IllegalStateException("Move cannot set color values");
+    throw new IllegalStateException("Resize cannot set color values");
   }
 
   @Override
   public int getStartB() {
-    throw new IllegalStateException("Move cannot get color values");
+    throw new IllegalStateException("Resize cannot get color values");
   }
 
   @Override
   public void setStartB(int startB) {
-    throw new IllegalStateException("Move cannot set color values");
+    throw new IllegalStateException("Resize cannot set color values");
   }
 
   @Override
   public int getStartA() {
-    throw new IllegalStateException("Move cannot get color values");
+    throw new IllegalStateException("Resize cannot get color values");
   }
 
   @Override
   public void setStartA(int startA) {
-    throw new IllegalStateException("Move cannot set color values");
+    throw new IllegalStateException("Resize cannot set color values");
   }
 
   @Override
   public Point2D getStartReference() {
-    throw new IllegalStateException("Move cannot get position values");
+    throw new IllegalStateException("Resize cannot get position values");
   }
 
   @Override
   public void setStartReference(Point2D startReference) {
-    throw new IllegalStateException("Move cannot set position values");
+    throw new IllegalStateException("Resize cannot set position values");
   }
 
   @Override
@@ -112,52 +112,52 @@ public class Resize extends AbstractChange {
 
   @Override
   public int getUpdatedR() {
-    throw new IllegalStateException("Move cannot get color values");
+    throw new IllegalStateException("Resize cannot get color values");
   }
 
   @Override
   public void setUpdatedR(int updatedR) {
-    throw new IllegalStateException("Move cannot set color values");
+    throw new IllegalStateException("Resize cannot set color values");
   }
 
   @Override
   public int getUpdatedG() {
-    throw new IllegalStateException("Move cannot get color values");
+    throw new IllegalStateException("Resize cannot get color values");
   }
 
   @Override
   public void setUpdatedG(int updatedG) {
-    throw new IllegalStateException("Move cannot set color values");
+    throw new IllegalStateException("Resize cannot set color values");
   }
 
   @Override
   public int getUpdatedB() {
-    throw new IllegalStateException("Move cannot get color values");
+    throw new IllegalStateException("Resize cannot get color values");
   }
 
   @Override
   public void setUpdatedB(int updatedB) {
-    throw new IllegalStateException("Move cannot set color values");
+    throw new IllegalStateException("Resize cannot set color values");
   }
 
   @Override
   public int getUpdatedA() {
-    throw new IllegalStateException("Move cannot get color values");
+    throw new IllegalStateException("Resize cannot get color values");
   }
 
   @Override
   public void setUpdatedA(int updatedA) {
-    throw new IllegalStateException("Move cannot set color values");
+    throw new IllegalStateException("Resize cannot set color values");
   }
 
   @Override
   public Point2D getReference() {
-    throw new IllegalStateException("Move cannot get position values");
+    throw new IllegalStateException("Resize cannot get position values");
   }
 
   @Override
   public void setReference(Point2D reference) {
-    throw new IllegalStateException("Move cannot set position values");
+    throw new IllegalStateException("Resize cannot set position values");
   }
 
 

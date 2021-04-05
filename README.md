@@ -28,7 +28,7 @@ AbstractShape: abstract class with a Point2D
 
 Rect, Circle: concrete inheriting classes
 
-Shapes themselves all have positions (Point2D composition), dimensions, color values, a string label to help provide another way to ID shapes, and a tick for when the animation runs. These attributes can be set and get via common methods in AbstractShape. Concrete shapes also have overloaded constructors so there are multiple ways to create shapes, have individual toString() methods, and can retrieve their respective enum types. Because the model will have to create copies of shapes, cloneShape() will help to get copies of the base case shapes in the model.
+Shapes themselves all have positions (Point2D composition), dimensions, color values, a string label to help provide another way to ID shapes, and a tick for when the animation runs (used by the controller as time passes). These attributes can be set and get via common methods in AbstractShape. Concrete shapes also have overloaded constructors so there are multiple ways to create shapes, have individual toString() methods, and can retrieve their respective enum types. Because the model will have to create copies of shapes, cloneShape() will help to get copies of the base case shapes in the model.
 
 ### Changes to the Model
 

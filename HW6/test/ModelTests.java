@@ -69,7 +69,7 @@ public class ModelTests {
 
   @Test
   public void testRemoveShapes() {
-    //Removing by shapde index
+    //Removing by shape index
     model2.addShape(AvailableShapes.RECTANGLE, 2, 2, 2, 2);
     model2.addShape(AvailableShapes.RECTANGLE, 3, 3, 3, 3);
     model2.addShape(AvailableShapes.OVAL, 4, 4, 4, 4);
@@ -133,8 +133,41 @@ public class ModelTests {
   }
 
   @Test
+  public void testAddColor() {
+    model1.addShape(rectangle1);
+    LinkedList<Change> testList = new LinkedList<Change>();
+    Recolor color1 = new Recolor(rectangle1, 0, 100, 115, 130, 0, 25);
+    testList.add(color1);
+    // model1.addRecolor(color1);
+    assertEquals(testList, model1.getChanges());
+
+  }
+
+  @Test
   public void testAddResize() {
     model1.addShape(rectangle2);
+    assertEquals("[Rectangle-> center: (5, 6) x-dimension: 7, y-dimension: 8]",
+            model1.getShapes().toString());
+    model1.addResize(rectangle2, 1, 3, 0 , 15);
+    assertEquals("[Rectangle-> center: (5, 6) x-dimension: 1, y-dimension: 3]",
+            model1.getShapes().toString());
+    model1.addResize(rectangle2, 5, 5, 15, 50);
+    assertEquals("[Rectangle-> center: (5, 6) x-dimension: 5, y-dimension: 5]",
+            model1.getShapes().toString());
 
+    model2.addShape(rectangle1);
+    model2.addShape(circle2);
+    model2.addShape(circle1);
+    assertEquals("[Rectangle-> center: (3, 6) x-dimension: 2, y-dimension: 3, " +
+                    "Circle-> center: (15, 26) x-dimension: 45, y-dimension: 45, " +
+                    "Circle-> center: (1, 2) x-dimension: 3, y-dimension: 4]",
+            model2.getShapes().toString());
+    model2.addResize(rectangle1, 1, 1, 1, 2);
+    model2.addResize(circle1, 1, 1, 1, 2);
+    model2.addResize(circle2, 1, 1, 1, 2);
+    assertEquals("[Rectangle-> center: (3, 6) x-dimension: 1, y-dimension: 1, " +
+                    "Circle-> center: (15, 26) x-dimension: 1, y-dimension: 1, " +
+                    "Circle-> center: (1, 2) x-dimension: 1, y-dimension: 1]",
+            model2.getShapes().toString());
   }
 }

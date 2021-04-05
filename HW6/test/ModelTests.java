@@ -138,9 +138,14 @@ public class ModelTests {
     LinkedList<Change> testList = new LinkedList<Change>();
     Recolor color1 = new Recolor(rectangle1, 0, 100, 115, 130, 0, 25);
     testList.add(color1);
-    // model1.addRecolor(color1);
-    assertEquals(testList, model1.getChanges());
-
+    model1.addRecolor(rectangle1, 100, 115, 130, 0, 25);
+    assertEquals(testList.get(0).getShapeID(), model1.getChanges().get(0).getShapeID());
+    assertEquals(testList.get(0).getUpdatedR(), model1.getChanges().get(0).getUpdatedR());
+    assertEquals(testList.get(0).getUpdatedG(), model1.getChanges().get(0).getUpdatedG());
+    assertEquals(testList.get(0).getUpdatedB(), model1.getChanges().get(0).getUpdatedB());
+    assertEquals(testList.get(0).getStartTime(), model1.getChanges().get(0).getStartTime());
+    assertEquals(testList.get(0).getEndTime(), model1.getChanges().get(0).getEndTime());
+    assertEquals(testList.get(0).getReference(), model1.getChanges().get(0).getReference());
   }
 
   @Test

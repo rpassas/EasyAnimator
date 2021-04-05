@@ -11,6 +11,8 @@ The model operates with a ledger of shapes and changes to those shapes. Respecti
 
 <img width="985" alt="Screen Shot 2021-04-05 at 12 42 48 PM" src="https://user-images.githubusercontent.com/35311744/113599474-a8c21e00-960c-11eb-9702-514193b8fc1f.png">
 
+The AnimationModel class is the interface for the AnimationMdelImpl that sits at the core of the model. The implemenation holds listOfShapes for created shapes in a base state, listOfChanges hold the changes that will take place over the course of the animation, the keys are held in a list and updated incrementally as a simple way to access shapes if needed that way. 
+
 ### Shapes in the Model
 
 <img width="978" alt="Screen Shot 2021-04-05 at 12 43 08 PM" src="https://user-images.githubusercontent.com/35311744/113599493-aeb7ff00-960c-11eb-8eeb-2a2b3548da25.png">

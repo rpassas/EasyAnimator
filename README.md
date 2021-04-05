@@ -5,7 +5,7 @@
 
 ### Overview
 
-The model operates with a ledger of shapes and changes to those shapes. Respective classes of shapes and changes manage the behaviors of the animation. Rect and Circle are concrete shapes extending the AbstractShape class that implements the BasicShape interface for shapes. The model's main job is to store and update the shapes according to the changes based on ticks and inputs managed upstream by the controller. 
+The model operates with a ledger of shapes and changes to those shapes. Respective classes of shapes and changes manage the behaviors of the animation. Rect and Circle are concrete shapes extending the AbstractShape class that implements the BasicShape interface for shapes. Move, Resize, and Recolor are all concrete changes that can occur to shapes as the animation progresses. The model's main job is to store and update the shapes according to the changes based on ticks and inputs managed upstream by the controller. 
 
 ### Main Model
 

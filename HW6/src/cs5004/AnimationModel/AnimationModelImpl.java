@@ -203,9 +203,6 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public void addMove(AbstractShape shape, int x, int y, int t1, int t2) {
-    if (x < 0 || y < 0) {
-      throw new IllegalArgumentException("x & y coordinates must be positive");
-    }
     if (t1 < 0 || t2 < 0) {
       throw new IllegalArgumentException("Time value must be positive");
     }

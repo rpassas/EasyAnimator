@@ -83,7 +83,7 @@ public class Circle extends AbstractShape{
     super.setR(0);
     super.setG(0);
     super.setB(0);
-    super.setOpacity(1);
+    super.setOpacity(100);
     super.setLabel(label);
     this.type = AvailableShapes.OVAL;
   }

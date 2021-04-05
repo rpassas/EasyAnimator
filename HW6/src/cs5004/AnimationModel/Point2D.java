@@ -16,9 +16,6 @@ public class Point2D {
    * @param y the y-coordinate of this point
    */
   public Point2D(int x, int y) {
-    if (x < 0 || y < 0) {
-      throw new IllegalArgumentException("X and Y must be positive.");
-    }
     this.x = x;
     this.y = y;
   }

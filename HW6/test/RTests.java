@@ -34,30 +34,6 @@ public class RTests {
 
   @Test
   public void testInvalidConstructor1() {
-    // Testing negative X for constructor 1
-    try {
-      new Rect("rect1", -5, 5, 2, 3, 2, 4, 5, 6);
-      fail("Invalid constructor should have thrown exception");
-    } catch (IllegalArgumentException iae) {
-      assertEquals("X and Y must be positive.", iae.getMessage());
-      assertTrue(iae.getMessage().length() > 0);
-    }
-    // Testing negative Y for constructor 1
-    try {
-      new Rect("rect2", 5, -5, 2, 3, 2, 4, 5, 6);
-      fail("Invalid constructor should have thrown exception");
-    } catch (IllegalArgumentException iae) {
-      assertEquals("X and Y must be positive.", iae.getMessage());
-      assertTrue(iae.getMessage().length() > 0);
-    }
-    // Testing negative X/Y for constructor 1
-    try {
-      new Rect("rect3", -5, -5, 2, 3, 2, 4, 5, 6);
-      fail("Invalid constructor should have thrown exception");
-    } catch (IllegalArgumentException iae) {
-      assertEquals("X and Y must be positive.", iae.getMessage());
-      assertTrue(iae.getMessage().length() > 0);
-    }
     // Testing negative Width for constructor 1
     try {
       new Rect("rect4", 5, 5, -2, 3, 2, 4, 5, 6);
@@ -78,30 +54,6 @@ public class RTests {
 
   @Test
   public void testInvalidConstructor2() {
-    // Testing negative X for constructor 2
-    try {
-      new Rect("rect1", -5, 5, 2, 3, 2, 4, 5, 6);
-      fail("Invalid constructor should have thrown exception");
-    } catch (IllegalArgumentException iae) {
-      assertEquals("X and Y must be positive.", iae.getMessage());
-      assertTrue(iae.getMessage().length() > 0);
-    }
-    // Testing negative Y for constructor 2
-    try {
-      new Rect("rect2", 5, -5, 2, 3, 2, 4, 5, 6);
-      fail("Invalid constructor should have thrown exception");
-    } catch (IllegalArgumentException iae) {
-      assertEquals("X and Y must be positive.", iae.getMessage());
-      assertTrue(iae.getMessage().length() > 0);
-    }
-    // Testing negative X/Y for constructor 2
-    try {
-      new Rect("rect3", -5, -5, 2, 3, 2, 4, 5, 6);
-      fail("Invalid constructor should have thrown exception");
-    } catch (IllegalArgumentException iae) {
-      assertEquals("X and Y must be positive.", iae.getMessage());
-      assertTrue(iae.getMessage().length() > 0);
-    }
     // Testing negative Width for constructor 2
     try {
       new Rect("rect4", 5, 5, -2, 3, 2, 4, 5, 6);
@@ -193,7 +145,7 @@ public class RTests {
     assertEquals(0, rectangle1.getR());
     assertEquals(0, rectangle1.getG());
     assertEquals(0, rectangle1.getB());
-    assertEquals(1, rectangle1.getOpacity());
+    assertEquals(100, rectangle1.getOpacity());
     assertEquals(AvailableShapes.RECTANGLE, rectangle1.getType());
 
     assertEquals(3, rectangle2.getLocation().getX());

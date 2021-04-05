@@ -195,25 +195,6 @@ public class ModelTests {
 
   @Test
   public void testIllegalAddMove() {
-    // TODO added x & y must be positive, that should line up with our other logic
-    // Testing negative x
-    try {
-      AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addMove(circle1, -15, 15, 5, 5);
-      fail("Invalid constructor should have thrown exception");
-    } catch (IllegalArgumentException iae) {
-      assertEquals("x & y coordinates must be positive", iae.getMessage());
-      assertTrue(iae.getMessage().length() > 0);
-    }
-    // Testing negative y
-    try {
-      AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addMove(circle1, 15, -15, 5, 5);
-      fail("Invalid constructor should have thrown exception");
-    } catch (IllegalArgumentException iae) {
-      assertEquals("x & y coordinates must be positive", iae.getMessage());
-      assertTrue(iae.getMessage().length() > 0);
-    }
     // Testing negative t1
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();

@@ -4,9 +4,9 @@ import java.util.LinkedList;
  * Implementation of the IShape interface.
  */
 public class AnimationModelImpl implements AnimationModel {
-  private LinkedList<AbstractShape> listOfShapes;
-  private LinkedList<AbstractChange> listOfChanges;
-  private LinkedList<Integer> listOfIndexes;
+  private final LinkedList<AbstractShape> listOfShapes;
+  private final LinkedList<AbstractChange> listOfChanges;
+  private final LinkedList<Integer> listOfIndexes;
   int shapeIndex;
 
   public AnimationModelImpl() {
@@ -138,8 +138,6 @@ public class AnimationModelImpl implements AnimationModel {
     } else {
       throw new IllegalArgumentException("That shape is not in the list");
     }
-    // We shouldn't decrement the shape index here, its a number that we don't want repeats of
-    //shapeIndex--;
   }
 
   /**
@@ -151,7 +149,6 @@ public class AnimationModelImpl implements AnimationModel {
     if (listOfIndexes.contains(shapeIdentifier)) {
       listOfShapes.remove(listOfIndexes.indexOf(shapeIdentifier));
       listOfIndexes.remove(listOfIndexes.indexOf(shapeIdentifier));
-      //shapeIndex--;
     } else {
      throw new IllegalArgumentException("That identifier is empty.");
     }
@@ -204,6 +201,9 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public void addMove(AbstractShape shape, int x, int y, int t1, int t2) {
+    if (x < 0 || y < 0) {
+      throw new IllegalArgumentException("x & y coordinates must be positive");
+    }
     if (t1 < 0 || t2 < 0) {
       throw new IllegalArgumentException("Time value must be positive");
     }
@@ -213,7 +213,7 @@ public class AnimationModelImpl implements AnimationModel {
     if (t1 > t2) {
       throw new IllegalArgumentException("Start time > end time");
     }
-    if (listOfShapes.indexOf(shape) == -1) {
+    if (!listOfShapes.contains(shape)) {
       this.addShape(shape);
     }
     listOfChanges.add(new Move(shape, listOfShapes.indexOf(shape), shape.getLabel(), x, y, t1, t2));
@@ -236,7 +236,10 @@ public class AnimationModelImpl implements AnimationModel {
     if (t1 > t2) {
       throw new IllegalArgumentException("Start time > end time");
     }
-    if (listOfShapes.indexOf(shape) == -1) {
+    if (a < 0 || a > 100) {
+      throw new IllegalArgumentException("Opacity must be between 0 and 100");
+    }
+    if (!listOfShapes.contains(shape)) {
       this.addShape(shape);
     }
     listOfChanges.add(new Recolor(shape, listOfShapes.indexOf(shape), shape.getLabel(),
@@ -257,7 +260,7 @@ public class AnimationModelImpl implements AnimationModel {
     if (t1 > t2) {
       throw new IllegalArgumentException("Start time > end time");
     }
-    if (listOfShapes.indexOf(shape) == -1) {
+    if (!listOfShapes.contains(shape)) {
       this.addShape(shape);
     }
     listOfChanges.add(new Resize(shape, listOfShapes.indexOf(shape), shape.getLabel(),

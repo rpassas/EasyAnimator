@@ -72,6 +72,26 @@ public class ModelTests {
   }
 
   @Test
+  public void testInvalidAddShapesWH() {
+    // Testing negative width for addShape 2
+    try {
+      model1.addShape(AvailableShapes.OVAL, "invalid 1", 5, 5, -5, 5);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("dimensions must be positive.", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing negative height for addShape 2
+    try {
+      model1.addShape(AvailableShapes.OVAL, "invalid 1", 5, 5, -5, 5);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("dimensions must be positive.", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+  }
+
+  @Test
   public void testRemoveShapes() {
     //Removing by shape index
     model2.addShape(AvailableShapes.RECTANGLE, "Rect1", 2, 2, 2, 2);
@@ -116,6 +136,26 @@ public class ModelTests {
   }
 
   @Test
+  public void testRemoveShape() {
+    // Testing removing by shape identifier
+    try {
+      model1.removeShape(15);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("That identifier is empty.", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing removing by label
+    try {
+      model1.removeShape("hi");
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Given label does not exist.", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+  }
+
+  @Test
   public void testAddMove() {
     //TODO how would we add a shape like this and then get it to move with parallel lists?
     model1.addShape(AvailableShapes.RECTANGLE, "Rect1", 1, 2, 3, 7);
@@ -146,6 +186,96 @@ public class ModelTests {
   }
 
   @Test
+  public void testIllegalAddMove() {
+    // TODO added x & y must be positive, that should line up with our other logic
+    // Testing negative x
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addMove(circle1, -15, 15, 5, 5);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("x & y coordinates must be positive", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing negative y
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addMove(circle1, 15, -15, 5, 5);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("x & y coordinates must be positive", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing negative t1
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addMove(circle1, 15, 15, -5, 5);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Time value must be positive", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing negative t2
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addMove(circle1, 15, 15, 25, -5);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Time value must be positive", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing conflicting time at front
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addMove(circle1, 15, 15, 15, 25);
+      testIllegal.addMove(circle1, 15, 15, 1, 16);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Only one move change can be made at a time", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing conflicting time at the back
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addMove(circle1, 15, 15, 15, 25);
+      testIllegal.addMove(circle1, 15, 15, 24, 45);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Only one move change can be made at a time", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing conflicting time, move 2 is within move 1
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addMove(circle1, 15, 15, 15, 25);
+      testIllegal.addMove(circle1, 15, 15, 19, 21);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Only one move change can be made at a time", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing conflicting time, move 1 is within move 2
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addMove(circle1, 15, 15, 15, 25);
+      testIllegal.addMove(circle1, 15, 15, 0, 40);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Only one move change can be made at a time", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing start time after end time
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addMove(circle1, 15, 15, 15, 5);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Start time > end time", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+  }
+
+  @Test
   public void testAddColor() {
     model1.addShape(rectangle1);
     LinkedList<Change> testList = new LinkedList<>();
@@ -160,6 +290,165 @@ public class ModelTests {
     assertEquals(testList.get(0).getUpdatedA(), model1.getChanges().get(0).getUpdatedA());
     assertEquals(testList.get(0).getStartTime(), model1.getChanges().get(0).getStartTime());
     assertEquals(testList.get(0).getEndTime(), model1.getChanges().get(0).getEndTime());
+
+    model2.addShape(circle1);
+    LinkedList<Change> testList2 = new LinkedList<>();
+    Recolor color2 = new Recolor(circle1,
+            0, circle1.getLabel(),100, 115, 130, 0, 5, 10);
+    testList2.add(color2);
+    model2.addRecolor(circle1, 100, 115, 130, 0, 5, 10);
+    assertEquals(testList2.get(0).getShapeID(), model2.getChanges().get(0).getShapeID());
+    assertEquals(testList2.get(0).getUpdatedR(), model2.getChanges().get(0).getUpdatedR());
+    assertEquals(testList2.get(0).getUpdatedG(), model2.getChanges().get(0).getUpdatedG());
+    assertEquals(testList2.get(0).getUpdatedB(), model2.getChanges().get(0).getUpdatedB());
+    assertEquals(testList2.get(0).getUpdatedA(), model2.getChanges().get(0).getUpdatedA());
+    assertEquals(testList2.get(0).getStartTime(), model2.getChanges().get(0).getStartTime());
+    assertEquals(testList2.get(0).getEndTime(), model2.getChanges().get(0).getEndTime());
+  }
+
+  @Test
+  public void testIllegalAddColor() {
+    // Testing negative R
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addRecolor(circle1, -15, 25, 30, 100, 5, 6);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Color values must be positive", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing negative G
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addRecolor(circle1, 15, -25, 30, 100, 5, 6);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Color values must be positive", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing negative B
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addRecolor(circle1, 15, 25, -30, 100, 5, 6);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Color values must be positive", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing negative A
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addRecolor(circle1, 15, 25, 30, -100, 5, 6);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Opacity must be between 0 and 100", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+
+    // Testing too High R
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addRecolor(circle1, 315, 25, 30, 100, 5, 6);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Color values must be below 255", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing too High G
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addRecolor(circle1, 15, 325, 30, 100, 5, 6);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Color values must be below 255", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing too high B
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addRecolor(circle1, 15, 25, 256, 100, 5, 6);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Color values must be below 255", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing too high A
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addRecolor(circle1, 15, 25, 30, 101, 5, 6);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Opacity must be between 0 and 100", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+
+    // Testing negative t1
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100, -5, 6);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Time value must be positive", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing negative t2
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 5, -6);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Time value must be positive", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing conflicting time at front
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 15, 25);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 1, 16);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Only one recolor change can be made at a time", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing conflicting time at the back
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 15, 25);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 24, 45);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Only one recolor change can be made at a time", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing conflicting time, move 2 is within move 1
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 15, 25);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 19, 21);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Only one recolor change can be made at a time", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing conflicting time, move 1 is within move 2
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 15, 25);
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 0, 40);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Only one recolor change can be made at a time", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing start time after end time
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addRecolor(circle1, 15, 25, 30, 100, 6, 5);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Start time > end time", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
   }
 
   @Test
@@ -199,6 +488,96 @@ public class ModelTests {
   }
 
   @Test
+  public void testIllegalAddResize() {
+    // TODO added x & y must be positive, that should line up with our other logic
+    // Testing negative/0 width
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addResize(circle1, -15, 15, 5, 5);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("dimensions must be positive.", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing negative/0 height
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addResize(circle1, 15, 0, 5, 5);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("dimensions must be positive.", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing negative t1
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addResize(circle1, 15, 15, -5, 5);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Time value must be positive", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing negative t2
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addResize(circle1, 15, 15, 25, -5);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Time value must be positive", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing conflicting time at front
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addResize(circle1, 15, 15, 15, 25);
+      testIllegal.addResize(circle1, 15, 15, 1, 16);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Only one resize change can be made at a time", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing conflicting time at the back
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addResize(circle1, 15, 15, 15, 25);
+      testIllegal.addResize(circle1, 15, 15, 24, 45);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Only one resize change can be made at a time", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing conflicting time, move 2 is within move 1
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addResize(circle1, 15, 15, 15, 25);
+      testIllegal.addResize(circle1, 15, 15, 19, 21);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Only one resize change can be made at a time", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing conflicting time, move 1 is within move 2
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addResize(circle1, 15, 15, 15, 25);
+      testIllegal.addResize(circle1, 15, 15, 0, 40);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Only one resize change can be made at a time", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+    // Testing start time after end time
+    try {
+      AnimationModelImpl testIllegal = new AnimationModelImpl();
+      testIllegal.addResize(circle1, 15, 15, 15, 5);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Start time > end time", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+  }
+
+  @Test
   public void testToString() {
     assertEquals("", model1.toString());
     model1.addShape(rectangle1);
@@ -217,7 +596,15 @@ public class ModelTests {
         "Shape C1 updates its position to x-dimension: 2, y-dimension: 3 from t= 2 to t= 3\n" +
         "Shape R1 updates its color to (2, 3, 250) from t= 5 to t= 7\n" +
         "Shape C1 updates its color to (17, 111, 2) from t= 5 to t= 8\n", model1.toString());
-
+    model1.addResize(circle1, 15, 15, 0, 100);
+    assertEquals("Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3\n" +
+            "Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4\n" +
+            "Shape R1 updates its position to x-dimension: 2, y-dimension: 3 from t= 2 to t= 3\n" +
+            "Shape C1 updates its position to x-dimension: 2, y-dimension: 3 from t= 2 to t= 3\n" +
+            "Shape R1 updates its color to (2, 3, 250) from t= 5 to t= 7\n" +
+            "Shape C1 updates its color to (17, 111, 2) from t= 5 to t= 8\n" +
+            "Shape C1 updates its dimensions to width: 15 height: 15 from t= 0 to t= 100\n",
+            model1.toString());
   }
 
 }

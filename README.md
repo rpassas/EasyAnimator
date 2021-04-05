@@ -16,7 +16,7 @@ AnimationModel: interface
 
 AnimationModelImpl: implementing concrete class
 
-The AnimationModel class is the interface for the AnimationModelImpl that sits at the core of the model. The implemenation holds listOfShapes for created shapes in a base state, listOfChanges holds the changes that will take place over the course of the animation, and the keys are held in a list and updated incrementally as a simple way to access shapes if needed that way. When the animation runs modified copies of the of shapes are returned via getShapesAtTick() where changes in listOfChanges dictate alterations to versions of shapes held in listOfShapes.
+The AnimationModel class is the interface for the AnimationModelImpl that sits at the core of the model. The implemenation holds listOfShapes for created shapes in a base state, listOfChanges holds the changes that will take place over the course of the animation, and the keys are held in a list and updated incrementally as a simple way to access shapes if needed that way just within the model. When the animation runs, modified copies of the of shapes are returned via getShapesAtTick() where changes in listOfChanges dictate alterations to versions of shapes held in listOfShapes.
 
 ### Shapes in the Model
 

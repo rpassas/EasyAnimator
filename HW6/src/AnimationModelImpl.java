@@ -160,10 +160,13 @@ public class AnimationModelImpl implements AnimationModel {
     if (timeOverlap(shape, t1, t2)) {
       throw new IllegalArgumentException("Only one change can be made at a time");
     }
+    if (t1 > t2) {
+      throw new IllegalArgumentException("Start time > end time");
+    }
     if (listOfShapes.indexOf(shape) == -1) {
       this.addShape(shape);
     }
-    listOfChanges.add(new Move(shape, listOfShapes.indexOf(shape), x, y, t1, t2));
+    listOfChanges.add(new Move(shape, listOfShapes.indexOf(shape), shape.getLabel(), x, y, t1, t2));
   }
 
   @Override
@@ -180,15 +183,19 @@ public class AnimationModelImpl implements AnimationModel {
     if (timeOverlap(shape, t1, t2)) {
       throw new IllegalArgumentException("Only one change can be made at a time");
     }
+    if (t1 > t2) {
+      throw new IllegalArgumentException("Start time > end time");
+    }
     if (listOfShapes.indexOf(shape) == -1) {
       this.addShape(shape);
     }
-    listOfChanges.add(new Recolor(shape, listOfShapes.indexOf(shape), r, g, b, t1, t2));
+    listOfChanges.add(new Recolor(shape, listOfShapes.indexOf(shape), shape.getLabel(),
+        r, g, b, t1, t2));
   }
 
   @Override
   public void addResize(AbstractShape shape, int w, int h, int t1, int t2) {
-    if (w < 0 || h < 0) {
+    if (w <= 0 || h <= 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
     }
     if (t1 < 0 || t2 < 0) {
@@ -197,10 +204,14 @@ public class AnimationModelImpl implements AnimationModel {
     if (timeOverlap(shape, t1, t2)) {
       throw new IllegalArgumentException("Only one change can be made at a time");
     }
+    if (t1 > t2) {
+      throw new IllegalArgumentException("Start time > end time");
+    }
     if (listOfShapes.indexOf(shape) == -1) {
       this.addShape(shape);
     }
-    listOfChanges.add(new Resize(shape, listOfShapes.indexOf(shape), w, h, t1, t2));
+    listOfChanges.add(new Resize(shape, listOfShapes.indexOf(shape), shape.getLabel(),
+        w, h, t1, t2));
   }
 
   //TODO does not have to be implemented until next time for controller
@@ -211,5 +222,17 @@ public class AnimationModelImpl implements AnimationModel {
       throw new IllegalArgumentException("Time value must be positive");
     }
     return null;
+  }
+
+  @Override
+  public String toString() {
+    String model = "";
+    for (AbstractShape shape: this.listOfShapes) {
+      model = model + shape.toString() + "\n";
+    }
+    for (AbstractChange change: this.listOfChanges) {
+      model = model + change.toString();
+    }
+    return model;
   }
 }

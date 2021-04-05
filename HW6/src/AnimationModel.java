@@ -31,7 +31,7 @@ public interface AnimationModel {
    * @param shape shape to be removed
    */
   void removeShape(AbstractShape shape);
-
+  //TODO documentation should reflect error throws
   /**
    * Moves a shape over a time interval by creating copies, deleting the previous shape,
    * and mapping time ticks to coordinates as they shape "moves."
@@ -71,4 +71,10 @@ public interface AnimationModel {
    * @return the shapes that are created at that time interval.
    */
   AnimationModel getShapesAtTick(int tick);
+
+  /**
+   * Generates a description of the model's shapes and changes to those shapes.
+   * @return string describing the model
+   */
+  String toString();
 }

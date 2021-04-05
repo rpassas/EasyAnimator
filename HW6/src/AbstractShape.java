@@ -85,10 +85,12 @@ public abstract class AbstractShape implements BasicShape{
   @Override
   public String getLabel() {return this.label;}
 
+  @Override
   public int getTick() {
     return tick;
   }
 
+  @Override
   public void setTick(int tick) {
     this.tick = tick;
   }

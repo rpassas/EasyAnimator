@@ -6,12 +6,12 @@ import java.util.LinkedList;
 public class AnimationModelImpl implements AnimationModel {
   private final LinkedList<AbstractShape> listOfShapes;
   private final LinkedList<AbstractChange> listOfChanges;
-  private final LinkedList<Integer> listOfIndexes;
-  int shapeIndex;
+  private final LinkedList<Integer> listOfKeys;
+  int ShapeKey;
 
   public AnimationModelImpl() {
     this.listOfShapes = new LinkedList<>();
-    this.listOfIndexes = new LinkedList<>();
+    this.listOfKeys = new LinkedList<>();
     this.listOfChanges = new LinkedList<>();
   }
 
@@ -35,12 +35,12 @@ public class AnimationModelImpl implements AnimationModel {
     }
     if (shape.getType().equals(AvailableShapes.OVAL)) {
       listOfShapes.add(shape);
-      listOfIndexes.add(shapeIndex);
-      shapeIndex++;
+      listOfKeys.add(ShapeKey);
+      ShapeKey++;
     } else if (shape.getType().equals(AvailableShapes.RECTANGLE)) {
       listOfShapes.add(shape);
-      listOfIndexes.add(shapeIndex);
-      shapeIndex++;
+      listOfKeys.add(ShapeKey);
+      ShapeKey++;
     } else {
       throw new IllegalArgumentException("added shape must be one of the accepted types");
     }
@@ -70,12 +70,12 @@ public class AnimationModelImpl implements AnimationModel {
     }
     if (shape == AvailableShapes.OVAL) {
       listOfShapes.add(new Circle(label, x, y, w, h));
-      listOfIndexes.add(shapeIndex);
-      shapeIndex++;
+      listOfKeys.add(ShapeKey);
+      ShapeKey++;
     } else if (shape == AvailableShapes.RECTANGLE) {
       listOfShapes.add(new Rect(label, x, y, w, h));
-      listOfIndexes.add(shapeIndex);
-      shapeIndex++;
+      listOfKeys.add(ShapeKey);
+      ShapeKey++;
     } else {
       throw new IllegalArgumentException("added shape must be one of the accepted types");
     }
@@ -119,12 +119,12 @@ public class AnimationModelImpl implements AnimationModel {
     }
     if (shape == AvailableShapes.OVAL) {
       listOfShapes.add(new Circle(label, x, y, w, h, r, g, b, opacity));
-      listOfIndexes.add(shapeIndex);
-      shapeIndex++;
+      listOfKeys.add(ShapeKey);
+      ShapeKey++;
     } else if (shape == AvailableShapes.RECTANGLE) {
       listOfShapes.add(new Rect(label, x, y, w, h, r, g, b, opacity));
-      listOfIndexes.add(shapeIndex);
-      shapeIndex++;
+      listOfKeys.add(ShapeKey);
+      ShapeKey++;
     } else {
       throw new IllegalArgumentException("added shape must be one of the accepted types");
     }
@@ -133,7 +133,7 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public void removeShape(AbstractShape shape) {
     if(listOfShapes.contains(shape)) {
-      listOfIndexes.remove(listOfShapes.indexOf(shape));
+      listOfKeys.remove(listOfShapes.indexOf(shape));
       listOfShapes.remove(shape);
     } else {
       throw new IllegalArgumentException("That shape is not in the list");
@@ -146,9 +146,9 @@ public class AnimationModelImpl implements AnimationModel {
    * @param shapeIdentifier index of the shape in the list of shapes
    */
   public void removeShape(int shapeIdentifier) {
-    if (listOfIndexes.contains(shapeIdentifier)) {
-      listOfShapes.remove(listOfIndexes.indexOf(shapeIdentifier));
-      listOfIndexes.remove(listOfIndexes.indexOf(shapeIdentifier));
+    if (listOfKeys.contains(shapeIdentifier)) {
+      listOfShapes.remove(listOfKeys.indexOf(shapeIdentifier));
+      listOfKeys.remove(listOfKeys.indexOf(shapeIdentifier));
     } else {
      throw new IllegalArgumentException("That identifier is empty.");
     }
@@ -163,7 +163,7 @@ public class AnimationModelImpl implements AnimationModel {
     for (AbstractShape aShape : this.listOfShapes) {
       if (aShape.getLabel().equals(label)) {
         listOfShapes.remove(aShape);
-        listOfIndexes.remove(listOfShapes.indexOf(aShape));
+        listOfKeys.remove(listOfShapes.indexOf(aShape));
         return;
       }
     }
@@ -184,7 +184,7 @@ public class AnimationModelImpl implements AnimationModel {
       //two changes of the same type cannot occur at once
       if (type == c.getType()
           // same shape?
-          && c.getShapeID() == listOfIndexes.get(listOfShapes.indexOf(shape))
+          && c.getShapeID() == listOfKeys.get(listOfShapes.indexOf(shape))
           //overlapping time at the front of existing change
           && ((c.getStartTime() <= t1 && c.getEndTime() > t1)
           // Overlapping time at the end of existing change

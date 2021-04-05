@@ -128,13 +128,21 @@ public class ModelTests {
     model2.addShape(circle2);
     model2.addMove(rectangle1, 15, 15, 5, 10);
     model2.addMove(rectangle1, 2, 2, 10, 20);
-    assertEquals("[Rectangle R1 -> center: (2, 2), x-dimension: 2, y-dimension: 3, " +
-                    "Circle C2 -> center: (15, 26), x-dimension: 45, y-dimension: 45]",
-            model2.getShapes().toString());
+    assertEquals("[Shape R1 updates its position to" +
+            " x-dimension: 15, y-dimension: 15 from t= 5 to t= 10\n" +
+            ", Shape R1 updates its position to" +
+            " x-dimension: 2, y-dimension: 2 from t= 10 to t= 20\n" +
+            "]",
+            model2.getChanges().toString());
     model2.addMove(circle2,1, 1, 0, 25);
-    assertEquals("[Rectangle R1 -> center: (2, 2), x-dimension: 2, y-dimension: 3, " +
-                    "Circle C2 -> center: (1, 1), x-dimension: 45, y-dimension: 45]",
-            model2.getShapes().toString());
+    assertEquals("[Shape R1 updates its position to" +
+            " x-dimension: 15, y-dimension: 15 from t= 5 to t= 10\n" +
+            ", Shape R1 updates its position to" +
+            " x-dimension: 2, y-dimension: 2 from t= 10 to t= 20\n" +
+            ", Shape C2 updates its position to" +
+            " x-dimension: 1, y-dimension: 1 from t= 0 to t= 25\n" +
+            "]",
+            model2.getChanges().toString());
   }
 
   @Test
@@ -142,16 +150,16 @@ public class ModelTests {
     model1.addShape(rectangle1);
     LinkedList<Change> testList = new LinkedList<>();
     Recolor color1 = new Recolor(rectangle1,
-        0, rectangle1.getLabel(),100, 115, 130, 0, 25);
+        0, rectangle1.getLabel(),100, 115, 130, 0, 5, 10);
     testList.add(color1);
-    model1.addRecolor(rectangle1, 100, 115, 130, 0, 25);
+    model1.addRecolor(rectangle1, 100, 115, 130, 0, 5, 10);
     assertEquals(testList.get(0).getShapeID(), model1.getChanges().get(0).getShapeID());
     assertEquals(testList.get(0).getUpdatedR(), model1.getChanges().get(0).getUpdatedR());
     assertEquals(testList.get(0).getUpdatedG(), model1.getChanges().get(0).getUpdatedG());
     assertEquals(testList.get(0).getUpdatedB(), model1.getChanges().get(0).getUpdatedB());
+    assertEquals(testList.get(0).getUpdatedA(), model1.getChanges().get(0).getUpdatedA());
     assertEquals(testList.get(0).getStartTime(), model1.getChanges().get(0).getStartTime());
     assertEquals(testList.get(0).getEndTime(), model1.getChanges().get(0).getEndTime());
-    assertEquals(testList.get(0).getReference(), model1.getChanges().get(0).getReference());
   }
 
   @Test
@@ -160,11 +168,17 @@ public class ModelTests {
     assertEquals("[Rectangle R2 -> center: (5, 6), x-dimension: 7, y-dimension: 8]",
             model1.getShapes().toString());
     model1.addResize(rectangle2, 1, 3, 0 , 15);
-    assertEquals("[Rectangle R2 -> center: (5, 6), x-dimension: 1, y-dimension: 3]",
-            model1.getShapes().toString());
+    assertEquals("[Shape R2 updates its dimensions to" +
+            " width: 1 height: 3 from t= 0 to t= 15\n" +
+            "]",
+            model1.getChanges().toString());
     model1.addResize(rectangle2, 5, 5, 15, 50);
-    assertEquals("[Rectangle R2 -> center: (5, 6), x-dimension: 5, y-dimension: 5]",
-            model1.getShapes().toString());
+    assertEquals("[Shape R2 updates its dimensions to" +
+            " width: 1 height: 3 from t= 0 to t= 15\n" +
+            ", Shape R2 updates its dimensions to" +
+            " width: 5 height: 5 from t= 15 to t= 50\n" +
+            "]",
+            model1.getChanges().toString());
 
     model2.addShape(rectangle1);
     model2.addShape(circle2);
@@ -176,10 +190,12 @@ public class ModelTests {
     model2.addResize(rectangle1, 1, 1, 1, 2);
     model2.addResize(circle1, 1, 1, 1, 2);
     model2.addResize(circle2, 1, 1, 1, 2);
-    assertEquals("[Rectangle R1 -> center: (3, 6), x-dimension: 1, y-dimension: 1," +
-            " Circle C2 -> center: (15, 26), x-dimension: 1, y-dimension: 1, " +
-            "Circle C1 -> center: (1, 2), x-dimension: 1, y-dimension: 1]",
-            model2.getShapes().toString());
+    assertEquals("[Shape R1 updates its dimensions to" +
+            " width: 1 height: 1 from t= 1 to t= 2\n" +
+            ", Shape C1 updates its dimensions to width: 1 height: 1 from t= 1 to t= 2\n" +
+            ", Shape C2 updates its dimensions to width: 1 height: 1 from t= 1 to t= 2\n" +
+            "]",
+            model2.getChanges().toString());
   }
 
   @Test
@@ -193,16 +209,14 @@ public class ModelTests {
         """, model1.toString());
     model1.addMove(rectangle1, 2, 3, 2,3);
     model1.addMove(circle1, 2, 3, 2,3);
-    model1.addRecolor(rectangle1, 2, 3, 250,3, 5);
-    model1.addRecolor(circle1, 17, 111, 2,3, 5);
-    assertEquals("""
-        Rectangle R1 -> center: (2, 3), x-dimension: 2, y-dimension: 3
-        Circle C1 -> center: (2, 3), x-dimension: 3, y-dimension: 4
-        Shape R1 updates its position to x-dimension: 2, y-dimension: 3 from t= 2 to t= 3
-        Shape C1 updates its position to x-dimension: 2, y-dimension: 3 from t= 2 to t= 3
-        Shape R1 updates its color to (2, 3, 250) from t= 3 to t= 5
-        Shape C1 updates its color to (17, 111, 2) from t= 3 to t= 5
-        """, model1.toString());
+    model1.addRecolor(rectangle1, 2, 3, 250,3, 5, 7);
+    model1.addRecolor(circle1, 17, 111, 2,3, 5, 8);
+    assertEquals("Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3\n" +
+        "Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4\n" +
+        "Shape R1 updates its position to x-dimension: 2, y-dimension: 3 from t= 2 to t= 3\n" +
+        "Shape C1 updates its position to x-dimension: 2, y-dimension: 3 from t= 2 to t= 3\n" +
+        "Shape R1 updates its color to (2, 3, 250) from t= 5 to t= 7\n" +
+        "Shape C1 updates its color to (17, 111, 2) from t= 5 to t= 8\n", model1.toString());
 
   }
 

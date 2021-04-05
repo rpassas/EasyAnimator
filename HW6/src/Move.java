@@ -2,7 +2,8 @@ public class Move extends AbstractChange {
 
   public Move(BasicShape shape, int shapeID, String shapeLabel,
               int x, int y, int startTime, int endTime) {
-    super.reference = shape.getLocation();
+    Point2D location = new Point2D(shape.getLocation().getX(), shape.getLocation().getY());
+    super.reference = location;
     super.reference.setX(x);
     super.reference.setY(y);
     super.setStartTime(startTime);
@@ -10,7 +11,15 @@ public class Move extends AbstractChange {
     super.setShapeID(shapeID);
     super.setShapeLabel(shapeLabel);
     super.setType(AvailableChanges.MOVE);
+    // set defaults
+    super.setUpdatedR(shape.getR());
+    super.setUpdatedG(shape.getG());
+    super.setUpdatedB(shape.getB());
+    super.setUpdatedA(shape.getOpacity());
+    super.setUpdatedHeight(shape.getHeight());
+    super.setUpdatedWidth(shape.getWidth());
   }
+
 
   @Override
   public String toString() {

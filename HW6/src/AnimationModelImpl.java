@@ -220,7 +220,7 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public void addRecolor(AbstractShape shape, int r, int g, int b, int t1, int t2) {
+  public void addRecolor(AbstractShape shape, int r, int g, int b, int a, int t1, int t2) {
     if (t1 < 0 || t2 < 0) {
       throw new IllegalArgumentException("Time value must be positive");
     }
@@ -240,7 +240,7 @@ public class AnimationModelImpl implements AnimationModel {
       this.addShape(shape);
     }
     listOfChanges.add(new Recolor(shape, listOfShapes.indexOf(shape), shape.getLabel(),
-        r, g, b, t1, t2));
+        r, g, b, a, t1, t2));
   }
 
   @Override

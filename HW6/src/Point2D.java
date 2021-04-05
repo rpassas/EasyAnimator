@@ -2,6 +2,8 @@
  * This class represents a 2D point. This point is denoted in Cartesian
  * coordinates as (x,y).
  */
+//TODO needs to indicate its relationship to another class (composition)
+// Move and abstract shape have this class
 public class Point2D {
   private int x;
   private int y;

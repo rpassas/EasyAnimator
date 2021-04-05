@@ -43,6 +43,7 @@ public abstract class AbstractShape implements BasicShape{
     return b;
   }
 
+
   @Override
   public int getOpacity() {
     return a;

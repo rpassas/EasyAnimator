@@ -1,4 +1,5 @@
 public interface Change {
+
   /**
    * Method to get the updatedHeight value of the current shape.
    * @return the updatedHeight value of the current shape.

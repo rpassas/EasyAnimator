@@ -60,7 +60,7 @@ public interface AnimationModel {
    * @throws IllegalArgumentException for negative colors
    * @throws IllegalArgumentException for out of bounds colors
    */
-  void addRecolor(AbstractShape shape, int r, int g, int b, int t1, int t2);
+  void addRecolor(AbstractShape shape, int r, int g, int b, int a, int t1, int t2);
 
   /**
    * Takes a shape and resizes it over time.

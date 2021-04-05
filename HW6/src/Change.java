@@ -87,27 +87,35 @@ public interface Change {
    * Method to get the startTime value of the current shape.
    * @return the startTime of the current shape.
    */
-  public int getStartTime();
+  int getStartTime();
 
   /**
    * Method to set the startTime value of the current shape.
    * @param startTime the startTime value that it will be set to.
    */
-  public void setStartTime(int startTime);
+  void setStartTime(int startTime);
 
   /**
    * Method to get the endTime value of the current shape.
    * @return the endTime of the current shape.
    */
-  public int getEndTime();
+  int getEndTime();
 
   /**
    * Method to set the endTime value of the current shape.
    * @param endTime the endTime value that it will be set to.
    */
-  public void setEndTime(int endTime);
+  void setEndTime(int endTime);
 
-  public int getShapeID();
+  /**
+   * Get the shape's ID for a change.
+   * @return int indicating shape ID
+   */
+  int getShapeID();
 
-  public void setShapeID(int shapeID);
+  /**
+   * Set the shape's ID for a change.
+   * @param shapeID is an int indicating a new ID.
+   */
+  void setShapeID(int shapeID);
 }

@@ -1,5 +1,7 @@
+package cs5004.AnimationModel;
+
 /**
- * A class representing a. oval.
+ * A class representing an oval.
  */
 public class Circle extends AbstractShape{
   private AvailableShapes type;
@@ -27,7 +29,7 @@ public class Circle extends AbstractShape{
   }
 
   /**
-   * Constructs a Circle object with the given center and dimensions
+   * Constructs a cs5004.AnimationModel.Circle object with the given center and dimensions
    *
    * @param x      x coordinate of the lower-left corner of this rectangle
    * @param y      y coordinate of the lower-left corner of this rectangle
@@ -87,7 +89,7 @@ public class Circle extends AbstractShape{
   }
 
   /**
-   * Constructs a Circle object with the given center and dimensions
+   * Constructs a cs5004.AnimationModel.Circle object with the given center and dimensions
    *
    * @param x      x coordinate of the lower-left corner of this rectangle
    * @param y      y coordinate of the lower-left corner of this rectangle
@@ -128,7 +130,7 @@ public class Circle extends AbstractShape{
   }
 
   public String toString() {
-    return "Circle " + this.getLabel() + " -> center: ("
+    return "cs5004.AnimationModel.Circle " + this.getLabel() + " -> center: ("
         + this.reference.getX() + ", " + this.reference.getY()
         + "), x-dimension: " + this.getWidth() + ", y-dimension: " + this.getHeight();
   }

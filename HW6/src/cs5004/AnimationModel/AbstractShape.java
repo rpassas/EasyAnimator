@@ -1,3 +1,5 @@
+package cs5004.AnimationModel;
+
 public abstract class AbstractShape implements BasicShape{
   protected Point2D reference;
   private int height;

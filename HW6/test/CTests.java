@@ -1,6 +1,10 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import cs5004.AnimationModel.AvailableShapes;
+import cs5004.AnimationModel.Circle;
+import cs5004.AnimationModel.Point2D;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -24,28 +28,28 @@ public class CTests {
   public void testConstructor() {
     //Testing the constructor with a radius no RGB or width and height
     Circle circleConstructorRadius = new Circle("circle1", 5, 3, 2);
-    assertEquals("Circle circle1 -> center: (5, 3), x-dimension: 2, y-dimension: 2",
+    assertEquals("cs5004.AnimationModel.Circle circle1 -> center: (5, 3), x-dimension: 2, y-dimension: 2",
             circleConstructorRadius.toString());
     // Testing the constructor with a width and a height and no radius or rgb
     Circle circleConstructorWH1 = new Circle("circle2", 2, 4, 5, 6);
-    assertEquals("Circle circle2 -> center: (2, 4), x-dimension: 5, y-dimension: 6",
+    assertEquals("cs5004.AnimationModel.Circle circle2 -> center: (2, 4), x-dimension: 5, y-dimension: 6",
             circleConstructorWH1.toString());
     Circle circleConstructorWH2 = new Circle("circle3", 15, 1, 15, 167);
-    assertEquals("Circle circle3 -> center: (15, 1), x-dimension: 15, y-dimension: 167",
+    assertEquals("cs5004.AnimationModel.Circle circle3 -> center: (15, 1), x-dimension: 15, y-dimension: 167",
             circleConstructorWH2.toString());
     //Testing constructor with width and height and rgb, no radius
     Circle circleConstructorRGB1 = new Circle("circle4",
         5, 3, 2, 2, 2, 2, 2, 20);
-    assertEquals("Circle circle4 -> center: (5, 3), x-dimension: 2, y-dimension: 2",
+    assertEquals("cs5004.AnimationModel.Circle circle4 -> center: (5, 3), x-dimension: 2, y-dimension: 2",
             circleConstructorRGB1.toString());
     Circle circleConstructorRGB2 = new Circle("circle5",
         1, 1, 1, 1, 1, 1, 1, 1);
-    assertEquals("Circle circle5 -> center: (1, 1), x-dimension: 1, y-dimension: 1",
+    assertEquals("cs5004.AnimationModel.Circle circle5 -> center: (1, 1), x-dimension: 1, y-dimension: 1",
             circleConstructorRGB2.toString());
     //Testing constructor with radius and rgb no width and height
     Circle circleConstructorRGBRadius = new Circle("circle6",
         1, 2, 3, 4, 5, 6, 7);
-    assertEquals("Circle circle6 -> center: (1, 2), x-dimension: 3, y-dimension: 3",
+    assertEquals("cs5004.AnimationModel.Circle circle6 -> center: (1, 2), x-dimension: 3, y-dimension: 3",
             circleConstructorRGBRadius.toString());
   }
 
@@ -340,8 +344,8 @@ public class CTests {
   @Test
   public void testGetters() {
     // Testing getters for circle 1
-    assertEquals(1, circle1.reference.getX());
-    assertEquals(2, circle1.reference.getY());
+    assertEquals(1, circle1.getLocation().getX());
+    assertEquals(2, circle1.getLocation().getY());
     assertEquals(3, circle1.getWidth());
     assertEquals(3, circle1.getHeight());
     assertEquals(0, circle1.getR());
@@ -351,8 +355,8 @@ public class CTests {
     assertEquals(AvailableShapes.OVAL, circle1.getType());
 
     // Testing getters for circle 2
-    assertEquals(1, circle2.reference.getX());
-    assertEquals(2, circle2.reference.getY());
+    assertEquals(1, circle2.getLocation().getX());
+    assertEquals(2, circle2.getLocation().getY());
     assertEquals(3, circle2.getWidth());
     assertEquals(4, circle2.getHeight());
     assertEquals(5, circle2.getR());
@@ -362,8 +366,8 @@ public class CTests {
     assertEquals(AvailableShapes.OVAL, circle2.getType());
 
     // Testing getters for circle 3
-    assertEquals(1, circle3.reference.getX());
-    assertEquals(2, circle3.reference.getY());
+    assertEquals(1, circle3.getLocation().getX());
+    assertEquals(2, circle3.getLocation().getY());
     assertEquals(3, circle3.getWidth());
     assertEquals(4, circle3.getHeight());
     assertEquals(0, circle3.getR());
@@ -373,8 +377,8 @@ public class CTests {
     assertEquals(AvailableShapes.OVAL, circle3.getType());
 
     // Testing getters for circle 4
-    assertEquals(1, circle4.reference.getX());
-    assertEquals(2, circle4.reference.getY());
+    assertEquals(1, circle4.getLocation().getX());
+    assertEquals(2, circle4.getLocation().getY());
     assertEquals(3, circle4.getWidth());
     assertEquals(3, circle4.getHeight());
     assertEquals(4, circle4.getR());
@@ -387,16 +391,16 @@ public class CTests {
   @Test
   public void testSetters() {
     // Testing Setters for circle 1
-    circle1.reference.setX(10);
-    circle1.reference.setY(20);
+    circle1.getLocation().setX(10);
+    circle1.getLocation().setY(20);
     circle1.setWidth(30);
     circle1.setHeight(40);
     circle1.setR(11);
     circle1.setG(12);
     circle1.setB(13);
     circle1.setOpacity(14);
-    assertEquals(10, circle1.reference.getX());
-    assertEquals(20, circle1.reference.getY());
+    assertEquals(10, circle1.getLocation().getX());
+    assertEquals(20, circle1.getLocation().getY());
     assertEquals(30, circle1.getWidth());
     assertEquals(40, circle1.getHeight());
     assertEquals(11, circle1.getR());
@@ -405,16 +409,16 @@ public class CTests {
     assertEquals(14, circle1.getOpacity());
 
     // Testing Setters for circle 2
-    circle2.reference.setX(100);
-    circle2.reference.setY(200);
+    circle2.getLocation().setX(100);
+    circle2.getLocation().setY(200);
     circle2.setWidth(300);
     circle2.setHeight(400);
     circle2.setR(110);
     circle2.setG(120);
     circle2.setB(130);
     circle2.setOpacity(140);
-    assertEquals(100, circle2.reference.getX());
-    assertEquals(200, circle2.reference.getY());
+    assertEquals(100, circle2.getLocation().getX());
+    assertEquals(200, circle2.getLocation().getY());
     assertEquals(300, circle2.getWidth());
     assertEquals(400, circle2.getHeight());
     assertEquals(110, circle2.getR());
@@ -423,16 +427,16 @@ public class CTests {
     assertEquals(140, circle2.getOpacity());
 
     // Testing Setters for circle 3
-    circle3.reference.setX(1000);
-    circle3.reference.setY(2000);
+    circle3.getLocation().setX(1000);
+    circle3.getLocation().setY(2000);
     circle3.setWidth(3000);
     circle3.setHeight(4000);
     circle3.setR(1100);
     circle3.setG(1200);
     circle3.setB(1300);
     circle3.setOpacity(1400);
-    assertEquals(1000, circle3.reference.getX());
-    assertEquals(2000, circle3.reference.getY());
+    assertEquals(1000, circle3.getLocation().getX());
+    assertEquals(2000, circle3.getLocation().getY());
     assertEquals(3000, circle3.getWidth());
     assertEquals(4000, circle3.getHeight());
     assertEquals(1100, circle3.getR());
@@ -441,16 +445,16 @@ public class CTests {
     assertEquals(1400, circle3.getOpacity());
 
     // Testing Setters for circle 4
-    circle4.reference.setX(10000);
-    circle4.reference.setY(20000);
+    circle4.getLocation().setX(10000);
+    circle4.getLocation().setY(20000);
     circle4.setWidth(30000);
     circle4.setHeight(40000);
     circle4.setR(11000);
     circle4.setG(12000);
     circle4.setB(13000);
     circle4.setOpacity(14000);
-    assertEquals(10000, circle4.reference.getX());
-    assertEquals(20000, circle4.reference.getY());
+    assertEquals(10000, circle4.getLocation().getX());
+    assertEquals(20000, circle4.getLocation().getY());
     assertEquals(30000, circle4.getWidth());
     assertEquals(40000, circle4.getHeight());
     assertEquals(11000, circle4.getR());

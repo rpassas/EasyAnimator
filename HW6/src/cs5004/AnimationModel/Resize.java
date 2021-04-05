@@ -1,3 +1,5 @@
+package cs5004.AnimationModel;
+
 public class Resize extends AbstractChange {
 
   public Resize(BasicShape shape, int shapeID, String shapeLabel,

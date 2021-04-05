@@ -1,3 +1,5 @@
+package cs5004.AnimationModel;
+
 public class Move extends AbstractChange {
 
   public Move(BasicShape shape, int shapeID, String shapeLabel,

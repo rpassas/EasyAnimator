@@ -1,6 +1,9 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import cs5004.AnimationModel.AvailableShapes;
+import cs5004.AnimationModel.Rect;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -183,8 +186,8 @@ public class RTests {
 
   @Test
   public void testGetters() {
-    assertEquals(3, rectangle1.reference.getX());
-    assertEquals(6, rectangle1.reference.getY());
+    assertEquals(3, rectangle1.getLocation().getX());
+    assertEquals(6, rectangle1.getLocation().getY());
     assertEquals(4, rectangle1.getWidth());
     assertEquals(7, rectangle1.getHeight());
     assertEquals(0, rectangle1.getR());
@@ -193,8 +196,8 @@ public class RTests {
     assertEquals(1, rectangle1.getOpacity());
     assertEquals(AvailableShapes.RECTANGLE, rectangle1.getType());
 
-    assertEquals(3, rectangle2.reference.getX());
-    assertEquals(6, rectangle2.reference.getY());
+    assertEquals(3, rectangle2.getLocation().getX());
+    assertEquals(6, rectangle2.getLocation().getY());
     assertEquals(2, rectangle2.getWidth());
     assertEquals(3, rectangle2.getHeight());
     assertEquals(10, rectangle2.getR());
@@ -206,16 +209,16 @@ public class RTests {
 
   @Test
   public void testSetters() {
-    rectangle1.reference.setX(10);
-    rectangle1.reference.setY(20);
+    rectangle1.getLocation().setX(10);
+    rectangle1.getLocation().setY(20);
     rectangle1.setWidth(30);
     rectangle1.setHeight(40);
     rectangle1.setR(11);
     rectangle1.setG(12);
     rectangle1.setB(13);
     rectangle1.setOpacity(14);
-    assertEquals(10, rectangle1.reference.getX());
-    assertEquals(20, rectangle1.reference.getY());
+    assertEquals(10, rectangle1.getLocation().getX());
+    assertEquals(20, rectangle1.getLocation().getY());
     assertEquals(30, rectangle1.getWidth());
     assertEquals(40, rectangle1.getHeight());
     assertEquals(11, rectangle1.getR());
@@ -223,16 +226,16 @@ public class RTests {
     assertEquals(13, rectangle1.getB());
     assertEquals(14, rectangle1.getOpacity());
 
-    rectangle2.reference.setX(30);
-    rectangle2.reference.setY(60);
+    rectangle2.getLocation().setX(30);
+    rectangle2.getLocation().setY(60);
     rectangle2.setWidth(20);
     rectangle2.setHeight(30);
     rectangle2.setR(100);
     rectangle2.setG(200);
     rectangle2.setB(130);
     rectangle2.setOpacity(99);
-    assertEquals(30, rectangle2.reference.getX());
-    assertEquals(60, rectangle2.reference.getY());
+    assertEquals(30, rectangle2.getLocation().getX());
+    assertEquals(60, rectangle2.getLocation().getY());
     assertEquals(20, rectangle2.getWidth());
     assertEquals(30, rectangle2.getHeight());
     assertEquals(100, rectangle2.getR());

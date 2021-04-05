@@ -1,3 +1,5 @@
+package cs5004.AnimationModel;
+
 /**
  * This interface contains all operations that all types of shapes
  * should support.

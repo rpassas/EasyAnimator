@@ -3,6 +3,14 @@ import org.junit.Test;
 
 import java.util.LinkedList;
 
+import cs5004.AnimationModel.AbstractShape;
+import cs5004.AnimationModel.AnimationModelImpl;
+import cs5004.AnimationModel.AvailableShapes;
+import cs5004.AnimationModel.Change;
+import cs5004.AnimationModel.Circle;
+import cs5004.AnimationModel.Recolor;
+import cs5004.AnimationModel.Rect;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -43,7 +51,7 @@ public class ModelTests {
     testList.add(circleConstructorRadius);
     model1.addShape(circleConstructorRadius);
     assertEquals(testList, model1.getShapes());
-    Rect rectangle1 = new Rect("Rect", 3, 6, 4, 7);
+    Rect rectangle1 = new Rect("cs5004.AnimationModel.Rect", 3, 6, 4, 7);
     testList.add(circleConstructorRadius);
     model1.addShape(circleConstructorRadius);
     assertEquals(testList, model1.getShapes());
@@ -65,8 +73,8 @@ public class ModelTests {
         6, 6, 6, 6, 6, 6, 6, 6);
     assertEquals("[Rectangle aRect -> center: (2, 2), x-dimension: 2, y-dimension: 2," +
             " Rectangle anotherRect -> center: (3, 3), x-dimension: 3, y-dimension: 3," +
-            " Circle aCircle -> center: (4, 4), x-dimension: 4, y-dimension: 4," +
-            " Circle anotherCircle -> center: (5, 5), x-dimension: 5, y-dimension: 5," +
+            " cs5004.AnimationModel.Circle aCircle -> center: (4, 4), x-dimension: 4, y-dimension: 4," +
+            " cs5004.AnimationModel.Circle anotherCircle -> center: (5, 5), x-dimension: 5, y-dimension: 5," +
             " Rectangle Rect3 -> center: (6, 6), x-dimension: 6, y-dimension: 6]",
             model2.getShapes().toString());
   }
@@ -103,14 +111,14 @@ public class ModelTests {
         6, 6, 6, 6, 6, 6, 6, 6);
     model2.removeShape(0);
     assertEquals("[Rectangle Rect2 -> center: (3, 3), x-dimension: 3, y-dimension: 3, " +
-            "Circle Circle1 -> center: (4, 4), x-dimension: 4, y-dimension: 4, Circle Circle2 -> " +
+            "cs5004.AnimationModel.Circle Circle1 -> center: (4, 4), x-dimension: 4, y-dimension: 4, cs5004.AnimationModel.Circle Circle2 -> " +
             "center: (5, 5), x-dimension: 5, y-dimension: 5, Rectangle Circle3 -> " +
             "center: (6, 6), x-dimension: 6, y-dimension: 6]",
             model2.getShapes().toString());
     model2.removeShape(1);
     model2.removeShape(3);
     model2.removeShape(4);
-    assertEquals("[Circle Circle1 -> center: (4, 4), x-dimension: 4, y-dimension: 4]",
+    assertEquals("[cs5004.AnimationModel.Circle Circle1 -> center: (4, 4), x-dimension: 4, y-dimension: 4]",
             model2.getShapes().toString());
     model2.removeShape(2);
     assertEquals("[]", model2.getShapes().toString());
@@ -121,14 +129,14 @@ public class ModelTests {
     model1.addShape(rectangle2);
     model1.addShape(circle2);
     assertEquals("[Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3, " +
-            "Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4, " +
+            "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4, " +
             "Rectangle R2 -> center: (5, 6), x-dimension: 7, y-dimension: 8, " +
-            "Circle C2 -> center: (15, 26), x-dimension: 45, y-dimension: 45]",
+            "cs5004.AnimationModel.Circle C2 -> center: (15, 26), x-dimension: 45, y-dimension: 45]",
             model1.getShapes().toString());
     model1.removeShape(rectangle1);
     model1.removeShape(rectangle2);
-    assertEquals("[Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4, " +
-            "Circle C2 -> center: (15, 26), x-dimension: 45, y-dimension: 45]",
+    assertEquals("[cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4, " +
+            "cs5004.AnimationModel.Circle C2 -> center: (15, 26), x-dimension: 45, y-dimension: 45]",
             model1.getShapes().toString());
     model1.removeShape(circle1);
     model1.removeShape(circle2);
@@ -473,8 +481,8 @@ public class ModelTests {
     model2.addShape(circle2);
     model2.addShape(circle1);
     assertEquals("[Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3, " +
-            "Circle C2 -> center: (15, 26), x-dimension: 45, y-dimension: 45, " +
-            "Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4]",
+            "cs5004.AnimationModel.Circle C2 -> center: (15, 26), x-dimension: 45, y-dimension: 45, " +
+            "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4]",
             model2.getShapes().toString());
     model2.addResize(rectangle1, 1, 1, 1, 2);
     model2.addResize(circle1, 1, 1, 1, 2);
@@ -584,21 +592,21 @@ public class ModelTests {
     model1.addShape(circle1);
     assertEquals("""
         Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3
-        Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4
+        cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4
         """, model1.toString());
     model1.addMove(rectangle1, 2, 3, 2,3);
     model1.addMove(circle1, 2, 3, 2,3);
     model1.addRecolor(rectangle1, 2, 3, 250,3, 5, 7);
     model1.addRecolor(circle1, 17, 111, 2,3, 5, 8);
     assertEquals("Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3\n" +
-        "Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4\n" +
+        "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4\n" +
         "Shape R1 updates its position to x-dimension: 2, y-dimension: 3 from t= 2 to t= 3\n" +
         "Shape C1 updates its position to x-dimension: 2, y-dimension: 3 from t= 2 to t= 3\n" +
         "Shape R1 updates its color to (2, 3, 250) from t= 5 to t= 7\n" +
         "Shape C1 updates its color to (17, 111, 2) from t= 5 to t= 8\n", model1.toString());
     model1.addResize(circle1, 15, 15, 0, 100);
     assertEquals("Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3\n" +
-            "Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4\n" +
+            "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4\n" +
             "Shape R1 updates its position to x-dimension: 2, y-dimension: 3 from t= 2 to t= 3\n" +
             "Shape C1 updates its position to x-dimension: 2, y-dimension: 3 from t= 2 to t= 3\n" +
             "Shape R1 updates its color to (2, 3, 250) from t= 5 to t= 7\n" +

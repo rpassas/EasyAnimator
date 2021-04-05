@@ -1,3 +1,5 @@
+package cs5004.AnimationModel;
+
 public class Recolor extends AbstractChange {
 
   public Recolor(AbstractShape shape, int shapeID, String shapeLabel,

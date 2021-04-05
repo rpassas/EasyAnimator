@@ -1,3 +1,5 @@
+package cs5004.AnimationModel;
+
 public abstract class AbstractChange implements Change{
   protected Point2D reference;
   private int updatedHeight;

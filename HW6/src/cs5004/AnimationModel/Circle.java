@@ -134,5 +134,13 @@ public class Circle extends AbstractShape{
         + this.reference.getX() + ", " + this.reference.getY()
         + "), x-dimension: " + this.getWidth() + ", y-dimension: " + this.getHeight();
   }
+
+  @Override
+  public BasicShape cloneShape() {
+    Circle circleClone = new Circle(this.getLabel(), this.reference.getX(),
+            this.reference.getY(), this.getWidth(), this.getHeight(),
+            this.getR(), this.getG(), this.getB(), this.getOpacity());
+    return circleClone;
+  }
 }
 

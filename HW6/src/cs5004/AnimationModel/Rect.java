@@ -78,6 +78,14 @@ public class Rect extends AbstractShape {
     return this.type;
   }
 
+  @Override
+  public BasicShape cloneShape() {
+    Rect rectClone = new Rect(this.getLabel(), this.reference.getX(), this.reference.getY(),
+            this.getWidth(), this.getHeight(), this.getR(), this.getG(),
+            this.getB(), this.getOpacity());
+    return rectClone;
+  }
+
   public String toString() {
     return "Rectangle " + this.getLabel() + " -> center: ("
         + this.reference.getX() + ", " + this.reference.getY()

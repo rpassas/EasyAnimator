@@ -96,4 +96,9 @@ public abstract class AbstractShape implements BasicShape{
   public void setTick(int tick) {
     this.tick = tick;
   }
+
+  @Override
+  public BasicShape cloneShape() {
+    return null;
+  }
 }

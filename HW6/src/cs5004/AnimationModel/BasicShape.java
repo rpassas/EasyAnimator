@@ -115,9 +115,9 @@ public interface BasicShape {
   void setTick(int tick);
 
   /**
-   * Generates a string describing the shape.
-   * @return string giving details of the shape
+   * Method to clone the shape.
+   * @return a deep copy of the shape.
    */
-  String toString();
+  BasicShape cloneShape();
 }
 

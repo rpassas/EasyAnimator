@@ -42,4 +42,4 @@ Move, Recolor, Resize: concrete inheriting classes
 
 The model also keeps track of changes which each get starting attributes, ending attributes, start time, end time, a type, and a label and ID's for the shape that the change they are associated with (both are there for the sake of flexibility for the controller). While individual concrete classes, like Move, change only a particular type of attribute, Point2D in the case of Move, AbstractChange handles common attributes, like timestamps, ID, label, a type (which gets set in the concrete classes via a "super" call). These changes keep record of what change is supposed to occur, and over what time period, helping the model to generate appropriate copies of existing shapes at the appropriate times.
 
-note: enum classes are not shown in the UML diagrams
+note: enum classes are not shown in the UML diagrams (types of changes and shapes are enumerated)

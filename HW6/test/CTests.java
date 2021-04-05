@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import cs5004.AnimationModel.AbstractShape;
 import cs5004.AnimationModel.AvailableShapes;
 import cs5004.AnimationModel.Circle;
 
@@ -370,5 +371,19 @@ public class CTests {
     assertEquals(12000, circle4.getG());
     assertEquals(13000, circle4.getB());
     assertEquals(14000, circle4.getOpacity());
+  }
+
+  @Test
+  public void testCloneShape() {
+    AbstractShape testClone = circle2.cloneShape();
+    assertEquals(testClone.getLabel(), circle2.getLabel());
+    assertEquals(testClone.getLocation().getX(), circle2.getLocation().getX());
+    assertEquals(testClone.getLocation().getY(), circle2.getLocation().getY());
+    assertEquals(testClone.getWidth(), circle2.getWidth());
+    assertEquals(testClone.getHeight(), circle2.getHeight());
+    assertEquals(testClone.getR(), circle2.getR());
+    assertEquals(testClone.getB(), circle2.getB());
+    assertEquals(testClone.getG(), circle2.getG());
+    assertEquals(testClone.getOpacity(), circle2.getOpacity());
   }
 }

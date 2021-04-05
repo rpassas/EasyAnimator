@@ -136,7 +136,7 @@ public class Circle extends AbstractShape{
   }
 
   @Override
-  public BasicShape cloneShape() {
+  public AbstractShape cloneShape() {
     Circle circleClone = new Circle(this.getLabel(), this.reference.getX(),
             this.reference.getY(), this.getWidth(), this.getHeight(),
             this.getR(), this.getG(), this.getB(), this.getOpacity());

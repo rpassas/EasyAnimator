@@ -631,5 +631,4 @@ public class ModelTests {
             " 3 from t= 0 to t= 100\n",
             model1.toString());
   }
-
 }

@@ -79,7 +79,7 @@ public class Rect extends AbstractShape {
   }
 
   @Override
-  public BasicShape cloneShape() {
+  public AbstractShape cloneShape() {
     Rect rectClone = new Rect(this.getLabel(), this.reference.getX(), this.reference.getY(),
             this.getWidth(), this.getHeight(), this.getR(), this.getG(),
             this.getB(), this.getOpacity());

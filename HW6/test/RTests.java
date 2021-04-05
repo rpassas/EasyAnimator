@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import cs5004.AnimationModel.AbstractShape;
 import cs5004.AnimationModel.AvailableShapes;
 import cs5004.AnimationModel.Rect;
 
@@ -194,5 +195,19 @@ public class RTests {
     assertEquals(200, rectangle2.getG());
     assertEquals(130, rectangle2.getB());
     assertEquals(99, rectangle2.getOpacity());
+  }
+
+  @Test
+  public void testCloneShape() {
+    AbstractShape testClone = rectangle2.cloneShape();
+    assertEquals(testClone.getLabel(), rectangle2.getLabel());
+    assertEquals(testClone.getLocation().getX(), rectangle2.getLocation().getX());
+    assertEquals(testClone.getLocation().getY(), rectangle2.getLocation().getY());
+    assertEquals(testClone.getWidth(), rectangle2.getWidth());
+    assertEquals(testClone.getHeight(), rectangle2.getHeight());
+    assertEquals(testClone.getR(), rectangle2.getR());
+    assertEquals(testClone.getB(), rectangle2.getB());
+    assertEquals(testClone.getG(), rectangle2.getG());
+    assertEquals(testClone.getOpacity(), rectangle2.getOpacity());
   }
 }

@@ -598,10 +598,10 @@ public class ModelTests {
     assertEquals("", model1.toString());
     model1.addShape(rectangle1);
     model1.addShape(circle1);
-    assertEquals("""
-        Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3
-        cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4
-        """, model1.toString());
+    assertEquals("Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3\n" +
+                    "cs5004.AnimationModel.Circle C1 -> center: (1, 2), " +
+                    "x-dimension: 3, y-dimension: 4\n"
+        , model1.toString());
     model1.addMove(rectangle1, 2, 3, 1, 3,2,3);
     model1.addMove(circle1, 2, 3, 1, 3,2,3);
     model1.addRecolor(rectangle1, 2, 3, 250,3,

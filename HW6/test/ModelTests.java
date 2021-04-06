@@ -176,20 +176,19 @@ public class ModelTests {
     model2.addShape(circle2);
     model2.addMove(rectangle1, 15, 15, 5, 10,  2, 11);
     model2.addMove(rectangle1, 2, 2, 10, 20, 12, 17);
-    assertEquals("[Shape R1 updates its position from x-dimension: 5," +
-            " y-dimension: 10 to x-dimension: 5, y-dimension: 10 from t= 2 to t= 11\n" +
-            ", Shape R1 updates its position from x-dimension: 10, y-dimension: 20 to" +
-            " x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n" +
+    assertEquals("[Shape R1 updates its position from x-dimension: 15, y-dimension: 15 " +
+            "to x-dimension: 5, y-dimension: 10 from t= 2 to t= 11\n" +
+            ", Shape R1 updates its position from x-dimension: 2, y-dimension: " +
+            "2 to x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n" +
             "]",
             model2.getChanges().toString());
     model2.addMove(circle2,1, 1, 0, 25, 18, 20);
-    assertEquals("[Shape R1 updates its position from x-dimension: 5, y-dimension:" +
-            " 10 to x-dimension: 5, y-dimension: 10 from t= 2 to t= 11\n" +
-            ", Shape R1 updates its position from x-dimension: 10," +
-            " y-dimension: 20 to x-dimension: " +
-            "10, y-dimension: 20 from t= 12 to t= 17\n" +
-            ", Shape C2 updates its position from x-dimension: 0, y-dimension: 25 to x-dimension:" +
-            " 0, y-dimension: 25 from t= 18 to t= 20\n" +
+    assertEquals("[Shape R1 updates its position from x-dimension: 15," +
+            " y-dimension: 15 to x-dimension: 5, y-dimension: 10 from t= 2 to t= 11\n" +
+            ", Shape R1 updates its position from x-dimension: 2, y-dimension: 2 to" +
+            " x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n" +
+            ", Shape C2 updates its position from x-dimension: 1, y-dimension: 1 to" +
+            " x-dimension: 0, y-dimension: 25 from t= 18 to t= 20\n" +
             "]",
             model2.getChanges().toString());
   }
@@ -472,16 +471,16 @@ public class ModelTests {
             model1.getShapes().toString());
     model1.addResize(rectangle2, 1, 3,
         5, 3,0 , 15);
-    assertEquals("[Shape R2 updates its dimensions from width: 0 height: 1 to width:" +
-            " 5 height: 3 from t= 0 to t= 15\n" +
+    assertEquals("[Shape R2 updates its dimensions from width: 1 height: 3" +
+            " to width: 5 height: 3 from t= 0 to t= 15\n" +
             "]",
             model1.getChanges().toString());
     model1.addResize(rectangle2, 5, 5,
         1, 3,15, 50);
-    assertEquals("[Shape R2 updates its dimensions from width: 0 height:" +
-            " 1 to width: 5 height: 3 from t= 0 to t= 15\n" +
-            ", Shape R2 updates its dimensions from width: 0 height: 5 to width:" +
-            " 1 height: 3 from t= 15 to t= 50\n" +
+    assertEquals("[Shape R2 updates its dimensions from width: 1 height: 3 to" +
+            " width: 5 height: 3 from t= 0 to t= 15\n" +
+            ", Shape R2 updates its dimensions from width: 5 height: 5 to " +
+            "width: 1 height: 3 from t= 15 to t= 50\n" +
             "]",
             model1.getChanges().toString());
 
@@ -489,18 +488,19 @@ public class ModelTests {
     model2.addShape(circle2);
     model2.addShape(circle1);
     assertEquals("[Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3, " +
-            "cs5004.AnimationModel.Circle C2 -> center: (15, 26), x-dimension: 45, y-dimension: 45, " +
+            "cs5004.AnimationModel.Circle C2 -> center: (15, 26)," +
+            " x-dimension: 45, y-dimension: 45, " +
             "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4]",
             model2.getShapes().toString());
     model2.addResize(rectangle1, 1, 1,7, 3, 1, 2);
     model2.addResize(circle1, 1, 1,3, 8, 1, 2);
     model2.addResize(circle2, 1, 1, 4, 1,1, 2);
-    assertEquals("[Shape R1 updates its dimensions from width: 0 height: 1 to width:" +
-            " 7 height: 3 from t= 1 to t= 2\n" +
-            ", Shape C1 updates its dimensions from width: 0 height: 1 to width: 3 height: " +
-            "8 from t= 1 to t= 2\n" +
-            ", Shape C2 updates its dimensions from width: 0 height: 1 to width: 4 height: " +
-            "1 from t= 1 to t= 2\n" +
+    assertEquals("[Shape R1 updates its dimensions from width: 1 height: 1 to width: " +
+            "7 height: 3 from t= 1 to t= 2\n" +
+            ", Shape C1 updates its dimensions from width: 1 height: 1 " +
+            "to width: 3 height: 8 from t= 1 to t= 2\n" +
+            ", Shape C2 updates its dimensions from width: 1 height: 1 " +
+            "to width: 4 height: 1 from t= 1 to t= 2\n" +
             "]",
             model2.getChanges().toString());
   }
@@ -609,26 +609,26 @@ public class ModelTests {
     model1.addRecolor(circle1, 17, 111, 2,3,
         2, 3, 250,3,5, 8);
     assertEquals("Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3\n" +
-        "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4\n" +
-        "Shape R1 updates its position from x-dimension: 1, y-dimension: 3 to x-dimension: 1, " +
-        "y-dimension: 3 from t= 2 to t= 3\n" +
-        "Shape C1 updates its position from x-dimension: 1, y-dimension: 3 to x-dimension: 1, " +
-        "y-dimension: 3 from t= 2 to t= 3\n" +
-        "Shape R1 updates its color from (2, 3, 250, 3) to (2, 3, 250, 3) from t= 5 to t= 7\n" +
-        "Shape C1 updates its color from (17, 111, 2, 3) to (2, 3, 250, 3) from t= 5 to t= 8\n",
+            "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4\n" +
+            "Shape R1 updates its position from x-dimension: 2, y-dimension: 3 to x-dimension: 1," +
+            " y-dimension: 3 from t= 2 to t= 3\n" +
+            "Shape C1 updates its position from x-dimension: 2, y-dimension: 3 to x-dimension: 1," +
+            " y-dimension: 3 from t= 2 to t= 3\n" +
+            "Shape R1 updates its color from (2, 3, 250, 3) to (2, 3, 250, 3) from t= 5 to t= 7\n" +
+            "Shape C1 updates its color from (17, 111, 2, 3) to (2, 3, 250, 3) from t= 5 to t= 8\n",
         model1.toString());
     model1.addResize(circle1, 15, 15, 1, 3,0, 100);
     assertEquals("Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3\n" +
             "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4\n" +
-            "Shape R1 updates its position from x-dimension: 1, y-dimension:" +
-            " 3 to x-dimension: 1, y-dimension: 3 from t= 2 to t= 3\n" +
-            "Shape C1 updates its position from x-dimension: 1, y-dimension: 3 to x-dimension:" +
-            " 1, y-dimension: 3 from t= 2 to t= 3\n" +
+            "Shape R1 updates its position from x-dimension: 2, y-dimension: 3 to x-dimension: 1," +
+            " y-dimension: 3 from t= 2 to t= 3\n" +
+            "Shape C1 updates its position from x-dimension: 2, y-dimension: 3 to x-dimension: 1," +
+            " y-dimension: 3 from t= 2 to t= 3\n" +
             "Shape R1 updates its color from (2, 3, 250, 3) to (2, 3, 250, 3) from t= 5 to t= 7\n" +
-            "Shape C1 updates its color from (17, 111, 2, 3) to (2, 3, 250, 3) from" +
-            " t= 5 to t= 8\n" +
-            "Shape C1 updates its dimensions from width: 0 height: 15 to width: 1 height:" +
-            " 3 from t= 0 to t= 100\n",
+            "Shape C1 updates its color from (17, 111, 2, 3) to" +
+            " (2, 3, 250, 3) from t= 5 to t= 8\n" +
+            "Shape C1 updates its dimensions from width: 15 height: 15" +
+            " to width: 1 height: 3 from t= 0 to t= 100\n",
             model1.toString());
   }
 }

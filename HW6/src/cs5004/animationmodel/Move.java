@@ -1,9 +1,24 @@
-package cs5004.AnimationModel;
+package cs5004.animationmodel;
 
+/**
+ * Move is a type of abstract change that moves a shape.
+ */
 public class Move extends AbstractChange {
   protected Point2D startReference;
   protected Point2D reference;
 
+  /**
+   * Constructor for the move class.
+   * @param shape the shape to be moved.
+   * @param shapeID the id of the shape to be moved.
+   * @param shapeLabel the string identifier of the shape.
+   * @param startX initial x coordinate.
+   * @param startY initial y coordinate.
+   * @param endX final x coordinate.
+   * @param endY final y coordinate.
+   * @param startTime starting time.
+   * @param endTime ending time.
+   */
   public Move(BasicShape shape, int shapeID, String shapeLabel,
               int startX, int startY, int endX, int endY, int startTime, int endTime) {
     Point2D location = new Point2D(shape.getLocation().getX(), shape.getLocation().getY());
@@ -166,7 +181,7 @@ public class Move extends AbstractChange {
   public String toString() {
     return "Shape " + super.getShapeLabel() + " updates its position from x-dimension: "
         + this.startReference.getX() + ", y-dimension: " + this.startReference.getY()
-        +" to x-dimension: "
+        + " to x-dimension: "
         + this.reference.getX() + ", y-dimension: " + this.reference.getY()
         + " from t= " + super.getStartTime() + " to t= " + super.getEndTime() + "\n";
   }

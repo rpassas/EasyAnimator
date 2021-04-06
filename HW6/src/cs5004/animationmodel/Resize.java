@@ -1,11 +1,26 @@
-package cs5004.AnimationModel;
+package cs5004.animationmodel;
 
+/**
+ * Change that resizes an object.
+ */
 public class Resize extends AbstractChange {
   private int startHeight;
   private int startWidth;
   private int updatedHeight;
   private int updatedWidth;
 
+  /**
+   * Constructor for the resize class.
+   * @param shape the shape that is being resized.
+   * @param shapeID the id of the shape.
+   * @param shapeLabel the string identifier of the shape.
+   * @param startW starting width.
+   * @param startH staring height.
+   * @param endW ending width.
+   * @param endH ending height.
+   * @param startTime starting time.
+   * @param endTime ending time.
+   */
   public Resize(BasicShape shape, int shapeID, String shapeLabel,
                 int startW, int startH, int endW, int endH, int startTime, int endTime) {
     this.setStartHeight(startH);
@@ -102,7 +117,7 @@ public class Resize extends AbstractChange {
 
   @Override
   public int getUpdatedWidth() {
-   return this.updatedWidth;
+    return this.updatedWidth;
   }
 
   @Override

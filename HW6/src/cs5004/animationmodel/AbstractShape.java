@@ -1,6 +1,9 @@
-package cs5004.AnimationModel;
+package cs5004.animationmodel;
 
-public abstract class AbstractShape implements BasicShape{
+/**
+ * Abstract class for the basic shape interface.
+ */
+public abstract class AbstractShape implements BasicShape {
   protected Point2D reference;
   private int height;
   private int width;
@@ -82,10 +85,14 @@ public abstract class AbstractShape implements BasicShape{
   }
 
   @Override
-  public void setLabel(String label) { this.label = label;}
+  public void setLabel(String label) {
+    this.label = label;
+  }
 
   @Override
-  public String getLabel() {return this.label;}
+  public String getLabel() {
+    return this.label;
+  }
 
   @Override
   public int getTick() {

@@ -1,4 +1,4 @@
-package cs5004.AnimationModel;
+package cs5004.animationmodel;
 
 /**
  * Enum to represent the shapes available to be created.

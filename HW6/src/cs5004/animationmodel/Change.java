@@ -1,7 +1,9 @@
-package cs5004.AnimationModel;
+package cs5004.animationmodel;
 
+/**
+ * Interface for the change part of the model.
+ */
 public interface Change {
-
 
   /**
    * Method to get the startHeight value of the current shape.

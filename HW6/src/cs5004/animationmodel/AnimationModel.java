@@ -1,4 +1,4 @@
-package cs5004.AnimationModel;
+package cs5004.animationmodel;
 
 import java.util.LinkedList;
 
@@ -22,7 +22,7 @@ public interface AnimationModel {
   LinkedList<AbstractChange> getChanges();
 
   /**
-   * Adds a shape to to the model
+   * Adds a shape to to the model.
    * @param shape the shape to be added to the model (list of shapes).
    * @throws IllegalArgumentException if the given shape does not have proper type.
    */

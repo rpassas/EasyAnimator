@@ -1,15 +1,17 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import cs5004.AnimationModel.AbstractShape;
-import cs5004.AnimationModel.AvailableShapes;
-import cs5004.AnimationModel.Rect;
+import cs5004.animationmodel.AbstractShape;
+import cs5004.animationmodel.AvailableShapes;
+import cs5004.animationmodel.Rect;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Testing for the rectangle class.
+ */
 public class RTests {
   private Rect rectangle1;
   private Rect rectangle2;

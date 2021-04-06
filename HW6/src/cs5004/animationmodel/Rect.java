@@ -1,8 +1,8 @@
-package cs5004.AnimationModel;
+package cs5004.animationmodel;
 
 /**
  * This class represents a rectangle.  It defines all the operations mandated by
- * the Shape interface
+ * the Shape interface.
  */
 
 public class Rect extends AbstractShape {
@@ -12,7 +12,7 @@ public class Rect extends AbstractShape {
 
   /**
    * Constructs a rectangle object with the given location of its lower-left
-   * corner and dimensions
+   * corner and dimensions.
    *
    * @param x      x coordinate of the lower-left corner of this rectangle
    * @param y      y coordinate of the lower-left corner of this rectangle
@@ -37,7 +37,7 @@ public class Rect extends AbstractShape {
 
   /**
    * Constructs a rectangle object with the given location of its lower-left
-   * corner and dimensions
+   * corner and dimensions.
    *
    * @param x      x coordinate of the lower-left corner of this rectangle
    * @param y      y coordinate of the lower-left corner of this rectangle
@@ -86,6 +86,10 @@ public class Rect extends AbstractShape {
     return rectClone;
   }
 
+  /**
+   * Creates a string representation of a rectangle.
+   * @return a string representation of a rectangle.
+   */
   public String toString() {
     return "Rectangle " + this.getLabel() + " -> center: ("
         + this.reference.getX() + ", " + this.reference.getY()

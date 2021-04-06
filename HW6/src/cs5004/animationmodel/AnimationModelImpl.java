@@ -1,4 +1,4 @@
-package cs5004.AnimationModel;
+package cs5004.animationmodel;
 
 import java.util.LinkedList;
 
@@ -9,8 +9,11 @@ public class AnimationModelImpl implements AnimationModel {
   private final LinkedList<AbstractShape> listOfShapes;
   private final LinkedList<AbstractChange> listOfChanges;
   private final LinkedList<Integer> listOfKeys;
-  int ShapeKey;
+  int shapeKey;
 
+  /**
+   * Constructor for the animation model impl.
+   */
   public AnimationModelImpl() {
     this.listOfShapes = new LinkedList<>();
     this.listOfKeys = new LinkedList<>();
@@ -37,12 +40,12 @@ public class AnimationModelImpl implements AnimationModel {
     }
     if (shape.getType().equals(AvailableShapes.OVAL)) {
       listOfShapes.add(shape);
-      listOfKeys.add(ShapeKey);
-      ShapeKey++;
+      listOfKeys.add(shapeKey);
+      shapeKey++;
     } else if (shape.getType().equals(AvailableShapes.RECTANGLE)) {
       listOfShapes.add(shape);
-      listOfKeys.add(ShapeKey);
-      ShapeKey++;
+      listOfKeys.add(shapeKey);
+      shapeKey++;
     } else {
       throw new IllegalArgumentException("added shape must be one of the accepted types");
     }
@@ -72,12 +75,12 @@ public class AnimationModelImpl implements AnimationModel {
     }
     if (shape == AvailableShapes.OVAL) {
       listOfShapes.add(new Circle(label, x, y, w, h));
-      listOfKeys.add(ShapeKey);
-      ShapeKey++;
+      listOfKeys.add(shapeKey);
+      shapeKey++;
     } else if (shape == AvailableShapes.RECTANGLE) {
       listOfShapes.add(new Rect(label, x, y, w, h));
-      listOfKeys.add(ShapeKey);
-      ShapeKey++;
+      listOfKeys.add(shapeKey);
+      shapeKey++;
     } else {
       throw new IllegalArgumentException("added shape must be one of the accepted types");
     }
@@ -121,12 +124,12 @@ public class AnimationModelImpl implements AnimationModel {
     }
     if (shape == AvailableShapes.OVAL) {
       listOfShapes.add(new Circle(label, x, y, w, h, r, g, b, opacity));
-      listOfKeys.add(ShapeKey);
-      ShapeKey++;
+      listOfKeys.add(shapeKey);
+      shapeKey++;
     } else if (shape == AvailableShapes.RECTANGLE) {
       listOfShapes.add(new Rect(label, x, y, w, h, r, g, b, opacity));
-      listOfKeys.add(ShapeKey);
-      ShapeKey++;
+      listOfKeys.add(shapeKey);
+      shapeKey++;
     } else {
       throw new IllegalArgumentException("added shape must be one of the accepted types");
     }
@@ -134,7 +137,7 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public void removeShape(AbstractShape shape) {
-    if(listOfShapes.contains(shape)) {
+    if (listOfShapes.contains(shape)) {
       listOfKeys.remove(listOfShapes.indexOf(shape));
       listOfShapes.remove(shape);
     } else {
@@ -152,7 +155,7 @@ public class AnimationModelImpl implements AnimationModel {
       listOfShapes.remove(listOfKeys.indexOf(shapeIdentifier));
       listOfKeys.remove(listOfKeys.indexOf(shapeIdentifier));
     } else {
-     throw new IllegalArgumentException("That identifier is empty.");
+      throw new IllegalArgumentException("That identifier is empty.");
     }
   }
 
@@ -169,7 +172,7 @@ public class AnimationModelImpl implements AnimationModel {
         return;
       }
     }
-      throw new IllegalArgumentException("Given label does not exist.");
+    throw new IllegalArgumentException("Given label does not exist.");
   }
 
   /**
@@ -275,8 +278,8 @@ public class AnimationModelImpl implements AnimationModel {
   //TODO does not have to be implemented until next time for controller
 
   @Override
-  public AnimationModel getShapesAtTick(int CurrentTick) {
-    if (CurrentTick < 0) {
+  public AnimationModel getShapesAtTick(int currentTick) {
+    if (currentTick < 0) {
       throw new IllegalArgumentException("Time value must be positive");
     }
     return null;

@@ -3,19 +3,21 @@ import org.junit.Test;
 
 import java.util.LinkedList;
 
-import cs5004.AnimationModel.AbstractShape;
-import cs5004.AnimationModel.AnimationModelImpl;
-import cs5004.AnimationModel.AvailableShapes;
-import cs5004.AnimationModel.Change;
-import cs5004.AnimationModel.Circle;
-import cs5004.AnimationModel.Recolor;
-import cs5004.AnimationModel.Rect;
+import cs5004.animationmodel.AbstractShape;
+import cs5004.animationmodel.AnimationModelImpl;
+import cs5004.animationmodel.AvailableShapes;
+import cs5004.animationmodel.Change;
+import cs5004.animationmodel.Circle;
+import cs5004.animationmodel.Recolor;
+import cs5004.animationmodel.Rect;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Testing for the Model class.
+ */
 public class ModelTests {
   private AnimationModelImpl model1;
   private AnimationModelImpl model2;
@@ -73,8 +75,10 @@ public class ModelTests {
         6, 6, 6, 6, 6, 6, 6, 6);
     assertEquals("[Rectangle aRect -> center: (2, 2), x-dimension: 2, y-dimension: 2," +
             " Rectangle anotherRect -> center: (3, 3), x-dimension: 3, y-dimension: 3," +
-            " cs5004.AnimationModel.Circle aCircle -> center: (4, 4), x-dimension: 4, y-dimension: 4," +
-            " cs5004.AnimationModel.Circle anotherCircle -> center: (5, 5), x-dimension: 5, y-dimension: 5," +
+            " cs5004.AnimationModel.Circle aCircle -> center: (4, 4), x-dimension: 4, " +
+                    "y-dimension: 4," +
+            " cs5004.AnimationModel.Circle anotherCircle -> center: (5, 5), x-dimension: 5, " +
+                    "y-dimension: 5," +
             " Rectangle Rect3 -> center: (6, 6), x-dimension: 6, y-dimension: 6]",
             model2.getShapes().toString());
   }
@@ -111,14 +115,16 @@ public class ModelTests {
         6, 6, 6, 6, 6, 6, 6, 6);
     model2.removeShape(0);
     assertEquals("[Rectangle Rect2 -> center: (3, 3), x-dimension: 3, y-dimension: 3, " +
-            "cs5004.AnimationModel.Circle Circle1 -> center: (4, 4), x-dimension: 4, y-dimension: 4, cs5004.AnimationModel.Circle Circle2 -> " +
+            "cs5004.AnimationModel.Circle Circle1 -> center: (4, 4), x-dimension: 4, " +
+                    "y-dimension: " + "4, cs5004.AnimationModel.Circle Circle2 -> " +
             "center: (5, 5), x-dimension: 5, y-dimension: 5, Rectangle Circle3 -> " +
             "center: (6, 6), x-dimension: 6, y-dimension: 6]",
             model2.getShapes().toString());
     model2.removeShape(1);
     model2.removeShape(3);
     model2.removeShape(4);
-    assertEquals("[cs5004.AnimationModel.Circle Circle1 -> center: (4, 4), x-dimension: 4, y-dimension: 4]",
+    assertEquals("[cs5004.AnimationModel.Circle Circle1 -> center: (4, 4), x-dimension: " +
+                    "4, y-dimension: 4]",
             model2.getShapes().toString());
     model2.removeShape(2);
     assertEquals("[]", model2.getShapes().toString());
@@ -131,13 +137,14 @@ public class ModelTests {
     assertEquals("[Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3, " +
             "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4, " +
             "Rectangle R2 -> center: (5, 6), x-dimension: 7, y-dimension: 8, " +
-            "cs5004.AnimationModel.Circle C2 -> center: (15, 26), x-dimension: 45, y-dimension: 45]",
-            model1.getShapes().toString());
+            "cs5004.AnimationModel.Circle C2 -> center: (15, 26), x-dimension: " +
+                    "45, y-dimension: 45]", model1.getShapes().toString());
     model1.removeShape(rectangle1);
     model1.removeShape(rectangle2);
-    assertEquals("[cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4, " +
-            "cs5004.AnimationModel.Circle C2 -> center: (15, 26), x-dimension: 45, y-dimension: 45]",
-            model1.getShapes().toString());
+    assertEquals("[cs5004.AnimationModel.Circle C1 -> center: (1, 2), " +
+                    "x-dimension: 3, y-dimension: 4, " +
+            "cs5004.AnimationModel.Circle C2 -> center: (15, 26), x-dimension: " +
+                    "45, y-dimension: 45]", model1.getShapes().toString());
     model1.removeShape(circle1);
     model1.removeShape(circle2);
     assertEquals("[]", model1.getShapes().toString());
@@ -165,7 +172,6 @@ public class ModelTests {
 
   @Test
   public void testAddMove() {
-    //TODO how would we add a shape like this and then get it to move with parallel lists?
     model1.addShape(AvailableShapes.RECTANGLE, "Rect1", 1, 2, 3, 7);
     model1.addShape(AvailableShapes.RECTANGLE, "Rect2", 11, 3, 2, 3);
     model1.addShape(AvailableShapes.OVAL, "Circle1", 41, 44, 1, 4);

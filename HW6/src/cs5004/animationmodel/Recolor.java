@@ -1,5 +1,8 @@
-package cs5004.AnimationModel;
+package cs5004.animationmodel;
 
+/**
+ * Recolor is an change that changes the color of the object it acts on.
+ */
 public class Recolor extends AbstractChange {
   private int startR;
   private int startG;
@@ -10,6 +13,22 @@ public class Recolor extends AbstractChange {
   private int updatedB;
   private int updatedA;
 
+  /**
+   * Constructor for the recolor class.
+   * @param shape the shape it is acting on.
+   * @param shapeID the id of the shape.
+   * @param shapeLabel the string identifier of the shape.
+   * @param startR starting r value.
+   * @param startG staring g value.
+   * @param startB starting b value.
+   * @param startA starting opacity.
+   * @param endR ending r value.
+   * @param endG ending g value.
+   * @param endB ending b value.
+   * @param endA ending opacity.
+   * @param startTime starting time.
+   * @param endTime ending time.
+   */
   public Recolor(AbstractShape shape, int shapeID, String shapeLabel,
                  int startR, int startG, int startB, int startA,
                  int endR, int endG, int endB, int endA,

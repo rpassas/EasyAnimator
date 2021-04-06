@@ -1,19 +1,14 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import cs5004.AnimationModel.AbstractChange;
-import cs5004.AnimationModel.AnimationModelImpl;
-import cs5004.AnimationModel.Change;
-import cs5004.AnimationModel.Circle;
-import cs5004.AnimationModel.Move;
-import cs5004.AnimationModel.Point2D;
-import cs5004.AnimationModel.Recolor;
-import cs5004.AnimationModel.Rect;
-import cs5004.AnimationModel.Resize;
-import cs5004.AnimationModel.Point2D;
+import cs5004.animationmodel.Circle;
+import cs5004.animationmodel.Move;
+import cs5004.animationmodel.Point2D;
+import cs5004.animationmodel.Recolor;
+import cs5004.animationmodel.Rect;
+import cs5004.animationmodel.Resize;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -25,8 +20,6 @@ public class ChangesTest {
   private Point2D point;
   private Point2D pointS;
   private Point2D pointE;
-  private Rect rectangle1;
-  private Circle circle1;
   private Move move1;
   private Recolor recolor1;
   private Resize resize1;
@@ -36,8 +29,8 @@ public class ChangesTest {
     point = new Point2D(1,1);
     pointS = new Point2D(3,4);
     pointE = new Point2D(5,6);
-    rectangle1 = new Rect("R1", 3, 6, 4, 7);
-    circle1 = new Circle("c1", 1, 2, 3);
+    Rect rectangle1 = new Rect("R1", 3, 6, 4, 7);
+    Circle circle1 = new Circle("c1", 1, 2, 3);
     move1 = new Move(rectangle1, 1, "R1",
         3, 4,5,6,7,8);
     recolor1 = new Recolor(circle1, 1, "C1",

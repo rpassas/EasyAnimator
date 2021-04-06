@@ -1,6 +1,9 @@
-package cs5004.AnimationModel;
+package cs5004.animationmodel;
 
-public abstract class AbstractChange implements Change{
+/**
+ * Abstract class for the change movement of the model.
+ */
+public abstract class AbstractChange implements Change {
   private int startTime;
   private int endTime;
   private int shapeID;
@@ -48,7 +51,9 @@ public abstract class AbstractChange implements Change{
   }
 
   @Override
-  public AvailableChanges getType() {return this.type;}
+  public AvailableChanges getType() {
+    return this.type;
+  }
 
   @Override
   public String getShapeLabel() {

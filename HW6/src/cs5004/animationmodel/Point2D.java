@@ -1,7 +1,7 @@
-package cs5004.AnimationModel;
+package cs5004.animationmodel;
 
 /**
- * This class represents a 2D point. This point is denoted in Cartesian
+ * This class represents a 2D point. This point is denoted in Cartesian.
  * coordinates as (x,y).
  */
 
@@ -10,7 +10,7 @@ public class Point2D {
   private int y;
 
   /**
-   * Construct a 2d point with the given coordinates
+   * Construct a 2d point with the given coordinates.
    *
    * @param x the x-coordinate of this point
    * @param y the y-coordinate of this point
@@ -21,7 +21,7 @@ public class Point2D {
   }
 
   /**
-   * Return the x-coordinate of this point
+   * Return the x-coordinate of this point.
    *
    * @return x-coordinate of this point
    */
@@ -30,7 +30,7 @@ public class Point2D {
   }
 
   /**
-   * Return the y-coordinate of this point
+   * Return the y-coordinate of this point.
    *
    * @return y-coordinate of this point
    */

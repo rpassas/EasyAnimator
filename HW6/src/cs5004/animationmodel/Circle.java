@@ -1,13 +1,13 @@
-package cs5004.AnimationModel;
+package cs5004.animationmodel;
 
 /**
  * A class representing an oval.
  */
-public class Circle extends AbstractShape{
+public class Circle extends AbstractShape {
   private AvailableShapes type;
 
   /**
-   * Construct a circle object using the given center and radius
+   * Construct a circle object using the given center and radius.
    * @param x x coordinate of the center of this circle
    * @param y y coordinate of the center of this circle
    * @param radius the radius of this circle
@@ -129,6 +129,10 @@ public class Circle extends AbstractShape{
     return this.type;
   }
 
+  /**
+   * Creates a string representation of the circle class.
+   * @return a string representation of a circle.
+   */
   public String toString() {
     return "cs5004.AnimationModel.Circle " + this.getLabel() + " -> center: ("
         + this.reference.getX() + ", " + this.reference.getY()

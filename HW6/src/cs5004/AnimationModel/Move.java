@@ -7,10 +7,11 @@ public class Move extends AbstractChange {
   public Move(BasicShape shape, int shapeID, String shapeLabel,
               int startX, int startY, int endX, int endY, int startTime, int endTime) {
     Point2D location = new Point2D(shape.getLocation().getX(), shape.getLocation().getY());
+    Point2D location2 = new Point2D(1,1);
     this.startReference = location;
     this.startReference.setX(startX);
     this.startReference.setY(startY);
-    this.reference = location;
+    this.reference = location2;
     this.reference.setX(endX);
     this.reference.setY(endY);
     super.setStartTime(startTime);

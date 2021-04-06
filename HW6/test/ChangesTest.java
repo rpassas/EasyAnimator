@@ -23,6 +23,8 @@ import static org.junit.Assert.fail;
  */
 public class ChangesTest {
   private Point2D point;
+  private Point2D pointS;
+  private Point2D pointE;
   private Rect rectangle1;
   private Circle circle1;
   private Move move1;
@@ -32,6 +34,8 @@ public class ChangesTest {
   @Before
   public void setup() {
     point = new Point2D(1,1);
+    pointS = new Point2D(3,4);
+    pointE = new Point2D(5,6);
     rectangle1 = new Rect("R1", 3, 6, 4, 7);
     circle1 = new Circle("c1", 1, 2, 3);
     move1 = new Move(rectangle1, 1, "R1",
@@ -436,6 +440,83 @@ public class ChangesTest {
       assertEquals("Resize cannot set position values", iae.getMessage());
       assertTrue(iae.getMessage().length() > 0);
     }
+
+  }
+
+  @Test
+  public void testValidMove() {
+
+    assertEquals(pointS.getX(), move1.getStartReference().getX());
+    assertEquals(pointS.getY(), move1.getStartReference().getY());
+    move1.setStartReference(point);
+    assertEquals(point.getX(), move1.getStartReference().getX());
+    assertEquals(point.getY(), move1.getStartReference().getY());
+
+    assertEquals(pointE.getX(), move1.getReference().getX());
+    assertEquals(pointE.getY(), move1.getReference().getY());
+    move1.setReference(point);
+    assertEquals(point.getX(), move1.getReference().getX());
+    assertEquals(point.getY(), move1.getReference().getY());
+
+  }
+
+
+  @Test
+  public void testValidRecolor() {
+
+    // set/get colors
+    assertEquals(3, recolor1.getStartR());
+    recolor1.setStartR(1);
+    assertEquals(1, recolor1.getStartR());
+
+    assertEquals(4, recolor1.getStartG());
+    recolor1.setStartG(2);
+    assertEquals(2, recolor1.getStartG());
+
+    assertEquals(5, recolor1.getStartB());
+    recolor1.setStartB(3);
+    assertEquals(3, recolor1.getStartB());
+
+    assertEquals(6, recolor1.getStartA());
+    recolor1.setStartA(4);
+    assertEquals(4, recolor1.getStartA());
+
+    assertEquals(7, recolor1.getUpdatedR());
+    recolor1.setUpdatedR(5);
+    assertEquals(5, recolor1.getUpdatedR());
+
+    assertEquals(8, recolor1.getUpdatedG());
+    recolor1.setUpdatedG(6);
+    assertEquals(6, recolor1.getUpdatedG());
+
+    assertEquals(9, recolor1.getUpdatedB());
+    recolor1.setUpdatedB(7);
+    assertEquals(7, recolor1.getUpdatedB());
+
+    assertEquals(10, recolor1.getUpdatedA());
+    recolor1.setUpdatedA(8);
+    assertEquals(8, recolor1.getUpdatedA());
+
+  }
+
+  @Test
+  public void testValidResize() {
+
+    assertEquals(4, resize1.getStartHeight());
+    resize1.setStartHeight(2);
+    assertEquals(2, resize1.getStartHeight());
+
+    assertEquals(6, resize1.getUpdatedHeight());
+    resize1.setUpdatedHeight(1);
+    assertEquals(1, resize1.getUpdatedHeight());
+
+    assertEquals(3, resize1.getStartWidth());
+    resize1.setStartWidth(2);
+    assertEquals(2, resize1.getStartWidth());
+
+    assertEquals(5, resize1.getUpdatedWidth());
+    resize1.setUpdatedWidth(2);
+    assertEquals(2, resize1.getUpdatedWidth());
 
   }
 

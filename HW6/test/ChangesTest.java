@@ -26,9 +26,13 @@ public class ChangesTest {
   public void setup() {
     rectangle1 = new Rect("R1", 3, 6, 4, 7);
     circle1 = new Circle("c1", 1, 2, 3);
-    move1 = new Move("c1", 1, 2, 3,);
-    recolor1 = new Circle("c2", 1, 2, 3, 4, 5, 6, 7, 8);
-    resize1 = new Circle("c3", 1, 2, 3, 4);
+    move1 = new Move(rectangle1, 1, "R1",
+        3, 4,5,6,7,8);
+    recolor1 = new Recolor(circle1, 1, "C1",
+        3, 4, 5, 6, 7, 8, 9,10,
+        11, 12);
+    resize1 = new Resize(rectangle1, 1, "R1", 3, 4,5,6,
+        7,8);
   }
 
   @Test
@@ -57,3 +61,4 @@ public class ChangesTest {
   }
 
 }
+

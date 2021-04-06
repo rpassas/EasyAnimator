@@ -42,21 +42,60 @@ public class ChangesTest {
       move1.getStartB();
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalStateException iae) {
-      assertEquals("Move cannot get color values.", iae.getMessage());
+      assertEquals("Move cannot get color values", iae.getMessage());
       assertTrue(iae.getMessage().length() > 0);
     }
 
     // set/get dimensions
-
+    try {
+      move1.getStartHeight();
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalStateException iae) {
+      assertEquals("Move does not have a height value", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
   }
 
   @Test
   public void testRecolorInvalid() {
+// set/get location
+    try {
+      recolor1.getStartReference();
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalStateException iae) {
+      assertEquals("Recolor cannot get position values", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
 
+    // set/get dimensions
+    try {
+      recolor1.getStartHeight();
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalStateException iae) {
+      assertEquals("Recolor does not have a height value", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
   }
 
   @Test
   public void testResizeInvalid() {
+    // set/get colors
+    try {
+      resize1.getStartB();
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalStateException iae) {
+      assertEquals("Resize cannot get color values", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
+
+    // set/get location
+    try {
+      resize1.getStartReference();
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalStateException iae) {
+      assertEquals("Resize cannot get position values", iae.getMessage());
+      assertTrue(iae.getMessage().length() > 0);
+    }
 
   }
 

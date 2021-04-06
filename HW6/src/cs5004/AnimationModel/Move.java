@@ -52,7 +52,7 @@ public class Move extends AbstractChange {
 
   @Override
   public int getStartG() {
-    throw new IllegalStateException("Move cannot set color values");
+    throw new IllegalStateException("Move cannot get color values");
   }
 
   @Override

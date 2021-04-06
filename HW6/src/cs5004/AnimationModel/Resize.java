@@ -52,7 +52,7 @@ public class Resize extends AbstractChange {
 
   @Override
   public int getStartG() {
-    throw new IllegalStateException("Resize cannot set color values");
+    throw new IllegalStateException("Resize cannot get color values");
   }
 
   @Override

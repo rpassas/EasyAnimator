@@ -51,4 +51,4 @@ Questions for TA are below DELETE BEFORE SUBMISSION
   2. How to imlement the getshapesattick method correctly/ does it need to be in the text view
   3. If no speed is imput i'm asumming it goes to 1, might want to confirm it.
   4. How will the program now which view to run?
-  5. 
+  5. Possible mthods for common interface tempo(speed for ticks per second), tween(attr converter), 

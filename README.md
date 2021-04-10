@@ -43,3 +43,8 @@ Move, Recolor, Resize: concrete inheriting classes
 The model also keeps track of changes which each get starting attributes, ending attributes, start time, end time, a type, and a label and ID's for the shape that the change they are associated with (both are there for the sake of flexibility for the controller). While individual concrete classes, like Move, change only a particular type of attribute, Point2D in the case of Move, AbstractChange handles common attributes, like timestamps, ID, label, a type (which gets set in the concrete classes via a "super" call). These changes keep record of what change is supposed to occur, and over what time period, helping the model to generate appropriate copies of existing shapes at the appropriate times.
 
 note: enum classes are not shown in the UML diagrams (types of changes and shapes are enumerated)
+
+Questions for TA are below DELETE BEFORE SUBMISSION
+  1. Best way to implement our builder/abstract view/concreete view. Right now I think appendable submits to the builder, the builder main method parses it to the correct concrete class and the class outputs the view as required.
+  2. How to imlement the getshapesattick method correctly/ does it need to be in the text view
+  3. If no speed is imput i'm asumming it goes to 1, might want to confirm it.

@@ -44,7 +44,11 @@ The model also keeps track of changes which each get starting attributes, ending
 
 note: enum classes are not shown in the UML diagrams (types of changes and shapes are enumerated)
 
+---
+
 Questions for TA are below DELETE BEFORE SUBMISSION
-  1. Best way to implement our builder/abstract view/concreete view. Right now I think appendable submits to the builder, the builder main method parses it to the correct concrete class and the class outputs the view as required.
+  1. Best way to implement our builder/abstract view/concrete view. Right now I think appendable submits to the builder, the builder main method parses it to the correct concrete class and the class outputs the view as required.
   2. How to imlement the getshapesattick method correctly/ does it need to be in the text view
   3. If no speed is imput i'm asumming it goes to 1, might want to confirm it.
+  4. How will the program now which view to run?
+  5. 

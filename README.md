@@ -48,7 +48,8 @@ note: enum classes are not shown in the UML diagrams (types of changes and shape
 
 Questions for TA are below DELETE BEFORE SUBMISSION
   1. Best way to implement our builder/abstract view/concrete view. Right now I think appendable submits to the builder, the builder main method parses it to the correct concrete class and the class outputs the view as required.
-  2. How to imlement the getshapesattick method correctly/ does it need to be in the text view
-  3. If no speed is imput i'm asumming it goes to 1, might want to confirm it.
-  4. How will the program now which view to run?
-  5. Possible mthods for common interface tempo(speed for ticks per second), tween(attr converter), 
+  2. How to implement the getshapesattick method correctly/ does it need to be in the text view
+  3. If no speed is input i'm asuming it goes to 1, might want to confirm it.
+  4. Possible methods for common interface: tempo(determine speed for ticks per second), tween(attr converter) ... does start/run() make sense to have? 
+  5. clarify inputs - do we only need to work with command line inputs like in the spec? What about having users generate .txt files?
+  6. Are elements like the graphics and Jframe classes best used in a composition or just used within the visual view class itself? What should the panels be used for?

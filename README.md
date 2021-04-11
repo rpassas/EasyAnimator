@@ -46,10 +46,5 @@ note: enum classes are not shown in the UML diagrams (types of changes and shape
 
 ---
 
-Questions for TA are below DELETE BEFORE SUBMISSION
-  1. Best way to implement our builder/abstract view/concrete view. Right now I think appendable submits to the builder, the builder main method parses it to the correct concrete class and the class outputs the view as required.
-  2. How to implement the getshapesattick method correctly/ does it need to be in the text view
-  3. If no speed is input i'm asuming it goes to 1, might want to confirm it.
-  4. Possible methods for common interface: tempo(determine speed for ticks per second), tween(attr converter) ... does start/run() make sense to have? 
-  5. clarify inputs - do we only need to work with command line inputs like in the spec? What about having users generate .txt files?
-  6. For the visual view, should the constructor have the JFrame and components created?
+Notes:
+Builder is a class in the model. Graphics are drawn ontop of components. Don't need tween helper necessarily, can just have the formula work within the getShapesAtTick() -> does not update model, just makes copies. Build() creates the model for the view. Controller manages speed of animation. The visual should have a setShapes() to get the shapes at tick. User just gives command lines to provide .txt files, speed, view etc.    

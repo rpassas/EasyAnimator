@@ -11,7 +11,7 @@ public interface IView {
    * Get the view's type (one of 3 types - visual, textual, SVG enum).
    * @return The type of view (enum)
    */
-  ViewType getViewType();
+  ViewType getType();
 
   /**
    * Set the speed of the view given a speed (per tick).

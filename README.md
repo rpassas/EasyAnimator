@@ -46,6 +46,6 @@ note: enum classes are not shown in the UML diagrams (types of changes and shape
 
 ---
 
-## Notes:
+#### Notes:
 
 Builder is a class in the model. Graphics are drawn ontop of components. Don't need tween helper necessarily, can just have the formula work within the getShapesAtTick() -> does not update model, just makes copies. Build() creates the model for the view. Controller manages speed of animation. The visual should have a setShapes() to get the shapes at tick. User just gives command lines to provide .txt files, speed, view etc.    

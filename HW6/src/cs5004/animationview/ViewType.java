@@ -1,0 +1,24 @@
+package cs5004.animationview;
+
+public enum ViewType {
+  TEXT, VISUAL, SVG;
+
+  /**
+   * Given a good string input will provide the corresponding view type.
+   * @param type The type of view.
+   * @return ViewType corresponding to the string.
+   * @throws IllegalArgumentException If the given type is not an existing ViewType
+   */
+  public static ViewType getViewType(String type) {
+    switch (type.toLowerCase()) {
+      case "text":
+        return ViewType.TEXT;
+      case "svg":
+        return ViewType.SVG;
+      case "visual":
+        return ViewType.VISUAL;
+      default:
+        throw new IllegalArgumentException("given view type does not exist");
+    }
+  }
+}

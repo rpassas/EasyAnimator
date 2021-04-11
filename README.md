@@ -52,4 +52,4 @@ Questions for TA are below DELETE BEFORE SUBMISSION
   3. If no speed is input i'm asuming it goes to 1, might want to confirm it.
   4. Possible methods for common interface: tempo(determine speed for ticks per second), tween(attr converter) ... does start/run() make sense to have? 
   5. clarify inputs - do we only need to work with command line inputs like in the spec? What about having users generate .txt files?
-  6. Are elements like the graphics and Jframe classes best used in a composition or just used within the visual view class itself? What should the panels be used for?
+  6. For the visual view, should the constructor have the JFrame and components created?

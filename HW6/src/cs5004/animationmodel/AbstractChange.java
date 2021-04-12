@@ -9,10 +9,21 @@ public abstract class AbstractChange implements Change {
   private int shapeID;
   private String shapeLabel;
   private AvailableChanges type;
+  private AvailableShapes shapeType;
 
   @Override
   public int getStartTime() {
     return startTime;
+  }
+
+  @Override
+  public AvailableShapes getShapeType() {
+    return this.shapeType;
+  }
+
+  @Override
+  public void setShapeType(AvailableShapes shapeType) {
+    this.shapeType = shapeType;
   }
 
   @Override

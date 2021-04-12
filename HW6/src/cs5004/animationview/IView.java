@@ -7,7 +7,7 @@ public interface IView {
   /**
    * Has the animation run (outputs vary depending on view type).
    */
-  void run();
+  void run() throws IOException;
 
   /**
    * Get the view's type (one of 3 types - visual, textual, SVG enum).

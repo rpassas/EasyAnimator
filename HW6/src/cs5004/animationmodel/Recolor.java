@@ -46,6 +46,7 @@ public class Recolor extends AbstractChange {
     super.setShapeID(shapeID);
     super.setShapeLabel(shapeLabel);
     super.setType(AvailableChanges.RECOLOR);
+    super.setShapeType(shape.getType());
   }
 
   @Override

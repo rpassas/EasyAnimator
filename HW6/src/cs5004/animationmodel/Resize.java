@@ -32,6 +32,7 @@ public class Resize extends AbstractChange {
     super.setShapeID(shapeID);
     super.setShapeLabel(shapeLabel);
     super.setType(AvailableChanges.RESIZE);
+    super.setShapeType(shape.getType());
 
   }
 

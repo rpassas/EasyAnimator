@@ -281,32 +281,76 @@ public class AnimationModelImpl implements AnimationModel {
         startW, startH, endW, endH, t1, t2));
   }
 
-  //TODO does not have to be implemented until next time for controller
-
-  private int getShapesAtTickHelper(int CurrentTick, int variable) {
-
-  }
-
   @Override
   public AnimationModel getShapesAtTick(int currentTick) {
     if (currentTick < 0) {
       throw new IllegalArgumentException("Time value must be positive");
     }
     AnimationModel modelCopy = new AnimationModelImpl();
+    // For each change in the list, if the current tick is within the change add it to a list
     for (AbstractChange change : this.listOfChanges) {
       if (currentTick > change.getStartTime() && currentTick < change.getEndTime()) {
-        int tweenOne = ((change.getEndTime() - (currentTick) /
+        // TweenOne is the first half of the tween formula
+        int tweenOne = (change.getEndTime() - (currentTick) /
                 (change.getEndTime() - change.getStartTime()));
+        // TweenTwo is the second half of the tween formula
         int tweenTwo = (((currentTick) - change.getStartTime()) /
                 (change.getEndTime() - change.getStartTime()));
+        // for a MOVE change, if the change isn't in the list, add it, otherwise update the shape
+        // this is done due to change commands being on the same time interval
         if(change.getType().equals(AvailableChanges.MOVE)) {
-          // How would we handle 2 changes happening simultaneously
-          // Could add
-          modelCopy.addShape(change.getShapeType, change.getShapeLabel(),
-                  change.getStartReference().getX() * tweenOne + change.getReference().getX() * tweenTwo,
-                  change.getStartReference().getY() * tweenOne + change.getReference().getY() * tweenTwo,
-                  change.getStartWidth(), change.getStartHeight(), change.getStartR(),
-                  change.getStartG(), change.getStartB(), 100);
+          // Checks each shape in the list for the current shape
+          for (AbstractShape shape : modelCopy.getShapes()) {
+            if (shape.getLabel().equals(change.getShapeLabel())) {
+              //Shape is in the model, updating the XY at currentTick to account for a second change
+              shape.getLocation().setX(change.getStartReference().getX() * tweenOne
+                      + change.getReference().getX() * tweenTwo);
+              shape.getLocation().setY(change.getStartReference().getY() * tweenOne
+                      + change.getReference().getY() * tweenTwo);
+            } else {
+              //Shape is not in the model, adds shape to the model
+              // TODO for some reason this add shape isn't using the right constructor
+              modelCopy.addShape(change.getShapeType(), change.getShapeLabel(),
+                      change.getStartReference().getX() * tweenOne + change.getReference().getX() * tweenTwo,
+                      change.getStartReference().getY() * tweenOne + change.getReference().getY() * tweenTwo,
+                      change.getStartWidth(), change.getStartHeight(), change.getStartR(),
+                      change.getStartG(), change.getStartB(), 100);
+            }
+          }
+        } else if (change.getType().equals(AvailableChanges.RECOLOR)) {
+          // Checks each shape in the list for the current change shape
+          for (AbstractShape shape : modelCopy.getShapes()) {
+            // Shape is in the model at this point, updating the RGB values
+            if (shape.getLabel().equals(change.getShapeLabel())) {
+              shape.setR(change.getStartR() * tweenOne + change.getUpdatedR() * tweenTwo);
+              shape.setG(change.getStartG() * tweenOne + change.getUpdatedG() * tweenTwo);
+              shape.setB(change.getStartB() * tweenOne + change.getUpdatedB() * tweenTwo);
+            } else {
+              // Shape was not in the model, adding the shape with updated RGB values
+              modelCopy.addShape(change.getShapeType, change.getShapeLabel(),
+                      change.getStartReference().getX(), change.getStartReference().getY(),
+                      change.getStartWidth(), change.getStartHeight(),
+                      change.getStartR() * tweenOne + change.getUpdatedR() * tweenTwo,
+                      change.getStartG() * tweenOne + change.getUpdatedG() * tweenTwo,
+                      change.getStartB() * tweenOne + change.getUpdatedB() * tweenTwo, 100);
+            }
+          }
+        } else if (change.getType().equals(AvailableChanges.RESIZE)) {
+          // Checks each shape in the list for the current change shape
+          for (AbstractShape shape : modelCopy.getShapes()) {
+            // Shape is in the model at this point, updating the width/height values
+            if (shape.getLabel().equals(change.getShapeLabel())) {
+              shape.setWidth(change.getStartWidth() * tweenOne + change.getUpdatedWidth() * tweenTwo);
+              shape.setHeight(change.getStartHeight() * tweenOne + change.getUpdatedHeight() * tweenTwo);
+            } else {
+              // Shape was not in the model, adding the shape with updated width/height
+              modelCopy.addShape(change.getShapeType, change.getShapeLabel(),
+                      change.getStartReference().getX(), change.getStartReference().getY(),
+                      change.getStartWidth() * tweenOne + change.getUpdatedWidth() * tweenTwo,
+                      change.getStartHeight() * tweenOne + change.getUpdatedHeight() * tweenTwo,
+                      change.getStartR(), change.getStartG(), change.getStartB(), 100);
+            }
+          }
         }
       }
     }

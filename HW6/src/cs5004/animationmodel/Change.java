@@ -18,6 +18,18 @@ public interface Change {
   void setStartHeight(int startHeight);
 
   /**
+   * Method to get the shape type value of the current shape.
+   * @return the shape type value of the current shape.
+   */
+  AvailableShapes getShapeType();
+
+  /**
+   * Sets the shapetype of the super class
+   * @param shapeType the type of shape
+   */
+  void setShapeType(AvailableShapes shapeType);
+
+  /**
    * Method to get the startWidth value of the current shape.
    * @return the startWidth value of the current shape.
    */

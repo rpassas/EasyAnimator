@@ -34,6 +34,7 @@ public class Move extends AbstractChange {
     super.setShapeID(shapeID);
     super.setShapeLabel(shapeLabel);
     super.setType(AvailableChanges.MOVE);
+    super.setShapeType(shape.getType());
   }
 
   @Override

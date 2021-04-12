@@ -1,10 +1,10 @@
 package cs5004.animationmodel;
 
-public class Canvass {
+public class Canvas {
   int width;
   int height;
 
-  public Canvass() {
+  public Canvas() {
     this.width = 0;
     this.height = 0;
   }

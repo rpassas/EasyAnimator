@@ -9,7 +9,7 @@ public class AnimationModelImpl implements AnimationModel {
   private final LinkedList<AbstractShape> listOfShapes;
   private final LinkedList<AbstractChange> listOfChanges;
   private final LinkedList<Integer> listOfKeys;
-  private Canvass canvass;
+  private Canvas canvas;
   int shapeKey;
 
   /**
@@ -19,7 +19,7 @@ public class AnimationModelImpl implements AnimationModel {
     this.listOfShapes = new LinkedList<>();
     this.listOfKeys = new LinkedList<>();
     this.listOfChanges = new LinkedList<>();
-    this.canvass = new Canvass();
+    this.canvas = new Canvas();
   }
 
   @Override
@@ -32,8 +32,8 @@ public class AnimationModelImpl implements AnimationModel {
     return this.listOfChanges;
   }
 
-  public Canvass getCanvass() {
-    return this.canvass;
+  public Canvas getCanvas() {
+    return this.canvas;
   }
 
   @Override

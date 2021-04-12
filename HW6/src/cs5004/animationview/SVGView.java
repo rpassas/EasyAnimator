@@ -30,10 +30,10 @@ public class SVGView implements IView {
 
   }
 
-  public void createCanvass() {
+  public void createCanvas() {
     System.out.printf("<svg width=\"%d\" height=\"%d\" version=\"1.1\" \n" +
             "xmls=\"http://www.w3.org/2000/svg\">", //Not sure if this line is right
-            model.getCanvass().getWidth(), model.getCanvass().getHeight());
+            model.getCanvas().getWidth(), model.getCanvas().getHeight());
   }
 
   public void createShapes(LinkedList<AbstractShape> listOfShapes, int speed) throws IOException {
@@ -77,7 +77,7 @@ public class SVGView implements IView {
 
   @Override
   public void run() {
-    createCanvass();
+    createCanvas();
     createShapes(model.getShapes(), speed);
   }
 

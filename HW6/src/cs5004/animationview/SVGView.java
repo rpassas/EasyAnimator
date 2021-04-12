@@ -13,15 +13,15 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 public class SVGView implements IView {
-  AnimationModelImpl model = new AnimationModelImpl();
+  AnimationModelImpl model;
   AnimationBuilder input;
   String filename;
   int speed;
   File file;
   FileWriter writer;
 
-  public SVGView(AnimationBuilder input, String filename, int speed) throws IOException {
-    this.input = input;
+  public SVGView(AnimationModelImpl model, String filename, int speed) throws IOException {
+    this.model = new AnimationModelImpl();
     this.filename = filename;
     this.speed = speed;
     this.file = new File(this.filename);;

@@ -1,5 +1,7 @@
 package cs5004.animationview;
 
+import java.io.IOException;
+
 public interface IView {
 
   /**

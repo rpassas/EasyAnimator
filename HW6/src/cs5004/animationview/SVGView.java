@@ -19,7 +19,7 @@ public class SVGView implements IView {
     this.output = output;
   }
 
-  public void createCanvass(int width, int height) {
+  public void createCanvass() {
     System.out.printf("<svg width=\"%d\" height=\"%d\" version=\"1.1\" \n" +
             "xmls=\"http://www.w3.org/2000/svg\">", //Not sure if this line is right
             model.getCanvass().getWidth(), model.getCanvass().getHeight());
@@ -40,30 +40,36 @@ public class SVGView implements IView {
               System.out.printf("  <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" attributeName\"cy\" from=\"%d\" to=\"%d\" fill=\"freeze\" />\n",
                       change.getStartTime() * 1000, (change.getEndTime() - change.getStartTime()) * 1000, change.getStartReference().getY(), change.getReference().getY());
             } else if (change.getType().equals(AvailableChanges.RESIZE)) {
-
+              System.out.printf("  <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" attributeName\"rx\" from=\"%d\" to=\"%d\" fill=\"freeze\" />\n",
+                      change.getStartTime() * 1000, (change.getEndTime() - change.getStartTime()) * 1000, change.getStartWidth(), change.getUpdatedWidth());
+              System.out.printf("  <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" attributeName\"ry\" from=\"%d\" to=\"%d\" fill=\"freeze\" />\n",
+                      change.getStartTime() * 1000, (change.getEndTime() - change.getStartTime()) * 1000, change.getStartHeight(), change.getUpdatedHeight());
+            } else if (change.getType().equals(AvailableChanges.RECOLOR)) {
+              System.out.printf("  <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" attributeName\"rx\" from=\"%d\" to=\"%d\" fill=\"freeze\" />\n",
+                      change.getStartTime() * 1000, (change.getEndTime() - change.getStartTime()) * 1000, change.getStartWidth(), change.getUpdatedWidth());
             }
           }
         }
       }
       if (shape.getType().equals(AvailableShapes.RECTANGLE)) {
-        if (shape.getType().equals(AvailableShapes.OVAL)) {
-          System.out.printf("<rect  id=\"%s\" cx=\"%d\" cy=\"%d\" rx=\"%d\" " +
-                          "ry=\"%d fill=\"rgb(%d, %d, %d)\" visibility=\"visible\" >",
-                  shape.getLabel(), shape.getLocation().getX(), shape.getLocation().getY(),
-                  shape.getWidth(), shape.getHeight(), shape.getR(), shape.getG(), shape.getB());
+        System.out.printf("<rect id=\"%s\" cx=\"%d\" cy=\"%d\" rx=\"%d\" " +
+                        "ry=\"%d fill=\"rgb(%d, %d, %d)\" visibility=\"visible\" >",
+                shape.getLabel(), shape.getLocation().getX(), shape.getLocation().getY(),
+                shape.getWidth(), shape.getHeight(), shape.getR(), shape.getG(), shape.getB());
         }
       }
     }
-  }
+
 
   @Override
   public void run() {
-
+    createCanvass();
+    createShapes(model.getShapes());
   }
 
   @Override
   public ViewType getType() {
-    return null;
+    return ViewType.SVG;
   }
 
   @Override

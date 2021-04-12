@@ -283,12 +283,35 @@ public class AnimationModelImpl implements AnimationModel {
 
   //TODO does not have to be implemented until next time for controller
 
+  private int getShapesAtTickHelper(int CurrentTick, int variable) {
+
+  }
+
   @Override
   public AnimationModel getShapesAtTick(int currentTick) {
     if (currentTick < 0) {
       throw new IllegalArgumentException("Time value must be positive");
     }
-    return null;
+    AnimationModel modelCopy = new AnimationModelImpl();
+    for (AbstractChange change : this.listOfChanges) {
+      if (currentTick > change.getStartTime() && currentTick < change.getEndTime()) {
+        int tweenOne = ((change.getEndTime() - (currentTick) /
+                (change.getEndTime() - change.getStartTime()));
+        int tweenTwo = (((currentTick) - change.getStartTime()) /
+                (change.getEndTime() - change.getStartTime()));
+        if(change.getType().equals(AvailableChanges.MOVE)) {
+          // How would we handle 2 changes happening simultaneously
+          // Could add
+          modelCopy.addShape(change.getShapeType, change.getShapeLabel(),
+                  change.getStartReference().getX() * tweenOne + change.getReference().getX() * tweenTwo,
+                  change.getStartReference().getY() * tweenOne + change.getReference().getY() * tweenTwo,
+                  change.getStartWidth(), change.getStartHeight(), change.getStartR(),
+                  change.getStartG(), change.getStartB(), 100);
+        }
+      }
+    }
+
+    return modelCopy;
   }
 
   @Override

@@ -303,11 +303,11 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public AnimationModel getShapesAtTick(int currentTick) {
+  public AnimationModelImpl getShapesAtTick(int currentTick) {
     if (currentTick < 0) {
       throw new IllegalArgumentException("Time value must be positive");
     }
-    AnimationModel modelCopy = new AnimationModelImpl();
+    AnimationModelImpl modelCopy = new AnimationModelImpl();
     // For each change in the list, if the current tick is within the change add it to a list
     for (AbstractChange change : this.listOfChanges) {
       if (currentTick > change.getStartTime() && currentTick < change.getEndTime()) {

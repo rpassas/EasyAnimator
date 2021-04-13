@@ -18,8 +18,8 @@ public class VisualView extends JFrame implements IView{
     this.model = model;
     this.speed = speed;
     this.setTitle("EZ Animator");
-    this.setSize(model.getCanvas().getX() + model.getCanvas().getWidth(),
-        model.getCanvas().getY() + model.getCanvas().getHeight());
+    this.setPreferredSize(new Dimension(model.getCanvas().getWidth(),
+        model.getCanvas().getHeight()));
     Point2D point = new Point2D(model.getCanvas().getX(), model.getCanvas().getY());
     this.mainPanel = new CanvasPanel(point,
         new Dimension(model.getCanvas().getWidth(), model.getCanvas().getHeight()));
@@ -37,7 +37,7 @@ public class VisualView extends JFrame implements IView{
 
   @Override
   public void setUpdateShapes(int currentTick) {
-    this.mainPanel.setAnimatedShapes(model);
+    this.mainPanel.setAnimatedShapes(model.getShapesAtTick(currentTick));
   }
 
   @Override

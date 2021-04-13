@@ -61,7 +61,5 @@ public class EasyAnimator {
       e.printStackTrace();
     }
 
-
-
   }
 }

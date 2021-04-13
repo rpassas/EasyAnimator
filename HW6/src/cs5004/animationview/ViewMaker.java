@@ -3,6 +3,7 @@ package cs5004.animationview;
 import java.io.IOException;
 
 import cs5004.animationmodel.AnimationModel;
+import cs5004.animationmodel.AnimationModelImpl;
 
 /**
  * The main animation class will have to create a view given a user input. The parsed input will
@@ -19,7 +20,7 @@ public class ViewMaker {
    * @return A view (depends on which type given)
    * @throws IllegalArgumentException If the given model is null or if the speed is < 0
    */
-  static IView makeView(ViewType type, AnimationModel model, String output, int speed)
+  static IView makeView(ViewType type, AnimationModelImpl model, String output, int speed)
           throws IllegalArgumentException, IOException {
     if (model == null) {
       throw new IllegalArgumentException("The provided model is null");

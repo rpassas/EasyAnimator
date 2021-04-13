@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import cs5004.animationmodel.AnimationModelImpl;
 import cs5004.animationmodel.Point2D;
 import cs5004.animationmodel.AvailableShapes;
-import cs5004.animationmodel.Point2D;
 
 
 public class VisualView extends JFrame implements IView{

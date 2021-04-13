@@ -12,14 +12,23 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 
+/**
+ * Model that outputs a SVG file.
+ */
 public class SVGView implements IView {
   AnimationModelImpl model;
-  AnimationBuilder input;
   String filename;
   int speed;
   File file;
   FileWriter writer;
 
+  /**
+   * Constructor for the SVG model.
+   * @param model the animationModelImpl that contains the data.
+   * @param filename the name of the file to export to.
+   * @param speed the speed of the file playback.
+   * @throws IOException if there is an error with the IO.
+   */
   public SVGView(AnimationModelImpl model, String filename, int speed) throws IOException {
     this.model = new AnimationModelImpl();
     this.filename = filename;
@@ -32,11 +41,21 @@ public class SVGView implements IView {
 
   // TODO add in IO exception/trycatch handling like in the last lab
 
+  /**
+   * Creates a canvass with the specified dimensions for the SVG.
+   * @throws IOException if there is an error with the IO.
+   */
   public void createCanvas() throws IOException {
     writer.write("<svg width=\"" + model.getCanvas().getWidth() + "\" height=\"" + model.getCanvas().getHeight() + "\" version=\"1.1\" \n" +
             "xmls=\"http://www.w3.org/2000/svg\">"); //Not sure if this line is right
   }
 
+  /**
+   * Adds all the shapes to the SVG output file.
+   * @param listOfShapes the list of shapes to be added.
+   * @param speed the speed at which it plays.
+   * @throws IOException if there is an error with the IO.
+   */
   public void createShapes(LinkedList<AbstractShape> listOfShapes, int speed) throws IOException {
     for(AbstractShape shape : model.getShapes()) {
       if (shape.getType().equals(AvailableShapes.OVAL)) {
@@ -90,19 +109,32 @@ public class SVGView implements IView {
   }
 
 
+  /**
+   * Runs the SVG file.
+   * @throws IOException if there is an error with the IO.
+   */
   @Override
   public void run() throws IOException {
     createCanvas();
     createShapes(model.getShapes(), speed);
   }
 
+  /**
+   * Returns the type of view.
+   * @return the type of view.
+   */
   @Override
   public ViewType getType() {
     return ViewType.SVG;
   }
 
+  /**
+   * Sets the speed of the view.
+   * @param speed updated speed of the view.
+   * @throws UnsupportedOperationException if its not supported.
+   */
   @Override
   public void setSpeed(int speed) throws UnsupportedOperationException {
-
+    this.speed = speed;
   }
 }

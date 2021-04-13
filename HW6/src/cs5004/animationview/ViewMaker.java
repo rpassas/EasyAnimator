@@ -1,5 +1,7 @@
 package cs5004.animationview;
 
+import java.io.IOException;
+
 import cs5004.animationmodel.AnimationModel;
 
 /**
@@ -18,7 +20,7 @@ public class ViewMaker {
    * @throws IllegalArgumentException If the given model is null or if the speed is < 0
    */
   static IView makeView(ViewType type, AnimationModel model, String output, int speed)
-      throws IllegalArgumentException {
+          throws IllegalArgumentException, IOException {
     if (model == null) {
       throw new IllegalArgumentException("The provided model is null");
     } else if (speed < 1) {

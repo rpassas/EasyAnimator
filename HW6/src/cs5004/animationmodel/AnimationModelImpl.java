@@ -27,6 +27,15 @@ public class AnimationModelImpl implements AnimationModel {
     return this.listOfShapes;
   }
 
+  public AbstractShape getShape(String name) {
+    for (AbstractShape shape : this.listOfShapes) {
+      if (shape.getLabel().equals(name)) {
+        return shape;
+      }
+    }
+    throw new IllegalArgumentException("no shape was found");
+  }
+
   @Override
   public LinkedList<AbstractChange> getChanges() {
     return this.listOfChanges;

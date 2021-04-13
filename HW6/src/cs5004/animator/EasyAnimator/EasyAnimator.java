@@ -1,22 +1,20 @@
 package cs5004.animator.EasyAnimator;
 
 import cs5004.animator.model.AnimationModelImpl;
+import cs5004.animator.util.AnimationReader;
+import cs5004.animator.view.ViewMaker;
 import cs5004.animator.view.ViewType;
+import cs5004.animator.view.IView;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class EasyAnimator {
 
   public static void main(String[] args) {
-    // parse input
-    // if nothing is null/invalid
-    // make the model
-    // make the controller
-    //IView view = ViewMaker.makeView(type, model, outputPath, speed);
-    // mush them together and run
-
-    // place holder view parameters
-    String FileIn = "";
+    // placeholder view parameters
+    String fileNameIn = "";
     ViewType viewType = null;
-    String FileOut = "";
+    String fileNameOut = "";
     int speed = 1;
 
     // parse commandline
@@ -25,7 +23,7 @@ public class EasyAnimator {
         switch (args[i]) {
           case "-in":
             i++;
-            FileIn = args[i];
+            fileNameIn = args[i];
             break;
           case "-view":
             i++;
@@ -33,7 +31,7 @@ public class EasyAnimator {
             break;
           case "-out":
             i++;
-            FileOut = args[i];
+            fileNameOut = args[i];
             break;
           case "-speed":
             i++;
@@ -45,20 +43,25 @@ public class EasyAnimator {
       }
     }
 
-
-    if (FileIn.equals("") || FileOut.equals("")) {
+    if (fileNameIn.equals("") || fileNameOut.equals("")) {
       throw new IllegalArgumentException("Both file names must be provided");
     } else if (viewType == null) {
       throw new IllegalArgumentException("A type of view must be provided");
     } else if (speed <= 0) {
       throw new IllegalArgumentException("Provided speed must be positive");
     }
+    try {
+      FileReader fileIn = new FileReader(fileNameIn);
+      AnimationModelImpl model = AnimationReader.parseFile(fileIn,
+          new AnimationModelImpl.Builder());
+      IView view = ViewMaker.makeView(viewType, model, fileNameOut, speed);
+      view.run();
+      //TODO controller
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
 
-    AnimationModelImpl empty = new AnimationModelImpl();
-    AnimationModelImpl builder = build();
-    AnimationModelImpl model = parseFile(FileIn, builder);
 
   }
-
 }

@@ -34,7 +34,7 @@ public class ViewMaker {
     } else if (type.equals(ViewType.SVG)) {
       return new SVGView(model, output, speed);
     } else if (type.equals(ViewType.VISUAL)) {
-      return new VisualView(model);
+      return new VisualView(model, speed);
     } else {
       throw new IllegalArgumentException("Type must be an IView (text, svg, visual)");
     }

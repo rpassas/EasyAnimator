@@ -5,12 +5,11 @@ import java.awt.Dimension;
 
 import cs5004.animationmodel.AnimationModelImpl;
 import cs5004.animationmodel.Point2D;
-import cs5004.animationmodel.AvailableShapes;
 
 
 public class VisualView extends JFrame implements IView{
   private AnimationModelImpl model;
-  private MainPanel mainPanel;
+  private CanvasPanel mainPanel;
   private int speed;
 
   //TODO speed must be > 0
@@ -22,7 +21,7 @@ public class VisualView extends JFrame implements IView{
     this.setSize(model.getCanvas().getX() + model.getCanvas().getWidth(),
         model.getCanvas().getY() + model.getCanvas().getHeight());
     Point2D point = new Point2D(model.getCanvas().getX(), model.getCanvas().getY());
-    this.mainPanel = new MainPanel(point,
+    this.mainPanel = new CanvasPanel(point,
         new Dimension(model.getCanvas().getWidth(), model.getCanvas().getHeight()));
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
@@ -36,6 +35,12 @@ public class VisualView extends JFrame implements IView{
     this.setVisible(true);
   }
 
+  @Override
+  public void setUpdateShapes(int currentTick) {
+    this.mainPanel.setAnimatedShapes(model);
+  }
+
+  @Override
   public ViewType getViewType() {
     return ViewType.VISUAL;
   }

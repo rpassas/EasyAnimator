@@ -10,10 +10,17 @@ public interface IView {
   void run() throws IOException;
 
   /**
+   * Has (visual) view update its shapes for its canvas panel for the given tick.
+   * @param currentTick  The current tick at which to re paint the shapes.
+   * @throws UnsupportedOperationException If the view is an SVG/Text view.
+   */
+  void setUpdateShapes(int currentTick);
+
+  /**
    * Get the view's type (one of 3 types - visual, textual, SVG enum).
    * @return The type of view (enum)
    */
-  ViewType getType();
+  ViewType getViewType();
 
   /**
    * Set the speed of the view given a speed (per tick).

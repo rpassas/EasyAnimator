@@ -39,7 +39,12 @@ public class TextView implements IView{
   }
 
   @Override
-  public ViewType getType() {
+  public void setUpdateShapes(int currentTick) {
+    // no tics
+  }
+
+  @Override
+  public ViewType getViewType() {
     return ViewType.TEXT;
   }
 

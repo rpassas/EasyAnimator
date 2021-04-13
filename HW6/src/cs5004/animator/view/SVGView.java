@@ -146,12 +146,17 @@ public class SVGView implements IView {
     }
   }
 
+  @Override
+  public void setUpdateShapes(int currentTick) {
+    // No tics
+  }
+
   /**
    * Returns the type of view.
    * @return the type of view.
    */
   @Override
-  public ViewType getType() {
+  public ViewType getViewType() {
     return ViewType.SVG;
   }
 

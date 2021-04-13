@@ -1,5 +1,5 @@
 # EasyAnimator
-## This is a simple animator software made for CS5008
+### This is a simple animator software made for CS5004
 
 
 
@@ -46,13 +46,11 @@ note: enum classes are not shown in the UML diagrams (types of changes and shape
 
 ---
 
+### View 
+
+
 #### Notes:
 
 Builder is a class in the model. Graphics are drawn ontop of components. Don't need tween helper necessarily, can just have the formula work within the getShapesAtTick() -> does not update model, just makes copies. Build() creates the model for the view. Controller manages speed of animation. The visual should have a setShapes() to get the shapes at tick. User just gives command lines to provide .txt files, speed, view etc.
 
-### TODO:
 
-- EasyAnimator class to hold main (sets params for/parses command line input to direct built model to a particular view)
-- interface for 3 views
-- 3 views (visual, SVG, textual) that take a model via builder and provide the right output
-- model needs to use reader/builder (needs builder class to build model for view)

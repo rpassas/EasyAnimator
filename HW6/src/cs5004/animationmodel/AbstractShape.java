@@ -55,6 +55,9 @@ public abstract class AbstractShape implements BasicShape {
   }
 
   @Override
+  public void setLocation(Point2D point) { this.reference = point; }
+
+  @Override
   public void setHeight(int height) {
     this.height = height;
   }
@@ -105,7 +108,7 @@ public abstract class AbstractShape implements BasicShape {
   }
 
   @Override
-  public BasicShape cloneShape() {
+  public AbstractShape cloneShape() {
     return null;
   }
 }

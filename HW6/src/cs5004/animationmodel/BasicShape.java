@@ -55,6 +55,12 @@ public interface BasicShape {
   AvailableShapes getType();
 
   /**
+   * Sets the coordinates for the shape.
+   * @param point that sets the new coordinates for a shape.
+   */
+  void setLocation(Point2D point);
+
+  /**
    * Method to set the height of the current shape.
    * @param height the height that it will be set to.
    */
@@ -124,6 +130,6 @@ public interface BasicShape {
    * Method to clone the shape.
    * @return a deep copy of the shape.
    */
-  BasicShape cloneShape();
+  AbstractShape cloneShape();
 }
 

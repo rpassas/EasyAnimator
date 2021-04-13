@@ -22,6 +22,22 @@ public interface AnimationModel {
   LinkedList<AbstractChange> getChanges();
 
   /**
+   * Gets the canvas for the animation.
+   * @return the animations canvas object
+   */
+  Canvas getCanvas();
+
+  /**
+   * Sets the canvas for the animation.
+   * @param x the x coordinate for the animation's canvas
+   * @param y y coordinate for the animation's canvas
+   * @param width the width for the animation's canvas
+   * @param height the height for the animation's canvas
+   */
+  void setCanvas(int x, int y, int width, int height);
+
+
+  /**
    * Adds a shape to to the model.
    * @param shape the shape to be added to the model (list of shapes).
    * @throws IllegalArgumentException if the given shape does not have proper type.

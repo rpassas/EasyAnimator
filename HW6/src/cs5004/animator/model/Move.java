@@ -1,4 +1,4 @@
-package cs5004.animationmodel;
+package cs5004.animator.model;
 
 /**
  * Move is a type of abstract change that moves a shape.

@@ -1,9 +1,9 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import cs5004.animationmodel.AbstractShape;
-import cs5004.animationmodel.AvailableShapes;
-import cs5004.animationmodel.Circle;
+import cs5004.animator.model.AbstractShape;
+import cs5004.animator.model.AvailableShapes;
+import cs5004.animator.model.Circle;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

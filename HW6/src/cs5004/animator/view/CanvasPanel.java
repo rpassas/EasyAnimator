@@ -1,4 +1,4 @@
-package cs5004.animationview;
+package cs5004.animator.view;
 
 import javax.swing.*;
 import java.awt.Color;
@@ -11,10 +11,10 @@ import java.awt.Shape;
 import java.util.LinkedList;
 
 
-import cs5004.animationmodel.AnimationModelImpl;
-import cs5004.animationmodel.AbstractShape;
-import cs5004.animationmodel.AvailableShapes;
-import cs5004.animationmodel.Point2D;
+import cs5004.animator.model.AnimationModelImpl;
+import cs5004.animator.model.AbstractShape;
+import cs5004.animator.model.AvailableShapes;
+import cs5004.animator.model.Point2D;
 
 /**
  * This is the main panel in the frame that will have shapes from the model,

@@ -3,13 +3,13 @@ import org.junit.Test;
 
 import java.util.LinkedList;
 
-import cs5004.animationmodel.AbstractShape;
-import cs5004.animationmodel.AnimationModelImpl;
-import cs5004.animationmodel.AvailableShapes;
-import cs5004.animationmodel.Change;
-import cs5004.animationmodel.Circle;
-import cs5004.animationmodel.Recolor;
-import cs5004.animationmodel.Rect;
+import cs5004.animator.model.AbstractShape;
+import cs5004.animator.model.AnimationModelImpl;
+import cs5004.animator.model.AvailableShapes;
+import cs5004.animator.model.Change;
+import cs5004.animator.model.Circle;
+import cs5004.animator.model.Recolor;
+import cs5004.animator.model.Rect;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

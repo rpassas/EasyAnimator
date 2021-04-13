@@ -1,4 +1,4 @@
-package cs5004.animationmodel;
+package cs5004.animator.model;
 
 /**
  * This interface contains all operations that all types of shapes

@@ -1,4 +1,4 @@
-package cs5004.animationview;
+package cs5004.animator.view;
 
 import java.io.IOException;
 

@@ -1,10 +1,10 @@
-package cs5004.animationview;
+package cs5004.animator.view;
 
 import javax.swing.JFrame;
 import java.awt.Dimension;
 
-import cs5004.animationmodel.AnimationModelImpl;
-import cs5004.animationmodel.Point2D;
+import cs5004.animator.model.AnimationModelImpl;
+import cs5004.animator.model.Point2D;
 
 
 public class VisualView extends JFrame implements IView{

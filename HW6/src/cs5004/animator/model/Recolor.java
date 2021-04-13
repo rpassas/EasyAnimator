@@ -1,4 +1,4 @@
-package cs5004.animationmodel;
+package cs5004.animator.model;
 
 /**
  * Recolor is an change that changes the color of the object it acts on.

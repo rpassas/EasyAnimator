@@ -1,11 +1,10 @@
-package cs5004.animationview;
+package cs5004.animator.view;
 
-import cs5004.animationmodel.AbstractChange;
-import cs5004.animationmodel.AbstractShape;
-import cs5004.animationmodel.AnimationModelImpl;
-import cs5004.animationmodel.AvailableChanges;
-import cs5004.animationmodel.AvailableShapes;
-import cs5004.animator.view.AnimationBuilder;
+import cs5004.animator.model.AbstractChange;
+import cs5004.animator.model.AbstractShape;
+import cs5004.animator.model.AnimationModelImpl;
+import cs5004.animator.model.AvailableChanges;
+import cs5004.animator.model.AvailableShapes;
 
 import java.io.File;
 import java.io.FileWriter;

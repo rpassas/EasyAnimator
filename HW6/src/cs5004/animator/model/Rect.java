@@ -1,4 +1,4 @@
-package cs5004.animationmodel;
+package cs5004.animator.model;
 
 /**
  * This class represents a rectangle.  It defines all the operations mandated by

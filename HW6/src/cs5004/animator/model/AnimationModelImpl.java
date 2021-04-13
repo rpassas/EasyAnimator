@@ -1,8 +1,8 @@
-package cs5004.animationmodel;
+package cs5004.animator.model;
 
 import java.util.LinkedList;
 
-import cs5004.animator.view.AnimationBuilder;
+import cs5004.animator.util.AnimationBuilder;
 
 /**
  * Implementation of the IShape interface.
@@ -402,10 +402,11 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   public static final class Builder implements AnimationBuilder<AnimationModelImpl> {
-    AnimationModelImpl model = new AnimationModelImpl();
+    AnimationModelImpl model;
 
     @Override
     public AnimationModelImpl build() {
+      this.model = new AnimationModelImpl();
       return model;
     }
 

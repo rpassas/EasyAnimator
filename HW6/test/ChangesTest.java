@@ -1,12 +1,12 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import cs5004.animationmodel.Circle;
-import cs5004.animationmodel.Move;
-import cs5004.animationmodel.Point2D;
-import cs5004.animationmodel.Recolor;
-import cs5004.animationmodel.Rect;
-import cs5004.animationmodel.Resize;
+import cs5004.animator.model.Circle;
+import cs5004.animator.model.Move;
+import cs5004.animator.model.Point2D;
+import cs5004.animator.model.Recolor;
+import cs5004.animator.model.Rect;
+import cs5004.animator.model.Resize;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

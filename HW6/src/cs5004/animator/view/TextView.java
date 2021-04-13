@@ -1,12 +1,10 @@
-package cs5004.animationview;
+package cs5004.animator.view;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import cs5004.animationmodel.AnimationModelImpl;
-import cs5004.animator.view.AnimationBuilder;
-import cs5004.animator.view.AnimationReader;
+import cs5004.animator.model.AnimationModelImpl;
 
 public class TextView implements IView{
   AnimationModelImpl model;

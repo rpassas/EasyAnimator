@@ -21,6 +21,8 @@ public interface AnimationModel {
    */
   LinkedList<AbstractChange> getChanges();
 
+
+
   /**
    * Gets the canvas for the animation.
    * @return the animations canvas object
@@ -35,6 +37,14 @@ public interface AnimationModel {
    * @param height the height for the animation's canvas
    */
   void setCanvas(int x, int y, int width, int height);
+
+  /**
+   * Gets the shape corresponding its given name.
+   * @param name String IDing the shape.
+   * @return the appropriate shape.
+   * @throws IllegalArgumentException if shape does not exist with that name.
+   */
+  AbstractShape getShape(String name);
 
 
   /**

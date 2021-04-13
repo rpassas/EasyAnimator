@@ -27,6 +27,7 @@ public class AnimationModelImpl implements AnimationModel {
     return this.listOfShapes;
   }
 
+  @Override
   public AbstractShape getShape(String name) {
     for (AbstractShape shape : this.listOfShapes) {
       if (shape.getLabel().equals(name)) {

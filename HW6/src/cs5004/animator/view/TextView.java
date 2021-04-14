@@ -37,8 +37,8 @@ public class TextView implements IView{
   }
 
   @Override
-  public void setUpdateShapes(int currentTick) {
-    // no tics
+  public void setUpdateShapes(int currentTick) throws UnsupportedOperationException {
+    throw new UnsupportedOperationException("SVG View cannot set updated shapes");
   }
 
   @Override

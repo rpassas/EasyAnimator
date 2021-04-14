@@ -31,6 +31,7 @@ public class VisualView extends JFrame implements IView{
     this.speed = speed;
   }
 
+  @Override
   public void run() {
     this.setVisible(true);
   }

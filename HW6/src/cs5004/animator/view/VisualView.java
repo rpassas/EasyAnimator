@@ -38,6 +38,8 @@ public class VisualView extends JFrame implements IView{
   @Override
   public void setUpdateShapes(int currentTick) {
     this.mainPanel.setAnimatedShapes(model.getShapesAtTick(currentTick));
+    // every child component calls paintComponent as a result
+    this.repaint();
   }
 
   @Override

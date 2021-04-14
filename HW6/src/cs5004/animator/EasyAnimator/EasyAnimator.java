@@ -65,6 +65,7 @@ public class EasyAnimator {
       FileReader fileIn = new FileReader(fileNameIn);
       AnimationModelImpl model = AnimationReader.parseFile(fileIn,
           new AnimationModelImpl.Builder());
+      //TODO: generate an empty file to be passed to the view
       IView view = ViewMaker.makeView(viewType, model, fileNameOut, speed);
       view.run();
       //TODO: controller

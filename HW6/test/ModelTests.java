@@ -650,6 +650,6 @@ public class ModelTests {
         2, 3, 250,3,5, 8);
     AnimationModelImpl modelRecolor = model1.getShapesAtTick(6);
     System.out.println(modelRecolor.toString());
-    System.out.println(model1.toString());
+    //System.out.println(model1.toString());
   }
 }

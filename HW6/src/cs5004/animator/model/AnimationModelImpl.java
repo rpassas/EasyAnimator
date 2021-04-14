@@ -305,12 +305,12 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public AnimationModelImpl getShapesAtTick(int currentTick) {
     if (currentTick < 0) {
-      throw new IllegalArgumentException("Time value must be positive");
+      throw new IllegalArgumentException("Time value must be >= 0");
     }
     AnimationModelImpl modelCopy = new AnimationModelImpl();
     // For each change in the list, if the current tick is within the change add it to a list
     for (AbstractChange change : this.listOfChanges) {
-      if (currentTick > change.getStartTime() && currentTick < change.getEndTime()) {
+      if (currentTick >= change.getStartTime() && currentTick <= change.getEndTime()) {
         // TweenOne is the first half of the tween formula
         int tweenOne = (change.getEndTime() - (currentTick) /
                 (change.getEndTime() - change.getStartTime()));
@@ -342,9 +342,16 @@ public class AnimationModelImpl implements AnimationModel {
             }
           }
         } else if (change.getType().equals(AvailableChanges.RECOLOR)) {
+          // check if target shape is in the modelcopy
+          // if yes alter attr
+          // if not add new shape with attr
+
           // Checks each shape in the list for the current change shape
           for (AbstractShape shape : modelCopy.getShapes()) {
             // Shape is in the model at this point, updating the RGB values
+            System.out.println(shape.toString());
+            System.out.println(change.toString());
+            System.out.println("oof");
             if (shape.getLabel().equals(change.getShapeLabel())) {
               shape.setR(change.getStartR() * tweenOne + change.getUpdatedR() * tweenTwo);
               shape.setG(change.getStartG() * tweenOne + change.getUpdatedG() * tweenTwo);

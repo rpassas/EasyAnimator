@@ -48,6 +48,9 @@ note: enum classes are not shown in the UML diagrams (types of changes and shape
 
 ### View 
 
+The scheme for the view has one interface that designates the behaviors for three implementing concrete classes: SVGView, TextView, and VisualView. The SVGView and TextView both generate a text file, with the SVGView being formatted specifically to meet SVG requirements so that it can render the animation. The VisualView generates a JFrame with a "canvas" panel component on which Graphics2D can be painted and repainted at particular ticks as the animation runs. Each view has an enum type and can run (IView specifies other behaviors but these are not functionally universal in their implementation).
+
+In the main EasyAnimator class that takes the command line arguments for the animation the arguments are parsed, used to build a model and other simple parameters needed for the views. These parameters are passed to the ViewMaker that can generate the appropriate view type given these inputs. 
 
 #### Notes:
 

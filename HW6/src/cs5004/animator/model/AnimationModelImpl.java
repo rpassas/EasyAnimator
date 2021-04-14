@@ -307,11 +307,8 @@ public class AnimationModelImpl implements AnimationModel {
             }
           }
         } else if (change.getType().equals(AvailableChanges.RECOLOR)) {
-          // check if target shape is in the modelcopy
-          // if yes alter attr
-          // if not add new shape with attr
-
           // Checks each shape in the list for the current change shape
+          boolean found = false;
           for (AbstractShape shape : modelCopy.getShapes()) {
             // Shape is in the model at this point, updating the RGB values
             System.out.println(shape.toString());

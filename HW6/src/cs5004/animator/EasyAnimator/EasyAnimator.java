@@ -7,6 +7,8 @@ import cs5004.animator.view.ViewType;
 import cs5004.animator.view.IView;
 import java.io.FileReader;
 import java.io.IOException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class EasyAnimator {
 
@@ -38,17 +40,26 @@ public class EasyAnimator {
             speed = Integer.parseInt(args[i]);
             break;
           default:
-            throw new IllegalArgumentException("Bad argument; try -in, -view, -out, -speed");
+            JFrame badArgs = new JFrame();
+            JOptionPane.showMessageDialog(badArgs, "Warning",
+                "Precede arguments with -speed, -out, -in, or -view.",
+                JOptionPane.WARNING_MESSAGE);
         }
       }
     }
 
     if (fileNameIn.equals("") || fileNameOut.equals("")) {
-      throw new IllegalArgumentException("Both file names must be provided");
+      JFrame noFiles = new JFrame();
+      JOptionPane.showMessageDialog(noFiles, "Warning",
+          "Both file names must be provided.", JOptionPane.WARNING_MESSAGE);
     } else if (viewType == null) {
-      throw new IllegalArgumentException("A type of view must be provided");
+      JFrame noType = new JFrame();
+      JOptionPane.showMessageDialog(noType, "Warning",
+          "A view type must be provided.", JOptionPane.WARNING_MESSAGE);
     } else if (speed <= 0) {
-      throw new IllegalArgumentException("Provided speed must be positive");
+      JFrame badSpeed = new JFrame();
+      JOptionPane.showMessageDialog(badSpeed, "Warning",
+          "Provided speed must be positive.", JOptionPane.WARNING_MESSAGE);
     }
     try {
       FileReader fileIn = new FileReader(fileNameIn);
@@ -56,9 +67,14 @@ public class EasyAnimator {
           new AnimationModelImpl.Builder());
       IView view = ViewMaker.makeView(viewType, model, fileNameOut, speed);
       view.run();
-      //TODO controller
+      //TODO: controller
     } catch (IOException e) {
       e.printStackTrace();
+    } catch (IllegalArgumentException e) {
+      JFrame noFiles = new JFrame();
+      JOptionPane.showMessageDialog(noFiles, "Warning",
+          e.toString(),
+          JOptionPane.WARNING_MESSAGE);
     }
 
   }

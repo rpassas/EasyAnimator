@@ -11,6 +11,7 @@ import java.awt.Shape;
 import java.util.LinkedList;
 
 
+import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.model.AbstractShape;
 import cs5004.animator.model.AvailableShapes;
@@ -38,7 +39,7 @@ public class CanvasPanel extends JPanel{
    * Sets the model's listOfShapes that are to be displayed.
    * @param model the model for the current state.
    */
-  void setAnimatedShapes(AnimationModelImpl model) {
+  void setAnimatedShapes(AnimationModel model) {
     this.shapes = model.getShapes();
   }
 

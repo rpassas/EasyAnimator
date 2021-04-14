@@ -55,6 +55,28 @@ public interface AnimationModel {
   void addShape(AbstractShape shape);
 
   /**
+   * Overload of addShape that adds a shape to the model using parameters needed to construct
+   * a shape.
+   * @param shape enum shape type
+   * @param label a label for the shape
+   * @param x x position of the shape
+   * @param y y position of the shape
+   * @param w width of the shape
+   * @param h height of the shape
+   * @param r red fill value
+   * @param g green fill value
+   * @param b blue fill value
+   * @param opacity fill opacity value
+   * @throws IllegalArgumentException for non-positive dimensions
+   * @throws IllegalArgumentException for negative color values
+   * @throws IllegalArgumentException for color values outside of normal range
+   * @throws IllegalArgumentException for non-unique label
+   * @throws IllegalArgumentException for invalid shape type
+   */
+   void addShape(AvailableShapes shape, String label, int x, int y, int w, int h,
+                       int r, int g, int b, int opacity);
+
+  /**
    * Given a shape, will remove that shape.
    * @param shape shape to be removed
    */

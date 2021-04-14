@@ -4,36 +4,29 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
 
 public class TextView implements IView{
-  AnimationModelImpl model;
-  String filename;
+  AnimationModel model;
+  Appendable fileOutput;
   File file;
   FileWriter writer;
 
-  public TextView(AnimationModelImpl model, String filename) {
-    this.model = new AnimationModelImpl();
-    this.filename = filename;
+  public TextView(AnimationModel model, Appendable fileOutput) {
+    this.model = model;
+    this.fileOutput = fileOutput;
   }
 
   @Override
   public void run() throws IOException {
     // Could add an if statement to see if file exists, if it does open it and write to it
     try {
-      this.file = new File(this.filename);
-      file.createNewFile();
-      this.writer = new FileWriter(file);
-      writer.write(model.toString());
+
+      fileOutput.append(model.toString());
     } catch (IOException e) {
       System.out.println("Error with the file writer.");
     }
-    finally {
-      if (writer != null) {
-        writer.close();
-      }
-    }
-
   }
 
   @Override

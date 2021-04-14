@@ -22,7 +22,6 @@ public class TextView implements IView{
   public void run() throws IOException {
     // Could add an if statement to see if file exists, if it does open it and write to it
     try {
-
       fileOutput.append(model.toString());
     } catch (IOException e) {
       System.out.println("Error with the file writer.");

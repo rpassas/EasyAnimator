@@ -7,6 +7,7 @@ import cs5004.animator.view.ViewMaker;
 import cs5004.animator.view.ViewType;
 import cs5004.animator.view.IView;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -63,12 +64,16 @@ public class EasyAnimator {
           "Provided speed must be positive.", JOptionPane.WARNING_MESSAGE);
     }
     try {
+      // build model with file reader
       FileReader fileIn = new FileReader(fileNameIn);
       AnimationModel model = AnimationReader.parseFile(fileIn,
           new AnimationModelImpl.Builder());
+      // output file
+      FileWriter fileOut = new FileWriter(fileNameOut);
       //TODO: generate an empty file to be passed to the view
-      IView view = ViewMaker.makeView(viewType, model, fileNameOut, speed);
+      IView view = ViewMaker.makeView(viewType, model, fileOut, speed);
       view.run();
+      fileOut.close();
       //TODO: controller
     } catch (IOException e) {
       e.printStackTrace();

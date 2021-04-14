@@ -48,5 +48,6 @@ public class TextView implements IView{
 
   @Override
   public void setSpeed(int speed) throws UnsupportedOperationException {
+    throw new UnsupportedOperationException("SVG View cannot set speed");
   }
 }

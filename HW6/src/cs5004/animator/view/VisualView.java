@@ -3,17 +3,18 @@ package cs5004.animator.view;
 import javax.swing.JFrame;
 import java.awt.Dimension;
 
+import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.model.Point2D;
 
 
 public class VisualView extends JFrame implements IView{
-  private AnimationModelImpl model;
+  private AnimationModel model;
   private CanvasPanel mainPanel;
   private int speed;
 
   //TODO speed must be > 0
-  VisualView(AnimationModelImpl model, int speed) {
+  VisualView(AnimationModel model, int speed) {
     super();
     this.model = model;
     this.speed = speed;

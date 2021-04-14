@@ -87,41 +87,6 @@ public class AnimationModelImpl implements AnimationModel {
    * @param y y position of the shape
    * @param w width of the shape
    * @param h height of the shape
-   * @throws IllegalArgumentException if dimensions are not positive
-   * @throws IllegalArgumentException for non-unique label
-   * @throws IllegalArgumentException if shape is not a circle or rectangle type
-   */
-  public void addShape(AvailableShapes shape, String label, int x, int y, int w, int h) {
-    if (w < 0 || h < 0) {
-      throw new IllegalArgumentException("dimensions must be positive.");
-    }
-    for (AbstractShape aShape : this.listOfShapes) {
-      if (aShape.getLabel().equals(label)) {
-        throw new IllegalArgumentException("Labels must be unique to shapes");
-      }
-    }
-    if (shape == AvailableShapes.OVAL) {
-      listOfShapes.add(new Circle(label, x, y, w, h));
-      listOfKeys.add(shapeKey);
-      shapeKey++;
-    } else if (shape == AvailableShapes.RECTANGLE) {
-      listOfShapes.add(new Rect(label, x, y, w, h));
-      listOfKeys.add(shapeKey);
-      shapeKey++;
-    } else {
-      throw new IllegalArgumentException("added shape must be one of the accepted types");
-    }
-  }
-
-  /**
-   * Overload of addShape that adds a shape to the model using parameters needed to construct
-   * a shape.
-   * @param shape enum shape type
-   * @param label a label for the shape
-   * @param x x position of the shape
-   * @param y y position of the shape
-   * @param w width of the shape
-   * @param h height of the shape
    * @param r red fill value
    * @param g green fill value
    * @param b blue fill value
@@ -408,23 +373,26 @@ public class AnimationModelImpl implements AnimationModel {
     return model;
   }
 
-  public static final class Builder implements AnimationBuilder<AnimationModelImpl> {
+  public static final class Builder implements AnimationBuilder<AnimationModel> {
     protected AnimationModelImpl model;
+
+    public Builder() {
+      this.model = new AnimationModelImpl();
+    }
 
     @Override
     public AnimationModelImpl build() {
-      this.model = new AnimationModelImpl();
       return this.model;
     }
 
     @Override
-    public AnimationBuilder<AnimationModelImpl> setBounds(int x, int y, int width, int height) {
+    public AnimationBuilder<AnimationModel> setBounds(int x, int y, int width, int height) {
       model.setCanvas(x, y, width, height);
       return this;
     }
 
     @Override
-    public AnimationBuilder<AnimationModelImpl> declareShape(String name, String type) {
+    public AnimationBuilder<AnimationModel> declareShape(String name, String type) {
       if (type.equalsIgnoreCase("rectangle")){
         model.addShape(AvailableShapes.RECTANGLE, name,
             0, 0, 0, 0, 0, 0, 0, 0);
@@ -438,7 +406,7 @@ public class AnimationModelImpl implements AnimationModel {
     }
 
     @Override
-    public AnimationBuilder<AnimationModelImpl> addMotion(String name,
+    public AnimationBuilder<AnimationModel> addMotion(String name,
                                       int t1, int x1, int y1, int w1, int h1,
                                                       int r1, int g1, int b1,
                                       int t2, int x2, int y2, int w2, int h2,

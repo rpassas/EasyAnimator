@@ -2,6 +2,7 @@ package cs5004.animator.view;
 
 import cs5004.animator.model.AbstractChange;
 import cs5004.animator.model.AbstractShape;
+import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.model.AvailableChanges;
 import cs5004.animator.model.AvailableShapes;
@@ -15,8 +16,8 @@ import java.util.LinkedList;
  * Model that outputs a SVG file.
  */
 public class SVGView implements IView {
-  AnimationModelImpl model;
-  String filename;
+  AnimationModel model;
+  Appendable fileOutput;
   int speed;
   File file;
   FileWriter writer;
@@ -24,13 +25,13 @@ public class SVGView implements IView {
   /**
    * Constructor for the SVG model.
    * @param model the animationModelImpl that contains the data.
-   * @param filename the name of the file to export to.
+   * @param fileOutput the name of the file to export to.
    * @param speed the speed of the file playback.
    * @throws IOException if there is an error with the IO.
    */
-  public SVGView(AnimationModelImpl model, String filename, int speed) throws IOException {
-    this.model = new AnimationModelImpl();
-    this.filename = filename;
+  public SVGView(AnimationModel model, Appendable fileOutput, int speed) throws IOException {
+    this.model = model;
+    this.fileOutput = fileOutput;
     this.speed = speed;
 
   }
@@ -42,7 +43,7 @@ public class SVGView implements IView {
    * @throws IOException if there is an error with the IO.
    */
   public void createCanvas() throws IOException {
-    writer.write("<svg width=\"" + model.getCanvas().getWidth() + "\" height=\""
+    fileOutput.append("<svg width=\"" + model.getCanvas().getWidth() + "\" height=\""
             + model.getCanvas().getHeight() + "\" version=\"1.1\" \n" +
             "xmls=\"http://www.w3.org/2000/svg\">"); //Not sure if this line is right
   }
@@ -57,13 +58,13 @@ public class SVGView implements IView {
     for(AbstractShape shape : model.getShapes()) {
       try {
         if (shape.getType().equals(AvailableShapes.OVAL)) {
-          writer.write("<ellipse id=\"" + shape.getLabel() + "\" cx=\""
+          fileOutput.append("<ellipse id=\"" + shape.getLabel() + "\" cx=\""
                   + shape.getLocation().getX() + "\" cy=\"" + shape.getLocation().getY()
                   + "\" rx=\"" + shape.getWidth() + "\" "
                   + "ry=\"" + shape.getHeight() + " fill=\"rgb(" + shape.getR() + ", "
                   + shape.getG() + ", " + shape.getB() + ")\" visibility=\"visible\" >\n");
         } else if (shape.getType().equals(AvailableShapes.RECTANGLE)) {
-          writer.write("<rect id=\"" + shape.getLabel() + "\" cx=\""
+          fileOutput.append("<rect id=\"" + shape.getLabel() + "\" cx=\""
                   + shape.getLocation().getX()
                   + "\" cy=\"" + shape.getLocation().getY() + "\" rx=\"" + shape.getWidth() + "\" "
                   + "ry=\"" + shape.getHeight() + " fill=\"rgb(" + shape.getR() + ", "
@@ -73,32 +74,32 @@ public class SVGView implements IView {
         for (AbstractChange change : model.getChanges()) {
           if (change.getShapeLabel().equals(shape.getLabel())) {
             if (change.getType().equals(AvailableChanges.MOVE)) {
-              writer.write("  <animate attributeType=\"xml\" begin=\"" + change.getStartTime()
+              fileOutput.append("  <animate attributeType=\"xml\" begin=\"" + change.getStartTime()
                       * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
                       - change.getStartTime()) * 1000 / this.speed
                       + "ms\" attributeName\"cx\" from=\""
                       + change.getStartReference().getX() + "\" to=\""
                       + change.getReference().getX()
                       + "\" fill=\"freeze\" />\n");
-              writer.write("  <animate attributeType=\"xml\" begin=\""
+              fileOutput.append("  <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
                       + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
                       + "ms\" attributeName\"cy\" from=\"" + change.getStartReference().getY()
                       + "\" to=\"" + change.getReference().getY() + "\" fill=\"freeze\" />\n");
             } else if (change.getType().equals(AvailableChanges.RESIZE)) {
-              writer.write("  <animate attributeType=\"xml\" begin=\"" + change.getStartTime()
+              fileOutput.append("  <animate attributeType=\"xml\" begin=\"" + change.getStartTime()
                       * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
                       - change.getStartTime()) * 1000 / this.speed
                       + "ms\" attributeName\"rx\" from=\"" + change.getStartWidth() + "\" to=\""
                       + change.getUpdatedWidth() + "\" fill=\"freeze\" />\n");
-              writer.write("  <animate attributeType=\"xml\" begin=\""
+              fileOutput.append("  <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
                       + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
                       + "ms\" attributeName\"ry\" from=\"" + change.getStartHeight()
                       + "\" to=\"" + change.getUpdatedHeight() + "\" fill=\"freeze\" />\n");
             } else if (change.getType().equals(AvailableChanges.RECOLOR)) {
               //Not sure if this recolor will work but should be close, doublecheck attributName/type
-              writer.write("  <animate attributeType=\"xml\" begin=\""
+              fileOutput.append("  <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
                       + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
                       + "ms\" attributeName\"fill\" from=\"rgb("
@@ -112,11 +113,11 @@ public class SVGView implements IView {
           }
         }
         if (shape.getType().equals(AvailableShapes.RECTANGLE)) {
-          writer.write("</rect>\n");
+          fileOutput.append("</rect>\n");
         } else if (shape.getType().equals(AvailableShapes.OVAL)) {
-          writer.write("</ellipse>\n");
+          fileOutput.append("</ellipse>\n");
         }
-        writer.write("\n");
+        fileOutput.append("\n");
       } catch (IOException e) {
         System.out.println("Error while writing to file");
       }
@@ -131,18 +132,10 @@ public class SVGView implements IView {
   @Override
   public void run() throws IOException {
     try {
-      this.file = new File(this.filename);
-      file.createNewFile();
-      this.writer = new FileWriter(file);
       createCanvas();
       createShapes(model.getShapes(), speed);
     } catch (IOException e) {
       System.out.println("Error with the file writer.");
-    }
-    finally {
-      if(writer != null) {
-        writer.close();
-      }
     }
   }
 

@@ -39,7 +39,7 @@ public class ModelTests {
   @Test
   public void testAnimationModelImplConstructor() {
     AnimationModelImpl modelConstructor = new AnimationModelImpl();
-    modelConstructor.addShape(AvailableShapes.RECTANGLE, "Rect1", 5, 1, 2, 5);
+    modelConstructor.addShape(AvailableShapes.RECTANGLE, "Rect1", 5, 1, 2, 5, 0, 0, 0,0);
     assertEquals("[Rectangle Rect1 -> center: (5, 1), x-dimension: 2, y-dimension: 5]",
         modelConstructor.getShapes().toString());
   }
@@ -66,9 +66,9 @@ public class ModelTests {
     assertEquals(testList, model1.getShapes());
 
     // testing a model via shape constructor
-    model2.addShape(AvailableShapes.RECTANGLE, "aRect", 2, 2, 2, 2);
-    model2.addShape(AvailableShapes.RECTANGLE, "anotherRect", 3, 3, 3, 3);
-    model2.addShape(AvailableShapes.OVAL, "aCircle", 4, 4, 4, 4);
+    model2.addShape(AvailableShapes.RECTANGLE, "aRect", 2, 2, 2, 2, 0, 0, 0,0);
+    model2.addShape(AvailableShapes.RECTANGLE, "anotherRect", 3, 3, 3, 3,0, 0, 0,0);
+    model2.addShape(AvailableShapes.OVAL, "aCircle", 4, 4, 4, 4,0, 0, 0,0);
     model2.addShape(AvailableShapes.OVAL, "anotherCircle",
         5, 5, 5, 5, 5, 5, 5, 100);
     model2.addShape(AvailableShapes.RECTANGLE, "Rect3",
@@ -87,7 +87,7 @@ public class ModelTests {
   public void testInvalidAddShapesWH() {
     // Testing negative width for addShape 2
     try {
-      model1.addShape(AvailableShapes.OVAL, "invalid 1", 5, 5, -5, 5);
+      model1.addShape(AvailableShapes.OVAL, "invalid 1", 5, 5, -5, 5,0, 0, 0,0);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -95,7 +95,7 @@ public class ModelTests {
     }
     // Testing negative height for addShape 2
     try {
-      model1.addShape(AvailableShapes.OVAL, "invalid 1", 5, 5, -5, 5);
+      model1.addShape(AvailableShapes.OVAL, "invalid 1", 5, 5, -5, 5,0, 0, 0,0);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -106,9 +106,9 @@ public class ModelTests {
   @Test
   public void testRemoveShapes() {
     //Removing by shape index
-    model2.addShape(AvailableShapes.RECTANGLE, "Rect1", 2, 2, 2, 2);
-    model2.addShape(AvailableShapes.RECTANGLE, "Rect2",3, 3, 3, 3);
-    model2.addShape(AvailableShapes.OVAL, "Circle1",4, 4, 4, 4);
+    model2.addShape(AvailableShapes.RECTANGLE, "Rect1", 2, 2, 2, 2,0, 0, 0,0);
+    model2.addShape(AvailableShapes.RECTANGLE, "Rect2",3, 3, 3, 3,0, 0, 0,0);
+    model2.addShape(AvailableShapes.OVAL, "Circle1",4, 4, 4, 4,0, 0, 0,0);
     model2.addShape(AvailableShapes.OVAL,"Circle2",
         5, 5, 5, 5, 5, 5, 5, 100);
     model2.addShape(AvailableShapes.RECTANGLE,"Circle3",
@@ -172,9 +172,9 @@ public class ModelTests {
 
   @Test
   public void testAddMove() {
-    model1.addShape(AvailableShapes.RECTANGLE, "Rect1", 1, 2, 3, 7);
-    model1.addShape(AvailableShapes.RECTANGLE, "Rect2", 11, 3, 2, 3);
-    model1.addShape(AvailableShapes.OVAL, "Circle1", 41, 44, 1, 4);
+    model1.addShape(AvailableShapes.RECTANGLE, "Rect1", 1, 2, 3, 7, 0, 0, 0, 0);
+    model1.addShape(AvailableShapes.RECTANGLE, "Rect2", 11, 3, 2, 3, 0, 0, 0, 0);
+    model1.addShape(AvailableShapes.OVAL, "Circle1", 41, 44, 1, 4, 0, 0, 0, 0);
     model1.addShape(AvailableShapes.OVAL, "Circle2",
         5, 25, 5, 55, 53, 35, 5, 100);
 

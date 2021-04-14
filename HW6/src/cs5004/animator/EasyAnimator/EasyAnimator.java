@@ -1,5 +1,6 @@
 package cs5004.animator.EasyAnimator;
 
+import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.util.AnimationReader;
 import cs5004.animator.view.ViewMaker;
@@ -63,7 +64,7 @@ public class EasyAnimator {
     }
     try {
       FileReader fileIn = new FileReader(fileNameIn);
-      AnimationModelImpl model = AnimationReader.parseFile(fileIn,
+      AnimationModel model = AnimationReader.parseFile(fileIn,
           new AnimationModelImpl.Builder());
       //TODO: generate an empty file to be passed to the view
       IView view = ViewMaker.makeView(viewType, model, fileNameOut, speed);

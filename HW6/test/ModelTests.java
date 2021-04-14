@@ -637,4 +637,19 @@ public class ModelTests {
             " to width: 1 height: 3 from t= 0 to t= 100\n",
             model1.toString());
   }
+
+  @Test
+  public void testGetShapesAtTick() {
+    model1.addShape(rectangle1);
+    model1.addShape(circle1);
+    AnimationModelImpl modelEmpty = model1.getShapesAtTick(1);
+    assertEquals(model2.toString(), modelEmpty.toString());
+    model1.addRecolor(rectangle1, 2, 3, 250,3,
+        2, 3, 250,3,5, 7);
+    model1.addRecolor(circle1, 17, 111, 2,3,
+        2, 3, 250,3,5, 8);
+    AnimationModelImpl modelRecolor = model1.getShapesAtTick(6);
+    System.out.println(modelRecolor.toString());
+    System.out.println(model1.toString());
+  }
 }

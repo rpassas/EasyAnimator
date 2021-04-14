@@ -21,7 +21,7 @@ public class SVGViewTest {
   private SVGView view2;
   private AnimationModelImpl model;
   private String toh;
-
+/*
   @Before
   public void setup() {
     this.model = new AnimationModelImpl();
@@ -43,7 +43,8 @@ public class SVGViewTest {
 //SVG and Text Views do not have methods that return anything rn
   @Test
   public void testOutput() {
-
+}
+ */
   }
 
 

@@ -26,7 +26,7 @@ public class TextViewTest {
     this.model = new AnimationModelImpl();
     this.toh = "toh-5.txt";
   }
-
+/*
   @Test
   public void testConstructor() {
     //Testing the constructor 1 with X/Y width and Height
@@ -44,4 +44,6 @@ public class TextViewTest {
   public void testOutput() {
 
   }
+
+ */
 }

@@ -14,7 +14,7 @@ public interface IView {
    * @param currentTick  The current tick at which to re paint the shapes.
    * @throws UnsupportedOperationException If the view is an SVG/Text view.
    */
-  void setUpdateShapes(int currentTick);
+  void setUpdatedShapes(int currentTick);
 
   /**
    * Get the view's type (one of 3 types - visual, textual, SVG enum).

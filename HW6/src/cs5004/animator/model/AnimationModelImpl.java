@@ -183,13 +183,13 @@ public class AnimationModelImpl implements AnimationModel {
           // same shape?
           && c.getShapeID() == listOfKeys.get(listOfShapes.indexOf(shape))
           //overlapping time at the front of existing change
-          && ((c.getStartTime() <= t1 && c.getEndTime() > t1)
+          && ((c.getStartTime() < t1 && c.getEndTime() > t1)
           // Overlapping time at the end of existing change
-          || (c.getStartTime() < t2 && c.getEndTime() >= t2)
+          || (c.getStartTime() < t2 && c.getEndTime() > t2)
           //new change inside old change time
-          || (c.getStartTime() <= t1 && c.getEndTime() >= t2)
+          || (c.getStartTime() < t1 && c.getEndTime() > t2)
           // old change inside new change's time
-          || (c.getStartTime() >= t1 && c.getEndTime() <= t2))) {
+          || (c.getStartTime() > t1 && c.getEndTime() < t2))) {
         return true;
       }
     }
@@ -448,6 +448,9 @@ public class AnimationModelImpl implements AnimationModel {
       if (r2 - r1 != 0 || g2 - g1 != 0 || b2 - b1 != 0) {
         model.addRecolor(model.getShape(name),
             r1, g1, b1, 100, r2, g2, b2, 100, t1, t2);
+      }
+      if (t2-t1 != 0) {
+        model.addMove(model.getShape(name), x1, y1, x2, y2, t1, t2);
       }
       return this;
     }

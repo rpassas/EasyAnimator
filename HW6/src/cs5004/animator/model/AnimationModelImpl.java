@@ -422,7 +422,11 @@ public class AnimationModelImpl implements AnimationModel {
         model.getShape(name).setR(r1);
         model.getShape(name).setG(g1);
         model.getShape(name).setB(b1);
-        model.getShape(name).setOpacity(100);
+        if (t1 == 1) {
+          model.getShape(name).setOpacity(100);
+        } else {
+          model.getShape(name).setOpacity(0);
+        }
       }
 
       if (x2 - x1 != 0 || y2 - y1 != 0) {

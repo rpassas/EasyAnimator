@@ -56,15 +56,25 @@ public class SVGView implements IView {
    * @throws IOException if there is an error with the IO.
    */
   public void createShapes(LinkedList<AbstractShape> listOfShapes, int speed) throws IOException {
+
     for(AbstractShape shape : model.getShapes()) {
+      //Attemped to set visiblity off the start, doesn't work when shapes come in later
       try {
+        String visible = "";
+        if (shape.getOpacity() == 100) {
+          visible += "visible";
+        } else {
+          visible += "hidden";
+        }
+        //Setup for each Oval
         if (shape.getType().equals(AvailableShapes.OVAL)) {
           fileOutput.append("<ellipse id=\"" + shape.getLabel() + "\" cx=\""
                   + (shape.getLocation().getX() - model.getCanvas().getX()) + "\" cy=\""
                   + (shape.getLocation().getY() - model.getCanvas().getY())
                   + "\" rx=\"" + shape.getWidth() + "\" ry=\"" + shape.getHeight()
                   + "\" fill=\"rgb(" + shape.getR() + ","
-                  + shape.getG() + "," + shape.getB() + ")\" visibility=\"visible\" >\n");
+                  + shape.getG() + "," + shape.getB() + ")\" visibility=\"" + visible + "\" >\n");
+          //Setup for each rectangle
         } else if (shape.getType().equals(AvailableShapes.RECTANGLE)) {
           fileOutput.append("<rect id=\"" + shape.getLabel() + "\" x=\""
                   + (shape.getLocation().getX() - model.getCanvas().getX())
@@ -72,12 +82,23 @@ public class SVGView implements IView {
                   + "\" width=\"" + shape.getWidth() + "\" "
                   + "height=\"" + shape.getHeight() + "\" fill=\"rgb(" + shape.getR() + ","
                   + shape.getG()
-                  + "," + shape.getB() + ")\" visibility=\"visible\" >\n");
+                  + "," + shape.getB() + ")\" visibility=\"" + visible + "\" >\n");
         }
+        //This changes the setting to if it was hidden before any motions
         for (AbstractChange change : model.getChanges()) {
           if (change.getShapeLabel().equals(shape.getLabel())) {
+            if (visible.equals("hidden")) {
+              fileOutput.append("    <animate attributeType=\"xml\" begin=\""
+                      + change.getStartTime()
+                      * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
+                      - change.getStartTime()) * 1000 / this.speed
+                      + "ms\" attributeName=\"visibility\" from=\"hidden\" to=\"visible\" " +
+                      "fill=\"freeze\" />\n");
+            }
+            //Finds changes for Moving a rectangle
             if (change.getType().equals(AvailableChanges.MOVE) && shape.getType().equals(AvailableShapes.RECTANGLE))
             {
+              //Moves X coordinate
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime()
                       * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
@@ -86,6 +107,7 @@ public class SVGView implements IView {
                       + (change.getStartReference().getX() - model.getCanvas().getX()) + "\" to=\""
                       + (change.getReference().getX() - model.getCanvas().getX())
                       + "\" fill=\"freeze\" />\n");
+              // Moves Y coordinate
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
                       + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
@@ -93,7 +115,9 @@ public class SVGView implements IView {
                       - model.getCanvas().getY())
                       + "\" to=\"" + (change.getReference().getY() - model.getCanvas().getY())
                       + "\" fill=\"freeze\" />\n");
+              //Find changes for moving an oval
             } else if (change.getType().equals(AvailableChanges.MOVE) && shape.getType().equals(AvailableShapes.OVAL)) {
+              //Moves X coordinate
                 fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                         + change.getStartTime()
                         * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
@@ -102,6 +126,7 @@ public class SVGView implements IView {
                         + (change.getStartReference().getX() - model.getCanvas().getX()) + "\" to=\""
                         + (change.getReference().getX() - model.getCanvas().getX())
                         + "\" fill=\"freeze\" />\n");
+                //Moves Y coordinate
                 fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                         + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
                         + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
@@ -109,30 +134,36 @@ public class SVGView implements IView {
                         - model.getCanvas().getY())
                         + "\" to=\"" + (change.getReference().getY() - model.getCanvas().getY())
                         + "\" fill=\"freeze\" />\n");
+                // Resizes a rectangle
             } else if (change.getType().equals(AvailableChanges.RESIZE) && shape.getType().equals(AvailableShapes.RECTANGLE)) {
+              //Resizes the width
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime()
                       * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
                       - change.getStartTime()) * 1000 / this.speed
                       + "ms\" attributeName=\"width\" from=\"" + change.getStartWidth() + "\" to=\""
                       + change.getUpdatedWidth() + "\" fill=\"freeze\" />\n");
+              //Resizes the height
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
                       + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
                       + "ms\" attributeName=\"height\" from=\"" + change.getStartHeight()
                       + "\" to=\"" + change.getUpdatedHeight() + "\" fill=\"freeze\" />\n");
             } else if (change.getType().equals(AvailableChanges.RESIZE) && shape.getType().equals(AvailableShapes.OVAL)) {
+              //Changes x radius
                 fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                         + change.getStartTime()
                         * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
                         - change.getStartTime()) * 1000 / this.speed
                         + "ms\" attributeName=\"rx\" from=\"" + change.getStartWidth() + "\" to=\""
                         + change.getUpdatedWidth() + "\" fill=\"freeze\" />\n");
+                //Changes y radius
                 fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                         + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
                         + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
                         + "ms\" attributeName=\"ry\" from=\"" + change.getStartHeight()
                         + "\" to=\"" + change.getUpdatedHeight() + "\" fill=\"freeze\" />\n");
+                //Recolors the shape
             } else if (change.getType().equals(AvailableChanges.RECOLOR)) {
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
@@ -147,6 +178,7 @@ public class SVGView implements IView {
             }
           }
         }
+        //Adds closing box to the shape
         if (shape.getType().equals(AvailableShapes.RECTANGLE)) {
           fileOutput.append("</rect>\n");
         } else if (shape.getType().equals(AvailableShapes.OVAL)) {

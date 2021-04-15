@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import cs5004.animator.model.AbstractShape;
 import cs5004.animator.model.AnimationModelImpl;
+import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AvailableShapes;
 import cs5004.animator.model.Change;
 import cs5004.animator.model.Circle;
@@ -642,13 +643,13 @@ public class ModelTests {
   public void testGetShapesAtTick() {
     model1.addShape(rectangle1);
     model1.addShape(circle1);
-    AnimationModelImpl modelEmpty = model1.getShapesAtTick(1);
+    AnimationModel modelEmpty = model1.getShapesAtTick(1);
     assertEquals(model2.toString(), modelEmpty.toString());
     model1.addRecolor(rectangle1, 2, 3, 250,3,
         2, 3, 250,3,5, 7);
     model1.addRecolor(circle1, 17, 111, 2,3,
         2, 3, 250,3,5, 8);
-    AnimationModelImpl modelRecolor = model1.getShapesAtTick(6);
+    AnimationModel modelRecolor = model1.getShapesAtTick(6);
     System.out.println(modelRecolor.toString());
     //System.out.println(model1.toString());
   }

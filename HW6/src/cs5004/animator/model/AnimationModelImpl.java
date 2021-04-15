@@ -268,7 +268,7 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public AnimationModelImpl getShapesAtTick(int currentTick) {
+  public AnimationModel getShapesAtTick(int currentTick) {
     if (currentTick < 0) {
       throw new IllegalArgumentException("Time value must be >= 0");
     }

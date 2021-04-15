@@ -176,7 +176,7 @@ public class SVGView implements IView {
   }
 
   @Override
-  public void setUpdateShapes(int currentTick) throws UnsupportedOperationException {
+  public void setUpdatedShapes(int currentTick) throws UnsupportedOperationException {
     throw new UnsupportedOperationException("SVG View cannot set updated shapes");
   }
 

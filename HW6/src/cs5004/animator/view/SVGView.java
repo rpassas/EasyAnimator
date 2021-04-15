@@ -62,8 +62,8 @@ public class SVGView implements IView {
           fileOutput.append("<ellipse id=\"" + shape.getLabel() + "\" cx=\""
                   + (shape.getLocation().getX() - model.getCanvas().getX()) + "\" cy=\""
                   + (shape.getLocation().getY() - model.getCanvas().getY())
-                  + "\" rx=\"" + shape.getWidth() + "\" "
-                  + "ry=\"" + shape.getHeight() + " fill=\"rgb(" + shape.getR() + ","
+                  + "\" rx=\"" + shape.getWidth() + "\" ry=\"" + shape.getHeight()
+                  + "\" fill=\"rgb(" + shape.getR() + ","
                   + shape.getG() + "," + shape.getB() + ")\" visibility=\"visible\" >\n");
         } else if (shape.getType().equals(AvailableShapes.RECTANGLE)) {
           fileOutput.append("<rect id=\"" + shape.getLabel() + "\" x=\""
@@ -76,7 +76,8 @@ public class SVGView implements IView {
         }
         for (AbstractChange change : model.getChanges()) {
           if (change.getShapeLabel().equals(shape.getLabel())) {
-            if (change.getType().equals(AvailableChanges.MOVE)) { //Porbably need to make one for elipse vs rect
+            if (change.getType().equals(AvailableChanges.MOVE) && shape.getType().equals(AvailableShapes.RECTANGLE))
+            {
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime()
                       * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
@@ -92,18 +93,46 @@ public class SVGView implements IView {
                       - model.getCanvas().getY())
                       + "\" to=\"" + (change.getReference().getY() - model.getCanvas().getY())
                       + "\" fill=\"freeze\" />\n");
-            } else if (change.getType().equals(AvailableChanges.RESIZE)) {
+            } else if (change.getType().equals(AvailableChanges.MOVE) && shape.getType().equals(AvailableShapes.OVAL)) {
+                fileOutput.append("    <animate attributeType=\"xml\" begin=\""
+                        + change.getStartTime()
+                        * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
+                        - change.getStartTime()) * 1000 / this.speed
+                        + "ms\" attributeName=\"cx\" from=\""
+                        + (change.getStartReference().getX() - model.getCanvas().getX()) + "\" to=\""
+                        + (change.getReference().getX() - model.getCanvas().getX())
+                        + "\" fill=\"freeze\" />\n");
+                fileOutput.append("    <animate attributeType=\"xml\" begin=\""
+                        + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
+                        + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
+                        + "ms\" attributeName=\"cy\" from=\"" + (change.getStartReference().getY()
+                        - model.getCanvas().getY())
+                        + "\" to=\"" + (change.getReference().getY() - model.getCanvas().getY())
+                        + "\" fill=\"freeze\" />\n");
+            } else if (change.getType().equals(AvailableChanges.RESIZE) && shape.getType().equals(AvailableShapes.RECTANGLE)) {
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime()
                       * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
                       - change.getStartTime()) * 1000 / this.speed
-                      + "ms\" attributeName=\"x\" from=\"" + change.getStartWidth() + "\" to=\""
+                      + "ms\" attributeName=\"width\" from=\"" + change.getStartWidth() + "\" to=\""
                       + change.getUpdatedWidth() + "\" fill=\"freeze\" />\n");
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
                       + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
-                      + "ms\" attributeName=\"y\" from=\"" + change.getStartHeight()
+                      + "ms\" attributeName=\"height\" from=\"" + change.getStartHeight()
                       + "\" to=\"" + change.getUpdatedHeight() + "\" fill=\"freeze\" />\n");
+            } else if (change.getType().equals(AvailableChanges.RESIZE) && shape.getType().equals(AvailableShapes.OVAL)) {
+                fileOutput.append("    <animate attributeType=\"xml\" begin=\""
+                        + change.getStartTime()
+                        * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
+                        - change.getStartTime()) * 1000 / this.speed
+                        + "ms\" attributeName=\"rx\" from=\"" + change.getStartWidth() + "\" to=\""
+                        + change.getUpdatedWidth() + "\" fill=\"freeze\" />\n");
+                fileOutput.append("    <animate attributeType=\"xml\" begin=\""
+                        + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
+                        + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
+                        + "ms\" attributeName=\"ry\" from=\"" + change.getStartHeight()
+                        + "\" to=\"" + change.getUpdatedHeight() + "\" fill=\"freeze\" />\n");
             } else if (change.getType().equals(AvailableChanges.RECOLOR)) {
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""

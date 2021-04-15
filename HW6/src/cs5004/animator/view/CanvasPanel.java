@@ -32,7 +32,7 @@ public class CanvasPanel extends JPanel{
    */
   CanvasPanel(Point2D reference, Dimension dimension) {
     this.setBackground(Color.WHITE);
-    this.setPreferredSize(dimension);
+    this.setSize(dimension);
   }
 
   /**

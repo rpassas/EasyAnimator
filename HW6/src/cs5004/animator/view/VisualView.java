@@ -11,11 +11,12 @@ import cs5004.animator.model.Point2D;
 import javax.swing.Timer;
 
 
-public class VisualView extends JFrame implements IView{
+public class VisualView extends JFrame implements IView, ActionListener{
   private AnimationModel model;
   private CanvasPanel mainPanel;
   private int speed;
   private Timer timer;
+  private int currentTick = 1;
 
   //TODO speed must be > 0
   VisualView(AnimationModel model, int speed) {
@@ -23,7 +24,7 @@ public class VisualView extends JFrame implements IView{
     this.model = model;
     this.speed = speed;
     this.setTitle("EZ Animator");
-    this.setPreferredSize(new Dimension(model.getCanvas().getWidth(),
+    this.setSize(new Dimension(model.getCanvas().getWidth(),
         model.getCanvas().getHeight()));
     System.out.println(new Dimension(model.getCanvas().getWidth(),
         model.getCanvas().getHeight()));
@@ -31,12 +32,12 @@ public class VisualView extends JFrame implements IView{
     this.mainPanel = new CanvasPanel(point,
         new Dimension(model.getCanvas().getWidth(), model.getCanvas().getHeight()));
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.timer = new Timer(1000 / speed, new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent ae) {
-        repaint();
-      }
-    });
+    this.timer = new Timer(1000 / this.speed, this);
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    this.setUpdatedShapes(this.currentTick);
   }
 
   @Override

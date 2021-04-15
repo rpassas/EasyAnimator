@@ -284,8 +284,8 @@ public class AnimationModelImpl implements AnimationModel {
                 (change.getEndTime() - change.getStartTime()));
         // add initial shape to modelCopy to have a starting point for iterators
         AbstractShape firstShape = this.getShape(change.getShapeLabel());
-        AbstractShape movedCopy = firstShape.cloneShape();
-        modelCopy.addShape(movedCopy);
+        AbstractShape firstCopy = firstShape.cloneShape();
+        modelCopy.addShape(firstCopy);
         // for a MOVE change, if the change isn't in the list, add it, otherwise update the shape
         // this is done due to change commands being on the same time interval
         if(change.getType().equals(AvailableChanges.MOVE)) {

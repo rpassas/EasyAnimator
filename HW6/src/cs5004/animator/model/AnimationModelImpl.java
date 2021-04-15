@@ -282,6 +282,10 @@ public class AnimationModelImpl implements AnimationModel {
         // TweenTwo is the second half of the tween formula
         int tweenTwo = (((currentTick) - change.getStartTime()) /
                 (change.getEndTime() - change.getStartTime()));
+        // add initial shape to modelCopy to have a starting point for iterators
+        AbstractShape firstShape = this.getShape(change.getShapeLabel());
+        AbstractShape movedCopy = firstShape.cloneShape();
+        modelCopy.addShape(movedCopy);
         // for a MOVE change, if the change isn't in the list, add it, otherwise update the shape
         // this is done due to change commands being on the same time interval
         if(change.getType().equals(AvailableChanges.MOVE)) {
@@ -308,12 +312,8 @@ public class AnimationModelImpl implements AnimationModel {
           }
         } else if (change.getType().equals(AvailableChanges.RECOLOR)) {
           // Checks each shape in the list for the current change shape
-          boolean found = false;
           for (AbstractShape shape : modelCopy.getShapes()) {
             // Shape is in the model at this point, updating the RGB values
-            System.out.println(shape.toString());
-            System.out.println(change.toString());
-            System.out.println("oof");
             if (shape.getLabel().equals(change.getShapeLabel())) {
               shape.setR(change.getStartR() * tweenOne + change.getUpdatedR() * tweenTwo);
               shape.setG(change.getStartG() * tweenOne + change.getUpdatedG() * tweenTwo);

@@ -38,6 +38,7 @@ public class VisualView extends JFrame implements IView, ActionListener{
   @Override
   public void actionPerformed(ActionEvent e) {
     this.setUpdatedShapes(this.currentTick);
+    this.currentTick++;
   }
 
   @Override

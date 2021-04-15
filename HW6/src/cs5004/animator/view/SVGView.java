@@ -60,14 +60,16 @@ public class SVGView implements IView {
       try {
         if (shape.getType().equals(AvailableShapes.OVAL)) {
           fileOutput.append("<ellipse id=\"" + shape.getLabel() + "\" cx=\""
-                  + shape.getLocation().getX() + "\" cy=\"" + shape.getLocation().getY()
+                  + (shape.getLocation().getX() - model.getCanvas().getX()) + "\" cy=\""
+                  + (shape.getLocation().getY() - model.getCanvas().getY())
                   + "\" rx=\"" + shape.getWidth() + "\" "
                   + "ry=\"" + shape.getHeight() + " fill=\"rgb(" + shape.getR() + ","
                   + shape.getG() + "," + shape.getB() + ")\" visibility=\"visible\" >\n");
         } else if (shape.getType().equals(AvailableShapes.RECTANGLE)) {
           fileOutput.append("<rect id=\"" + shape.getLabel() + "\" x=\""
-                  + shape.getLocation().getX()
-                  + "\" y=\"" + shape.getLocation().getY() + "\" width=\"" + shape.getWidth() + "\" "
+                  + (shape.getLocation().getX() - model.getCanvas().getX())
+                  + "\" y=\"" + (shape.getLocation().getY() - model.getCanvas().getY())
+                  + "\" width=\"" + shape.getWidth() + "\" "
                   + "height=\"" + shape.getHeight() + "\" fill=\"rgb(" + shape.getR() + ","
                   + shape.getG()
                   + "," + shape.getB() + ")\" visibility=\"visible\" >\n");
@@ -75,20 +77,24 @@ public class SVGView implements IView {
         for (AbstractChange change : model.getChanges()) {
           if (change.getShapeLabel().equals(shape.getLabel())) {
             if (change.getType().equals(AvailableChanges.MOVE)) { //Porbably need to make one for elipse vs rect
-              fileOutput.append("    <animate attributeType=\"xml\" begin=\"" + change.getStartTime()
+              fileOutput.append("    <animate attributeType=\"xml\" begin=\""
+                      + change.getStartTime()
                       * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
                       - change.getStartTime()) * 1000 / this.speed
                       + "ms\" attributeName=\"x\" from=\""
-                      + change.getStartReference().getX() + "\" to=\""
-                      + change.getReference().getX()
+                      + (change.getStartReference().getX() - model.getCanvas().getX()) + "\" to=\""
+                      + (change.getReference().getX() - model.getCanvas().getX())
                       + "\" fill=\"freeze\" />\n");
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
                       + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
-                      + "ms\" attributeName=\"y\" from=\"" + change.getStartReference().getY()
-                      + "\" to=\"" + change.getReference().getY() + "\" fill=\"freeze\" />\n");
+                      + "ms\" attributeName=\"y\" from=\"" + (change.getStartReference().getY()
+                      - model.getCanvas().getY())
+                      + "\" to=\"" + (change.getReference().getY() - model.getCanvas().getY())
+                      + "\" fill=\"freeze\" />\n");
             } else if (change.getType().equals(AvailableChanges.RESIZE)) {
-              fileOutput.append("    <animate attributeType=\"xml\" begin=\"" + change.getStartTime()
+              fileOutput.append("    <animate attributeType=\"xml\" begin=\""
+                      + change.getStartTime()
                       * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
                       - change.getStartTime()) * 1000 / this.speed
                       + "ms\" attributeName=\"x\" from=\"" + change.getStartWidth() + "\" to=\""
@@ -99,7 +105,6 @@ public class SVGView implements IView {
                       + "ms\" attributeName=\"y\" from=\"" + change.getStartHeight()
                       + "\" to=\"" + change.getUpdatedHeight() + "\" fill=\"freeze\" />\n");
             } else if (change.getType().equals(AvailableChanges.RECOLOR)) {
-              //Not sure if this recolor will work but should be close, doublecheck attributName/type
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
                       + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed

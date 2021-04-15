@@ -48,7 +48,7 @@ public class CanvasPanel extends JPanel{
     // taking model data, converting to graphics2D objects with shapes
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g;
-
+    System.out.println(this.shapes.toString());
     for (AbstractShape s: this.shapes) {
       Color c = new Color(s.getR(), s.getG(), s.getB());
       if (s.getType().equals(AvailableShapes.RECTANGLE)) {
@@ -56,11 +56,13 @@ public class CanvasPanel extends JPanel{
             s.getLocation().getX(), s.getLocation().getY());
         g2d.setColor(c);
         g2d.fill(rect);
+        System.out.println(s.toString());
       } else if (s.getType().equals(AvailableShapes.OVAL)) {
         Shape oval = new Ellipse2D.Double(s.getHeight(), s.getWidth(),
             s.getLocation().getX(), s.getLocation().getY());
         g2d.setColor(c);
         g2d.fill(oval);
+        System.out.println(s.toString());
     } else {
         throw new IllegalStateException("Shape must be RECT or OVAL");
       }

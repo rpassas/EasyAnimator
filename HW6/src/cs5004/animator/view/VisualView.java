@@ -6,9 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import cs5004.animator.model.AnimationModel;
-import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.model.Point2D;
+import javax.swing.JScrollPane;
+import java.awt.BorderLayout;
 import javax.swing.Timer;
+
 
 
 public class VisualView extends JFrame implements IView, ActionListener{
@@ -31,6 +33,10 @@ public class VisualView extends JFrame implements IView, ActionListener{
     Point2D point = new Point2D(model.getCanvas().getX(), model.getCanvas().getY());
     this.mainPanel = new CanvasPanel(point,
         new Dimension(model.getCanvas().getWidth(), model.getCanvas().getHeight()));
+    JScrollPane pane = new JScrollPane(mainPanel);
+    pane.setPreferredSize(new Dimension(model.getCanvas().getWidth(),
+        model.getCanvas().getWidth()));
+    this.getContentPane().add(pane, BorderLayout.CENTER);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.timer = new Timer(1000 / this.speed, this);
   }
@@ -50,6 +56,7 @@ public class VisualView extends JFrame implements IView, ActionListener{
   public void run() {
     this.setVisible(true);
     this.timer.start();
+    System.out.println("running...");
   }
 
   @Override
@@ -57,6 +64,7 @@ public class VisualView extends JFrame implements IView, ActionListener{
     this.mainPanel.setAnimatedShapes(model.getShapesAtTick(currentTick));
     // every child component calls paintComponent as a result
     this.repaint();
+    System.out.println(currentTick);
   }
 
   @Override

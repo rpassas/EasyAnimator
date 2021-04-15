@@ -371,14 +371,14 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   public static final class Builder implements AnimationBuilder<AnimationModel> {
-    protected AnimationModelImpl model;
+    protected AnimationModel model;
 
     public Builder() {
       this.model = new AnimationModelImpl();
     }
 
     @Override
-    public AnimationModelImpl build() {
+    public AnimationModel build() {
       return this.model;
     }
 

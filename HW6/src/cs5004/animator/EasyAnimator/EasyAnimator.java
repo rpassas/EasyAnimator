@@ -6,6 +6,8 @@ import cs5004.animator.util.AnimationReader;
 import cs5004.animator.view.ViewMaker;
 import cs5004.animator.view.ViewType;
 import cs5004.animator.view.IView;
+
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -64,25 +66,40 @@ public class EasyAnimator {
           "Provided speed must be positive.", JOptionPane.WARNING_MESSAGE);
     }
     try {
+      FileWriter fileOut = new FileWriter(fileNameOut);
       // build model with file reader
       FileReader fileIn = new FileReader(fileNameIn);
       AnimationModel model = AnimationReader.parseFile(fileIn,
           new AnimationModelImpl.Builder());
-      // output file
-      FileWriter fileOut = new FileWriter(fileNameOut);
-      //TODO: generate an empty file to be passed to the view
       IView view = ViewMaker.makeView(viewType, model, fileOut, speed);
       view.run();
+      System.out.println("running...");
       fileOut.close();
-      //TODO: controller
     } catch (IOException e) {
-      e.printStackTrace();
-    } catch (IllegalArgumentException e) {
-      JFrame noFiles = new JFrame();
-      JOptionPane.showMessageDialog(noFiles, "Warning",
-          e.toString(),
-          JOptionPane.WARNING_MESSAGE);
+      // fileNameOut not a file
+      try {
+        // create outfile
+        File fileOutFile = new File(fileNameOut);
+        FileWriter fileOut = new FileWriter(fileOutFile);
+        // build model with file reader
+        FileReader fileIn = new FileReader(fileNameIn);
+        AnimationModel model = AnimationReader.parseFile(fileIn,
+            new AnimationModelImpl.Builder());
+        IView view = ViewMaker.makeView(viewType, model, fileOut, speed);
+        view.run();
+        System.out.println("running...");
+        fileOut.close();
+        //TODO: controller
+      } catch (IOException ee) {
+        // could not create output file writer
+        // or could not find file in
+        e.printStackTrace();
+      } catch (IllegalArgumentException eee) {
+        JFrame noFiles = new JFrame();
+        JOptionPane.showMessageDialog(noFiles, "Warning",
+            eee.toString(),
+            JOptionPane.WARNING_MESSAGE);
+      }
     }
-
   }
 }

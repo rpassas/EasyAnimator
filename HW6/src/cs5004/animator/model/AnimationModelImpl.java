@@ -288,18 +288,21 @@ public class AnimationModelImpl implements AnimationModel {
         modelCopy.addShape(firstCopy);
         // for a MOVE change, if the change isn't in the list, add it, otherwise update the shape
         // this is done due to change commands being on the same time interval
+        LinkedList<AbstractShape> shapesCopy = modelCopy.getShapes();
         if(change.getType().equals(AvailableChanges.MOVE)) {
           // Checks each shape in the list for the current shape
-          for (AbstractShape shape : modelCopy.getShapes()) {
-            if (shape.getLabel().equals(change.getShapeLabel())) {
+          int m;
+          for (m=0; m<shapesCopy.size(); m++){
+          //for (AbstractShape shape : modelCopy.getShapes()) {
+            if (shapesCopy.get(m).getLabel().equals(change.getShapeLabel())) {
               //Shape is in the model, updating the XY at currentTick to account for a second change
-              shape.getLocation().setX(change.getStartReference().getX() * tweenOne
+              shapesCopy.get(m).getLocation().setX(change.getStartReference().getX() * tweenOne
                       + change.getReference().getX() * tweenTwo);
-              shape.getLocation().setY(change.getStartReference().getY() * tweenOne
+              shapesCopy.get(m).getLocation().setY(change.getStartReference().getY() * tweenOne
                       + change.getReference().getY() * tweenTwo);
             } else {
               //Shape is not in the model, adds shape to the model
-              AbstractShape movedCopy = shape.cloneShape();
+              AbstractShape movedCopy = shapesCopy.get(m).cloneShape();
               // set the new coordinates
               int tweenX = change.getStartReference().getX() * tweenOne
                   + change.getReference().getX() * tweenTwo;
@@ -312,15 +315,19 @@ public class AnimationModelImpl implements AnimationModel {
           }
         } else if (change.getType().equals(AvailableChanges.RECOLOR)) {
           // Checks each shape in the list for the current change shape
-          for (AbstractShape shape : modelCopy.getShapes()) {
+          int c;
+          for (c=0; c<shapesCopy.size(); c++){
             // Shape is in the model at this point, updating the RGB values
-            if (shape.getLabel().equals(change.getShapeLabel())) {
-              shape.setR(change.getStartR() * tweenOne + change.getUpdatedR() * tweenTwo);
-              shape.setG(change.getStartG() * tweenOne + change.getUpdatedG() * tweenTwo);
-              shape.setB(change.getStartB() * tweenOne + change.getUpdatedB() * tweenTwo);
+            if (shapesCopy.get(c).getLabel().equals(change.getShapeLabel())) {
+              shapesCopy.get(c).setR(change.getStartR() * tweenOne
+                  + change.getUpdatedR() * tweenTwo);
+              shapesCopy.get(c).setG(change.getStartG() * tweenOne
+                  + change.getUpdatedG() * tweenTwo);
+              shapesCopy.get(c).setB(change.getStartB() * tweenOne
+                  + change.getUpdatedB() * tweenTwo);
             } else {
               // Shape was not in the model, adding the shape with updated RGB values
-              AbstractShape recoloredCopy = shape.cloneShape();
+              AbstractShape recoloredCopy = shapesCopy.get(c).cloneShape();
               // set new colors
               int tweenR = change.getStartR() * tweenOne + change.getUpdatedR() * tweenTwo;
               int tweenG = change.getStartG() * tweenOne + change.getUpdatedG() * tweenTwo;
@@ -333,14 +340,17 @@ public class AnimationModelImpl implements AnimationModel {
           }
         } else if (change.getType().equals(AvailableChanges.RESIZE)) {
           // Checks each shape in the list for the current change shape
-          for (AbstractShape shape : modelCopy.getShapes()) {
+          int s;
+          for (s=0; s<shapesCopy.size(); s++){
             // Shape is in the model at this point, updating the width/height values
-            if (shape.getLabel().equals(change.getShapeLabel())) {
-              shape.setWidth(change.getStartWidth() * tweenOne + change.getUpdatedWidth() * tweenTwo);
-              shape.setHeight(change.getStartHeight() * tweenOne + change.getUpdatedHeight() * tweenTwo);
+            if (shapesCopy.get(s).getLabel().equals(change.getShapeLabel())) {
+              shapesCopy.get(s).setWidth(change.getStartWidth() * tweenOne
+                  + change.getUpdatedWidth() * tweenTwo);
+              shapesCopy.get(s).setHeight(change.getStartHeight() * tweenOne
+                  + change.getUpdatedHeight() * tweenTwo);
             } else {
               // Shape was not in the model, adding the shape with updated width/height
-              AbstractShape resizedCopy = shape.cloneShape();
+              AbstractShape resizedCopy = shapesCopy.get(s).cloneShape();
               // set new dimensions
               int tweenW = change.getStartWidth() * tweenOne
                   + change.getUpdatedWidth() * tweenTwo;

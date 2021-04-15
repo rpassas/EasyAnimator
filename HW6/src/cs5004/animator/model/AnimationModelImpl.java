@@ -99,7 +99,7 @@ public class AnimationModelImpl implements AnimationModel {
    */
   public void addShape(AvailableShapes shape, String label, int x, int y, int w, int h,
                        int r, int g, int b, int opacity) {
-    if (w <= 0 || h <= 0) {
+    if (w < 0 || h < 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
     }
     if (r < 0 || g < 0 || b < 0 || opacity < 0) {
@@ -248,7 +248,7 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public void addResize(AbstractShape shape,
                         int startW, int startH, int endW, int endH, int t1, int t2) {
-    if (startW <= 0 || startH <= 0 || endW <= 0 || endH <= 0) {
+    if (startW < 0 || startH < 0 || endW < 0 || endH < 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
     }
     if (t1 < 0 || t2 < 0) {
@@ -409,6 +409,22 @@ public class AnimationModelImpl implements AnimationModel {
                                       int t2, int x2, int y2, int w2, int h2,
                                                       int r2, int g2, int b2)
     {
+      boolean newShape = true;
+      for (Change c : model.getChanges()) {
+        if (c.getShapeLabel().equals(name)) {
+          newShape = false;
+        }
+      }
+      if (newShape) {
+        model.getShape(name).setLocation(new Point2D(x1, y1));
+        model.getShape(name).setWidth(w1);
+        model.getShape(name).setHeight(h1);
+        model.getShape(name).setR(r1);
+        model.getShape(name).setG(g1);
+        model.getShape(name).setB(b1);
+        model.getShape(name).setOpacity(100);
+      }
+
       if (x2 - x1 != 0 || y2 - y1 != 0) {
         model.addMove(model.getShape(name), x1, y1, x2, y2, t1, t2);
       } else if (w2 - w1 != 0 || h2 - h1 != 0) {

@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import cs5004.animator.EasyAnimator.EasyAnimator;
 import cs5004.animator.model.AbstractShape;
 import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.model.AvailableShapes;
@@ -26,6 +27,7 @@ public class TextViewTest {
     this.model = new AnimationModelImpl();
     this.toh = "toh-5.txt";
   }
+
 /*
   @Test
   public void testConstructor() {
@@ -46,4 +48,11 @@ public class TextViewTest {
   }
 
  */
+
+  public void testMainText() {
+
+    StringBuilder textLog = new StringBuilder();
+    //EasyAnimator("")
+
+  }
 }

@@ -44,8 +44,9 @@ public class SVGView implements IView {
    */
   public void createCanvas() throws IOException {
     fileOutput.append("<svg width=\"" + model.getCanvas().getWidth() + "\" height=\""
-            + model.getCanvas().getHeight() + "\" version=\"1.1\" \n" +
-            "xmls=\"http://www.w3.org/2000/svg\">"); //Not sure if this line is right
+            + model.getCanvas().getHeight() + "\" version=\"1.1\"" +
+            "xmls=\"http://www.w3.org/2000/svg\">\n"); //Not sure if this line is right
+    fileOutput.append("\n");
   }
 
   /**
@@ -61,48 +62,48 @@ public class SVGView implements IView {
           fileOutput.append("<ellipse id=\"" + shape.getLabel() + "\" cx=\""
                   + shape.getLocation().getX() + "\" cy=\"" + shape.getLocation().getY()
                   + "\" rx=\"" + shape.getWidth() + "\" "
-                  + "ry=\"" + shape.getHeight() + " fill=\"rgb(" + shape.getR() + ", "
-                  + shape.getG() + ", " + shape.getB() + ")\" visibility=\"visible\" >\n");
+                  + "ry=\"" + shape.getHeight() + " fill=\"rgb(" + shape.getR() + ","
+                  + shape.getG() + "," + shape.getB() + ")\" visibility=\"visible\" >\n");
         } else if (shape.getType().equals(AvailableShapes.RECTANGLE)) {
-          fileOutput.append("<rect id=\"" + shape.getLabel() + "\" cx=\""
+          fileOutput.append("<rect id=\"" + shape.getLabel() + "\" x=\""
                   + shape.getLocation().getX()
-                  + "\" cy=\"" + shape.getLocation().getY() + "\" rx=\"" + shape.getWidth() + "\" "
-                  + "ry=\"" + shape.getHeight() + " fill=\"rgb(" + shape.getR() + ", "
+                  + "\" y=\"" + shape.getLocation().getY() + "\" width=\"" + shape.getWidth() + "\" "
+                  + "height=\"" + shape.getHeight() + "\" fill=\"rgb(" + shape.getR() + ","
                   + shape.getG()
-                  + ", " + shape.getB() + ")\" visibility=\"visible\" >\n");
+                  + "," + shape.getB() + ")\" visibility=\"visible\" >\n");
         }
         for (AbstractChange change : model.getChanges()) {
           if (change.getShapeLabel().equals(shape.getLabel())) {
-            if (change.getType().equals(AvailableChanges.MOVE)) {
-              fileOutput.append("  <animate attributeType=\"xml\" begin=\"" + change.getStartTime()
+            if (change.getType().equals(AvailableChanges.MOVE)) { //Porbably need to make one for elipse vs rect
+              fileOutput.append("    <animate attributeType=\"xml\" begin=\"" + change.getStartTime()
                       * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
                       - change.getStartTime()) * 1000 / this.speed
-                      + "ms\" attributeName\"cx\" from=\""
+                      + "ms\" attributeName=\"x\" from=\""
                       + change.getStartReference().getX() + "\" to=\""
                       + change.getReference().getX()
                       + "\" fill=\"freeze\" />\n");
-              fileOutput.append("  <animate attributeType=\"xml\" begin=\""
+              fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
                       + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
-                      + "ms\" attributeName\"cy\" from=\"" + change.getStartReference().getY()
+                      + "ms\" attributeName=\"y\" from=\"" + change.getStartReference().getY()
                       + "\" to=\"" + change.getReference().getY() + "\" fill=\"freeze\" />\n");
             } else if (change.getType().equals(AvailableChanges.RESIZE)) {
-              fileOutput.append("  <animate attributeType=\"xml\" begin=\"" + change.getStartTime()
+              fileOutput.append("    <animate attributeType=\"xml\" begin=\"" + change.getStartTime()
                       * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
                       - change.getStartTime()) * 1000 / this.speed
-                      + "ms\" attributeName\"rx\" from=\"" + change.getStartWidth() + "\" to=\""
+                      + "ms\" attributeName=\"x\" from=\"" + change.getStartWidth() + "\" to=\""
                       + change.getUpdatedWidth() + "\" fill=\"freeze\" />\n");
-              fileOutput.append("  <animate attributeType=\"xml\" begin=\""
+              fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
                       + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
-                      + "ms\" attributeName\"ry\" from=\"" + change.getStartHeight()
+                      + "ms\" attributeName=\"y\" from=\"" + change.getStartHeight()
                       + "\" to=\"" + change.getUpdatedHeight() + "\" fill=\"freeze\" />\n");
             } else if (change.getType().equals(AvailableChanges.RECOLOR)) {
               //Not sure if this recolor will work but should be close, doublecheck attributName/type
-              fileOutput.append("  <animate attributeType=\"xml\" begin=\""
+              fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
                       + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
-                      + "ms\" attributeName\"fill\" from=\"rgb("
+                      + "ms\" attributeName=\"fill\" from=\"rgb("
                       + change.getStartR() + ","
                       + change.getStartG() + ","
                       + change.getStartB() + ")\" to=\"rgb("
@@ -134,6 +135,7 @@ public class SVGView implements IView {
     try {
       createCanvas();
       createShapes(model.getShapes(), speed);
+      fileOutput.append("</svg>");
     } catch (IOException e) {
       System.out.println("Error with the file writer.");
     }

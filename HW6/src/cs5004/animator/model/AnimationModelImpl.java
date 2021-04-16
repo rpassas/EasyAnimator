@@ -1,7 +1,9 @@
 package cs5004.animator.model;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import cs5004.animator.util.AnimationBuilder;
 
@@ -9,7 +11,8 @@ import cs5004.animator.util.AnimationBuilder;
  * Implementation of the IShape interface.
  */
 public class AnimationModelImpl implements AnimationModel {
-  private final LinkedList<AbstractShape> listOfShapes;
+  //private final LinkedList<AbstractShape> listOfShapes;
+  private final HashMap<String, AbstractShape> shapeMap;
   private final LinkedList<AbstractChange> listOfChanges;
   private final LinkedList<Integer> listOfKeys;
   private final Canvas canvas;
@@ -19,25 +22,16 @@ public class AnimationModelImpl implements AnimationModel {
    * Constructor for the animation model impl.
    */
   public AnimationModelImpl() {
-    this.listOfShapes = new LinkedList<>();
+    this.shapeMap = new LinkedHashMap<>();
     this.listOfKeys = new LinkedList<>();
     this.listOfChanges = new LinkedList<>();
     this.canvas = new Canvas();
   }
 
   @Override
-  public LinkedList<AbstractShape> getShapes() {
-    return this.listOfShapes;
-  }
-
-  @Override
-  public AbstractShape getShape(String name) {
-    for (AbstractShape shape : this.listOfShapes) {
-      if (shape.getLabel().equals(name)) {
-        return shape;
-      }
-    }
-    throw new IllegalArgumentException("no shape was found");
+  public HashMap<String, AbstractShape>  getShapes() {
+    List<AbstractShape> list = new LinkedList<AbstractShape>(shapeMap.values());
+    return list
   }
 
   @Override

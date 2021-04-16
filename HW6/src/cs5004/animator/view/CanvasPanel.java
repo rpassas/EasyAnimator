@@ -59,14 +59,12 @@ public class CanvasPanel extends JPanel{
               s.getWidth(),s.getHeight());
           g2d.setColor(c);
           g2d.fill(rect);
-          //System.out.println(s.toString());
         } else if (s.getType().equals(AvailableShapes.OVAL)) {
           Shape oval = new Ellipse2D.Double(s.getLocation().getX(),
               s.getLocation().getY(),
               s.getWidth(),s.getHeight());
           g2d.setColor(c);
           g2d.fill(oval);
-          //System.out.println(s.toString());
         } else {
           throw new IllegalStateException("Shape must be RECT or OVAL");
         }

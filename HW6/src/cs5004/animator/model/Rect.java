@@ -91,9 +91,9 @@ public class Rect extends AbstractShape {
    * @return a string representation of a rectangle.
    */
   public String toString() {
-    return "Rectangle " + this.getLabel() + " -> center: ("
+    return "Rectangle " + this.getLabel() + " with RGB(" + this.getR() + ", " + this.getG() + ", " + this.getB() + "), and corner at ("
         + this.reference.getX() + ", " + this.reference.getY()
-        + "), x-dimension: " + this.getWidth() + ", y-dimension: " + this.getHeight();
+        + "), width: " + this.getWidth() + ", height: " + this.getHeight();
   }
 }
 

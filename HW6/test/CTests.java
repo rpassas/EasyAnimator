@@ -29,35 +29,30 @@ public class CTests {
   @Test
   public void testConstructor() {
     //Testing the constructor with a radius no RGB or width and height
-    Circle circleConstructorRadius = new Circle("circle1", 5, 3, 2);
-    assertEquals("cs5004.AnimationModel.Circle circle1 -> center: (5, 3)," +
-            " x-dimension: 2, y-dimension: 2",
+    Circle circleConstructorRadius = new Circle("circle1", 5, 3, 2, 15, 25, 35, 100);
+    assertEquals("Ellipse circle1 with RGB(15, 25, 35), and center at: " +
+                    "(5, 3), x-radius: 2, y-radius: 2",
             circleConstructorRadius.toString());
     // Testing the constructor with a width and a height and no radius or rgb
     Circle circleConstructorWH1 = new Circle("circle2", 2, 4, 5, 6);
-    assertEquals("cs5004.AnimationModel.Circle circle2 -> center: (2, 4)," +
-            " x-dimension: 5, y-dimension: 6",
+    assertEquals("Ellipse circle2 with RGB(0, 0, 0), and center at: (2, 4), x-radius: 5, y-radius: 6",
             circleConstructorWH1.toString());
     Circle circleConstructorWH2 = new Circle("circle3", 15, 1, 15, 167);
-    assertEquals("cs5004.AnimationModel.Circle circle3 -> center: (15, 1)," +
-            " x-dimension: 15, y-dimension: 167",
+    assertEquals("Ellipse circle3 with RGB(0, 0, 0), and center at: (15, 1), x-radius: 15, y-radius: 167",
             circleConstructorWH2.toString());
     //Testing constructor with width and height and rgb, no radius
     Circle circleConstructorRGB1 = new Circle("circle4",
         5, 3, 2, 2, 2, 2, 2, 20);
-    assertEquals("cs5004.AnimationModel.Circle circle4 -> center: (5, 3)," +
-            " x-dimension: 2, y-dimension: 2",
+    assertEquals("Ellipse circle4 with RGB(2, 2, 2), and center at: (5, 3), x-radius: 2, y-radius: 2",
             circleConstructorRGB1.toString());
     Circle circleConstructorRGB2 = new Circle("circle5",
         1, 1, 1, 1, 1, 1, 1, 1);
-    assertEquals("cs5004.AnimationModel.Circle circle5 -> center: (1, 1)," +
-            " x-dimension: 1, y-dimension: 1",
+    assertEquals("Ellipse circle5 with RGB(1, 1, 1), and center at: (1, 1), x-radius: 1, y-radius: 1",
             circleConstructorRGB2.toString());
     //Testing constructor with radius and rgb no width and height
     Circle circleConstructorRGBRadius = new Circle("circle6",
         1, 2, 3, 4, 5, 6, 7);
-    assertEquals("cs5004.AnimationModel.Circle circle6 -> center: (1, 2)," +
-            " x-dimension: 3, y-dimension: 3",
+    assertEquals("Ellipse circle6 with RGB(4, 5, 6), and center at: (1, 2), x-radius: 3, y-radius: 3",
             circleConstructorRGBRadius.toString());
   }
 

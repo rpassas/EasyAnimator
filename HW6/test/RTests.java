@@ -26,12 +26,14 @@ public class RTests {
   public void testConstructor() {
     //Testing the constructor 1 with X/Y width and Height
     Rect rectConstructorWH = new Rect("rect1",1, 1, 2, 9, 30, 25, 50, 100);
-    assertEquals("Rectangle rect1 with RGB(30, 25, 50), and corner at (1, 1), width: 2, height: 9",
+    assertEquals("Rectangle rect1 with RGB(30, 25, 50), and corner at " +
+                    "(1, 1), width: 2, height: 9",
             rectConstructorWH.toString());
     //Testing the constructor 2 with X/Y, width, height, RGB, and opacity
     Rect rectConstructorRGB = new Rect("rect2",
         10, 20, 30, 40, 15, 15, 15, 100);
-    assertEquals("Rectangle rect2 with RGB(15, 15, 15), and corner at (10, 20), width: 30, height: 40",
+    assertEquals("Rectangle rect2 with RGB(15, 15, 15), and corner at " +
+                    "(10, 20), width: 30, height: 40",
             rectConstructorRGB.toString());
   }
 

@@ -35,24 +35,29 @@ public class CTests {
             circleConstructorRadius.toString());
     // Testing the constructor with a width and a height and no radius or rgb
     Circle circleConstructorWH1 = new Circle("circle2", 2, 4, 5, 6);
-    assertEquals("Ellipse circle2 with RGB(0, 0, 0), and center at: (2, 4), x-diameter: 5, y-diameter: 6",
+    assertEquals("Ellipse circle2 with RGB(0, 0, 0), and center at: (2, 4), " +
+                    "x-diameter: 5, y-diameter: 6",
             circleConstructorWH1.toString());
     Circle circleConstructorWH2 = new Circle("circle3", 15, 1, 15, 167);
-    assertEquals("Ellipse circle3 with RGB(0, 0, 0), and center at: (15, 1), x-diameter: 15, y-diameter: 167",
+    assertEquals("Ellipse circle3 with RGB(0, 0, 0), and center at: (15, 1)," +
+                    " x-diameter: 15, y-diameter: 167",
             circleConstructorWH2.toString());
     //Testing constructor with width and height and rgb, no radius
     Circle circleConstructorRGB1 = new Circle("circle4",
         5, 3, 2, 2, 2, 2, 2, 20);
-    assertEquals("Ellipse circle4 with RGB(2, 2, 2), and center at: (5, 3), x-diameter: 2, y-diameter: 2",
+    assertEquals("Ellipse circle4 with RGB(2, 2, 2), and center at: (5, 3)," +
+                    " x-diameter: 2, y-diameter: 2",
             circleConstructorRGB1.toString());
     Circle circleConstructorRGB2 = new Circle("circle5",
         1, 1, 1, 1, 1, 1, 1, 1);
-    assertEquals("Ellipse circle5 with RGB(1, 1, 1), and center at: (1, 1), x-diameter: 1, y-diameter: 1",
+    assertEquals("Ellipse circle5 with RGB(1, 1, 1), and center at: (1, 1)," +
+                    " x-diameter: 1, y-diameter: 1",
             circleConstructorRGB2.toString());
     //Testing constructor with radius and rgb no width and height
     Circle circleConstructorRGBRadius = new Circle("circle6",
         1, 2, 3, 4, 5, 6, 7);
-    assertEquals("Ellipse circle6 with RGB(4, 5, 6), and center at: (1, 2), x-diameter: 3, y-diameter: 3",
+    assertEquals("Ellipse circle6 with RGB(4, 5, 6), and center at: (1, 2)," +
+                    " x-diameter: 3, y-diameter: 3",
             circleConstructorRGBRadius.toString());
   }
 

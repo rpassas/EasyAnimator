@@ -134,7 +134,8 @@ public class Circle extends AbstractShape {
    * @return a string representation of a circle.
    */
   public String toString() {
-    return "Ellipse " + this.getLabel() + " with RGB(" + this.getR() + ", " + this.getG() + ", " + this.getB() + "), and center at: ("
+    return "Ellipse " + this.getLabel() + " with RGB(" + this.getR() + ", " + this.getG()
+            + ", " + this.getB() + "), and center at: ("
         + this.reference.getX() + ", " + this.reference.getY()
         + "), x-diameter: " + this.getWidth() + ", y-diameter: " + this.getHeight();
   }

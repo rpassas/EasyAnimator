@@ -29,9 +29,9 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public HashMap<String, AbstractShape>  getShapes() {
-    List<AbstractShape> list = new LinkedList<AbstractShape>(shapeMap.values());
-    return list
+  public LinkedList<AbstractShape>  getShapes() {
+    LinkedList<AbstractShape> list = new LinkedList<AbstractShape>(shapeMap.values());
+    return list;
   }
 
   @Override

@@ -86,7 +86,6 @@ public class EasyAnimator {
             new AnimationModelImpl.Builder());
         IView view = ViewMaker.makeView(viewType, model, fileOut, speed);
         view.run();
-        System.out.println("running...");
         fileOut.close();
         //TODO: controller
       } catch (IOException ee) {

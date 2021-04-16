@@ -134,7 +134,7 @@ public class Circle extends AbstractShape {
    * @return a string representation of a circle.
    */
   public String toString() {
-    return "cs5004.AnimationModel.Circle " + this.getLabel() + " -> center: ("
+    return "Circle " + this.getLabel() + " -> center: ("
         + this.reference.getX() + ", " + this.reference.getY()
         + "), x-dimension: " + this.getWidth() + ", y-dimension: " + this.getHeight();
   }

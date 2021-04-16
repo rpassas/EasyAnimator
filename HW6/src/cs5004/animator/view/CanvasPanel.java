@@ -52,20 +52,22 @@ public class CanvasPanel extends JPanel{
     Graphics2D g2d = (Graphics2D) g;
     if (this.shapes != null) {
       for (AbstractShape s : this.shapes) {
+        System.out.println(s);
         Color c = new Color(s.getR(), s.getG(), s.getB());
         if (s.getType().equals(AvailableShapes.RECTANGLE)) {
-          Shape rect = new Rectangle2D.Double(s.getHeight(), s.getWidth(),
-              s.getLocation().getX(), s.getLocation().getY());
+          Shape rect = new Rectangle2D.Double(s.getLocation().getX(),
+              s.getLocation().getY(),
+              s.getWidth(),s.getHeight());
           g2d.setColor(c);
           g2d.fill(rect);
-          System.out.println(s.toString());
+          //System.out.println(s.toString());
         } else if (s.getType().equals(AvailableShapes.OVAL)) {
-          Shape oval = new Ellipse2D.Double(s.getHeight(), s.getWidth(),
-              s.getLocation().getX() - model.getCanvas().getX(),
-              s.getLocation().getY() - model.getCanvas().getX());
+          Shape oval = new Ellipse2D.Double(s.getLocation().getX(),
+              s.getLocation().getY(),
+              s.getWidth(),s.getHeight());
           g2d.setColor(c);
           g2d.fill(oval);
-          System.out.println(s.toString());
+          //System.out.println(s.toString());
         } else {
           throw new IllegalStateException("Shape must be RECT or OVAL");
         }

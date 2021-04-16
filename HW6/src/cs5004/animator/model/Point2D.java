@@ -50,7 +50,7 @@ public class Point2D {
   /**
    * Method to set the Y value of the origin point to a new value.
    *
-   * @param y is the new value ofy.
+   * @param y is the new value of y.
    */
   public void setY(int y) {
     this.y = y;

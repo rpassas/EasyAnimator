@@ -18,7 +18,7 @@ public class VisualView extends JFrame implements IView, ActionListener{
   private CanvasPanel mainPanel;
   private int speed;
   private Timer timer;
-  private int currentTick = 1;
+  private int currentTick = 0;
 
   //TODO speed must be > 0
   VisualView(AnimationModel model, int speed) {
@@ -27,8 +27,6 @@ public class VisualView extends JFrame implements IView, ActionListener{
     this.speed = speed;
     this.setTitle("EZ Animator");
     this.setSize(new Dimension(model.getCanvas().getWidth(),
-        model.getCanvas().getHeight()));
-    System.out.println(new Dimension(model.getCanvas().getWidth(),
         model.getCanvas().getHeight()));
     Point2D point = new Point2D(model.getCanvas().getX(), model.getCanvas().getY());
     this.mainPanel = new CanvasPanel(point,
@@ -56,7 +54,6 @@ public class VisualView extends JFrame implements IView, ActionListener{
   public void run() {
     this.setVisible(true);
     this.timer.start();
-    System.out.println("running...");
   }
 
   @Override
@@ -64,7 +61,7 @@ public class VisualView extends JFrame implements IView, ActionListener{
     this.mainPanel.setAnimatedShapes(model.getShapesAtTick(currentTick));
     // every child component calls paintComponent as a result
     this.repaint();
-    System.out.println(currentTick);
+    System.out.println("tick: " + currentTick);
   }
 
   @Override

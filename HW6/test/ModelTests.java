@@ -41,7 +41,8 @@ public class ModelTests {
   public void testAnimationModelImplConstructor() {
     AnimationModelImpl modelConstructor = new AnimationModelImpl();
     modelConstructor.addShape(AvailableShapes.RECTANGLE, "Rect1", 5, 1, 2, 5, 0, 0, 0,0);
-    assertEquals("[Rectangle Rect1 -> center: (5, 1), x-dimension: 2, y-dimension: 5]",
+    assertEquals("[Rectangle Rect1 with RGB(0, 0, 0), and corner at (5, 1), " +
+                    "width: 2, height: 5]",
         modelConstructor.getShapes().toString());
   }
 
@@ -55,8 +56,6 @@ public class ModelTests {
     model1.addShape(circleConstructorRadius);
     assertEquals(testList, model1.getShapes());
     Rect rectangle1 = new Rect("cs5004.AnimationModel.Rect", 3, 6, 4, 7);
-    testList.add(circleConstructorRadius);
-    model1.addShape(circleConstructorRadius);
     assertEquals(testList, model1.getShapes());
 
     // adding via a change
@@ -74,13 +73,13 @@ public class ModelTests {
         5, 5, 5, 5, 5, 5, 5, 100);
     model2.addShape(AvailableShapes.RECTANGLE, "Rect3",
         6, 6, 6, 6, 6, 6, 6, 6);
-    assertEquals("[Rectangle aRect -> center: (2, 2), x-dimension: 2, y-dimension: 2," +
-            " Rectangle anotherRect -> center: (3, 3), x-dimension: 3, y-dimension: 3," +
-            " cs5004.AnimationModel.Circle aCircle -> center: (4, 4), x-dimension: 4, " +
-                    "y-dimension: 4," +
-            " cs5004.AnimationModel.Circle anotherCircle -> center: (5, 5), x-dimension: 5, " +
-                    "y-dimension: 5," +
-            " Rectangle Rect3 -> center: (6, 6), x-dimension: 6, y-dimension: 6]",
+    assertEquals("[Rectangle aRect with RGB(0, 0, 0), and corner at (2, 2), width: 2, " +
+                    "height: 2, Rectangle anotherRect with RGB(0, 0, 0), and corner at (3, 3), " +
+                    "width: 3, height: 3, Ellipse aCircle with RGB(0, 0, 0), and center at: " +
+                    "(4, 4), x-diameter: 4, y-diameter: 4, Ellipse anotherCircle with " +
+                    "RGB(5, 5, 5), and center at: (5, 5), x-diameter: 5, y-diameter: 5, " +
+                    "Rectangle Rect3 with RGB(6, 6, 6), and corner at (6, 6), width: " +
+                    "6, height: 6]",
             model2.getShapes().toString());
   }
 
@@ -107,60 +106,35 @@ public class ModelTests {
   @Test
   public void testRemoveShapes() {
     //Removing by shape index
-    model2.addShape(AvailableShapes.RECTANGLE, "Rect1", 2, 2, 2, 2,0, 0, 0,0);
-    model2.addShape(AvailableShapes.RECTANGLE, "Rect2",3, 3, 3, 3,0, 0, 0,0);
-    model2.addShape(AvailableShapes.OVAL, "Circle1",4, 4, 4, 4,0, 0, 0,0);
+    model2.addShape(AvailableShapes.RECTANGLE, "Rect1", 2, 2, 2, 2,
+            0, 0, 0,0);
+    model2.addShape(AvailableShapes.RECTANGLE, "Rect2",3, 3, 3, 3,
+            0, 0, 0,0);
+    model2.addShape(AvailableShapes.OVAL, "Circle1",4, 4, 4, 4,0,
+            0, 0,0);
     model2.addShape(AvailableShapes.OVAL,"Circle2",
         5, 5, 5, 5, 5, 5, 5, 100);
     model2.addShape(AvailableShapes.RECTANGLE,"Circle3",
         6, 6, 6, 6, 6, 6, 6, 6);
-    model2.removeShape(0);
-    assertEquals("[Rectangle Rect2 -> center: (3, 3), x-dimension: 3, y-dimension: 3, " +
-            "cs5004.AnimationModel.Circle Circle1 -> center: (4, 4), x-dimension: 4, " +
-                    "y-dimension: " + "4, cs5004.AnimationModel.Circle Circle2 -> " +
-            "center: (5, 5), x-dimension: 5, y-dimension: 5, Rectangle Circle3 -> " +
-            "center: (6, 6), x-dimension: 6, y-dimension: 6]",
+    model2.removeShape("Rect1");
+    assertEquals("[Rectangle Rect2 with RGB(0, 0, 0), and corner at (3, 3), width: " +
+                    "3, height: 3, Ellipse Circle1 with RGB(0, 0, 0), and center at: (4, 4), " +
+                    "x-diameter: 4, y-diameter: 4, Ellipse Circle2 with RGB(5, 5, 5), " +
+                    "and center at: (5, 5), x-diameter: 5, y-diameter: 5, Rectangle Circle3 " +
+                    "with RGB(6, 6, 6), and corner at (6, 6), width: 6, height: 6]",
             model2.getShapes().toString());
-    model2.removeShape(1);
-    model2.removeShape(3);
-    model2.removeShape(4);
-    assertEquals("[cs5004.AnimationModel.Circle Circle1 -> center: (4, 4), x-dimension: " +
-                    "4, y-dimension: 4]",
+    model2.removeShape("Rect2");
+    model2.removeShape("Circle1");
+    model2.removeShape("Circle2");
+    assertEquals("[Rectangle Circle3 with RGB(6, 6, 6), and corner at (6, 6), " +
+                    "width: 6, height: 6]",
             model2.getShapes().toString());
-    model2.removeShape(2);
+    model2.removeShape("Circle3");
     assertEquals("[]", model2.getShapes().toString());
-
-    // Removing by shape object
-    model1.addShape(rectangle1);
-    model1.addShape(circle1);
-    model1.addShape(rectangle2);
-    model1.addShape(circle2);
-    assertEquals("[Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3, " +
-            "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4, " +
-            "Rectangle R2 -> center: (5, 6), x-dimension: 7, y-dimension: 8, " +
-            "cs5004.AnimationModel.Circle C2 -> center: (15, 26), x-dimension: " +
-                    "45, y-dimension: 45]", model1.getShapes().toString());
-    model1.removeShape(rectangle1);
-    model1.removeShape(rectangle2);
-    assertEquals("[cs5004.AnimationModel.Circle C1 -> center: (1, 2), " +
-                    "x-dimension: 3, y-dimension: 4, " +
-            "cs5004.AnimationModel.Circle C2 -> center: (15, 26), x-dimension: " +
-                    "45, y-dimension: 45]", model1.getShapes().toString());
-    model1.removeShape(circle1);
-    model1.removeShape(circle2);
-    assertEquals("[]", model1.getShapes().toString());
   }
 
   @Test
   public void testRemoveShape() {
-    // Testing removing by shape identifier
-    try {
-      model1.removeShape(15);
-      fail("Invalid constructor should have thrown exception");
-    } catch (IllegalArgumentException iae) {
-      assertEquals("That identifier is empty.", iae.getMessage());
-      assertTrue(iae.getMessage().length() > 0);
-    }
     // Testing removing by label
     try {
       model1.removeShape("hi");
@@ -275,8 +249,7 @@ public class ModelTests {
   public void testAddColor() {
     model1.addShape(rectangle1);
     LinkedList<Change> testList = new LinkedList<>();
-    Recolor color1 = new Recolor(rectangle1,
-        0, rectangle1.getLabel(),
+    Recolor color1 = new Recolor(rectangle1, rectangle1.getLabel(),
         100, 115, 130, 100,
         100, 115, 130, 100, 0, 5);
     testList.add(color1);
@@ -293,7 +266,7 @@ public class ModelTests {
     model2.addShape(circle1);
     LinkedList<Change> testList2 = new LinkedList<>();
     Recolor color2 = new Recolor(circle1,
-            0, circle1.getLabel(),100, 115, 130, 0,
+            circle1.getLabel(),100, 115, 130, 0,
         100, 115, 10, 0,5, 10);
     testList2.add(color2);
     model2.addRecolor(circle1, 100, 115, 130, 0,
@@ -474,7 +447,8 @@ public class ModelTests {
   @Test
   public void testAddResize() {
     model1.addShape(rectangle2);
-    assertEquals("[Rectangle R2 -> center: (5, 6), x-dimension: 7, y-dimension: 8]",
+    assertEquals("[Rectangle R2 with RGB(0, 0, 0), and corner at (5, 6), " +
+                    "width: 7, height: 8]",
             model1.getShapes().toString());
     model1.addResize(rectangle2, 1, 3,
         5, 3,0 , 15);
@@ -494,10 +468,10 @@ public class ModelTests {
     model2.addShape(rectangle1);
     model2.addShape(circle2);
     model2.addShape(circle1);
-    assertEquals("[Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3, " +
-            "cs5004.AnimationModel.Circle C2 -> center: (15, 26)," +
-            " x-dimension: 45, y-dimension: 45, " +
-            "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4]",
+    assertEquals("[Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), width: " +
+                    "2, height: 3, Ellipse C2 with RGB(0, 64, 254), and center at: (15, 26), " +
+                    "x-diameter: 45, y-diameter: 45, Ellipse C1 with RGB(0, 0, 0), and center" +
+                    " at: (1, 2), x-diameter: 3, y-diameter: 4]",
             model2.getShapes().toString());
     model2.addResize(rectangle1, 1, 1,7, 3, 1, 2);
     model2.addResize(circle1, 1, 1,3, 8, 1, 2);
@@ -525,7 +499,7 @@ public class ModelTests {
     // Testing negative/0 height
     try {
       AnimationModelImpl testIllegal = new AnimationModelImpl();
-      testIllegal.addResize(circle1, 15, 0,1, 3, 5, 5);
+      testIllegal.addResize(circle1, 15, -1,1, 3, 5, 5);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());

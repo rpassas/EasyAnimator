@@ -31,12 +31,12 @@ public class ChangesTest {
     pointE = new Point2D(5,6);
     Rect rectangle1 = new Rect("R1", 3, 6, 4, 7);
     Circle circle1 = new Circle("c1", 1, 2, 3);
-    move1 = new Move(rectangle1, 1, "R1",
+    move1 = new Move(rectangle1, "R1",
         3, 4,5,6,7,8);
-    recolor1 = new Recolor(circle1, 1, "C1",
+    recolor1 = new Recolor(circle1, "C1",
         3, 4, 5, 6, 7, 8, 9,10,
         11, 12);
-    resize1 = new Resize(rectangle1, 1, "R1", 3, 4,5,6,
+    resize1 = new Resize(rectangle1, "R1", 3, 4,5,6,
         7,8);
   }
 

@@ -12,7 +12,6 @@ public class Resize extends AbstractChange {
   /**
    * Constructor for the resize class.
    * @param shape the shape that is being resized.
-   * @param shapeID the id of the shape.
    * @param shapeLabel the string identifier of the shape.
    * @param startW starting width.
    * @param startH staring height.
@@ -21,7 +20,7 @@ public class Resize extends AbstractChange {
    * @param startTime starting time.
    * @param endTime ending time.
    */
-  public Resize(BasicShape shape, int shapeID, String shapeLabel,
+  public Resize(BasicShape shape, String shapeLabel,
                 int startW, int startH, int endW, int endH, int startTime, int endTime) {
     this.setStartHeight(startH);
     this.setStartWidth(startW);
@@ -29,7 +28,6 @@ public class Resize extends AbstractChange {
     this.setUpdatedWidth(endW);
     super.setStartTime(startTime);
     super.setEndTime(endTime);
-    super.setShapeID(shapeID);
     super.setShapeLabel(shapeLabel);
     super.setType(AvailableChanges.RESIZE);
     super.setShapeType(shape.getType());

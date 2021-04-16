@@ -16,7 +16,6 @@ public class Recolor extends AbstractChange {
   /**
    * Constructor for the recolor class.
    * @param shape the shape it is acting on.
-   * @param shapeID the id of the shape.
    * @param shapeLabel the string identifier of the shape.
    * @param startR starting r value.
    * @param startG staring g value.
@@ -29,7 +28,7 @@ public class Recolor extends AbstractChange {
    * @param startTime starting time.
    * @param endTime ending time.
    */
-  public Recolor(AbstractShape shape, int shapeID, String shapeLabel,
+  public Recolor(AbstractShape shape, String shapeLabel,
                  int startR, int startG, int startB, int startA,
                  int endR, int endG, int endB, int endA,
                  int startTime, int endTime) {
@@ -43,7 +42,6 @@ public class Recolor extends AbstractChange {
     this.setUpdatedA(endA);
     super.setStartTime(startTime);
     super.setEndTime(endTime);
-    super.setShapeID(shapeID);
     super.setShapeLabel(shapeLabel);
     super.setType(AvailableChanges.RECOLOR);
     super.setShapeType(shape.getType());

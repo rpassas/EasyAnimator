@@ -31,6 +31,10 @@ public class AnimationModelImpl implements AnimationModel {
     return list;
   }
 
+  public AbstractShape getShape(String label) {
+    return shapeMap.get(label);
+  }
+
   @Override
   public LinkedList<AbstractChange> getChanges() {
     return this.listOfChanges;
@@ -51,7 +55,6 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public void addShape(AbstractShape shape) {
-
     // make sure labels are unique
     if (shapeMap.containsKey(shape.getLabel())) {
       throw new IllegalArgumentException("This shape has already been added");
@@ -117,10 +120,11 @@ public class AnimationModelImpl implements AnimationModel {
    * @param label unique string label for a shape
    */
   public void removeShape(String label) {
-    if (shapeMap.remove(label)) {
+    if (shapeMap.containsKey(label)) {
       shapeMap.remove(label);
+    } else {
+      throw new IllegalArgumentException("Given label does not exist.");
     }
-    throw new IllegalArgumentException("Given label does not exist.");
   }
 
   /**
@@ -137,8 +141,8 @@ public class AnimationModelImpl implements AnimationModel {
       //two changes of the same type cannot occur at once
       if (type == c.getType()
           // same shape?
-          && c.getShapeID() == listOfKeys.get(listOfShapes.indexOf(shape))
-          //overlapping time at the front of existing change
+          && c.getShapeLabel().equals(shape.getLabel())
+              //overlapping time at the front of existing change
           && ((c.getStartTime() < t1 && c.getEndTime() > t1)
           // Overlapping time at the end of existing change
           || (c.getStartTime() < t2 && c.getEndTime() > t2)
@@ -164,10 +168,10 @@ public class AnimationModelImpl implements AnimationModel {
     if (t1 > t2) {
       throw new IllegalArgumentException("Start time > end time");
     }
-    if (!listOfShapes.contains(shape)) {
+    if (!shapeMap.containsKey(shape.getLabel())) {
       this.addShape(shape);
     }
-    listOfChanges.add(new Move(shape, listOfShapes.indexOf(shape), shape.getLabel(),
+    listOfChanges.add(new Move(shape, shape.getLabel(),
         startX, startY, endX, endY, t1, t2));
   }
 
@@ -194,10 +198,10 @@ public class AnimationModelImpl implements AnimationModel {
     if (startA < 0 || startA > 100 || endA < 0 || endA > 100) {
       throw new IllegalArgumentException("Opacity must be between 0 and 100");
     }
-    if (!listOfShapes.contains(shape)) {
+    if (!shapeMap.containsKey(shape.getLabel())) {
       this.addShape(shape);
     }
-    listOfChanges.add(new Recolor(shape, listOfShapes.indexOf(shape), shape.getLabel(),
+    listOfChanges.add(new Recolor(shape, shape.getLabel(),
         startR, startG, startB, startA, endR, endG, endB, endA, t1, t2));
   }
 
@@ -216,10 +220,10 @@ public class AnimationModelImpl implements AnimationModel {
     if (t1 > t2) {
       throw new IllegalArgumentException("Start time > end time");
     }
-    if (!listOfShapes.contains(shape)) {
+    if (!shapeMap.containsKey(shape.getLabel())) {
       this.addShape(shape);
     }
-    listOfChanges.add(new Resize(shape, listOfShapes.indexOf(shape), shape.getLabel(),
+    listOfChanges.add(new Resize(shape, shape.getLabel(),
         startW, startH, endW, endH, t1, t2));
   }
 
@@ -392,9 +396,13 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public String toString() {
     String model = "";
-    for (AbstractShape shape: this.listOfShapes) {
+    //TODO Not sure if this will work
+    this.shapeMap.toString();
+    /**
+    for (AbstractShape shape: this.shapeMap) {
       model = model + shape.toString() + "\n";
     }
+     **/
     for (AbstractChange change: this.listOfChanges) {
       model = model + change.toString();
     }

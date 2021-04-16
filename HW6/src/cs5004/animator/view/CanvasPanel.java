@@ -52,7 +52,6 @@ public class CanvasPanel extends JPanel{
     Graphics2D g2d = (Graphics2D) g;
     if (this.shapes != null) {
       for (AbstractShape s : this.shapes) {
-        System.out.println(s);
         Color c = new Color(s.getR(), s.getG(), s.getB());
         if (s.getType().equals(AvailableShapes.RECTANGLE)) {
           Shape rect = new Rectangle2D.Double(s.getLocation().getX(),

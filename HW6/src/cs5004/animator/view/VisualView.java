@@ -61,7 +61,6 @@ public class VisualView extends JFrame implements IView, ActionListener{
     this.mainPanel.setAnimatedShapes(model.getShapesAtTick(currentTick));
     // every child component calls paintComponent as a result
     this.repaint();
-    System.out.println("tick: " + currentTick);
   }
 
   @Override

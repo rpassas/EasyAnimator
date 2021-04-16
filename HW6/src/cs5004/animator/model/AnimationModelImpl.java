@@ -54,20 +54,15 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public void addShape(AbstractShape shape) {
+
     // make sure labels are unique
-    for (AbstractShape aShape : this.listOfShapes) {
-      if (aShape.getLabel().equals(shape.getLabel())) {
-        shape.setLabel(shape.getLabel() + "+");
-      }
+    if (shapeMap.containsKey(shape.getLabel())) {
+      throw new IllegalArgumentException("This shape has already been added");
     }
     if (shape.getType().equals(AvailableShapes.OVAL)) {
-      listOfShapes.add(shape);
-      listOfKeys.add(shapeKey);
-      shapeKey++;
+      this.shapeMap.put(shape.getLabel(), shape);
     } else if (shape.getType().equals(AvailableShapes.RECTANGLE)) {
-      listOfShapes.add(shape);
-      listOfKeys.add(shapeKey);
-      shapeKey++;
+      this.shapeMap.put(shape.getLabel(), shape);
     } else {
       throw new IllegalArgumentException("added shape must be one of the accepted types");
     }
@@ -76,7 +71,7 @@ public class AnimationModelImpl implements AnimationModel {
   /**
    * Overload of addShape that adds a shape to the model using parameters needed to construct
    * a shape.
-   * @param shape enum shape type
+   * @param shapeType enum shape type
    * @param label a label for the shape
    * @param x x position of the shape
    * @param y y position of the shape
@@ -92,7 +87,7 @@ public class AnimationModelImpl implements AnimationModel {
    * @throws IllegalArgumentException for non-unique label
    * @throws IllegalArgumentException for invalid shape type
    */
-  public void addShape(AvailableShapes shape, String label, int x, int y, int w, int h,
+  public void addShape(AvailableShapes shapeType, String label, int x, int y, int w, int h,
                        int r, int g, int b, int opacity) {
     if (w < 0 || h < 0) {
       throw new IllegalArgumentException("dimensions must be positive.");
@@ -104,19 +99,15 @@ public class AnimationModelImpl implements AnimationModel {
       throw new IllegalArgumentException("Color values must be below 255 for " +
               "rgb and 100 for opacity");
     }
-    for (AbstractShape aShape : this.listOfShapes) {
-      if (aShape.getLabel().equals(label)) {
-        throw new IllegalArgumentException("Labels must be unique to shapes");
-      }
+    if (shapeMap.containsKey(label)) {
+      throw new IllegalArgumentException("This shape has already been added");
     }
-    if (shape == AvailableShapes.OVAL) {
-      listOfShapes.add(new Circle(label, x, y, w, h, r, g, b, opacity));
-      listOfKeys.add(shapeKey);
-      shapeKey++;
-    } else if (shape == AvailableShapes.RECTANGLE) {
-      listOfShapes.add(new Rect(label, x, y, w, h, r, g, b, opacity));
-      listOfKeys.add(shapeKey);
-      shapeKey++;
+    if (shapeType == AvailableShapes.OVAL) {
+      AbstractShape circ = new Circle(label, x, y, w, h, r, g, b, opacity);
+      this.shapeMap.put(label, circ);
+    } else if (shapeType == AvailableShapes.RECTANGLE) {
+      AbstractShape rect = new Rect(label, x, y, w, h, r, g, b, opacity);
+      this.shapeMap.put(label, rect);
     } else {
       throw new IllegalArgumentException("added shape must be one of the accepted types");
     }
@@ -124,6 +115,9 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public void removeShape(AbstractShape shape) {
+    if (shapeMap.containsKey(label)) {
+      throw new IllegalArgumentException("This shape has already been added");
+    }
     if (listOfShapes.contains(shape)) {
       listOfKeys.remove(listOfShapes.indexOf(shape));
       listOfShapes.remove(shape);

@@ -14,16 +14,13 @@ public class AnimationModelImpl implements AnimationModel {
   //private final LinkedList<AbstractShape> listOfShapes;
   private final HashMap<String, AbstractShape> shapeMap;
   private final LinkedList<AbstractChange> listOfChanges;
-  private final LinkedList<Integer> listOfKeys;
   private final Canvas canvas;
-  int shapeKey;
 
   /**
    * Constructor for the animation model impl.
    */
   public AnimationModelImpl() {
     this.shapeMap = new LinkedHashMap<>();
-    this.listOfKeys = new LinkedList<>();
     this.listOfChanges = new LinkedList<>();
     this.canvas = new Canvas();
   }
@@ -62,12 +59,9 @@ public class AnimationModelImpl implements AnimationModel {
     }
     if (shape.getType().equals(AvailableShapes.OVAL)) {
       listOfShapes.add(shape);
-      listOfKeys.add(shapeKey);
       shapeKey++;
     } else if (shape.getType().equals(AvailableShapes.RECTANGLE)) {
       listOfShapes.add(shape);
-      listOfKeys.add(shapeKey);
-      shapeKey++;
     } else {
       throw new IllegalArgumentException("added shape must be one of the accepted types");
     }
@@ -111,38 +105,10 @@ public class AnimationModelImpl implements AnimationModel {
     }
     if (shape == AvailableShapes.OVAL) {
       listOfShapes.add(new Circle(label, x, y, w, h, r, g, b, opacity));
-      listOfKeys.add(shapeKey);
-      shapeKey++;
     } else if (shape == AvailableShapes.RECTANGLE) {
       listOfShapes.add(new Rect(label, x, y, w, h, r, g, b, opacity));
-      listOfKeys.add(shapeKey);
-      shapeKey++;
     } else {
       throw new IllegalArgumentException("added shape must be one of the accepted types");
-    }
-  }
-
-  @Override
-  public void removeShape(AbstractShape shape) {
-    if (listOfShapes.contains(shape)) {
-      listOfKeys.remove(listOfShapes.indexOf(shape));
-      listOfShapes.remove(shape);
-    } else {
-      throw new IllegalArgumentException("That shape is not in the list");
-    }
-  }
-
-  /**
-   * Overload method for removeShape that takes the indentifier for a shape rather than the shape
-   * itself to find and remove it from the model.
-   * @param shapeIdentifier index of the shape in the list of shapes
-   */
-  public void removeShape(int shapeIdentifier) {
-    if (listOfKeys.contains(shapeIdentifier)) {
-      listOfShapes.remove(listOfKeys.indexOf(shapeIdentifier));
-      listOfKeys.remove(listOfKeys.indexOf(shapeIdentifier));
-    } else {
-      throw new IllegalArgumentException("That identifier is empty.");
     }
   }
 

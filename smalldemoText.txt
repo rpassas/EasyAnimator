@@ -1,0 +1,19 @@
+Rectangle R with RGB(255, 0, 0), and corner at (200, 200), width: 50, height: 100
+Ellipse C with RGB(0, 0, 255), and center at: (440, 70), x-radius: 120, y-radius: 60
+Shape R updates its position from x-dimension: 200, y-dimension: 200 to x-dimension: 200, y-dimension: 200 from t= 1 to t= 10
+Shape R updates its position from x-dimension: 200, y-dimension: 200 to x-dimension: 300, y-dimension: 300 from t= 10 to t= 50
+Shape R updates its position from x-dimension: 200, y-dimension: 200 to x-dimension: 300, y-dimension: 300 from t= 10 to t= 50
+Shape R updates its position from x-dimension: 300, y-dimension: 300 to x-dimension: 300, y-dimension: 300 from t= 50 to t= 51
+Shape R updates its dimensions from width: 50 height: 100 to width: 25 height: 100 from t= 51 to t= 70
+Shape R updates its position from x-dimension: 300, y-dimension: 300 to x-dimension: 300, y-dimension: 300 from t= 51 to t= 70
+Shape R updates its position from x-dimension: 300, y-dimension: 300 to x-dimension: 200, y-dimension: 200 from t= 70 to t= 100
+Shape R updates its position from x-dimension: 300, y-dimension: 300 to x-dimension: 200, y-dimension: 200 from t= 70 to t= 100
+Shape C updates its position from x-dimension: 440, y-dimension: 70 to x-dimension: 440, y-dimension: 70 from t= 6 to t= 20
+Shape C updates its position from x-dimension: 440, y-dimension: 70 to x-dimension: 440, y-dimension: 250 from t= 20 to t= 50
+Shape C updates its position from x-dimension: 440, y-dimension: 70 to x-dimension: 440, y-dimension: 250 from t= 20 to t= 50
+Shape C updates its position from x-dimension: 440, y-dimension: 250 to x-dimension: 440, y-dimension: 370 from t= 50 to t= 70
+Shape C updates its color from (0, 0, 255, 100) to (0, 170, 85, 100) from t= 50 to t= 70
+Shape C updates its position from x-dimension: 440, y-dimension: 250 to x-dimension: 440, y-dimension: 370 from t= 50 to t= 70
+Shape C updates its color from (0, 170, 85, 100) to (0, 255, 0, 100) from t= 70 to t= 80
+Shape C updates its position from x-dimension: 440, y-dimension: 370 to x-dimension: 440, y-dimension: 370 from t= 70 to t= 80
+Shape C updates its position from x-dimension: 440, y-dimension: 370 to x-dimension: 440, y-dimension: 370 from t= 80 to t= 100

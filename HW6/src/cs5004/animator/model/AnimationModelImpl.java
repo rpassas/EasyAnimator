@@ -14,23 +14,20 @@ public class AnimationModelImpl implements AnimationModel {
   //private final LinkedList<AbstractShape> listOfShapes;
   private final HashMap<String, AbstractShape> shapeMap;
   private final LinkedList<AbstractChange> listOfChanges;
-  private final LinkedList<Integer> listOfKeys;
   private final Canvas canvas;
-  int shapeKey;
 
   /**
    * Constructor for the animation model impl.
    */
   public AnimationModelImpl() {
     this.shapeMap = new LinkedHashMap<>();
-    this.listOfKeys = new LinkedList<>();
     this.listOfChanges = new LinkedList<>();
     this.canvas = new Canvas();
   }
 
   @Override
   public LinkedList<AbstractShape>  getShapes() {
-    LinkedList<AbstractShape> list = new LinkedList<AbstractShape>(shapeMap.values());
+    List<AbstractShape> list = new LinkedList<AbstractShape>(shapeMap.values());
     return list;
   }
 

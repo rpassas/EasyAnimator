@@ -27,7 +27,7 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public LinkedList<AbstractShape>  getShapes() {
-    List<AbstractShape> list = new LinkedList<AbstractShape>(shapeMap.values());
+    LinkedList<AbstractShape> list = new LinkedList<AbstractShape>(shapeMap.values());
     return list;
   }
 
@@ -110,32 +110,6 @@ public class AnimationModelImpl implements AnimationModel {
     }
   }
 
-  @Override
-  public void removeShape(AbstractShape shape) {
-    if (shapeMap.containsKey(label)) {
-      throw new IllegalArgumentException("This shape has already been added");
-    }
-    if (listOfShapes.contains(shape)) {
-      listOfKeys.remove(listOfShapes.indexOf(shape));
-      listOfShapes.remove(shape);
-    } else {
-      throw new IllegalArgumentException("That shape is not in the list");
-    }
-  }
-
-  /**
-   * Overload method for removeShape that takes the indentifier for a shape rather than the shape
-   * itself to find and remove it from the model.
-   * @param shapeIdentifier index of the shape in the list of shapes
-   */
-  public void removeShape(int shapeIdentifier) {
-    if (listOfKeys.contains(shapeIdentifier)) {
-      listOfShapes.remove(listOfKeys.indexOf(shapeIdentifier));
-      listOfKeys.remove(listOfKeys.indexOf(shapeIdentifier));
-    } else {
-      throw new IllegalArgumentException("That identifier is empty.");
-    }
-  }
 
   /**
    * Overload of removeShape method that uses the unique label of a shape rather than the shape
@@ -143,12 +117,8 @@ public class AnimationModelImpl implements AnimationModel {
    * @param label unique string label for a shape
    */
   public void removeShape(String label) {
-    for (AbstractShape aShape : this.listOfShapes) {
-      if (aShape.getLabel().equals(label)) {
-        listOfShapes.remove(aShape);
-        listOfKeys.remove(listOfShapes.indexOf(aShape));
-        return;
-      }
+    if (shapeMap.remove(label)) {
+      shapeMap.remove(label);
     }
     throw new IllegalArgumentException("Given label does not exist.");
   }

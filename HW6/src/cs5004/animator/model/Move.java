@@ -10,7 +10,6 @@ public class Move extends AbstractChange {
   /**
    * Constructor for the move class.
    * @param shape the shape to be moved.
-   * @param shapeID the id of the shape to be moved.
    * @param shapeLabel the string identifier of the shape.
    * @param startX initial x coordinate.
    * @param startY initial y coordinate.
@@ -19,7 +18,7 @@ public class Move extends AbstractChange {
    * @param startTime starting time.
    * @param endTime ending time.
    */
-  public Move(BasicShape shape, int shapeID, String shapeLabel,
+  public Move(BasicShape shape, String shapeLabel,
               int startX, int startY, int endX, int endY, int startTime, int endTime) {
     Point2D location = new Point2D(shape.getLocation().getX(), shape.getLocation().getY());
     Point2D location2 = new Point2D(1,1);
@@ -31,7 +30,6 @@ public class Move extends AbstractChange {
     this.reference.setY(endY);
     super.setStartTime(startTime);
     super.setEndTime(endTime);
-    super.setShapeID(shapeID);
     super.setShapeLabel(shapeLabel);
     super.setType(AvailableChanges.MOVE);
     super.setShapeType(shape.getType());

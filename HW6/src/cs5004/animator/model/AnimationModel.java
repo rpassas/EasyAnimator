@@ -16,6 +16,13 @@ public interface AnimationModel {
   LinkedList<AbstractShape> getShapes();
 
   /**
+   * Returns the shape with the given identifier
+   * @param label the identifier of the shape
+   * @return the shape with the identifier.
+   */
+  AbstractShape getShape(String label);
+
+  /**
    * Gets all the changes altering the shapes in the model.
    * @return list of changes in the model
    */
@@ -37,15 +44,6 @@ public interface AnimationModel {
    * @param height the height for the animation's canvas
    */
   void setCanvas(int x, int y, int width, int height);
-
-  /**
-   * Gets the shape corresponding its given name.
-   * @param name String IDing the shape.
-   * @return the appropriate shape.
-   * @throws IllegalArgumentException if shape does not exist with that name.
-   */
-  AbstractShape getShape(String name);
-
 
   /**
    * Adds a shape to to the model.
@@ -78,9 +76,9 @@ public interface AnimationModel {
 
   /**
    * Given a shape, will remove that shape.
-   * @param shape shape to be removed
+   * @param label of the shape to be removed
    */
-  void removeShape(AbstractShape shape);
+  void removeShape(String label);
 
   /**
    * Moves a shape over a time interval by creating copies, deleting the previous shape,

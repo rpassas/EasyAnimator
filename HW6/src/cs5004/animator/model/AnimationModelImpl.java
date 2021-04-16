@@ -1,5 +1,6 @@
 package cs5004.animator.model;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import cs5004.animator.util.AnimationBuilder;
@@ -484,25 +485,24 @@ public class AnimationModelImpl implements AnimationModel {
                                       int t2, int x2, int y2, int w2, int h2,
                                                       int r2, int g2, int b2)
     {
-      boolean newShape = true;
-      for (Change c : model.getChanges()) {
-        if (c.getShapeLabel().equals(name)) {
-          newShape = false;
-        }
-      }
-      if (newShape) {
+      //Add hashtable for new shapes with boolean value of if it's seen
+      HashMap shapeList = new HashMap<>();
+
+      if (!shapeList.containsKey(name)) {
         model.getShape(name).setLocation(new Point2D(x1, y1));
         model.getShape(name).setWidth(w1);
         model.getShape(name).setHeight(h1);
         model.getShape(name).setR(r1);
         model.getShape(name).setG(g1);
         model.getShape(name).setB(b1);
+        shapeList.put(name, false);
         if (t1 == 1) {
           model.getShape(name).setOpacity(100);
         } else {
           model.getShape(name).setOpacity(0);
         }
       }
+
 
       if (x2 - x1 != 0 || y2 - y1 != 0) {
         model.addMove(model.getShape(name), x1, y1, x2, y2, t1, t2);

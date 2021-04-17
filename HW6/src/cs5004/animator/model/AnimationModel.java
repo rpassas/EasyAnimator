@@ -9,6 +9,14 @@ import java.util.LinkedList;
 
 public interface AnimationModel {
 
+
+  /**
+   * Determines if shape exists in the model given a label.
+   * @param label String ID for possibly existent shape
+   * @return boolean indicating existence of the shape
+   */
+  public boolean hasShape(String label);
+
   /**
    * Gets all the shapes in the model.
    * @return list of shapes in the model

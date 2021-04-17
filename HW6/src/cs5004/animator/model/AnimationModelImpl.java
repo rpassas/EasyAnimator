@@ -347,7 +347,7 @@ public class AnimationModelImpl implements AnimationModel {
     }
     model = model + "\n";
 
-    for (AbstractChange change : this.changeMap.keySet()) {
+
       // Creating a list of when the shapes appear and a list of the changes
       for (AbstractChange change : this.changeMap.keySet()) {
         if (appearMap.containsKey(change.getShapeLabel())) {
@@ -375,7 +375,7 @@ public class AnimationModelImpl implements AnimationModel {
       }
       return model;
     }
-  }
+
 
     public static final class Builder implements AnimationBuilder<AnimationModel> {
       protected AnimationModel model;
@@ -400,10 +400,10 @@ public class AnimationModelImpl implements AnimationModel {
       public AnimationBuilder<AnimationModel> declareShape(String name, String type) {
         if (type.equalsIgnoreCase("rectangle")) {
           model.addShape(AvailableShapes.RECTANGLE, name,
-              0, 0, 0, 0, 0, 0, 0, 0);
+                  0, 0, 0, 0, 0, 0, 0, 0);
         } else if (type.equalsIgnoreCase("ellipse")) {
           model.addShape(AvailableShapes.OVAL, name,
-              0, 0, 0, 0, 0, 0, 0, 0);
+                  0, 0, 0, 0, 0, 0, 0, 0);
         } else {
           throw new IllegalArgumentException("Must be a rectangle or ellipse");
         }
@@ -443,16 +443,17 @@ public class AnimationModelImpl implements AnimationModel {
         }
         if (r2 - r1 != 0 || g2 - g1 != 0 || b2 - b1 != 0) {
           model.addRecolor(model.getShape(name),
-              r1, g1, b1, 100, r2, g2, b2, 100, t1, t2);
+                  r1, g1, b1, 100, r2, g2, b2, 100, t1, t2);
         }
         if (t2 - t1 != 0
-            && (x2 - x1 == 0 || y2 - y1 == 0
-            && w2 - w1 == 0 || h2 - h1 == 0
-            && r2 - r1 == 0 || g2 - g1 == 0 || b2 - b1 == 0)) {
+                && (x2 - x1 == 0 || y2 - y1 == 0
+                && w2 - w1 == 0 || h2 - h1 == 0
+                && r2 - r1 == 0 || g2 - g1 == 0 || b2 - b1 == 0)) {
           model.addMove(model.getShape(name), x1, y1, x2, y2, t1, t2);
         }
         return this;
       }
     }
   }
+
 

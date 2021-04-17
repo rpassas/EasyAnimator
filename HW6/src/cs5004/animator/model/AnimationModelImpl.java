@@ -475,7 +475,10 @@ public class AnimationModelImpl implements AnimationModel {
         model.addRecolor(model.getShape(name),
             r1, g1, b1, 100, r2, g2, b2, 100, t1, t2);
       }
-      if (t2-t1 != 0) {
+      if (t2-t1 != 0
+              && (x2 - x1 == 0 || y2 - y1 == 0
+              && w2 - w1 == 0 || h2 - h1 == 0
+              && r2 - r1 == 0 || g2 - g1 == 0 || b2 - b1 == 0)) {
         model.addMove(model.getShape(name), x1, y1, x2, y2, t1, t2);
       }
       return this;

@@ -579,9 +579,10 @@ public class ModelTests {
     assertEquals("", model1.toString());
     model1.addShape(rectangle1);
     model1.addShape(circle1);
-    assertEquals("Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3\n" +
-                    "cs5004.AnimationModel.Circle C1 -> center: (1, 2), " +
-                    "x-dimension: 3, y-dimension: 4\n"
+    assertEquals("Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), " +
+                    "width: 2, height: 3\n" +
+                    "Ellipse C1 with RGB(0, 0, 0), and center at: (1, 2), " +
+                    "x-diameter: 3, y-diameter: 4\n"
         , model1.toString());
     model1.addMove(rectangle1, 2, 3, 1, 3,2,3);
     model1.addMove(circle1, 2, 3, 1, 3,2,3);
@@ -589,27 +590,34 @@ public class ModelTests {
         2, 3, 250,3,5, 7);
     model1.addRecolor(circle1, 17, 111, 2,3,
         2, 3, 250,3,5, 8);
-    assertEquals("Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3\n" +
-            "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4\n" +
-            "Shape R1 updates its position from x-dimension: 2, y-dimension: 3 to x-dimension: 1," +
-            " y-dimension: 3 from t= 2 to t= 3\n" +
-            "Shape C1 updates its position from x-dimension: 2, y-dimension: 3 to x-dimension: 1," +
-            " y-dimension: 3 from t= 2 to t= 3\n" +
-            "Shape R1 updates its color from (2, 3, 250, 3) to (2, 3, 250, 3) from t= 5 to t= 7\n" +
-            "Shape C1 updates its color from (17, 111, 2, 3) to (2, 3, 250, 3) from t= 5 to t= 8\n",
+    assertEquals("Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), width: " +
+                    "2, height: 3\n" +
+                    "Ellipse C1 with RGB(0, 0, 0), and center at: (1, 2), x-diameter: 3, " +
+                    "y-diameter: 4\n" +
+                    "Shape R1 updates its position from x-dimension: 2, y-dimension: 3 to " +
+                    "x-dimension: 1, y-dimension: 3 from t= 2 to t= 3\n" +
+                    "Shape C1 updates its position from x-dimension: 2, y-dimension: 3 to " +
+                    "x-dimension: 1, y-dimension: 3 from t= 2 to t= 3\n" +
+                    "Shape R1 updates its color from (2, 3, 250, 3) to (2, 3, 250, 3) from " +
+                    "t= 5 to t= 7\n" +
+                    "Shape C1 updates its color from (17, 111, 2, 3) to (2, 3, 250, 3) from " +
+                    "t= 5 to t= 8\n",
         model1.toString());
     model1.addResize(circle1, 15, 15, 1, 3,0, 100);
-    assertEquals("Rectangle R1 -> center: (3, 6), x-dimension: 2, y-dimension: 3\n" +
-            "cs5004.AnimationModel.Circle C1 -> center: (1, 2), x-dimension: 3, y-dimension: 4\n" +
-            "Shape R1 updates its position from x-dimension: 2, y-dimension: 3 to x-dimension: 1," +
-            " y-dimension: 3 from t= 2 to t= 3\n" +
-            "Shape C1 updates its position from x-dimension: 2, y-dimension: 3 to x-dimension: 1," +
-            " y-dimension: 3 from t= 2 to t= 3\n" +
-            "Shape R1 updates its color from (2, 3, 250, 3) to (2, 3, 250, 3) from t= 5 to t= 7\n" +
-            "Shape C1 updates its color from (17, 111, 2, 3) to" +
-            " (2, 3, 250, 3) from t= 5 to t= 8\n" +
-            "Shape C1 updates its dimensions from width: 15 height: 15" +
-            " to width: 1 height: 3 from t= 0 to t= 100\n",
+    assertEquals("Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), width: " +
+                    "2, height: 3\n" +
+                    "Ellipse C1 with RGB(0, 0, 0), and center at: (1, 2), x-diameter: 3, " +
+                    "y-diameter: 4\n" +
+                    "Shape R1 updates its position from x-dimension: 2, y-dimension: 3 to " +
+                    "x-dimension: 1, y-dimension: 3 from t= 2 to t= 3\n" +
+                    "Shape C1 updates its position from x-dimension: 2, y-dimension: 3 to " +
+                    "x-dimension: 1, y-dimension: 3 from t= 2 to t= 3\n" +
+                    "Shape R1 updates its color from (2, 3, 250, 3) to (2, 3, 250, 3) from " +
+                    "t= 5 to t= 7\n" +
+                    "Shape C1 updates its color from (17, 111, 2, 3) to (2, 3, 250, 3) from " +
+                    "t= 5 to t= 8\n" +
+                    "Shape C1 updates its dimensions from width: 15 height: 15 to width: 1 " +
+                    "height: 3 from t= 0 to t= 100\n",
             model1.toString());
   }
 

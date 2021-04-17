@@ -37,10 +37,7 @@ public class AnimationReader {
     Scanner s = new Scanner(readable);
     // Split at whitespace, and ignore # comment lines
     s.useDelimiter(Pattern.compile("(\\p{Space}+|#.*)+"));
-    int i = 0;
     while (s.hasNext()) {
-      System.out.printf("%d\n", i);
-      i++;
       String word = s.next();
       switch (word) {
         case "canvas":

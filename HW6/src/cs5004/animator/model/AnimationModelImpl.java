@@ -1,5 +1,6 @@
 package cs5004.animator.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -396,13 +397,10 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public String toString() {
     String model = "";
-    //TODO Not sure if this will work
-    this.shapeMap.toString();
-    /**
-    for (AbstractShape shape: this.shapeMap) {
-      model = model + shape.toString() + "\n";
+    for (String label: shapeMap.keySet()) {
+      model = model + shapeMap.get(label).toString() + "\n";
     }
-     **/
+
     for (AbstractChange change: this.listOfChanges) {
       model = model + change.toString();
     }
@@ -411,6 +409,7 @@ public class AnimationModelImpl implements AnimationModel {
 
   public static final class Builder implements AnimationBuilder<AnimationModel> {
     protected AnimationModel model;
+    HashMap shapeList = new HashMap<>();
 
     public Builder() {
       this.model = new AnimationModelImpl();
@@ -449,16 +448,15 @@ public class AnimationModelImpl implements AnimationModel {
                                                       int r2, int g2, int b2)
     {
       //Add hashtable for new shapes with boolean value of if it's seen
-      HashMap shapeList = new HashMap<>();
 
-      if (!shapeList.containsKey(name)) {
+      if (!shapeList.containsValue(name)) {
         model.getShape(name).setLocation(new Point2D(x1, y1));
         model.getShape(name).setWidth(w1);
         model.getShape(name).setHeight(h1);
         model.getShape(name).setR(r1);
         model.getShape(name).setG(g1);
         model.getShape(name).setB(b1);
-        shapeList.put(name, false);
+        shapeList.put(name, name);
         if (t1 == 1) {
           model.getShape(name).setOpacity(100);
         } else {
@@ -466,7 +464,7 @@ public class AnimationModelImpl implements AnimationModel {
         }
       }
 
-
+//could enclose the first 3 in a if statement to encompass so the t only adds once
       if (x2 - x1 != 0 || y2 - y1 != 0) {
         model.addMove(model.getShape(name), x1, y1, x2, y2, t1, t2);
       }

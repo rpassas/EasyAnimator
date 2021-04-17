@@ -94,6 +94,7 @@ public class SVGView implements IView {
                       - change.getStartTime()) * 1000 / this.speed
                       + "ms\" attributeName=\"visibility\" from=\"hidden\" to=\"visible\" " +
                       "fill=\"freeze\" />\n");
+              visible += "visible";
             }
             //Finds changes for Moving a rectangle
             if (change.getType().equals(AvailableChanges.MOVE) && shape.getType().equals(AvailableShapes.RECTANGLE))

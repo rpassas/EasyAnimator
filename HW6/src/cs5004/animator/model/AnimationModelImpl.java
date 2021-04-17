@@ -1,10 +1,12 @@
 package cs5004.animator.model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import cs5004.animator.util.AnimationBuilder;
 
@@ -396,12 +398,37 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public String toString() {
+    HashMap<String, AbstractChange> appearMap =  new LinkedHashMap<>();
+    ArrayList<AbstractChange>  changeListNoAppear = new ArrayList<>();
+
+    //Adding the different shapes to the model string
     String model = "";
     for (String label: shapeMap.keySet()) {
       model = model + shapeMap.get(label).toString() + "\n";
     }
+    model = model + "\n";
 
+    // Creating a list of when the shapes appear and a list of the changes
     for (AbstractChange change: this.listOfChanges) {
+      if (appearMap.containsKey(change.getShapeLabel())) {
+        changeListNoAppear.add(change);
+      } else {
+        appearMap.put(change.getShapeLabel(), change);
+      }
+    }
+
+    //Adding when they appear to the model string
+    for (String label: appearMap.keySet() ) {
+      model = model + appearMap.get(label).getShapeLabel() + " appears at time t=" + appearMap.get(label).getStartTime() + "\n";
+    }
+    model = model + "\n";
+
+    //Comparator to sort by start time
+    ChangeComparator byStartTime = new ChangeComparator();
+    List<AbstractChange>  sortedChangeListNoAppear = changeListNoAppear.stream().sorted(byStartTime).collect(Collectors.toList());
+
+    //Adding the Changes to the model string
+    for (AbstractChange change: sortedChangeListNoAppear) {
       model = model + change.toString();
     }
     return model;
@@ -470,6 +497,7 @@ public class AnimationModelImpl implements AnimationModel {
       }
       if (w2 - w1 != 0 || h2 - h1 != 0) {
         model.addResize(model.getShape(name), w1,  h1, w2, h2, t1, t2);
+
       }
       if (r2 - r1 != 0 || g2 - g1 != 0 || b2 - b1 != 0) {
         model.addRecolor(model.getShape(name),

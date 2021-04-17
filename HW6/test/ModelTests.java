@@ -157,11 +157,9 @@ public class ModelTests {
     model2.addShape(circle2);
     model2.addMove(rectangle1, 15, 15, 5, 10,  2, 11);
     model2.addMove(rectangle1, 2, 2, 10, 20, 12, 17);
-    assertEquals("[Shape R1 updates its position from x-dimension: 15, y-dimension: 15 " +
-            "to x-dimension: 5, y-dimension: 10 from t= 2 to t= 11\n" +
-            ", Shape R1 updates its position from x-dimension: 2, y-dimension: " +
-            "2 to x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n" +
-            "]",
+    assertEquals("[Shape R1 updates its position from x-dimension: 15, y-dimension: 15 to x-dimension: 5, y-dimension: 10 from t= 2 to t= 11\n" +
+                    ", Shape R1 updates its position from x-dimension: 2, y-dimension: 2 to x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n" +
+                    "]",
             model2.getChanges().toString());
     model2.addMove(circle2,1, 1, 0, 25, 18, 20);
     assertEquals("[Shape R1 updates its position from x-dimension: 15," +

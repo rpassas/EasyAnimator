@@ -1,6 +1,6 @@
 package cs5004.animator.view;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;

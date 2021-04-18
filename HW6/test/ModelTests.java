@@ -270,7 +270,6 @@ public class ModelTests {
     testList.add(color1);
     model1.addRecolor(rectangle1, 100, 115, 130, 100,
         100, 115, 130, 100, 0, 5);
-    assertEquals(testList.get(0).getShapeID(), model1.getChanges().get(0).getShapeID());
     assertEquals(testList.get(0).getUpdatedR(), model1.getChanges().get(0).getUpdatedR());
     assertEquals(testList.get(0).getUpdatedG(), model1.getChanges().get(0).getUpdatedG());
     assertEquals(testList.get(0).getUpdatedB(), model1.getChanges().get(0).getUpdatedB());
@@ -286,7 +285,6 @@ public class ModelTests {
     testList2.add(color2);
     model2.addRecolor(circle1, 100, 115, 130, 0,
         100, 115, 10, 0,5, 10);
-    assertEquals(testList2.get(0).getShapeID(), model2.getChanges().get(0).getShapeID());
     assertEquals(testList2.get(0).getUpdatedR(), model2.getChanges().get(0).getUpdatedR());
     assertEquals(testList2.get(0).getUpdatedG(), model2.getChanges().get(0).getUpdatedG());
     assertEquals(testList2.get(0).getUpdatedB(), model2.getChanges().get(0).getUpdatedB());

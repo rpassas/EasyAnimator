@@ -6,7 +6,6 @@ package cs5004.animator.model;
 public abstract class AbstractChange implements Change {
   private int startTime;
   private int endTime;
-  private int shapeID;
   private String shapeLabel;
   private AvailableChanges type;
   private AvailableShapes shapeType;
@@ -42,20 +41,9 @@ public abstract class AbstractChange implements Change {
   }
 
   @Override
-  public int getShapeID() {
-    return shapeID;
-  }
-
-  @Override
-  public void setShapeID(int shapeID) {
-    this.shapeID = shapeID;
-  }
-
-  @Override
   public void setShapeLabel(String shapeLabel) {
     this.shapeLabel = shapeLabel;
   }
-
   @Override
   public void setType(AvailableChanges type) {
     this.type = type;

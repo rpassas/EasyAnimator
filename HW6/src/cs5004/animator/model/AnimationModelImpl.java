@@ -351,7 +351,8 @@ public class AnimationModelImpl implements AnimationModel {
     HashMap<String, AbstractChange> appearMap = new LinkedHashMap<>();
     ArrayList<AbstractChange> changeListNoAppear = new ArrayList<>();
     ChangeComparator byStartTime = new ChangeComparator();
-    List<AbstractChange> sortedChanges = changeMap.keySet().stream().sorted(byStartTime).collect(Collectors.toList());
+    List<AbstractChange> sortedChanges = changeMap.keySet().stream().
+            sorted(byStartTime).collect(Collectors.toList());
 
     //Adding the different shapes to the model string
     String model = "";
@@ -362,110 +363,109 @@ public class AnimationModelImpl implements AnimationModel {
 
 
       // Creating a list of when the shapes appear and a list of the changes
-      for (AbstractChange change : sortedChanges) {
-        if (appearMap.containsKey(change.getShapeLabel())) {
-          changeListNoAppear.add(change);
-        } else {
-          appearMap.put(change.getShapeLabel(), change);
-        }
+    for (AbstractChange change : sortedChanges) {
+      if (appearMap.containsKey(change.getShapeLabel())) {
+        changeListNoAppear.add(change);
+      } else {
+        appearMap.put(change.getShapeLabel(), change);
       }
-
-      //Adding when they appear to the model string
-      for (String label : appearMap.keySet()) {
-        model = model + appearMap.get(label).getShapeLabel() + " appears at time t="
-            + appearMap.get(label).getStartTime() + "\n";
-      }
-      model = model + "\n";
-
-      //Comparator to sort by start time, i think this is redundant
-      List<AbstractChange> sortedChangeListNoAppear = changeListNoAppear
-          .stream().sorted(byStartTime).collect(Collectors.toList());
-
-      //Adding the Changes to the model string
-      for (AbstractChange change : sortedChangeListNoAppear) {
-        model = model + change.toString();
-      }
-      return model;
     }
 
+    //Adding when they appear to the model string
+    for (String label : appearMap.keySet()) {
+      model = model + appearMap.get(label).getShapeLabel() + " appears at time t="
+          + appearMap.get(label).getStartTime() + "\n";
+    }
+    model = model + "\n";
 
-    public static final class Builder implements AnimationBuilder<AnimationModel> {
-      protected AnimationModel model;
-      HashMap shapeList = new HashMap<>();
+    //Comparator to sort by start time, i think this is redundant
+    List<AbstractChange> sortedChangeListNoAppear = changeListNoAppear
+        .stream().sorted(byStartTime).collect(Collectors.toList());
 
-      public Builder() {
-        this.model = new AnimationModelImpl();
+    //Adding the Changes to the model string
+    for (AbstractChange change : sortedChangeListNoAppear) {
+      model = model + change.toString();
+    }
+    return model;
+    }
+
+  public static final class Builder implements AnimationBuilder<AnimationModel> {
+    protected AnimationModel model;
+    HashMap shapeList = new HashMap<>();
+
+    public Builder() {
+      this.model = new AnimationModelImpl();
+    }
+
+    @Override
+    public AnimationModel build() {
+      return this.model;
+    }
+
+    @Override
+    public AnimationBuilder<AnimationModel> setBounds(int x, int y, int width, int height) {
+      model.setCanvas(x, y, width, height);
+      return this;
+    }
+
+    @Override
+    public AnimationBuilder<AnimationModel> declareShape(String name, String type) {
+      if (type.equalsIgnoreCase("rectangle")) {
+        model.addShape(AvailableShapes.RECTANGLE, name,
+                0, 0, 0, 0, 0, 0, 0, 0);
+      } else if (type.equalsIgnoreCase("ellipse")) {
+        model.addShape(AvailableShapes.OVAL, name,
+                0, 0, 0, 0, 0, 0, 0, 0);
+      } else {
+        throw new IllegalArgumentException("Must be a rectangle or ellipse");
       }
+      return this;
+    }
 
-      @Override
-      public AnimationModel build() {
-        return this.model;
-      }
+    @Override
+    public AnimationBuilder<AnimationModel> addMotion(String name,
+                                                      int t1, int x1, int y1, int w1, int h1,
+                                                      int r1, int g1, int b1,
+                                                      int t2, int x2, int y2, int w2, int h2,
+                                                      int r2, int g2, int b2) {
+      //Add hashtable for new shapes with boolean value of if it's seen
 
-      @Override
-      public AnimationBuilder<AnimationModel> setBounds(int x, int y, int width, int height) {
-        model.setCanvas(x, y, width, height);
-        return this;
-      }
-
-      @Override
-      public AnimationBuilder<AnimationModel> declareShape(String name, String type) {
-        if (type.equalsIgnoreCase("rectangle")) {
-          model.addShape(AvailableShapes.RECTANGLE, name,
-                  0, 0, 0, 0, 0, 0, 0, 0);
-        } else if (type.equalsIgnoreCase("ellipse")) {
-          model.addShape(AvailableShapes.OVAL, name,
-                  0, 0, 0, 0, 0, 0, 0, 0);
+      if (!shapeList.containsValue(name)) {
+        model.getShape(name).setLocation(new Point2D(x1, y1));
+        model.getShape(name).setWidth(w1);
+        model.getShape(name).setHeight(h1);
+        model.getShape(name).setR(r1);
+        model.getShape(name).setG(g1);
+        model.getShape(name).setB(b1);
+        shapeList.put(name, name);
+        if (t1 == 1) {
+          model.getShape(name).setOpacity(100);
         } else {
-          throw new IllegalArgumentException("Must be a rectangle or ellipse");
+          model.getShape(name).setOpacity(0);
         }
-        return this;
       }
 
-      @Override
-      public AnimationBuilder<AnimationModel> addMotion(String name,
-                                                        int t1, int x1, int y1, int w1, int h1,
-                                                        int r1, int g1, int b1,
-                                                        int t2, int x2, int y2, int w2, int h2,
-                                                        int r2, int g2, int b2) {
-        //Add hashtable for new shapes with boolean value of if it's seen
-
-        if (!shapeList.containsValue(name)) {
-          model.getShape(name).setLocation(new Point2D(x1, y1));
-          model.getShape(name).setWidth(w1);
-          model.getShape(name).setHeight(h1);
-          model.getShape(name).setR(r1);
-          model.getShape(name).setG(g1);
-          model.getShape(name).setB(b1);
-          shapeList.put(name, name);
-          if (t1 == 1) {
-            model.getShape(name).setOpacity(100);
-          } else {
-            model.getShape(name).setOpacity(0);
-          }
-        }
-
-//could enclose the first 3 in a if statement to encompass so the t only adds once
-        if (x2 - x1 != 0 || y2 - y1 != 0) {
-          model.addMove(model.getShape(name), x1, y1, x2, y2, t1, t2);
-        }
-        if (w2 - w1 != 0 || h2 - h1 != 0) {
-          model.addResize(model.getShape(name), w1, h1, w2, h2, t1, t2);
-
-        }
-        if (r2 - r1 != 0 || g2 - g1 != 0 || b2 - b1 != 0) {
-          model.addRecolor(model.getShape(name),
-                  r1, g1, b1, 100, r2, g2, b2, 100, t1, t2);
-        }
-        if (t2 - t1 != 0
-                && (x2 - x1 == 0 || y2 - y1 == 0
-                && w2 - w1 == 0 || h2 - h1 == 0
-                && r2 - r1 == 0 || g2 - g1 == 0 || b2 - b1 == 0)) {
-          model.addMove(model.getShape(name), x1, y1, x2, y2, t1, t2);
-        }
-        return this;
+      //could enclose the first 3 in a if statement to encompass so the t only adds once
+      if (x2 - x1 != 0 || y2 - y1 != 0) {
+        model.addMove(model.getShape(name), x1, y1, x2, y2, t1, t2);
       }
+      if (w2 - w1 != 0 || h2 - h1 != 0) {
+        model.addResize(model.getShape(name), w1, h1, w2, h2, t1, t2);
+
+      }
+      if (r2 - r1 != 0 || g2 - g1 != 0 || b2 - b1 != 0) {
+        model.addRecolor(model.getShape(name),
+                r1, g1, b1, 100, r2, g2, b2, 100, t1, t2);
+      }
+      if (t2 - t1 != 0
+              && (x2 - x1 == 0 || y2 - y1 == 0
+              && w2 - w1 == 0 || h2 - h1 == 0
+              && r2 - r1 == 0 || g2 - g1 == 0 || b2 - b1 == 0)) {
+        model.addMove(model.getShape(name), x1, y1, x2, y2, t1, t2);
+      }
+      return this;
     }
   }
+}
 
 

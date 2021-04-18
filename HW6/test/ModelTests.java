@@ -557,7 +557,7 @@ public class ModelTests {
 
   @Test
   public void testToString() throws FileNotFoundException {
-    FileReader fileIn = new FileReader("resources/testAllMotions.txt");
+    FileReader fileIn = new FileReader("HW6/resources/testAllMotions.txt");
     AnimationModel model3 = AnimationReader.parseFile(fileIn,
         new AnimationModelImpl.Builder());
     assertEquals("Rectangle R1 with RGB(100, 100, 100), and corner at (100, 100), " +

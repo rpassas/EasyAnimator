@@ -17,8 +17,6 @@ import static org.junit.Assert.fail;
  * Tests cases for the SVGView.
  */
 public class SVGViewTest {
-  private SVGView view1;
-  private SVGView view2;
 
   @Before
   public void setup() {
@@ -28,7 +26,7 @@ public class SVGViewTest {
 
   @Test
   public void testConstructor() throws IOException {
-    FileReader fileIn = new FileReader("smalldemo.txt");
+    FileReader fileIn = new FileReader("HW6/resources/smalldemo.txt");
     AnimationModel model = AnimationReader.parseFile(fileIn,
             new AnimationModelImpl.Builder());
     Appendable viewLog = new StringBuilder();
@@ -56,7 +54,7 @@ public class SVGViewTest {
 //SVG and Text Views do not have methods that return anything rn
   @Test
   public void testOutput() throws IOException {
-    FileReader fileIn = new FileReader("smalldemo.txt");
+    FileReader fileIn = new FileReader("HW6/resources/smalldemo.txt");
     AnimationModel model = AnimationReader.parseFile(fileIn,
             new AnimationModelImpl.Builder());
     Appendable viewLog = new StringBuilder();
@@ -146,7 +144,7 @@ public class SVGViewTest {
 
   @Test
   public void testAllMotions() throws IOException {
-    FileReader fileIn = new FileReader("testAllMotions.txt");
+    FileReader fileIn = new FileReader("HW6/resources/testAllMotions.txt");
     AnimationModel model = AnimationReader.parseFile(fileIn,
             new AnimationModelImpl.Builder());
     Appendable viewLog = new StringBuilder();
@@ -233,7 +231,8 @@ public class SVGViewTest {
             "    <animate attributeType=\"xml\" begin=\"1333ms\" dur=\"2000ms\" " +
             "attributeName=\"cy\" from=\"-30\" to=\"20\" fill=\"freeze\" />\n" +
             "    <animate attributeType=\"xml\" begin=\"3333ms\" dur=\"1333ms\" " +
-            "attributeName=\"fill\" from=\"rgb(15,25,200)\" to=\"rgb(0,170,85)\" fill=\"freeze\" />\n" +
+            "attributeName=\"fill\" from=\"rgb(15,25,200)\" to=\"rgb(0,170,85)\" " +
+            "fill=\"freeze\" />\n" +
             "    <animate attributeType=\"xml\" begin=\"3333ms\" dur=\"1333ms\"" +
             " attributeName=\"rx\" from=\"120\" to=\"120\" fill=\"freeze\" />\n" +
             "    <animate attributeType=\"xml\" begin=\"3333ms\" dur=\"1333ms\"" +
@@ -267,7 +266,7 @@ public class SVGViewTest {
 
   @Test
   public void testMultipleShapes() throws IOException {
-    FileReader fileIn = new FileReader("testMultipleShapes.txt");
+    FileReader fileIn = new FileReader("HW6/resources/testMultipleShapes.txt");
     AnimationModel model = AnimationReader.parseFile(fileIn,
             new AnimationModelImpl.Builder());
     Appendable viewLog = new StringBuilder();

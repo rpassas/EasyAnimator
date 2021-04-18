@@ -24,7 +24,7 @@ public interface Change {
   AvailableShapes getShapeType();
 
   /**
-   * Sets the shapetype of the super class
+   * Sets the shapetype of the super class.
    * @param shapeType the type of shape
    */
   void setShapeType(AvailableShapes shapeType);

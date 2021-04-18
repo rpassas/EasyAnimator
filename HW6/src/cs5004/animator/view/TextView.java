@@ -1,17 +1,15 @@
 package cs5004.animator.view;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import cs5004.animator.model.AnimationModel;
-import cs5004.animator.model.AnimationModelImpl;
 
-public class TextView implements IView{
+/**
+ * Creates the textual representation.
+ */
+public class TextView implements IView {
   AnimationModel model;
   Appendable fileOutput;
-  File file;
-  FileWriter writer;
 
   public TextView(AnimationModel model, Appendable fileOutput) {
     this.model = model;
@@ -20,7 +18,6 @@ public class TextView implements IView{
 
   @Override
   public void run() throws IOException {
-    // Could add an if statement to see if file exists, if it does open it and write to it
     try {
       fileOutput.append(model.toString());
     } catch (IOException e) {

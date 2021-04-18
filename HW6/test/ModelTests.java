@@ -16,7 +16,6 @@ import cs5004.animator.model.Recolor;
 import cs5004.animator.model.Rect;
 import cs5004.animator.model.Resize;
 import cs5004.animator.util.AnimationReader;
-import cs5004.animator.view.SVGView;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -31,7 +30,6 @@ public class ModelTests {
   private Rect rectangle1;
   private Rect rectangle2;
   private Circle circle1;
-  private Circle circle2;
 
   @Before
   public void setup() {
@@ -40,13 +38,14 @@ public class ModelTests {
     rectangle1 = new Rect("R1", 3, 6, 2, 3, 10, 20, 30, 50);
     rectangle2 = new Rect("R2", 5, 6, 7, 8);
     circle1 = new Circle("C1", 1, 2, 3, 4);
-    circle2 = new Circle("C2", 15, 26, 45, 0, 64, 254, 100);
+    Circle circle2 = new Circle("C2", 15, 26, 45, 0, 64, 254, 100);
   }
 
   @Test
   public void testAnimationModelImplConstructor() {
     AnimationModelImpl modelConstructor = new AnimationModelImpl();
-    modelConstructor.addShape(AvailableShapes.RECTANGLE, "Rect1", 5, 1, 2, 5, 0, 0, 0,0);
+    modelConstructor.addShape(AvailableShapes.RECTANGLE, "Rect1", 5, 1, 2,
+            5, 0, 0, 0,0);
     assertEquals("[Rectangle Rect1 with RGB(0, 0, 0), and corner at (5, 1), " +
             "width: 2, height: 5]",
         modelConstructor.getShapes().toString());
@@ -72,9 +71,12 @@ public class ModelTests {
     assertEquals(testList, model1.getShapes());
 
     // testing a model via shape constructor
-    model2.addShape(AvailableShapes.RECTANGLE, "aRect", 2, 2, 2, 2, 0, 0, 0,0);
-    model2.addShape(AvailableShapes.RECTANGLE, "anotherRect", 3, 3, 3, 3,0, 0, 0,0);
-    model2.addShape(AvailableShapes.OVAL, "aCircle", 4, 4, 4, 4,0, 0, 0,0);
+    model2.addShape(AvailableShapes.RECTANGLE, "aRect", 2, 2, 2, 2,
+            0, 0, 0,0);
+    model2.addShape(AvailableShapes.RECTANGLE, "anotherRect", 3, 3, 3,
+            3,0, 0, 0,0);
+    model2.addShape(AvailableShapes.OVAL, "aCircle", 4, 4, 4, 4,0,
+            0, 0,0);
     model2.addShape(AvailableShapes.OVAL, "anotherCircle",
         5, 5, 5, 5, 5, 5, 5, 100);
     model2.addShape(AvailableShapes.RECTANGLE, "Rect3",
@@ -93,7 +95,8 @@ public class ModelTests {
   public void testInvalidAddShapesWH() {
     // Testing negative width for addShape 2
     try {
-      model1.addShape(AvailableShapes.OVAL, "invalid 1", 5, 5, -5, 5,0, 0, 0,0);
+      model1.addShape(AvailableShapes.OVAL, "invalid 1", 5, 5, -5, 5,
+              0, 0, 0,0);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -101,7 +104,8 @@ public class ModelTests {
     }
     // Testing negative height for addShape 2
     try {
-      model1.addShape(AvailableShapes.OVAL, "invalid 1", 5, 5, -5, 5,0, 0, 0,0);
+      model1.addShape(AvailableShapes.OVAL, "invalid 1", 5, 5, -5, 5,
+              0, 0, 0,0);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -161,8 +165,10 @@ public class ModelTests {
     testList.add(move1);
     model1.addMove(rectangle1, 100, 115, 130, 100,
         100, 115);
-    assertEquals(testList.get(0).getReference().getX(), model1.getChanges().get(0).getReference().getX());
-    assertEquals(testList.get(0).getReference().getY(), model1.getChanges().get(0).getReference().getY());
+    assertEquals(testList.get(0).getReference().getX(),
+            model1.getChanges().get(0).getReference().getX());
+    assertEquals(testList.get(0).getReference().getY(),
+            model1.getChanges().get(0).getReference().getY());
     assertEquals(testList.get(0).getStartTime(), model1.getChanges().get(0).getStartTime());
     assertEquals(testList.get(0).getEndTime(), model1.getChanges().get(0).getEndTime());
 
@@ -174,8 +180,10 @@ public class ModelTests {
     testList2.add(move1);
     model2.addMove(rectangle2, 100, 115, 130, 100,
         100, 115);
-    assertEquals(testList2.get(0).getReference().getX(), model2.getChanges().get(0).getReference().getX());
-    assertEquals(testList2.get(0).getReference().getY(), model2.getChanges().get(0).getReference().getY());
+    assertEquals(testList2.get(0).getReference().getX(),
+            model2.getChanges().get(0).getReference().getX());
+    assertEquals(testList2.get(0).getReference().getY(),
+            model2.getChanges().get(0).getReference().getY());
     assertEquals(testList2.get(0).getStartTime(), model2.getChanges().get(0).getStartTime());
     assertEquals(testList2.get(0).getEndTime(), model2.getChanges().get(0).getEndTime());
   }

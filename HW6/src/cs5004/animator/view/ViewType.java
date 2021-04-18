@@ -1,5 +1,8 @@
 package cs5004.animator.view;
 
+/**
+ * Enum for the different view types available.
+ */
 public enum ViewType {
   TEXT, VISUAL, SVG;
 

@@ -11,9 +11,10 @@ import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
 import javax.swing.Timer;
 
-
-
-public class VisualView extends JFrame implements IView, ActionListener{
+/**
+ * Class for the visual view representation.
+ */
+public class VisualView extends JFrame implements IView, ActionListener {
   private AnimationModel model;
   private CanvasPanel mainPanel;
   private int speed;

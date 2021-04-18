@@ -3,7 +3,6 @@ package cs5004.animator.view;
 import java.io.IOException;
 
 import cs5004.animator.model.AnimationModel;
-import cs5004.animator.model.AnimationModelImpl;
 
 /**
  * The main animation class will have to create a view given a user input. The parsed input will

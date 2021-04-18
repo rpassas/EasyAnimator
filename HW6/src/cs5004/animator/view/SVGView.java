@@ -125,7 +125,7 @@ public class SVGView implements IView {
               //Find changes for moving an oval
             } else if (change.getType().equals(AvailableChanges.MOVE)
                     && shape.getType().equals(AvailableShapes.OVAL)) {
-                //Moves X coordinate
+              //Moves X coordinate
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime()
                       * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
@@ -135,7 +135,7 @@ public class SVGView implements IView {
                       - model.getCanvas().getX()) + "\" to=\""
                       + (change.getReference().getX() - model.getCanvas().getX())
                       + "\" fill=\"freeze\" />\n");
-                //Moves Y coordinate
+              //Moves Y coordinate
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
                       + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed

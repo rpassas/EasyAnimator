@@ -44,6 +44,7 @@ public abstract class AbstractChange implements Change {
   public void setShapeLabel(String shapeLabel) {
     this.shapeLabel = shapeLabel;
   }
+
   @Override
   public void setType(AvailableChanges type) {
     this.type = type;

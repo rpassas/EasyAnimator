@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.LinkedList;
 
 import cs5004.animator.model.AbstractShape;
@@ -9,8 +11,12 @@ import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AvailableShapes;
 import cs5004.animator.model.Change;
 import cs5004.animator.model.Circle;
+import cs5004.animator.model.Move;
 import cs5004.animator.model.Recolor;
 import cs5004.animator.model.Rect;
+import cs5004.animator.model.Resize;
+import cs5004.animator.util.AnimationReader;
+import cs5004.animator.view.SVGView;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -147,33 +153,33 @@ public class ModelTests {
 
   @Test
   public void testAddMove() {
-    model1.addShape(AvailableShapes.RECTANGLE, "Rect1", 1, 2, 3, 7, 0, 0, 0, 0);
-    model1.addShape(AvailableShapes.RECTANGLE, "Rect2", 11, 3, 2, 3, 0, 0, 0, 0);
-    model1.addShape(AvailableShapes.OVAL, "Circle1", 41, 44, 1, 4, 0, 0, 0, 0);
-    model1.addShape(AvailableShapes.OVAL, "Circle2",
-        5, 25, 5, 55, 53, 35, 5, 100);
+    model1.addShape(rectangle1);
+    LinkedList<Change> testList = new LinkedList<>();
+    Move move1 = new Move(rectangle1, rectangle1.getLabel(),
+            100, 115, 130, 100,
+            100, 115);
+    testList.add(move1);
+    model1.addMove(rectangle1, 100, 115, 130, 100,
+            100, 115);
+    assertEquals(testList.get(0).getReference().getX(), model1.getChanges().get(0).getReference().getX());
+    assertEquals(testList.get(0).getReference().getY(), model1.getChanges().get(0).getReference().getY());
+    assertEquals(testList.get(0).getStartTime(), model1.getChanges().get(0).getStartTime());
+    assertEquals(testList.get(0).getEndTime(), model1.getChanges().get(0).getEndTime());
 
     model2.addShape(rectangle1);
-    model2.addShape(circle2);
-    model2.addMove(rectangle1, 15, 15, 5, 10,  2, 11);
-    model2.addMove(rectangle1, 2, 2, 10, 20, 12, 17);
-    assertEquals("Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), width: 2, height: 3\n" +
-                    "Ellipse C2 with RGB(0, 64, 254), and center at: (15, 26), x-diameter: 45, y-diameter: 45\n" +
-                    "\n" +
-                    "R1 appears at time t=2\n" +
-                    "\n" +
-                    "Shape R1 updates its position from x-dimension: 2, y-dimension: 2 to x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n",
-            model2.toString());
-    model2.addMove(circle2,1, 1, 0, 25, 18, 20);
-    assertEquals("Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), width: 2, height: 3\n" +
-                    "Ellipse C2 with RGB(0, 64, 254), and center at: (15, 26), x-diameter: 45, y-diameter: 45\n" +
-                    "\n" +
-                    "R1 appears at time t=2\n" +
-                    "C2 appears at time t=18\n" +
-                    "\n" +
-                    "Shape R1 updates its position from x-dimension: 2, y-dimension: 2 to x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n",
-            model2.toString());
+    LinkedList<Change> testList2 = new LinkedList<>();
+    Move move2 = new Move(rectangle2, rectangle2.getLabel(),
+            100, 115, 130, 100,
+            100, 115);
+    testList2.add(move1);
+    model2.addMove(rectangle2, 100, 115, 130, 100,
+            100, 115);
+    assertEquals(testList2.get(0).getReference().getX(), model2.getChanges().get(0).getReference().getX());
+    assertEquals(testList2.get(0).getReference().getY(), model2.getChanges().get(0).getReference().getY());
+    assertEquals(testList2.get(0).getStartTime(), model2.getChanges().get(0).getStartTime());
+    assertEquals(testList2.get(0).getEndTime(), model2.getChanges().get(0).getEndTime());
   }
+
 
   @Test
   public void testIllegalAddMove() {
@@ -447,42 +453,18 @@ public class ModelTests {
 
   @Test
   public void testAddResize() {
-    model1.addShape(rectangle2);
-    assertEquals("[Rectangle R2 with RGB(0, 0, 0), and corner at (5, 6), " +
-                    "width: 7, height: 8]",
-            model1.getShapes().toString());
-    model1.addResize(rectangle2, 1, 3,
-        5, 3,0 , 15);
-    assertEquals("[Shape R2 updates its dimensions from width: 1 height: 3" +
-            " to width: 5 height: 3 from t= 0 to t= 15\n" +
-            "]",
-            model1.getChanges().toString());
-    model1.addResize(rectangle2, 5, 5,
-        1, 3,15, 50);
-    assertEquals("[Shape R2 updates its dimensions from width: 5 height: 5 to width: 1 height: 3 from t= 15 to t= 50\n" +
-                    ", Shape R2 updates its dimensions from width: 1 height: 3 to width: 5 height: 3 from t= 0 to t= 15\n" +
-                    "]",
-            model1.getChanges().toString());
-
-    model2.addShape(rectangle1);
-    model2.addShape(circle2);
-    model2.addShape(circle1);
-    assertEquals("[Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), width: " +
-                    "2, height: 3, Ellipse C2 with RGB(0, 64, 254), and center at: (15, 26), " +
-                    "x-diameter: 45, y-diameter: 45, Ellipse C1 with RGB(0, 0, 0), and center" +
-                    " at: (1, 2), x-diameter: 3, y-diameter: 4]",
-            model2.getShapes().toString());
-    model2.addResize(rectangle1, 1, 1,7, 3, 1, 2);
-    model2.addResize(circle1, 1, 1,3, 8, 1, 2);
-    model2.addResize(circle2, 1, 1, 4, 1,1, 2);
-    assertEquals("[Shape R1 updates its dimensions from width: 1 height: 1 to width: " +
-            "7 height: 3 from t= 1 to t= 2\n" +
-            ", Shape C1 updates its dimensions from width: 1 height: 1 " +
-            "to width: 3 height: 8 from t= 1 to t= 2\n" +
-            ", Shape C2 updates its dimensions from width: 1 height: 1 " +
-            "to width: 4 height: 1 from t= 1 to t= 2\n" +
-            "]",
-            model2.getChanges().toString());
+    model1.addShape(rectangle1);
+    LinkedList<Change> testList = new LinkedList<>();
+    Resize resize1 = new Resize(rectangle1, rectangle1.getLabel(),
+            100, 115, 600, 100,
+            100, 115);
+    testList.add(resize1);
+    model1.addResize(rectangle1, 100, 115, 600, 100,
+            100, 115);
+    assertEquals(testList.get(0).getUpdatedWidth(), model1.getChanges().get(0).getUpdatedWidth());
+    assertEquals(testList.get(0).getUpdatedHeight(), model1.getChanges().get(0).getUpdatedHeight());
+    assertEquals(testList.get(0).getStartTime(), model1.getChanges().get(0).getStartTime());
+    assertEquals(testList.get(0).getEndTime(), model1.getChanges().get(0).getEndTime());
   }
 
   @Test
@@ -574,50 +556,68 @@ public class ModelTests {
   }
 
   @Test
-  public void testToString() {
-    assertEquals("", model1.toString());
-    model1.addShape(rectangle1);
-    model1.addShape(circle1);
-    assertEquals("Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), " +
-                    "width: 2, height: 3\n" +
-                    "Ellipse C1 with RGB(0, 0, 0), and center at: (1, 2), " +
-                    "x-diameter: 3, y-diameter: 4\n"
-        , model1.toString());
-    model1.addMove(rectangle1, 2, 3, 1, 3,2,3);
-    model1.addMove(circle1, 2, 3, 1, 3,2,3);
-    model1.addRecolor(rectangle1, 2, 3, 250,3,
-        2, 3, 250,3,5, 7);
-    model1.addRecolor(circle1, 17, 111, 2,3,
-        2, 3, 250,3,5, 8);
-    assertEquals("Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), width: " +
-                    "2, height: 3\n" +
-                    "Ellipse C1 with RGB(0, 0, 0), and center at: (1, 2), x-diameter: 3, " +
-                    "y-diameter: 4\n" +
-                    "Shape R1 updates its position from x-dimension: 2, y-dimension: 3 to " +
-                    "x-dimension: 1, y-dimension: 3 from t= 2 to t= 3\n" +
-                    "Shape C1 updates its position from x-dimension: 2, y-dimension: 3 to " +
-                    "x-dimension: 1, y-dimension: 3 from t= 2 to t= 3\n" +
-                    "Shape R1 updates its color from (2, 3, 250, 3) to (2, 3, 250, 3) from " +
-                    "t= 5 to t= 7\n" +
-                    "Shape C1 updates its color from (17, 111, 2, 3) to (2, 3, 250, 3) from " +
-                    "t= 5 to t= 8\n",
-        model1.toString());
-    model1.addResize(circle1, 15, 15, 1, 3,0, 100);
-    assertEquals("Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), width: " +
-                    "2, height: 3\n" +
-                    "Ellipse C1 with RGB(0, 0, 0), and center at: (1, 2), x-diameter: 3, " +
-                    "y-diameter: 4\n" +
-                    "Shape R1 updates its position from x-dimension: 2, y-dimension: 3 to " +
-                    "x-dimension: 1, y-dimension: 3 from t= 2 to t= 3\n" +
-                    "Shape C1 updates its position from x-dimension: 2, y-dimension: 3 to " +
-                    "x-dimension: 1, y-dimension: 3 from t= 2 to t= 3\n" +
-                    "Shape R1 updates its color from (2, 3, 250, 3) to (2, 3, 250, 3) from " +
-                    "t= 5 to t= 7\n" +
-                    "Shape C1 updates its color from (17, 111, 2, 3) to (2, 3, 250, 3) from " +
-                    "t= 5 to t= 8\n" +
-                    "Shape C1 updates its dimensions from width: 15 height: 15 to width: 1 " +
-                    "height: 3 from t= 0 to t= 100\n",
-            model1.toString());
+  public void testToString() throws FileNotFoundException {
+    FileReader fileIn = new FileReader("testAllMotions.txt");
+    AnimationModel model3 = AnimationReader.parseFile(fileIn,
+            new AnimationModelImpl.Builder());
+   assertEquals("Rectangle R1 with RGB(100, 100, 100), and corner at (100, 100), " +
+           "width: 100, height: 100\n" +
+           "Ellipse C1 with RGB(0, 222, 255), and center at: (440, 70), x-diameter: 120, " +
+           "y-diameter: 60\n" +
+           "\n" +
+           "R1 appears at time t=1\n" +
+           "C1 appears at time t=6\n" +
+           "\n" +
+           "Shape R1 updates its dimensions from width: 100 height: 100 to width: 50 height: " +
+           "100 from t= 1 to t= 10\n" +
+           "Shape R1 updates its position from x-dimension: 100, y-dimension: 100 to " +
+           "x-dimension: 200, y-dimension: 200 from t= 1 to t= 10\n" +
+           "Shape C1 updates its position from x-dimension: 440, y-dimension: 70 to " +
+           "x-dimension: 440, y-dimension: 70 from t= 6 to t= 20\n" +
+           "Shape R1 updates its color from (255, 0, 0, 100) to (255, 0, 230, 100) " +
+           "from t= 10 to t= 50\n" +
+           "Shape R1 updates its position from x-dimension: 200, y-dimension: 200 to " +
+           "x-dimension: 400, y-dimension: 400 from t= 10 to t= 50\n" +
+           "Shape R1 updates its position from x-dimension: 200, y-dimension: 200 to " +
+           "x-dimension: 400, y-dimension: 400 from t= 10 to t= 50\n" +
+           "Shape C1 updates its color from (222, 0, 255, 100) to (15, 25, 200, 100) " +
+           "from t= 20 to t= 50\n" +
+           "Shape C1 updates its dimensions from width: 120 height: 60 to width: 120 " +
+           "height: 120 from t= 20 to t= 50\n" +
+           "Shape C1 updates its position from x-dimension: 440, y-dimension: 70 to " +
+           "x-dimension: 100, y-dimension: 120 from t= 20 to t= 50\n" +
+           "Shape C1 updates its color from (15, 25, 200, 100) to (0, 170, 85, 100) " +
+           "from t= 50 to t= 70\n" +
+           "Shape C1 updates its dimensions from width: 120 height: 120 to width: 120 " +
+           "height: 60 from t= 50 to t= 70\n" +
+           "Shape C1 updates its position from x-dimension: 100, y-dimension: 120 to " +
+           "x-dimension: 440, y-dimension: 370 from t= 50 to t= 70\n" +
+           "Shape R1 updates its position from x-dimension: 400, y-dimension: 400 to " +
+           "x-dimension: 400, y-dimension: 400 from t= 50 to t= 51\n" +
+           "Shape R1 updates its color from (255, 0, 230, 100) to (255, 0, 0, 100) " +
+           "from t= 51 to t= 70\n" +
+           "Shape R1 updates its dimensions from width: 50 height: 100 to " +
+           "width: 25 height: 100 from t= 51 to t= 70\n" +
+           "Shape R1 updates its position from x-dimension: 400, y-dimension: 400 to " +
+           "x-dimension: 1, y-dimension: 1 from t= 51 to t= 70\n" +
+           "Shape R1 updates its position from x-dimension: 400, y-dimension: 400 to " +
+           "x-dimension: 1, y-dimension: 1 from t= 51 to t= 70\n" +
+           "Shape C1 updates its color from (0, 170, 85, 100) to (255, 255, 0, 100) " +
+           "from t= 70 to t= 80\n" +
+           "Shape C1 updates its position from x-dimension: 440, y-dimension: 370 to " +
+           "x-dimension: 15, y-dimension: 15 from t= 70 to t= 80\n" +
+           "Shape R1 updates its color from (255, 0, 0, 100) to (0, 0, 0, 100) from " +
+           "t= 70 to t= 100\n" +
+           "Shape R1 updates its position from x-dimension: 1, y-dimension: 1 to " +
+           "x-dimension: 200, y-dimension: 200 from t= 70 to t= 100\n" +
+           "Shape R1 updates its position from x-dimension: 1, y-dimension: 1 to " +
+           "x-dimension: 200, y-dimension: 200 from t= 70 to t= 100\n" +
+           "Shape C1 updates its color from (255, 255, 0, 100) to (255, 25, 20, 100) " +
+           "from t= 80 to t= 100\n" +
+           "Shape C1 updates its dimensions from width: 120 height: 60 to width: 300 " +
+           "height: 300 from t= 80 to t= 100\n" +
+           "Shape C1 updates its position from x-dimension: 15, y-dimension: 15 to " +
+           "x-dimension: 440, y-dimension: 370 from t= 80 to t= 100\n", model3.toString());
   }
 
   @Test

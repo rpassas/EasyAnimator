@@ -47,6 +47,9 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public LinkedList<AbstractChange> getChanges() {
     LinkedList<AbstractChange> changes = new LinkedList<>(changeMap.keySet());
+    ChangeComparator byStartTime = new ChangeComparator();
+    List<AbstractChange> sortedChangeList = changes
+            .stream().sorted(byStartTime).collect(Collectors.toList());
     return changes;
   }
 
@@ -347,6 +350,8 @@ public class AnimationModelImpl implements AnimationModel {
   public String toString() {
     HashMap<String, AbstractChange> appearMap = new LinkedHashMap<>();
     ArrayList<AbstractChange> changeListNoAppear = new ArrayList<>();
+    ChangeComparator byStartTime = new ChangeComparator();
+    List<AbstractChange> sortedChanges = changeMap.keySet().stream().sorted(byStartTime).collect(Collectors.toList());
 
     //Adding the different shapes to the model string
     String model = "";
@@ -357,7 +362,7 @@ public class AnimationModelImpl implements AnimationModel {
 
 
       // Creating a list of when the shapes appear and a list of the changes
-      for (AbstractChange change : this.changeMap.keySet()) {
+      for (AbstractChange change : sortedChanges) {
         if (appearMap.containsKey(change.getShapeLabel())) {
           changeListNoAppear.add(change);
         } else {
@@ -372,8 +377,7 @@ public class AnimationModelImpl implements AnimationModel {
       }
       model = model + "\n";
 
-      //Comparator to sort by start time
-      ChangeComparator byStartTime = new ChangeComparator();
+      //Comparator to sort by start time, i think this is redundant
       List<AbstractChange> sortedChangeListNoAppear = changeListNoAppear
           .stream().sorted(byStartTime).collect(Collectors.toList());
 

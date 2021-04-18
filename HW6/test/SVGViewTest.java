@@ -73,7 +73,7 @@ public class SVGViewTest {
     SVGView smalldemoSVG = new SVGView(model, viewLog, 10);
     smalldemoSVG.run();
     assertEquals("<svg width=\"360\" height=\"360\"" +
-            " version=\"1.1\"xmls=\"http://www.w3.org/2000/svg\">\n" +
+            " version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
             "\n" +
             "<rect id=\"R\" x=\"0\" y=\"130\" width=\"50\" height=\"100\"" +
             " fill=\"rgb(255,0,0)\" visibility=\"visible\" >\n" +
@@ -167,7 +167,7 @@ public class SVGViewTest {
     SVGView testAllMotionsSVG = new SVGView(model, viewLog, 15);
     testAllMotionsSVG.run();
     assertEquals("<svg width=\"500\" height=\"500\"" +
-            " version=\"1.1\"xmls=\"http://www.w3.org/2000/svg\">\n" +
+            " version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
             "\n" +
             "<rect id=\"R1\" x=\"0\" y=\"0\" width=\"100\" height=\"100\" " +
             "fill=\"rgb(100,100,100)\" visibility=\"visible\" >\n" +
@@ -293,7 +293,7 @@ public class SVGViewTest {
     SVGView multipleShapes = new SVGView(model, viewLog, 5);
     multipleShapes.run();
     assertEquals("<svg width=\"500\" height=\"500\" " +
-            "version=\"1.1\"xmls=\"http://www.w3.org/2000/svg\">\n" +
+            "version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
             "\n" +
             "<rect id=\"R1\" x=\"100\" y=\"100\" width=\"100\" height=\"100\" " +
             "fill=\"rgb(100,100,100)\" visibility=\"visible\" >\n" +

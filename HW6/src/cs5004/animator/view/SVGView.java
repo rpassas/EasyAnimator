@@ -47,7 +47,7 @@ public class SVGView implements IView {
   public void createCanvas() throws IOException {
     fileOutput.append("<svg width=\"" + model.getCanvas().getWidth() + "\" height=\""
             + model.getCanvas().getHeight() + "\" version=\"1.1\"" +
-            "xmls=\"http://www.w3.org/2000/svg\">\n"); //Not sure if this line is right
+            " xmlns=\"http://www.w3.org/2000/svg\">\n"); //Not sure if this line is right
     fileOutput.append("\n");
   }
 

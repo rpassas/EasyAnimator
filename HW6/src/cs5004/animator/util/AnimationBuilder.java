@@ -1,8 +1,8 @@
 package cs5004.animator.util;
 
 /**
- * Adaptor class from the animation reader to the andimation model.
- * @param <Doc>
+ * Adaptor class from the animation reader to the animation model.
+ * @param <Doc> the AnimationModel which is being processed.
  */
 public interface AnimationBuilder<Doc> {
   /**

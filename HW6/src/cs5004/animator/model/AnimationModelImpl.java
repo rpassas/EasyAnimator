@@ -1,12 +1,10 @@
 package cs5004.animator.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import java.util.stream.Collectors;
 
@@ -362,7 +360,7 @@ public class AnimationModelImpl implements AnimationModel {
     model = model + "\n";
 
 
-      // Creating a list of when the shapes appear and a list of the changes
+    // Creating a list of when the shapes appear and a list of the changes
     for (AbstractChange change : sortedChanges) {
       if (appearMap.containsKey(change.getShapeLabel())) {
         changeListNoAppear.add(change);
@@ -387,8 +385,11 @@ public class AnimationModelImpl implements AnimationModel {
       model = model + change.toString();
     }
     return model;
-    }
+  }
 
+  /**
+   * Class for the Builder which is an adaptor for the view to the model.
+   */
   public static final class Builder implements AnimationBuilder<AnimationModel> {
     protected AnimationModel model;
     HashMap shapeList = new HashMap<>();

@@ -90,7 +90,8 @@ public class TextViewTest {
             "x-dimension: 440, y-dimension: 250 from t= 20 to t= 50\n" +
             "Shape C updates its position from x-dimension: 440, y-dimension: 70 to " +
             "x-dimension: 440, y-dimension: 250 from t= 20 to t= 50\n" +
-            "Shape C updates its color from (0, 0, 255, 100) to (0, 170, 85, 100) from t= 50 to t= 70\n" +
+            "Shape C updates its color from (0, 0, 255, 100) " +
+            "to (0, 170, 85, 100) from t= 50 to t= 70\n" +
             "Shape C updates its position from x-dimension: 440, y-dimension: 250 to" +
             " x-dimension: 440, y-dimension: 370 from t= 50 to t= 70\n" +
             "Shape C updates its position from x-dimension: 440, y-dimension: 250 to " +
@@ -195,8 +196,8 @@ public class TextViewTest {
     AnimationModel model = AnimationReader.parseFile(fileIn,
             new AnimationModelImpl.Builder());
     Appendable viewLog = new StringBuilder();
-    TextView MultipleShapesText = new TextView(model, viewLog);
-    MultipleShapesText.run();
+    TextView multipleShapesText = new TextView(model, viewLog);
+    multipleShapesText.run();
     assertEquals("Rectangle R1 with RGB(100, 100, 100), and corner " +
             "at (100, 100), width: 100, height: 100\n" +
             "Rectangle R2 with RGB(255, 0, 230), and corner at (400, 400), " +

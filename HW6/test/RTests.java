@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import cs5004.animator.model.AbstractShape;
 import cs5004.animator.model.AvailableShapes;
+import cs5004.animator.model.Point2D;
 import cs5004.animator.model.Rect;
 
 import static org.junit.Assert.assertEquals;
@@ -176,6 +177,10 @@ public class RTests {
     rectangle1.setOpacity(14);
     assertEquals(10, rectangle1.getLocation().getX());
     assertEquals(20, rectangle1.getLocation().getY());
+    Point2D point = new Point2D(5,5);
+    rectangle1.setLocation(point);
+    assertEquals(5, rectangle1.getLocation().getX());
+    assertEquals(5, rectangle1.getLocation().getY());
     assertEquals(30, rectangle1.getWidth());
     assertEquals(40, rectangle1.getHeight());
     assertEquals(11, rectangle1.getR());

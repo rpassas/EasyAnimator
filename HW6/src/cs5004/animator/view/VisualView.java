@@ -21,7 +21,6 @@ public class VisualView extends JFrame implements IView, ActionListener {
   private Timer timer;
   private int currentTick = 0;
 
-  //TODO speed must be > 0
   VisualView(AnimationModel model, int speed) {
     super();
     this.model = model;

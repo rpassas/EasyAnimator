@@ -18,6 +18,7 @@ import cs5004.animator.model.Resize;
 import cs5004.animator.util.AnimationReader;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -49,6 +50,18 @@ public class ModelTests {
     assertEquals("[Rectangle Rect1 with RGB(0, 0, 0), and corner at (5, 1), " +
             "width: 2, height: 5]",
         modelConstructor.getShapes().toString());
+  }
+
+  @Test
+  public void testCanvas() {
+    assertEquals(0, model1.getCanvas().getHeight());
+    assertEquals(0, model1.getCanvas().getWidth());
+    model1.setCanvas(1,2,3,4);
+    assertEquals(4, model1.getCanvas().getHeight());
+    assertEquals(3, model1.getCanvas().getWidth());
+    assertEquals(2, model1.getCanvas().getY());
+    assertEquals(1, model1.getCanvas().getX());
+
   }
 
   @Test
@@ -89,6 +102,14 @@ public class ModelTests {
             "Rectangle Rect3 with RGB(6, 6, 6), and corner at (6, 6), width: " +
             "6, height: 6]",
         model2.getShapes().toString());
+  }
+
+  @Test
+  public void testGetHasShape() {
+    assertFalse(model1.hasShape("R1"));
+    model1.addShape(rectangle1);
+    assertTrue(model1.hasShape("R1"));
+    assertEquals(rectangle1, model1.getShape("R1"));
   }
 
   @Test

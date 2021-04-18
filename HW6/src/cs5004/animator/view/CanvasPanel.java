@@ -12,7 +12,6 @@ import java.util.LinkedList;
 
 
 import cs5004.animator.model.AnimationModel;
-import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.model.AbstractShape;
 import cs5004.animator.model.AvailableShapes;
 import cs5004.animator.model.Point2D;
@@ -21,10 +20,9 @@ import cs5004.animator.model.Point2D;
  * This is the main panel in the frame that will have shapes from the model,
  * represented as graphics, painted on it.
  */
-public class CanvasPanel extends JPanel{
+public class CanvasPanel extends JPanel {
   private Point2D reference;
   private LinkedList<AbstractShape> shapes;
-  private AnimationModel model;
 
   /**
    * Constructs the Canvas Panel where shapes can be drawn.
@@ -42,7 +40,6 @@ public class CanvasPanel extends JPanel{
    */
   void setAnimatedShapes(AnimationModel model) {
     this.shapes = model.getShapes();
-    this.model = model;
   }
 
   @Override

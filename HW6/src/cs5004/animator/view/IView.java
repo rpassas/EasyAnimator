@@ -2,6 +2,9 @@ package cs5004.animator.view;
 
 import java.io.IOException;
 
+/**
+ * Interface for the view classes.
+ */
 public interface IView {
 
   /**

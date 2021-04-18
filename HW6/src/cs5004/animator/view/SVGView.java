@@ -3,7 +3,6 @@ package cs5004.animator.view;
 import cs5004.animator.model.AbstractChange;
 import cs5004.animator.model.AbstractShape;
 import cs5004.animator.model.AnimationModel;
-import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.model.AvailableChanges;
 import cs5004.animator.model.AvailableShapes;
 import cs5004.animator.model.ChangeComparator;
@@ -60,7 +59,7 @@ public class SVGView implements IView {
    */
   public void createShapes(LinkedList<AbstractShape> listOfShapes, int speed) throws IOException {
 
-    for(AbstractShape shape : model.getShapes()) {
+    for (AbstractShape shape : model.getShapes()) {
       //Attemped to set visiblity off the start, doesn't work when shapes come in later
       try {
         String visible = "";
@@ -104,7 +103,8 @@ public class SVGView implements IView {
               visible += "visible";
             }
             //Finds changes for Moving a rectangle
-            if (change.getType().equals(AvailableChanges.MOVE) && shape.getType().equals(AvailableShapes.RECTANGLE))
+            if (change.getType().equals(AvailableChanges.MOVE)
+                    && shape.getType().equals(AvailableShapes.RECTANGLE))
             {
               //Moves X coordinate
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
@@ -124,14 +124,16 @@ public class SVGView implements IView {
                       + "\" to=\"" + (change.getReference().getY() - model.getCanvas().getY())
                       + "\" fill=\"freeze\" />\n");
               //Find changes for moving an oval
-            } else if (change.getType().equals(AvailableChanges.MOVE) && shape.getType().equals(AvailableShapes.OVAL)) {
-              //Moves X coordinate
+            } else if (change.getType().equals(AvailableChanges.MOVE)
+                    && shape.getType().equals(AvailableShapes.OVAL)) {
+                //Moves X coordinate
                 fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                         + change.getStartTime()
                         * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
                         - change.getStartTime()) * 1000 / this.speed
                         + "ms\" attributeName=\"cx\" from=\""
-                        + (change.getStartReference().getX() - model.getCanvas().getX()) + "\" to=\""
+                        + (change.getStartReference().getX()
+                        - model.getCanvas().getX()) + "\" to=\""
                         + (change.getReference().getX() - model.getCanvas().getX())
                         + "\" fill=\"freeze\" />\n");
                 //Moves Y coordinate
@@ -143,7 +145,8 @@ public class SVGView implements IView {
                         + "\" to=\"" + (change.getReference().getY() - model.getCanvas().getY())
                         + "\" fill=\"freeze\" />\n");
                 // Resizes a rectangle
-            } else if (change.getType().equals(AvailableChanges.RESIZE) && shape.getType().equals(AvailableShapes.RECTANGLE)) {
+            } else if (change.getType().equals(AvailableChanges.RESIZE)
+                    && shape.getType().equals(AvailableShapes.RECTANGLE)) {
               //Resizes the width
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime()
@@ -157,8 +160,9 @@ public class SVGView implements IView {
                       + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
                       + "ms\" attributeName=\"height\" from=\"" + change.getStartHeight()
                       + "\" to=\"" + change.getUpdatedHeight() + "\" fill=\"freeze\" />\n");
-            } else if (change.getType().equals(AvailableChanges.RESIZE) && shape.getType().equals(AvailableShapes.OVAL)) {
-              //Changes x radius
+            } else if (change.getType().equals(AvailableChanges.RESIZE)
+                    && shape.getType().equals(AvailableShapes.OVAL)) {
+                //Changes x radius
                 fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                         + change.getStartTime()
                         * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()

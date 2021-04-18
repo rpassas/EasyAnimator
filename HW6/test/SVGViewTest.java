@@ -152,7 +152,7 @@ public class SVGViewTest {
             "</ellipse>\n" +
             "\n" +
             "</svg>", viewLog.toString());
-    }
+  }
 
   /**
    * Tests the AllMotions file.
@@ -290,8 +290,8 @@ public class SVGViewTest {
     AnimationModel model = AnimationReader.parseFile(fileIn,
             new AnimationModelImpl.Builder());
     Appendable viewLog = new StringBuilder();
-    SVGView MultipleShapes = new SVGView(model, viewLog, 5);
-    MultipleShapes.run();
+    SVGView multipleShapes = new SVGView(model, viewLog, 5);
+    multipleShapes.run();
     assertEquals("<svg width=\"500\" height=\"500\" " +
             "version=\"1.1\"xmls=\"http://www.w3.org/2000/svg\">\n" +
             "\n" +

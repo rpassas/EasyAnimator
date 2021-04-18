@@ -104,8 +104,7 @@ public class SVGView implements IView {
             }
             //Finds changes for Moving a rectangle
             if (change.getType().equals(AvailableChanges.MOVE)
-                    && shape.getType().equals(AvailableShapes.RECTANGLE))
-            {
+                    && shape.getType().equals(AvailableShapes.RECTANGLE)) {
               //Moves X coordinate
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime()
@@ -127,23 +126,23 @@ public class SVGView implements IView {
             } else if (change.getType().equals(AvailableChanges.MOVE)
                     && shape.getType().equals(AvailableShapes.OVAL)) {
                 //Moves X coordinate
-                fileOutput.append("    <animate attributeType=\"xml\" begin=\""
-                        + change.getStartTime()
-                        * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
-                        - change.getStartTime()) * 1000 / this.speed
-                        + "ms\" attributeName=\"cx\" from=\""
-                        + (change.getStartReference().getX()
-                        - model.getCanvas().getX()) + "\" to=\""
-                        + (change.getReference().getX() - model.getCanvas().getX())
-                        + "\" fill=\"freeze\" />\n");
+              fileOutput.append("    <animate attributeType=\"xml\" begin=\""
+                      + change.getStartTime()
+                      * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
+                      - change.getStartTime()) * 1000 / this.speed
+                      + "ms\" attributeName=\"cx\" from=\""
+                      + (change.getStartReference().getX()
+                      - model.getCanvas().getX()) + "\" to=\""
+                      + (change.getReference().getX() - model.getCanvas().getX())
+                      + "\" fill=\"freeze\" />\n");
                 //Moves Y coordinate
-                fileOutput.append("    <animate attributeType=\"xml\" begin=\""
-                        + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
-                        + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
-                        + "ms\" attributeName=\"cy\" from=\"" + (change.getStartReference().getY()
-                        - model.getCanvas().getY())
-                        + "\" to=\"" + (change.getReference().getY() - model.getCanvas().getY())
-                        + "\" fill=\"freeze\" />\n");
+              fileOutput.append("    <animate attributeType=\"xml\" begin=\""
+                      + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
+                      + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
+                      + "ms\" attributeName=\"cy\" from=\"" + (change.getStartReference().getY()
+                      - model.getCanvas().getY())
+                      + "\" to=\"" + (change.getReference().getY() - model.getCanvas().getY())
+                      + "\" fill=\"freeze\" />\n");
                 // Resizes a rectangle
             } else if (change.getType().equals(AvailableChanges.RESIZE)
                     && shape.getType().equals(AvailableShapes.RECTANGLE)) {
@@ -162,20 +161,20 @@ public class SVGView implements IView {
                       + "\" to=\"" + change.getUpdatedHeight() + "\" fill=\"freeze\" />\n");
             } else if (change.getType().equals(AvailableChanges.RESIZE)
                     && shape.getType().equals(AvailableShapes.OVAL)) {
-                //Changes x radius
-                fileOutput.append("    <animate attributeType=\"xml\" begin=\""
-                        + change.getStartTime()
-                        * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
-                        - change.getStartTime()) * 1000 / this.speed
-                        + "ms\" attributeName=\"rx\" from=\"" + change.getStartWidth() + "\" to=\""
-                        + change.getUpdatedWidth() + "\" fill=\"freeze\" />\n");
-                //Changes y radius
-                fileOutput.append("    <animate attributeType=\"xml\" begin=\""
-                        + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
-                        + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
-                        + "ms\" attributeName=\"ry\" from=\"" + change.getStartHeight()
-                        + "\" to=\"" + change.getUpdatedHeight() + "\" fill=\"freeze\" />\n");
-                //Recolors the shape
+              //Changes x radius
+              fileOutput.append("    <animate attributeType=\"xml\" begin=\""
+                      + change.getStartTime()
+                      * 1000 / this.speed + "ms\" dur=\"" + (change.getEndTime()
+                      - change.getStartTime()) * 1000 / this.speed
+                      + "ms\" attributeName=\"rx\" from=\"" + change.getStartWidth() + "\" to=\""
+                      + change.getUpdatedWidth() + "\" fill=\"freeze\" />\n");
+              //Changes y radius
+              fileOutput.append("    <animate attributeType=\"xml\" begin=\""
+                      + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""
+                      + (change.getEndTime() - change.getStartTime()) * 1000 / this.speed
+                      + "ms\" attributeName=\"ry\" from=\"" + change.getStartHeight()
+                      + "\" to=\"" + change.getUpdatedHeight() + "\" fill=\"freeze\" />\n");
+              //Recolors the shape
             } else if (change.getType().equals(AvailableChanges.RECOLOR)) {
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""
                       + change.getStartTime() * 1000 / this.speed + "ms\" dur=\""

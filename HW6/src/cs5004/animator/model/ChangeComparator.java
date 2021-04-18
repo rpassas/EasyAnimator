@@ -9,7 +9,7 @@ public class ChangeComparator implements Comparator<AbstractChange> {
       return 1;
     }
     if (a.getStartTime() == b.getStartTime()) {
-      return 0;
+      return a.getShapeLabel().compareTo(b.getShapeLabel());
     }
     return -1;
   }

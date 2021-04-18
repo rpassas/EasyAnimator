@@ -18,12 +18,18 @@ import static org.junit.Assert.fail;
  */
 public class SVGViewTest {
 
+  /**
+   * Setup for the testing files.
+   */
   @Before
   public void setup() {
     AnimationModelImpl model = new AnimationModelImpl();
-    String toh = "toh-5.txt";
   }
 
+  /**
+   * Testing the constructor.
+   * @throws IOException if there is an error with reading input.
+   */
   @Test
   public void testConstructor() throws IOException {
     FileReader fileIn = new FileReader("HW6/resources/smalldemo.txt");
@@ -37,6 +43,9 @@ public class SVGViewTest {
 
   }
 
+  /**
+   * Tests for an invalid constructor.
+   */
   @Test
   public void testInvalidConstructor() {
     try {
@@ -49,11 +58,14 @@ public class SVGViewTest {
               "file specified)", ioe.getMessage());
       assertTrue(ioe.getMessage().length() > 0);
     }
-}
+  }
 
-//SVG and Text Views do not have methods that return anything rn
+  /**
+   * Tests the output of smallDemo.
+   * @throws IOException if input is invalid.
+   */
   @Test
-  public void testOutput() throws IOException {
+  public void testSmallDemo() throws IOException {
     FileReader fileIn = new FileReader("HW6/resources/smalldemo.txt");
     AnimationModel model = AnimationReader.parseFile(fileIn,
             new AnimationModelImpl.Builder());
@@ -142,6 +154,10 @@ public class SVGViewTest {
             "</svg>", viewLog.toString());
     }
 
+  /**
+   * Tests the AllMotions file.
+   * @throws IOException if input is invalid.
+   */
   @Test
   public void testAllMotions() throws IOException {
     FileReader fileIn = new FileReader("HW6/resources/testAllMotions.txt");
@@ -264,6 +280,10 @@ public class SVGViewTest {
             "</svg>", viewLog.toString());
   }
 
+  /**
+   * Tests the MultipleShapes file.
+   * @throws IOException if input is invalid.
+   */
   @Test
   public void testMultipleShapes() throws IOException {
     FileReader fileIn = new FileReader("HW6/resources/testMultipleShapes.txt");

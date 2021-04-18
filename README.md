@@ -48,12 +48,11 @@ note: enum classes are not shown in the UML diagrams (types of changes and shape
 
 ### View 
 
-The scheme for the view has one interface that designates the behaviors for three implementing concrete classes: SVGView, TextView, and VisualView. The SVGView and TextView both generate a text file, with the SVGView being formatted specifically to meet SVG requirements so that it can render the animation. The VisualView generates a JFrame with a "canvas" panel component on which Graphics2D can be painted and repainted at particular ticks as the animation runs. Each view has an enum type and can run (IView specifies other behaviors but these are not functionally universal in their implementation).
+The scheme for the view has one interface that designates the behaviors for three implementing concrete classes: SVGView, TextView, and VisualView. The SVGView and TextView both generate a text file, with the SVGView being formatted specifically to meet SVG requirements so that it can render the animation. TextView simply generates a readable description of the animation. The VisualView generates a JFrame with a "canvas" panel component on which Graphics2D can be painted and repainted at particular ticks as the animation runs. The VisualView takes the model (like each other view) and uniquely converts "tweened" shapes at the current tick to graphics. Each view has an enum type and can run (IView specifies other behaviors but these are not functionally universal in their implementation).
 
-In the main EasyAnimator class that takes the command line arguments for the animation the arguments are parsed, used to build a model and other simple parameters needed for the views. These parameters are passed to the ViewMaker that can generate the appropriate view type given these inputs. 
+In the main EasyAnimator class that takes the command line arguments for the animation, the arguments are parsed and then used to build a model and other simple parameters needed for the views. These parameters are passed to the ViewMaker that can generate the appropriate view type given these inputs. If there is an error in the execution of main() in EasyAnimator, the program will generate a warning panel.
 
-#### Notes:
+From the original implementation, the model had some minor updates. Most notably, the data structures for storing changes and shapes were changed from lists to maps, reducing run time which was particularly important for visual view when running larger animations. Moreover, a model now has a custom canvas class that determines the size/location of the canvas for view. Of course, the builder class was also implemented in the model to build a model given an input text file. 
 
-Builder is a class in the model. Graphics are drawn ontop of components. Don't need tween helper necessarily, can just have the formula work within the getShapesAtTick() -> does not update model, just makes copies. Build() creates the model for the view. Controller manages speed of animation. The visual should have a setShapes() to get the shapes at tick. User just gives command lines to provide .txt files, speed, view etc.
 
 

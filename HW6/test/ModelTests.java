@@ -157,19 +157,22 @@ public class ModelTests {
     model2.addShape(circle2);
     model2.addMove(rectangle1, 15, 15, 5, 10,  2, 11);
     model2.addMove(rectangle1, 2, 2, 10, 20, 12, 17);
-    assertEquals("[Shape R1 updates its position from x-dimension: 15, y-dimension: 15 to x-dimension: 5, y-dimension: 10 from t= 2 to t= 11\n" +
-                    ", Shape R1 updates its position from x-dimension: 2, y-dimension: 2 to x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n" +
-                    "]",
-            model2.getChanges().toString());
+    assertEquals("Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), width: 2, height: 3\n" +
+                    "Ellipse C2 with RGB(0, 64, 254), and center at: (15, 26), x-diameter: 45, y-diameter: 45\n" +
+                    "\n" +
+                    "R1 appears at time t=2\n" +
+                    "\n" +
+                    "Shape R1 updates its position from x-dimension: 2, y-dimension: 2 to x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n",
+            model2.toString());
     model2.addMove(circle2,1, 1, 0, 25, 18, 20);
-    assertEquals("[Shape R1 updates its position from x-dimension: 15," +
-            " y-dimension: 15 to x-dimension: 5, y-dimension: 10 from t= 2 to t= 11\n" +
-            ", Shape R1 updates its position from x-dimension: 2, y-dimension: 2 to" +
-            " x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n" +
-            ", Shape C2 updates its position from x-dimension: 1, y-dimension: 1 to" +
-            " x-dimension: 0, y-dimension: 25 from t= 18 to t= 20\n" +
-            "]",
-            model2.getChanges().toString());
+    assertEquals("Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), width: 2, height: 3\n" +
+                    "Ellipse C2 with RGB(0, 64, 254), and center at: (15, 26), x-diameter: 45, y-diameter: 45\n" +
+                    "\n" +
+                    "R1 appears at time t=2\n" +
+                    "C2 appears at time t=18\n" +
+                    "\n" +
+                    "Shape R1 updates its position from x-dimension: 2, y-dimension: 2 to x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n",
+            model2.toString());
   }
 
   @Test
@@ -456,11 +459,9 @@ public class ModelTests {
             model1.getChanges().toString());
     model1.addResize(rectangle2, 5, 5,
         1, 3,15, 50);
-    assertEquals("[Shape R2 updates its dimensions from width: 1 height: 3 to" +
-            " width: 5 height: 3 from t= 0 to t= 15\n" +
-            ", Shape R2 updates its dimensions from width: 5 height: 5 to " +
-            "width: 1 height: 3 from t= 15 to t= 50\n" +
-            "]",
+    assertEquals("[Shape R2 updates its dimensions from width: 5 height: 5 to width: 1 height: 3 from t= 15 to t= 50\n" +
+                    ", Shape R2 updates its dimensions from width: 1 height: 3 to width: 5 height: 3 from t= 0 to t= 15\n" +
+                    "]",
             model1.getChanges().toString());
 
     model2.addShape(rectangle1);

@@ -6,11 +6,14 @@ import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
 import cs5004.animator.model.AvailableChanges;
 import cs5004.animator.model.AvailableShapes;
+import cs5004.animator.model.ChangeComparator;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Model that outputs a SVG file.
@@ -84,8 +87,12 @@ public class SVGView implements IView {
                   + shape.getG()
                   + "," + shape.getB() + ")\" visibility=\"" + visible + "\" >\n");
         }
+        ChangeComparator byStartTime = new ChangeComparator();
+        List<AbstractChange> sortedChangeListNoAppear = model.getChanges()
+                .stream().sorted(byStartTime).collect(Collectors.toList());
+
         //This changes the setting to if it was hidden before any motions
-        for (AbstractChange change : model.getChanges()) {
+        for (AbstractChange change : sortedChangeListNoAppear) {
           if (change.getShapeLabel().equals(shape.getLabel())) {
             if (visible.equals("hidden")) {
               fileOutput.append("    <animate attributeType=\"xml\" begin=\""

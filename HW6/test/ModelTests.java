@@ -40,7 +40,8 @@ public class ModelTests {
   @Test
   public void testAnimationModelImplConstructor() {
     AnimationModelImpl modelConstructor = new AnimationModelImpl();
-    modelConstructor.addShape(AvailableShapes.RECTANGLE, "Rect1", 5, 1, 2, 5, 0, 0, 0,0);
+    modelConstructor.addShape(AvailableShapes.RECTANGLE, "Rect1", 5, 1, 2, 5,
+        0, 0, 0,0);
     assertEquals("[Rectangle Rect1 with RGB(0, 0, 0), and corner at (5, 1), " +
                     "width: 2, height: 5]",
         modelConstructor.getShapes().toString());
@@ -66,9 +67,12 @@ public class ModelTests {
     assertEquals(testList, model1.getShapes());
 
     // testing a model via shape constructor
-    model2.addShape(AvailableShapes.RECTANGLE, "aRect", 2, 2, 2, 2, 0, 0, 0,0);
-    model2.addShape(AvailableShapes.RECTANGLE, "anotherRect", 3, 3, 3, 3,0, 0, 0,0);
-    model2.addShape(AvailableShapes.OVAL, "aCircle", 4, 4, 4, 4,0, 0, 0,0);
+    model2.addShape(AvailableShapes.RECTANGLE, "aRect", 2, 2, 2, 2, 0, 0,
+        0,0);
+    model2.addShape(AvailableShapes.RECTANGLE, "anotherRect", 3, 3, 3, 3,0,
+        0, 0,0);
+    model2.addShape(AvailableShapes.OVAL, "aCircle", 4, 4, 4, 4,0, 0,
+        0,0);
     model2.addShape(AvailableShapes.OVAL, "anotherCircle",
         5, 5, 5, 5, 5, 5, 5, 100);
     model2.addShape(AvailableShapes.RECTANGLE, "Rect3",
@@ -87,7 +91,8 @@ public class ModelTests {
   public void testInvalidAddShapesWH() {
     // Testing negative width for addShape 2
     try {
-      model1.addShape(AvailableShapes.OVAL, "invalid 1", 5, 5, -5, 5,0, 0, 0,0);
+      model1.addShape(AvailableShapes.OVAL, "invalid 1", 5, 5, -5, 5,0,
+          0, 0,0);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -95,7 +100,8 @@ public class ModelTests {
     }
     // Testing negative height for addShape 2
     try {
-      model1.addShape(AvailableShapes.OVAL, "invalid 1", 5, 5, -5, 5,0, 0, 0,0);
+      model1.addShape(AvailableShapes.OVAL, "invalid 1", 5, 5, -5, 5,0,
+          0, 0,0);
       fail("Invalid constructor should have thrown exception");
     } catch (IllegalArgumentException iae) {
       assertEquals("dimensions must be positive.", iae.getMessage());
@@ -147,9 +153,12 @@ public class ModelTests {
 
   @Test
   public void testAddMove() {
-    model1.addShape(AvailableShapes.RECTANGLE, "Rect1", 1, 2, 3, 7, 0, 0, 0, 0);
-    model1.addShape(AvailableShapes.RECTANGLE, "Rect2", 11, 3, 2, 3, 0, 0, 0, 0);
-    model1.addShape(AvailableShapes.OVAL, "Circle1", 41, 44, 1, 4, 0, 0, 0, 0);
+    model1.addShape(AvailableShapes.RECTANGLE, "Rect1", 1, 2, 3, 7, 0,
+        0, 0, 0);
+    model1.addShape(AvailableShapes.RECTANGLE, "Rect2", 11, 3, 2, 3, 0,
+        0, 0, 0);
+    model1.addShape(AvailableShapes.OVAL, "Circle1", 41, 44, 1, 4, 0,
+        0, 0, 0);
     model1.addShape(AvailableShapes.OVAL, "Circle2",
         5, 25, 5, 55, 53, 35, 5, 100);
 
@@ -157,21 +166,27 @@ public class ModelTests {
     model2.addShape(circle2);
     model2.addMove(rectangle1, 15, 15, 5, 10,  2, 11);
     model2.addMove(rectangle1, 2, 2, 10, 20, 12, 17);
-    assertEquals("Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), width: 2, height: 3\n" +
-                    "Ellipse C2 with RGB(0, 64, 254), and center at: (15, 26), x-diameter: 45, y-diameter: 45\n" +
+    assertEquals("Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), width: 2," +
+            " height: 3\n" +
+                    "Ellipse C2 with RGB(0, 64, 254), and center at: (15, 26), x-diameter: 45," +
+            " y-diameter: 45\n" +
                     "\n" +
                     "R1 appears at time t=2\n" +
                     "\n" +
-                    "Shape R1 updates its position from x-dimension: 2, y-dimension: 2 to x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n",
+                    "Shape R1 updates its position from x-dimension: 2, y-dimension:" +
+            " 2 to x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n",
             model2.toString());
     model2.addMove(circle2,1, 1, 0, 25, 18, 20);
-    assertEquals("Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), width: 2, height: 3\n" +
-                    "Ellipse C2 with RGB(0, 64, 254), and center at: (15, 26), x-diameter: 45, y-diameter: 45\n" +
+    assertEquals("Rectangle R1 with RGB(10, 20, 30), and corner at (3, 6), width:" +
+            " 2, height: 3\n" +
+                    "Ellipse C2 with RGB(0, 64, 254), and center at: (15, 26), x-diameter:" +
+            " 45, y-diameter: 45\n" +
                     "\n" +
                     "R1 appears at time t=2\n" +
                     "C2 appears at time t=18\n" +
                     "\n" +
-                    "Shape R1 updates its position from x-dimension: 2, y-dimension: 2 to x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n",
+                    "Shape R1 updates its position from x-dimension: 2, y-dimension:" +
+            " 2 to x-dimension: 10, y-dimension: 20 from t= 12 to t= 17\n",
             model2.toString());
   }
 
@@ -459,8 +474,11 @@ public class ModelTests {
             model1.getChanges().toString());
     model1.addResize(rectangle2, 5, 5,
         1, 3,15, 50);
-    assertEquals("[Shape R2 updates its dimensions from width: 5 height: 5 to width: 1 height: 3 from t= 15 to t= 50\n" +
-                    ", Shape R2 updates its dimensions from width: 1 height: 3 to width: 5 height: 3 from t= 0 to t= 15\n" +
+
+    assertEquals("[Shape R2 updates its dimensions from width: 5 height: 5 to width:" +
+            " 1 height: 3 from t= 15 to t= 50\n" +
+                    ", Shape R2 updates its dimensions from width: 1 height: 3 to width:" +
+            " 5 height: 3 from t= 0 to t= 15\n" +
                     "]",
             model1.getChanges().toString());
 
@@ -475,12 +493,12 @@ public class ModelTests {
     model2.addResize(rectangle1, 1, 1,7, 3, 1, 2);
     model2.addResize(circle1, 1, 1,3, 8, 1, 2);
     model2.addResize(circle2, 1, 1, 4, 1,1, 2);
-    assertEquals("[Shape R1 updates its dimensions from width: 1 height: 1 to width: " +
-            "7 height: 3 from t= 1 to t= 2\n" +
-            ", Shape C1 updates its dimensions from width: 1 height: 1 " +
-            "to width: 3 height: 8 from t= 1 to t= 2\n" +
-            ", Shape C2 updates its dimensions from width: 1 height: 1 " +
-            "to width: 4 height: 1 from t= 1 to t= 2\n" +
+    assertEquals("[Shape C1 updates its dimensions from width: 1 height: 1 to width:" +
+            " 3 height: 8 from t= 1 to t= 2\n" +
+            ", Shape R1 updates its dimensions from width: 1 height: 1 to width: 7 height:" +
+            " 3 from t= 1 to t= 2\n" +
+            ", Shape C2 updates its dimensions from width: 1 height: 1 to width: 4 height:" +
+            " 1 from t= 1 to t= 2\n" +
             "]",
             model2.getChanges().toString());
   }
@@ -626,12 +644,50 @@ public class ModelTests {
     model1.addShape(circle1);
     AnimationModel modelEmpty = model1.getShapesAtTick(1);
     assertEquals(model2.toString(), modelEmpty.toString());
-    model1.addRecolor(rectangle1, 2, 3, 250,3,
-        2, 3, 250,3,5, 7);
-    model1.addRecolor(circle1, 17, 111, 2,3,
-        2, 3, 250,3,5, 8);
-    AnimationModel modelRecolor = model1.getShapesAtTick(6);
-    System.out.println(modelRecolor.toString());
-    //System.out.println(model1.toString());
+    model1.addResize(rectangle1, 1, 3,
+        5, 3,0 , 10);
+    model1.addMove(rectangle1, 1, 3, 5,3,
+        0, 10);
+    model1.addRecolor(circle1, 18, 111, 2,3,
+        2, 3, 250,3,5, 11);
+    // altered attributes
+    assertEquals(model1.getShapesAtTick(5).getShape(rectangle1.getLabel()).getWidth(),
+        3);
+    assertEquals(model1.getShapesAtTick(5)
+            .getShape(rectangle1.getLabel()).getLocation().getX(),
+        3);
+    assertEquals(model1.getShapesAtTick(8)
+            .getShape(circle1.getLabel()).getR(),
+        10);
+    assertEquals(model1.getShapesAtTick(8)
+            .getShape(circle1.getLabel()).getG(),
+        57);
+    assertEquals(model1.getShapesAtTick(8)
+            .getShape(circle1.getLabel()).getB(),
+        126);
+    assertEquals(model1.getShapesAtTick(8)
+            .getShape(circle1.getLabel()).getOpacity(),
+        3);
+    // unaltered attributes stay the same
+    assertEquals(model1.getShapesAtTick(5).getShape(rectangle1.getLabel()).getHeight(),
+        3);
+    assertEquals(model1.getShapesAtTick(5).getShape(circle1.getLabel()).getHeight(),
+        4);
+  }
+
+  @Test
+  public void testIllegalGetShapesAtTick() {
+    model1.addShape(rectangle1);
+    model1.addShape(circle1);
+    model1.addResize(rectangle1, 1, 3,
+        5, 3,0 , 10);
+    // Testing negative tick
+    try {
+      assertEquals(model1.getShapesAtTick(-1).getShape(rectangle1.getLabel()).getWidth(),
+          3);
+      fail("Invalid constructor should have thrown exception");
+    } catch (IllegalArgumentException iae) {
+      assertEquals("Time value must be >= 0\"", iae.getMessage());
+    }
   }
 }

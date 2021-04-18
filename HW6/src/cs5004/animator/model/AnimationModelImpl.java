@@ -301,18 +301,22 @@ public class AnimationModelImpl implements AnimationModel {
               change.getStartG(), change.getUpdatedG());
           int b = tweener(change.getStartTime(), change.getEndTime(), currentTick,
               change.getStartB(), change.getUpdatedB());
+          int a = tweener(change.getStartTime(), change.getEndTime(), currentTick,
+              change.getStartA(), change.getUpdatedA());
           // model has the shape
           if (modelCopy.hasShape(change.getShapeLabel())) {
             AbstractShape shape = modelCopy.getShape(change.getShapeLabel());
             shape.setR(r);
             shape.setG(g);
             shape.setB(b);
+            shape.setOpacity(a);
             // model doesn't have the shape
           } else {
             AbstractShape colorCopy = this.getShape(change.getShapeLabel()).cloneShape();
             colorCopy.setR(r);
             colorCopy.setG(g);
             colorCopy.setB(b);
+            colorCopy.setOpacity(a);
             modelCopy.addShape(colorCopy);
           }
         } else if (change.getType().equals(AvailableChanges.RESIZE)) {

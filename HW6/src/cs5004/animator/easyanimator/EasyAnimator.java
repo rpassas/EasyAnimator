@@ -1,4 +1,4 @@
-package cs5004.animator.EasyAnimator;
+package cs5004.animator.easyanimator;
 
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
@@ -14,8 +14,15 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+/**
+ * Main method for the EasyAnimator project.
+ */
 public class EasyAnimator {
 
+  /**
+   * Method to run the program.
+   * @param args arguments for running the program such as -view, -speed, -in, -out.
+   */
   public static void main(String[] args) {
     // placeholder view parameters
     String fileNameIn = "";

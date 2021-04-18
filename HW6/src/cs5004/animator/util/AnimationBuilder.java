@@ -1,5 +1,9 @@
 package cs5004.animator.util;
 
+/**
+ * Adaptor class from the animation reader to the andimation model.
+ * @param <Doc>
+ */
 public interface AnimationBuilder<Doc> {
   /**
    * Constructs a final document.

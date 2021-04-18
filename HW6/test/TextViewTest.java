@@ -1,12 +1,6 @@
 import org.junit.Before;
-import org.junit.Test;
 
-import cs5004.animator.EasyAnimator.EasyAnimator;
-import cs5004.animator.model.AbstractShape;
 import cs5004.animator.model.AnimationModelImpl;
-import cs5004.animator.model.AvailableShapes;
-import cs5004.animator.model.Rect;
-import cs5004.animator.view.SVGView;
 import cs5004.animator.view.TextView;
 
 import static org.junit.Assert.assertEquals;

@@ -24,8 +24,8 @@ public interface AnimationModel {
   LinkedList<AbstractShape> getShapes();
 
   /**
-   * Returns the shape with the given identifier
-   * @param label the identifier of the shape
+   * Returns the shape with the given identifier.
+   * @param label the identifier of the shape.
    * @return the shape with the identifier.
    */
   AbstractShape getShape(String label);
@@ -78,7 +78,7 @@ public interface AnimationModel {
    * @throws IllegalArgumentException for non-unique label
    * @throws IllegalArgumentException for invalid shape type
    */
-   void addShape(AvailableShapes shape, String label, int x, int y, int w, int h,
+  void addShape(AvailableShapes shape, String label, int x, int y, int w, int h,
                        int r, int g, int b, int opacity);
 
   /**

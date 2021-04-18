@@ -52,7 +52,9 @@ The scheme for the view has one interface that designates the behaviors for thre
 
 In the main EasyAnimator class that takes the command line arguments for the animation, the arguments are parsed and then used to build a model and other simple parameters needed for the views. These parameters are passed to the ViewMaker that can generate the appropriate view type given these inputs. If there is an error in the execution of main() in EasyAnimator, the program will generate a warning panel.
 
-From the original implementation, the model had some minor updates. Most notably, the data structures for storing changes and shapes were changed from lists to maps, reducing run time which was particularly important for visual view when running larger animations. Moreover, a model now has a custom canvas class that determines the size/location of the canvas for view. Of course, the builder class was also implemented in the model to build a model given an input text file. 
+#### Changes to the Model
+
+From the original implementation, the model had some minor updates. Most notably, the data structures for storing changes and shapes were changed from lists to maps, reducing run time which was particularly important for visual view when running larger animations. As a result, the model can now also quickly getShape() and check if it hasShape() for searching. Moreover, a model now has a custom canvas class that determines the size/location of the canvas for view. Of course, the builder class was also implemented in the model to build a model given an input text file. Some superfluous methods and fields were originally added to leave flexibility for the controller/views, but these were removed. The extra parts of the model, now removed, were an overloaded addShape() method, and the ShapeID field and its associated getter/setter.
 
 
 

@@ -240,8 +240,12 @@ public class AnimationModelImpl implements AnimationModel {
         startW, startH, endW, endH, t1, t2), shape.getLabel());
   }
 
-
-  public int tweener(int startTime, int endTime, int tick, int startVal, int endVal) {
+  @Override
+  public int tweener(int startTime, int endTime, int tick, int startVal, int endVal)
+      throws IllegalArgumentException {
+    if (tick < startTime || tick > endTime) {
+      throw new IllegalArgumentException("tick must be within start/end times for tweening");
+    }
     if (startVal != endVal) {
       Double endT = new Double(endTime);
       Double currTick = new Double(tick);
@@ -257,8 +261,8 @@ public class AnimationModelImpl implements AnimationModel {
       int intV = tweenX.intValue();
       return intV;
     }
+    // values do not change
     return startVal;
-
   }
 
 
